@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="nara/css/style.css">
+    <title>Masukkan PIN atau Sandi</title>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Masukkan PIN kamu</div>
+        <div class="pin-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <div class="keyboard">
+            <div class="row">
+                <button class="key" data-value="1">1</button>
+                <button class="key" data-value="2">2</button>
+                <button class="key" data-value="3">3</button>
+            </div>
+            <div class="row">
+                <button class="key" data-value="4">4</button>
+                <button class="key" data-value="5">5</button>
+                <button class="key" data-value="6">6</button>
+            </div>
+            <div class="row">
+                <button class="key" data-value="7">7</button>
+                <button class="key" data-value="8">8</button>
+                <button class="key" data-value="9">9</button>
+            </div>
+            <div class="row">
+                <button class="key"></button>
+                <button class="key" data-value="0">0</button>
+                <button class="key backspace">X</button>
+            </div>
+        </div>
+        <button id="use-password-button" class="use-password-button">GUNAKAN PASSWORD</button>
+        <button id="contact-us-button" class="use-password-button">HUBUNGI KAMI</button>
+        <div id="password-input-container" class="password-input-container">
+            <input type="text" id="password-input" class="password-input" placeholder="Masukkan Sandi (Nama)">
+            <button id="password-submit-button" class="password-submit-button">MASUK</button>
+            <p id="password-error-message" class="error-message"></p>
+        </div>
+        <div id="contact-us-container" class="contact-us-container">
+            <input type="text" id="contact-us-name" class="contact-us-input" placeholder="Masukkan Nama Kamu">
+            <input type="tel" id="contact-us-whatsapp" class="contact-us-input" placeholder="Masukkan Nomor WhatsApp Kamu">
+            <button id="submit-contact-us" class="contact-us-button">KIRIM PESAN</button>
+            <p id="contact-us-error-message" class="error-message"></p>
+        </div>
+        <div id="password-display-container" class="password-display-container">
+            <p><span id="contact-name-display"></span>, selamat kamu berhasil mendapatkan PIN <span id="displayed-pin" class="green-text"></span> atau Kata Sandi <span id="displayed-password" class="green-text"></span> untuk login. Terimakasih atas partisipasinya.</p>
+            <div style="display: flex; gap: 10px;">
+                <button id="copy-password-button" class="use-password-button">Salin</button>
+                <button id="enter-password-button" class="use-password-button">Masuk Web</button>
+            </div>
+        </div>
+        <p id="pin-error-message" class="error-message"></p>
+    </div>
+    <div id="main-content">
+        <nav class="navbar">
+            <div class="navbar-left">
+                <video autoplay loop muted width="150px" height="70px">
+                    <source src="https://h.top4top.io/m_3344t78p00.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="navbar-right">
+                <button class="menu-button">
+                    <div class="menu-icon"></div>
+                    <div class="menu-icon"></div>
+                    <div class="menu-icon"></div>
+                </button>
+                <div class="menu-list">
+                    <button data-content="content1">Salat Fardhu</button>
+                    <button data-content="content2">Dzikir</button>
+                    <button data-content="content3">JADWAL IMSAK TANGERANG</button>
+                    <button data-content="content4">KLAIM VOUCHER</button>
+                    <button data-content="content5">KUIS RAMADHAN</button>
+                    <button data-content="content6">KLAIM YT PREMIUM</button>
+                    <button data-content="content7">TANGKAP TAWON</button>
+                    <button data-content="content8">LACAK BOT TELEGRAM</button>
+                </div>
+            </div>
+        </nav>
+        <div id="content1" class="content">
+            <iframe src="https://narazaen.github.io/NaraOi/solat.html"></iframe>
+        </div>
+        <div id="content2" class="content">
+            <iframe src="https://narazaen.github.io/NaraOi/dzikir.html"></iframe>
+        </div>
+        <div id="content3" class="content">
+            <iframe src="https://nara-zaen.github.io/Nara/imsak.html"></iframe>
+        </div>
+        <div id="content4" class="content">
+            <iframe src="https://nara-zaen.github.io/Nara/voucher.html"></iframe>
+        </div>
+        <div id="content5" class="content">
+            <iframe src="https://nara-zaen.github.io/Nara/kuis.html"></iframe>
+        </div>
+        <div id="content6" class="content" scrolling="no" style="height: 100vh; overflow: hidden;">
+            <iframe src="https://nara-zaen.github.io/Nara/Rff.html"></iframe>
+        </div>
+        <div id="content7" class="content">
+            <iframe src="https://nara-zaen.github.io/Nara/twn.html"></iframe>
+        </div>
+                <div id="content8" class="content">
+            <iframe src="nara/iframe/bot.html"></iframe>
+        </div>
+        <div class="copyright">
+            <div style="text-align: left; font-size: 7px; color: white;">
+                &copy; 2025 Nara Zaen. Semua hak dilindungi. Izin resmi untuk penggunaan atau reproduksi konten situs web ini harus diperoleh secara tertulis dari Nara Zaen.
+            </div>
+        </div>
+    </div>
+    <div id="loading-overlay">
+        <div class="loader"></div>
+    </div>
+    <script src="nara/script/utama.js"></script>
+
+</body>
+</html>
