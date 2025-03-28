@@ -1,0 +1,152 @@
+body {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    font-family: sans-serif;
+    background-image: url(https://g.top4top.io/p_3372vruug0.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Tambahkan properti ini */
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.input-container-wrapper {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 90%;
+    box-sizing: border-box;
+}
+
+.input-container {
+    /* text-align: center; */
+}
+
+#response-area {
+    margin-top: 30px;
+    text-align: left;
+    width: 90%;
+    max-width: 800px;
+    box-sizing: border-box;
+}
+
+#response-area > div {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: transparent !important;
+    border: none !important;
+    box-sizing: border-box;
+}
+
+#response-area h3 {
+    margin-top: 0;
+    color: #fff;
+}
+
+#response-area pre {
+    font-size: 1.2em;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #fff;
+}
+
+#response-area .error {
+    color: #f44336;
+    font-weight: bold;
+}
+
+.response-success {
+    color: #4CAF50;
+}
+
+.response-error-bg {
+    color: #f44336;
+}
+
+label {
+    color: #fff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 1.2em;
+    animation: blinker-green 1s linear infinite;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #66BB6A;
+}
+
+#deleteWebhookButtonContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+#deleteWebhookButton {
+    background-color: #f44336;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: blinker-red 1s linear infinite;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+@keyframes blinker-green {
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes blinker-red {
+    50% {
+        opacity: 0.7;
+    }
+}
+
+#deleteWebhookButton.hidden {
+    display: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+h1,
+h2,
+h3 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
