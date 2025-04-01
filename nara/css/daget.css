@@ -1,0 +1,270 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #000;
+    color: #fff;
+    font-size: 18px;
+}
+
+.header {
+    padding: 30px 25px 20px;
+    display: flex;
+    justify-content: flex-start; /* Mengatur item rata kiri */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 2em;
+    color: #fff;
+    display: flex;
+    flex-direction: column; /* Mengatur elemen di bawahnya tertata vertikal */
+    align-items: flex-start; /* Rata kiri untuk semua elemen di dalam h2 */
+}
+
+.header h2 img {
+    width: 500px;
+    height: 150px;
+    margin-right: 20px;
+    margin-bottom: 10px; /* Beri jarak antara logo dan teks */
+}
+
+.header h2 span.main-title {
+    display: flex;
+    flex-direction: column; /* Susun title dan info vertikal */
+    align-items: flex-start; /* Rata kiri */
+}
+
+.header h2 span.main-title .title-text {
+    display: block;
+    margin-bottom: 5px; /* Beri jarak antara judul dan waktu */
+}
+
+.header h2 span.main-title .time-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Rata kiri */
+    margin-left: 0; /* Hilangkan margin kiri */
+}
+
+.header h2 span.main-title .time-container .time {
+    font-size: 1.3em;
+    color: #ccc;
+    margin-top: 0; /* Hilangkan margin atas pada waktu */
+}
+
+.daily-tasks {
+    list-style: none;
+    padding: 25px;
+}
+
+.task-item {
+    background-color: #111;
+    color: #eee;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.task-icon {
+    margin-right: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.task-icon img {
+    width: 60px;
+    height: 60px;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+.warning-button {
+    background-color: transparent;
+    border: none;
+    font-size: 50px;
+    margin-right: 15px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    line-height: 0;
+    color: #ffcc00;
+    min-width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Hapus animasi blinker yang lama */
+}
+
+.warning-button .info-icon {
+    opacity: 0; /* Awalnya ikon tidak terlihat */
+    animation: fade-in-out 2s infinite; /* Animasi fade in dan out selama 2 detik, berulang */
+}
+
+.task-details {
+    flex-grow: 1;
+}
+
+.task-details p {
+    margin: 0 0 10px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+}
+
+.reward {
+    color: #4CAF50;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+}
+
+.reward img {
+    width: 28px;
+    height: 28px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.action-container {
+    display: flex;
+    align-items: center;
+}
+
+.action-button {
+    border: none;
+    padding: 15px 25px;
+    border-radius: 25px;
+    cursor: not-allowed; /* Awalnya tidak bisa diklik */
+    font-size: 1.2em;
+    min-width: 180px; /* Lebar disesuaikan untuk menampung teks countdown */
+    text-align: center;
+    background-color: #6c757d; /* Warna abu-abu sebagai indikasi tidak aktif */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-button:hover {
+    opacity: 0.8;
+}
+
+.action-button.active {
+    background-color: #2196F3;
+    cursor: pointer;
+}
+
+.action-button.active:hover {
+    opacity: 0.8;
+}
+
+.countdown {
+    display: inline-block;
+    font-size: 0.9em;
+    color: #ccc;
+    margin-left: 5px;
+}
+
+/* Efek kedip-kedip untuk tombol info */
+@keyframes fade-in-out {
+    0% { opacity: 0; } /* Awal tidak terlihat */
+    50% { opacity: 1; } /* Muncul di tengah animasi */
+    100% { opacity: 0; } /* Kembali tidak terlihat di akhir animasi */
+}
+
+/* Style untuk konten fixed (Modal) */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background-color: #222;
+    color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border: 1px solid #333;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 15px;
+    position: relative;
+    text-align: center;
+}
+
+.modal-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #fff;
+}
+
+.modal-header .modal-time {
+    font-size: 1.2em;
+    color: #ccc;
+}
+
+.modal-body {
+    margin-bottom: 25px;
+    color: #eee;
+    font-size: 1.1em;
+    line-height: 1.6;
+    text-align: left; /* Align text to the left for better readability */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 34px;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+.modal-close-button {
+    background-color: #d32f2f;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.modal-close-button:hover {
+    opacity: 0.8;
+}
