@@ -2,8 +2,8 @@
             const passwordInput = document.getElementById('password');
             const submitBtn = document.getElementById('submitBtn');
             const messageElement = document.getElementById('message');
-            const correctPassword = "puputcantik"; // Ganti dengan kata sandi yang sebenarnya
-            const targetUrl = "https://link.dana.id/danakaget?c=sp3reyytq&r=cAYM8h&orderId=20250404101214838115010300166998216135966"; // Ganti dengan URL tujuan
+            const correctPassword = "alquran"; // Ganti dengan kata sandi yang sebenarnya
+            const targetUrl = "https://link.dana.id/danakaget?c=srtaja2fj&r=cAYM8h&orderId=20250404101214128115010300166998216088236"; // Ganti dengan URL tujuan
 
             submitBtn.addEventListener('click', function() {
                 const enteredPassword = passwordInput.value;
