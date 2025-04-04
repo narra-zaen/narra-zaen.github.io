@@ -1,0 +1,104 @@
+    
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: black; /* Background hitam */
+            margin: 0;
+            position: relative; /* Untuk memposisikan tombol secara absolut */
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.8); /* Container hitam transparan */
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1); /* Efek bayangan putih tipis */
+            text-align: center;
+            color: white; /* Warna teks putih untuk kontras */
+        }
+
+        .logo {
+            max-width: 150px; /* Atur lebar maksimum logo sesuai keinginan Anda */
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        input[type="password"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            width: 80%;
+            max-width: 300px;
+            box-sizing: border-box;
+            background-color: #333; /* Latar belakang input gelap */
+            color: white;
+        }
+
+        button[type="submit"] { /* Gaya untuk tombol verifikasi */
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid #0056b3; /* Tambahkan border pada tombol verifikasi */
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .fixed-button {
+            position: fixed;
+            background-color: #25D366; /* Warna hijau WhatsApp */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            z-index: 1000; /* Pastikan tombol berada di atas konten lain */
+            border: 1px solid #128C7E; /* Tambahkan border pada tombol tetap */
+        }
+
+        .fixed-button:hover {
+            background-color: #128C7E;
+        }
+
+        .left-bottom {
+            left: 20px;
+            bottom: 20px;
+        }
+
+        .right-bottom {
+            right: 20px;
+            bottom: 20px;
+        }
+    
