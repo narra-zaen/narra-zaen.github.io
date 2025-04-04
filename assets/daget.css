@@ -1,104 +1,160 @@
-    
-        body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: black; /* Background hitam */
-            margin: 0;
-            position: relative; /* Untuk memposisikan tombol secara absolut */
-        }
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: black; /* Background hitam */
+    margin: 0;
+}
 
-        .container {
-            background-color: rgba(0, 0, 0, 0.8); /* Container hitam transparan */
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1); /* Efek bayangan putih tipis */
-            text-align: center;
-            color: white; /* Warna teks putih untuk kontras */
-        }
+.container {
+    background-color: rgba(0, 0, 0, 0.8); /* Container hitam transparan */
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 80%;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1); /* Efek bayangan putih tipis */
+    text-align: center;
+    color: white; /* Warna teks putih untuk kontras */
+    display: flex; /* Mengaktifkan flexbox */
+    flex-direction: column; /* Menyusun elemen secara vertikal */
+    align-items: center; /* Membuat elemen di tengah secara horizontal */
+    margin-left: 10px; /* Jarak kiri container */
+    margin-right: 10px; /* Jarak kanan container */
+}
 
-        .logo {
-            max-width: 150px; /* Atur lebar maksimum logo sesuai keinginan Anda */
-            height: auto;
-            margin-bottom: 20px;
-        }
+.logo {
+    max-width: 150px; /* Atur lebar maksimum logo sesuai keinginan Anda */
+    height: auto;
+    margin-bottom: 20px;
+}
 
-        h1 {
-            margin-bottom: 20px;
-        }
+h1 {
+    margin-bottom: 20px;
+}
 
-        p {
-            margin-bottom: 15px;
-        }
+p {
+    margin-bottom: 15px;
+}
 
-        input[type="password"] {
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #555;
-            border-radius: 4px;
-            width: 80%;
-            max-width: 300px;
-            box-sizing: border-box;
-            background-color: #333; /* Latar belakang input gelap */
-            color: white;
-        }
+.password-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 300px;
+}
 
-        button[type="submit"] { /* Gaya untuk tombol verifikasi */
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: 1px solid #0056b3; /* Tambahkan border pada tombol verifikasi */
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+input[type="text"] { /* Ubah type menjadi "text" */
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #333; /* Latar belakang input gelap */
+    color: white;
+}
 
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
+.button-container {
+    display: flex; /* Mengatur tombol-tombol agar berada dalam satu baris */
+    gap: 10px; /* Memberikan jarak antar tombol */
+    margin-bottom: 20px; /* Memberikan jarak dengan elemen berikutnya */
+    width: 100%; /* Lebar container tombol menyesuaikan container utama */
+    max-width: 326px; /* Lebar maksimum container tombol (300px input + 3px kiri + 3px kanan + sedikit toleransi gap) */
+    justify-content: center; /* Membuat tombol berada di tengah */
+    padding-left: 3px; /* Jarak kiri container tombol */
+    padding-right: 3px; /* Jarak kanan container tombol */
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar total */
+}
 
-        #message {
-            margin-top: 15px;
-            font-weight: bold;
-        }
+.fixed-button {
+    background-color: #25D366; /* Warna hijau WhatsApp */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    border: 1px solid #128C7E; /* Tambahkan border pada tombol tetap */
+}
 
-        .hidden {
-            display: none;
-        }
+.fixed-button:hover {
+    background-color: #128C7E;
+}
 
-        .error {
-            color: red;
-        }
+button[type="submit"] { /* Gaya untuk tombol verifikasi */
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: 1px solid #0056b3; /* Tambahkan border pada tombol verifikasi */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
 
-        .success {
-            color: green;
-        }
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
 
-        .fixed-button {
-            position: fixed;
-            background-color: #25D366; /* Warna hijau WhatsApp */
-            color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 16px;
-            z-index: 1000; /* Pastikan tombol berada di atas konten lain */
-            border: 1px solid #128C7E; /* Tambahkan border pada tombol tetap */
-        }
+#message {
+    margin-top: 15px;
+    font-weight: bold;
+}
 
-        .fixed-button:hover {
-            background-color: #128C7E;
-        }
+.hidden {
+    display: none;
+}
 
-        .left-bottom {
-            left: 20px;
-            bottom: 20px;
-        }
+.error {
+    color: red;
+}
 
-        .right-bottom {
-            right: 20px;
-            bottom: 20px;
-        }
-    
+.success {
+    color: green;
+}
+
+#success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Latar belakang gelap transparan */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; /* Lebih tinggi dari tombol tetap */
+    flex-direction: column;
+}
+
+#success-image {
+    max-width: 300px; /* Atur lebar maksimum gambar sesuai keinginan Anda */
+    height: auto;
+    margin-bottom: 10px; /* Ruang antara gambar dan teks */
+}
+
+#success-text {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 5px; /* Ruang antara teks dan loading bar */
+}
+
+#loading-bar-container {
+    width: 200px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 5px; /* Ruang antara loading bar dan teks tunggu */
+}
+
+#loading-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #007bff;
+    border-radius: 5px;
+}
+
+#countdown-text {
+    color: white;
+    font-size: 14px;
+}
