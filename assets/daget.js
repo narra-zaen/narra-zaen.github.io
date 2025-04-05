@@ -2,7 +2,7 @@
             const passwordInput = document.getElementById('password');
             const submitBtn = document.getElementById('submitBtn');
             const messageElement = document.getElementById('message');
-            const correctPassword = "17";
+            const correctPassword = "niat";
             const targetUrl = "https://link.dana.id/danakaget?c=syskde72y&r=cAYM8h&orderId=20250405101214282815010300166998216380609";
             const successOverlay = document.getElementById('success-overlay');
             const successVideo = document.getElementById('success-video');
