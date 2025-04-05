@@ -2,8 +2,8 @@
             const passwordInput = document.getElementById('password');
             const submitBtn = document.getElementById('submitBtn');
             const messageElement = document.getElementById('message');
-            const correctPassword = "70butir";
-            const targetUrl = "https://link.dana.id/danakaget?c=sepd3r6sy&r=cAYM8h&orderId=20250404101214004515010300166998216236520";
+            const correctPassword = "17";
+            const targetUrl = "https://link.dana.id/danakaget?c=scvlpkkdk&r=cAYM8h&orderId=20250405101214727715010300166998216329383";
             const successOverlay = document.getElementById('success-overlay');
             const successVideo = document.getElementById('success-video');
             const loadingBar = document.getElementById('loading-bar');
