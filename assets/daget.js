@@ -8,7 +8,7 @@
             const successVideo = document.getElementById('success-video');
             const loadingBar = document.getElementById('loading-bar');
             const countdownText = document.getElementById('countdown-text');
-            const totalLoadingTime = 22000;
+            const totalLoadingTime = 32000;
             const loadingIntervalTime = 100;
             let elapsedTime = 0;
             let countdownInterval;
