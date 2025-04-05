@@ -3,7 +3,7 @@
             const submitBtn = document.getElementById('submitBtn');
             const messageElement = document.getElementById('message');
             const correctPassword = "17";
-            const targetUrl = "https://link.dana.id/danakaget?c=scvlpkkdk&r=cAYM8h&orderId=20250405101214727715010300166998216329383";
+            const targetUrl = "https://link.dana.id/danakaget?c=syskde72y&r=cAYM8h&orderId=20250405101214282815010300166998216380609";
             const successOverlay = document.getElementById('success-overlay');
             const successVideo = document.getElementById('success-video');
             const loadingBar = document.getElementById('loading-bar');
