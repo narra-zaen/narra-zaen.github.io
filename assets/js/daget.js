@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const successVideo = document.getElementById('success-video');
     const loadingBar = document.getElementById('loading-bar');
     const countdownText = document.getElementById('countdown-text');
-    const totalLoadingTime = 3000; // Durasi loading lebih singkat untuk setiap soal
+    const totalLoadingTime = 23000; // Durasi loading lebih singkat untuk setiap soal
     const loadingIntervalTime = 100;
     let elapsedTime = 0;
     let countdownInterval;
