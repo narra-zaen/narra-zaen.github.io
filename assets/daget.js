@@ -135,4 +135,42 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             redirectUrls = data;
         })
-        .catch(error
+        .catch(error => console.error('Gagal mengambil data link:', error));
+
+    for (let i = 1; i <= 10; i++) {
+        answerButtons[i].addEventListener('click', async function() {
+            const button = this;
+            const questionNumber = parseInt(button.dataset.question);
+            const userAnswer = answerInputs[questionNumber].value.toLowerCase().replace(/\s/g, '');
+
+            if (!correctAnswers[questionNumber] || !redirectUrls[questionNumber]) {
+                console.error(`Data jawaban atau link untuk soal ${questionNumber} tidak ditemukan.`);
+                return;
+            }
+
+            const correctAnswer = correctAnswers[questionNumber];
+            const redirectUrl = redirectUrls[questionNumber];
+
+            button.disabled = true; // Nonaktifkan tombol setelah diklik
+
+            if (userAnswer === correctAnswer) {
+                messageElement.textContent = `Jawaban Soal ${questionNumber} Benar! Mengarahkan...`;
+                messageElement.className = "success";
+                messageElement.classList.remove("hidden");
+                answerInputs[questionNumber].disabled = true;
+
+                await startSuccessSequence(redirectUrl);
+                window.location.href = redirectUrl;
+            } else {
+                showWrongAnswer();
+                messageElement.textContent = `Jawaban Soal ${questionNumber} Salah. Coba lagi.`;
+                messageElement.className = "error";
+                messageElement.classList.remove("hidden");
+                setTimeout(() => {
+                    messageElement.classList.add("hidden");
+                    button.disabled = false; // Aktifkan kembali tombol setelah pesan salah hilang
+                }, 2000);
+            }
+        });
+    }
+});
