@@ -4,7 +4,233 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>DAGET SUQAD +3206 - Web Quiz Agama</title>
-    <link rel="stylesheet" href="assets/css/daget.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: black;
+            margin: 0;
+            position: relative; /* Untuk positioning overlay salah */
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 80%;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .logo {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .question-container {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .question-row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 25px;
+        }
+
+        .question {
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .answer-input-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .answer-input {
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #333;
+            color: white;
+        }
+
+        .answer-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .answer-button:hover {
+            background-color: #0056b3;
+        }
+
+        .answer-button[disabled] {
+            background-color: #ccc;
+            cursor: not-allowed;
+            border: 1px solid #999;
+            color: #666;
+        }
+
+        .fixed-button-container {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .fixed-button {
+            background-color: #25D366;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            border: 1px solid #128C7E;
+        }
+
+        .fixed-button:hover {
+            background-color: #128C7E;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        #success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            flex-direction: column;
+        }
+
+        #success-video-container {
+            max-width: 400px;
+            width: 90%;
+            margin-bottom: 10px;
+        }
+
+        #success-video {
+            width: 100%;
+            height: auto;
+        }
+
+        #success-text {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        #loading-bar-container {
+            width: 200px;
+            height: 10px;
+            background-color: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        #loading-bar {
+            width: 0%;
+            height: 100%;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+
+        #countdown-text {
+            color: white;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .locked {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        #wrong-answer-overlay {
+            position: fixed; /* Ubah menjadi fixed */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            background-color: rgba(0, 0, 0, 0.5); /* Tambahkan latar belakang semi-transparan agar lebih terlihat */
+        }
+
+        #wrong-answer-image {
+            max-width: 200px;
+            width: 80%;
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        #wrong-answer-text {
+            color: red;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        #wrong-answer-overlay.show {
+            display: flex;
+        }
+
+        #wrong-answer-overlay.show #wrong-answer-image {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -12,7 +238,7 @@
         <h1>DAGET SUQAD +3206 - Web Quiz Agama</h1>
         <p>Jawablah semua pertanyaan di bawah ini dengan benar (huruf kecil tanpa tanda baca).</p>
 
-        </div class="question-container">
+        <div class="question-container">
             <div class="question-row">
                 <div class="question">Soal 1: Apa kitab suci agama Islam?</div>
                 <div class="answer-input-container">
@@ -32,7 +258,7 @@
                     <button class="answer-button locked" data-question="2" disabled>Terkunci (00:00:00)</button>
                 </div>
                 <div class="fixed-button-container">
-                    <a href="https://whatsapp.com/channel/029VaorBn4FHWq0dEFX993F" class="fixed-button" target="_blank">CHANEL</a>
+                    <a href="https://whatsapp.com/channel/0029VaorBn4FHWq0dEFX993F" class="fixed-button" target="_blank">CHANEL</a>
                     <a href="https://chat.whatsapp.com/KFD8wFX1XDgIrge89SO70L" class="fixed-button" target="_blank">JOIN GROUP</a>
                 </div>
             </div>
@@ -145,7 +371,7 @@
                 Browser Anda tidak mendukung pemutar video.
             </video>
         </div>
-        <p id="success-text"><strong>SELAMAT! SEMUA JAWABAN BENAR....</strong><br>Jangan Lupa Gabung Group <strong>DAGET SQUAD</strong> ya, dan join chanel RANDOM</p>
+        <p id="success-text"><strong>SELAMAT! SEMUA  JAWABAN BENAR....</strong><br>Jangan Lupa Gabung Group <strong>DAGET SQUAD</strong> ya, dan join chanel RANDOM</p>
         <div id="loading-bar-container">
             <div id="loading-bar"></div>
 
@@ -161,8 +387,4 @@
     <script src="assets/js/daget.js"></script>
 </body>
 </html>
-
-
-
-
 
