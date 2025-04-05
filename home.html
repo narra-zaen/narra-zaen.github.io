@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akses Terproteksi</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6441A5, #2A0845);
+            margin: 0;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            overflow: hidden;
+        }
+
+        .glowing-border {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff008a, #ffeb3b, #00ff8c, #00cfff, #ff008a);
+            z-index: -1;
+            border-radius: 12px;
+            background-size: 200% 200%;
+            animation: glowing 5s linear infinite;
+        }
+
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0 0; }
+        }
+
+        .lock-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #eee;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #f0f0f0;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+
+        input[type="password"] {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 6px;
+            width: 200px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333;
+        }
+
+        input[type="password"]::placeholder {
+            color: #777;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="glowing-border"></div>
+        <div class="lock-icon">🔒</div>
+        <h1>MASUKAN SANDI</h1>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Masukkan kata sandi">
+            <button onclick="checkPassword()">Masuk</button>
+        </div>
+        <p id="error" class="error-message" style="display: none;">Kata sandi salah!</p>
+    </div>
+
+    <script>
+        const correctPassword = "narazaen123";
+
+        function checkPassword() {
+            const passwordInput = document.getElementById("password");
+            const errorMessage = document.getElementById("error");
+            const enteredPassword = passwordInput.value;
+
+            if (enteredPassword === correctPassword) {
+                window.location.href = "https://narra-zaen.github.io/";
+            } else {
+                errorMessage.style.display = "block";
+                passwordInput.value = "";
+            }
+        }
+
+        document.getElementById("password").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
