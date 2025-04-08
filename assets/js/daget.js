@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const unlockTimes = {};
     for (let i = 2; i <= 10; i++) {
         unlockTimes[i] = new Date();
-        unlockTimes[i].setHours(8 + (i - 2), 0, 0, 0); // Soal 2 mulai jam 8, soal 3 jam 9, dst.
+        unlockTimes[i].setHours(24 + (i - 2), 0, 0, 0); // Soal 2 mulai jam 8, soal 3 jam 9, dst.
     }
 
     successVideo.controls = false;
