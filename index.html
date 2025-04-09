@@ -130,7 +130,8 @@
         const gameBoard = document.getElementById('game-board');
         const claimButton = document.getElementById('claim-button');
 
-        let danaKagetLink;
+        // Link Dana Kaget langsung di dalam script
+        const danaKagetLink = "https://link.dana.id/danakaget?c=sn3e8efuq&r=cAYM8h&orderId=20250409101214808715010300166998216995563";
 
         function initGame() {
             gameBoard.innerHTML = '';
@@ -193,19 +194,10 @@
             initGame();
         }
 
-        // Ambil link Dana Kaget dari file JSON
-        fetch('./config/dana_kaget.json')
-            .then(response => response.json())
-            .then(data => {
-                danaKagetLink = data.link;
-                // Setelah link didapatkan, tambahkan event listener
-                claimButton.addEventListener('click', () => {
-                    window.open(danaKagetLink, '_blank');
-                });
-            })
-            .catch(error => {
-                console.error('Gagal memuat konfigurasi Dana Kaget:', error);
-            });
+        // Event listener untuk tombol klaim
+        claimButton.addEventListener('click', () => {
+            window.open(danaKagetLink, '_blank');
+        });
 
         initGame();
     </script>
