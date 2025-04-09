@@ -34,7 +34,25 @@
         .logo {
             max-width: 150px;
             height: auto;
-            margin-bottom: 20px;
+            margin-bottom: 10px; /* Sedikit dikurangi agar teks kedip lebih dekat */
+        }
+
+        .blinking-text {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            animation: rainbow 2s infinite alternate;
+        }
+
+        @keyframes rainbow {
+            0% { color: red; }
+            14% { color: orange; }
+            28% { color: yellow; }
+            42% { color: green; }
+            57% { color: blue; }
+            71% { color: indigo; }
+            85% { color: violet; }
+            100% { color: red; }
         }
 
         h1 {
@@ -50,12 +68,12 @@
         .question-row {
             display: flex;
             flex-direction: column;
-            margin-bottom: 35px; /* Tambah margin bawah untuk tombol WhatsApp */
+            margin-bottom: 25px;
         }
 
         .question {
             font-weight: bold;
-            margin-bottom: 15px; /* Tambah margin bawah agar tidak terlalu dekat dengan input */
+            margin-bottom: 15px;
             text-align: left;
         }
 
@@ -238,6 +256,36 @@
         #wrong-answer-overlay.show #wrong-answer-image {
             opacity: 1;
         }
+
+        #correct-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002; /* Lebih tinggi dari wrong-answer-overlay */
+        }
+
+        #correct-checkmark {
+            font-size: 80px;
+            color: green;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        #correct-overlay.show {
+            display: flex;
+        }
+
+        #correct-overlay.show #correct-checkmark {
+            opacity: 1;
+            transform: scale(1);
+        }
     </style>
 </head>
 <body>
@@ -247,8 +295,9 @@
 
     <div class="container">
         <img src="https://i.ibb.co.com/9kDxBHP4/IMG-20250410-WA0026.jpg" alt="Logo Chef Rama" class="logo">
+        <div class="blinking-text">SIAPA CEPAT DIA DAPAT , Jawab semua pertanyaan dengan benar bila beruntung kamu akan mendapatkan dana kaget</div>
         <h1>Chef Rama - Web Quiz Pribadi</h1>
-
+        <p>Jawablah semua pertanyaan di bawah ini dengan benar (huruf kecil tanpa tanda baca).</p>
 
         <div class="question-container">
             <div class="question-row">
@@ -257,6 +306,24 @@
                 <div class="answer-input-container">
                     <input type="text" class="answer-input" id="answer1">
                     <button class="answer-button" data-question="1">Jawab</button>
+                </div>
+            </div>
+
+            <div class="question-row">
+                <div class="question">Soal 2: Plat nopol gw</div>
+                <div class="options">Pilihan: BM, BK, BA</div>
+                <div class="answer-input-container">
+                    <input type="text" class="answer-input" id="answer2">
+                    <button class="answer-button" data-question="2">Jawab</button>
+                </div>
+            </div>
+
+            <div class="question-row">
+                <div class="question">Soal 3: Merk hp gw</div>
+                <div class="options">Pilihan: siomay, oddo, aipong</div>
+                <div class="answer-input-container">
+                    <input type="text" class="answer-input" id="answer3">
+                    <button class="answer-button" data-question="3">Jawab</button>
                 </div>
             </div>
         </div>
@@ -272,7 +339,7 @@
                 Browser Anda tidak mendukung pemutar video.
             </video>
         </div>
-        <p id="success-text"><strong>SELAMAT! JAWABAN BENAR....</strong><br>Jangan Lupa Gabung Group <strong>CHEF RAMA</strong> ya, dan join chanel RANDOM</p>
+        <p id="success-text"><strong>SELAMAT! SEMUA JAWABAN BENAR....</strong><br>Jangan Lupa Gabung Group <strong>CHEF RAMA</strong> ya, dan join chanel RANDOM</p>
         <div id="loading-bar-container">
             <div id="loading-bar"></div>
 
@@ -285,32 +352,44 @@
         <div id="wrong-answer-text">JAWABAN SALAH</div>
     </div>
 
+    <div id="correct-overlay">
+        <div id="correct-checkmark">&#10004;</div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const answerInputs = {
-                1: document.getElementById('answer1')
+                1: document.getElementById('answer1'),
+                2: document.getElementById('answer2'),
+                3: document.getElementById('answer3')
             };
-            const answerButtons = {
-                1: document.querySelector(`.answer-button[data-question="1"]`)
-            };
+            const answerButtons = {};
+            for (let i = 1; i <= 3; i++) {
+                answerButtons[i] = document.querySelector(`.answer-button[data-question="${i}"]`);
+            }
             const messageElement = document.getElementById('message');
             const wrongAnswerOverlay = document.getElementById('wrong-answer-overlay');
             const wrongAnswerImage = document.getElementById('wrong-answer-image');
             const wrongAnswerTextElement = document.getElementById('wrong-answer-text');
             const correctAnswers = {
-                1: ["kuning", "abu", "biru"]
+                1: ["kuning", "abu", "biru"],
+                2: ["bm", "bk", "ba"],
+                3: ["siomay", "oddo", "aipong"]
             };
             const redirectUrls = {
-                1: "https://link.dana.id/danakaget?c=skzw56hka&r=gHPvYe&orderId=20250410101214771915010300166560917431519"
+                final: "https://link.dana.id/danakaget?c=skzw56hka&r=gHPvYe&orderId=20250410101214771915010300166560917431519"
             };
             const successOverlay = document.getElementById('success-overlay');
             const successVideo = document.getElementById('success-video');
             const loadingBar = document.getElementById('loading-bar');
             const countdownText = document.getElementById('countdown-text');
-            const totalLoadingTime = 23000; // Durasi loading lebih singkat untuk setiap soal
+            const totalLoadingTime = 3000; // Durasi loading lebih singkat untuk setiap soal
             const loadingIntervalTime = 100;
             let elapsedTime = 0;
             let countdownInterval;
+            let answers = {};
+            const correctOverlay = document.getElementById('correct-overlay');
+            const correctCheckmark = document.getElementById('correct-checkmark');
 
             successVideo.controls = false;
 
@@ -324,12 +403,19 @@
                 }, 2000);
             }
 
+            function showCorrectAnswerEffect() {
+                correctOverlay.classList.add('show');
+                setTimeout(() => {
+                    correctOverlay.classList.remove('show');
+                }, 2000);
+            }
+
             function startSuccessSequence(redirectUrl) {
                 return new Promise((resolve) => {
                     successOverlay.style.display = 'flex';
                     successVideo.muted = false;
                     successVideo.play();
-                    successText.textContent = 'SELAMAT! JAWABAN BENAR...'; // Pesan selamat singkat
+                    successText.textContent = 'SELAMAT! SEMUA JAWABAN BENAR...'; // Pesan selamat singkat
 
                     let width = 0;
                     elapsedTime = 0; // Reset waktu
@@ -339,7 +425,7 @@
                         loadingBar.style.width = width + '%';
 
                         const remainingTime = Math.ceil((totalLoadingTime - elapsedTime) / 1000);
-                        countdownText.textContent = `tunggu sebentar... (${remainingTime})`;
+                        countdownText.textContent = `Memuat... (${remainingTime})`;
 
                         if (elapsedTime >= totalLoadingTime) {
                             clearInterval(loadingInterval);
@@ -352,36 +438,56 @@
 
             const successText = document.getElementById('success-text');
 
-            if (answerButtons[1]) {
-                answerButtons[1].addEventListener('click', async function() {
-                    const button = this;
-                    const questionNumber = parseInt(button.dataset.question);
-                    const userAnswer = answerInputs[questionNumber].value.toLowerCase().replace(/\s/g, '');
-                    const correctAnswersForQuestion = correctAnswers[questionNumber];
+            for (let i = 1; i <= 3; i++) {
+                const answerButton = answerButtons[i];
+                if (answerButton) {
+                    answerButton.addEventListener('click', async function() {
+                        const button = this;
+                        const questionNumber = parseInt(button.dataset.question);
+                        const userAnswer = answerInputs[questionNumber].value.toLowerCase().replace(/\s/g, '');
+                        const correctAnswersForQuestion = correctAnswers[questionNumber];
 
-                    button.disabled = true; // Nonaktifkan tombol setelah diklik
+                        button.disabled = true; // Nonaktifkan tombol setelah diklik
 
-                    if (correctAnswersForQuestion.includes(userAnswer)) {
-                        messageElement.textContent = `Jawaban Soal ${questionNumber} Benar! Mengarahkan...`;
-                        messageElement.className = "success";
-                        messageElement.classList.remove("hidden");
-                        answerInputs[questionNumber].disabled = true;
+                        if (correctAnswersForQuestion.includes(userAnswer)) {
+                            answers[questionNumber] = true;
+                            showCorrectAnswerEffect(); // Tampilkan efek centang hijau
+                            messageElement.textContent = `Jawaban Soal ${questionNumber} Benar!`;
+                            messageElement.className = "success";
+                            messageElement.classList.remove("hidden");
+                            answerInputs[questionNumber].disabled = true;
+                            setTimeout(() => {
+                                messageElement.classList.add("hidden");
+                            }, 1500);
+                        } else {
+                            answers[questionNumber] = false;
+                            showWrongAnswer();
+                            messageElement.textContent = `Jawaban Soal ${questionNumber} Salah. Coba lagi.`;
+                            messageElement.className = "error";
+                            messageElement.classList.remove("hidden");
+                            setTimeout(() => {
+                                messageElement.classList.add("hidden");
+                                button.disabled = false; // Aktifkan kembali
+                            }, 2000);
+                        }
 
-                        await startSuccessSequence(redirectUrls[questionNumber]);
-                        window.location.href = redirectUrls[questionNumber];
-                    } else {
-                        showWrongAnswer();
-                        messageElement.textContent = `Jawaban Soal ${questionNumber} Salah. Coba lagi.`;
-                        messageElement.className = "error";
-                        messageElement.classList.remove("hidden");
-                        setTimeout(() => {
-                            messageElement.classList.add("hidden");
-                            button.disabled = false; // Aktifkan kembali
-                        }, 2000);
-                    }
-                });
+                        // Cek apakah semua jawaban benar setelah setiap jawaban
+                        if (Object.keys(answers).length === 3 && Object.values(answers).every(val => val === true)) {
+                            await startSuccessSequence(redirectUrls.final);
+                            window.location.href = redirectUrls.final;
+                        } else if (Object.keys(answers).length === 3 && Object.values(answers).some(val => val === false)) {
+                            // Reset jawaban jika ada yang salah setelah semua dijawab
+                            answers = {};
+                            for (let j = 1; j <= 3; j++) {
+                                answerInputs[j].disabled = false;
+                                answerButtons[j].disabled = false;
+                            }
+                        }
+                    });
+                }
             }
         });
     </script>
 </body>
 </html>
+
