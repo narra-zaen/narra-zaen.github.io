@@ -181,4 +181,35 @@
                 }
             } else {
                 setTimeout(() => {
-                    card
+                    card1.style.backgroundColor = '#333'; // Kembalikan warna jika tidak cocok
+                    card2.style.backgroundColor = '#333'; // Kembalikan warna jika tidak cocok
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                }, 1000);
+            }
+            flippedCards = [];
+        }
+
+        function resetGame() {
+            initGame();
+        }
+
+        // Ambil link Dana Kaget dari file eksternal
+        fetch('./config/dana_kaget.js')
+            .then(response => response.text())
+            .then(scriptText => {
+                // Jalankan kode dari file eksternal
+                eval(scriptText);
+                // Setelah link didapatkan, tambahkan event listener
+                claimButton.addEventListener('click', () => {
+                    window.open(danaKagetLink, '_blank');
+                });
+            })
+            .catch(error => {
+                console.error('Gagal memuat konfigurasi Dana Kaget:', error);
+            });
+
+        initGame();
+    </script>
+</body>
+</html>
