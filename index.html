@@ -130,7 +130,6 @@
         const gameBoard = document.getElementById('game-board');
         const claimButton = document.getElementById('claim-button');
 
-        // Deklarasikan variabel untuk link Dana Kaget
         let danaKagetLink;
 
         function initGame() {
@@ -194,12 +193,11 @@
             initGame();
         }
 
-        // Ambil link Dana Kaget dari file eksternal
-        fetch('./config/dana_kaget.js')
-            .then(response => response.text())
-            .then(scriptText => {
-                // Jalankan kode dari file eksternal
-                eval(scriptText);
+        // Ambil link Dana Kaget dari file JSON
+        fetch('./config/dana_kaget.json')
+            .then(response => response.json())
+            .then(data => {
+                danaKagetLink = data.link;
                 // Setelah link didapatkan, tambahkan event listener
                 claimButton.addEventListener('click', () => {
                     window.open(danaKagetLink, '_blank');
