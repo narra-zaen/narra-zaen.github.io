@@ -1,390 +1,184 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>DAGET SUQAD +3206 - Web Quiz Agama</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nara zaen</title>
     <style>
         body {
-            font-family: sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: flex-start; /* Align items to the top to see everything */
             min-height: 100vh;
-            background-color: black;
+            background-color: #2c3e50;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            position: relative; /* Untuk positioning overlay salah */
-        }
-
-        .container {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            border-radius: 20px;
-            max-width: 80%;
-            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
-            text-align: center;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-
-        .logo {
-            max-width: 150px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        .question-container {
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .question-row {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 25px;
-        }
-
-        .question {
-            font-weight: bold;
-            margin-bottom: 5px;
-            text-align: left;
-        }
-
-        .answer-input-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .answer-input {
-            padding: 10px;
-            border: 1px solid #555;
-            border-radius: 4px;
-            width: 100%;
+            padding: 20px;
             box-sizing: border-box;
-            background-color: #333;
             color: white;
         }
-
-        .answer-button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
+        #game-title {
+            color: #f39c12;
+            font-size: 2em; /* Ukuran judul diperkecil */
+            margin-bottom: 20px; /* Margin diperkecil */
+            text-align: center;
+        }
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 65px); /* Ukuran kartu diperkecil */
+            grid-gap: 10px; /* Jarak antar kartu diperkecil */
+            margin-bottom: 20px; /* Margin diperkecil */
+            background-color: #34495e;
+            padding: 15px; /* Padding diperkecil */
+            border-radius: 10px; /* Radius diperkecil */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Bayangan diperkecil */
+        }
+        .card {
+            width: 100%;
+            height: 65px; /* Sesuai dengan ukuran grid */
+            background-color: #333; /* Warna awal hitam */
+            border-radius: 8px; /* Radius diperkecil */
             cursor: pointer;
-            font-size: 14px;
-            margin-left: 10px;
-        }
-
-        .answer-button:hover {
-            background-color: #0056b3;
-        }
-
-        .answer-button[disabled] {
-            background-color: #ccc;
-            cursor: not-allowed;
-            border: 1px solid #999;
-            color: #666;
-        }
-
-        .fixed-button-container {
             display: flex;
-            gap: 10px;
-            width: 100%;
             justify-content: center;
+            align-items: center;
+            font-size: 1.5em; /* Ukuran emoji diperkecil */
+            color: transparent;
+            transition: transform 0.3s, background-color 0.3s, color 0.3s;
+            transform-style: preserve-3d;
         }
-
-        .fixed-button {
-            background-color: #25D366;
+        .card.flipped {
+            background-color: #e67e22; /* Warna saat kartu dibuka */
             color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
+            transform: rotateY(180deg);
+        }
+        .card.matched {
+            background-color: #2ecc71;
+            cursor: default;
+            opacity: 0.8;
+        }
+        #score {
+            font-size: 1.2em; /* Ukuran skor diperkecil */
+            margin-bottom: 15px; /* Margin diperkecil */
+            color: #ecf0f1;
+            text-align: center;
+        }
+        button {
+            padding: 8px 15px; /* Padding diperkecil */
+            font-size: 0.9em; /* Ukuran font tombol diperkecil */
+            background-color: #3498db;
+            border: none;
+            color: white;
+            border-radius: 5px; /* Radius diperkecil */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #link-button {
+            display: none;
+            margin-top: 20px; /* Margin diperkecil */
+            text-align: center;
+        }
+        #link-button button {
+            background-color: #1abc9c;
+            padding: 8px 15px; /* Padding diperkecil */
+            font-size: 0.9em; /* Ukuran font tombol klaim diperkecil */
+            border-radius: 5px; /* Radius diperkecil */
+        }
+        #link-button button:hover {
+            background-color: #16a085;
+        }
+        #link-button a {
             text-decoration: none;
-            font-size: 16px;
-            border: 1px solid #128C7E;
-        }
-
-        .fixed-button:hover {
-            background-color: #128C7E;
-        }
-
-        #message {
-            margin-top: 15px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .error {
-            color: red;
-        }
-
-        .success {
-            color: green;
-        }
-
-        #success-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1001;
-            flex-direction: column;
-        }
-
-        #success-video-container {
-            max-width: 400px;
-            width: 90%;
-            margin-bottom: 10px;
-        }
-
-        #success-video {
-            width: 100%;
-            height: auto;
-        }
-
-        #success-text {
             color: white;
-            font-size: 18px;
-            margin-bottom: 5px;
+        }
+        #warning-text {
+            color: white; /* Warna teks menjadi putih */
+            font-size: 1.1em;
+            margin-top: 20px;
             text-align: center;
+            /* animation: blinker 1s linear infinite; Hapus animasi kedip */
         }
-
-        #loading-bar-container {
-            width: 200px;
-            height: 10px;
-            background-color: #333;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 5px;
-        }
-
-        #loading-bar {
-            width: 0%;
-            height: 100%;
-            background-color: #007bff;
-            border-radius: 5px;
-        }
-
-        #countdown-text {
-            color: white;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .locked {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        #wrong-answer-overlay {
-            position: fixed; /* Ubah menjadi fixed */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            flex-direction: column;
-            background-color: rgba(0, 0, 0, 0.5); /* Tambahkan latar belakang semi-transparan agar lebih terlihat */
-        }
-
-        #wrong-answer-image {
-            max-width: 200px;
-            width: 80%;
-            margin-bottom: 10px;
-            opacity: 0;
-            transition: opacity 0.5s ease-out;
-        }
-
-        #wrong-answer-text {
-            color: red;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        #wrong-answer-overlay.show {
-            display: flex;
-        }
-
-        #wrong-answer-overlay.show #wrong-answer-image {
-            opacity: 1;
-        }
+        /* @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        } */
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://a.top4top.io/p_33815a0it0.png" alt="Logo" class="logo">
-        <h1>DAGET SUQAD +3206 - Web Quiz Agama</h1>
-        <p>Jawablah semua pertanyaan di bawah ini dengan benar (huruf kecil tanpa tanda baca).</p>
-
-        <div class="question-container">
-            <div class="question-row">
-                <div class="question">Soal 1: Apa kitab suci agama Islam?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer1">
-                    <button class="answer-button" data-question="1">Jawab</button>
-                </div>
-                <div class="fixed-button-container">
-                    <a href="https://whatsapp.com/channel/0029VaorBn4FHWq0dEFX993F" class="fixed-button" target="_blank">CHANEL</a>
-                    <a href="https://chat.whatsapp.com/KFD8wFX1XDgIrge89SO70L" class="fixed-button" target="_blank">JOIN GROUP</a>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 2: Siapa nabi terakhir dalam agama Islam?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer2">
-                    <button class="answer-button locked" data-question="2" disabled>Terkunci (00:00:00)</button>
-                </div>
-                <div class="fixed-button-container">
-                    <a href="https://whatsapp.com/channel/0029VaorBn4FHWq0dEFX993F" class="fixed-button" target="_blank">CHANEL</a>
-                    <a href="https://chat.whatsapp.com/KFD8wFX1XDgIrge89SO70L" class="fixed-button" target="_blank">JOIN GROUP</a>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 3: Berapa jumlah rukun Islam? (format angka)</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer3">
-                    <button class="answer-button locked" data-question="3" disabled>Terkunci (00:00:00)</button>
-                </div>
-                <div class="fixed-button-container">
-                    <a href="https://whatsapp.com/channel/0029VaorBn4FHWq0dEFX993F" class="fixed-button" target="_blank">CHANEL</a>
-                    <a href="https://chat.whatsapp.com/KFD8wFX1XDgIrge89SO70L" class="fixed-button" target="_blank">JOIN GROUP</a>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 4: Apa nama bulan suci dalam agama Islam di mana umat Muslim berpuasa?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer4">
-                    <button class="answer-button locked" data-question="4" disabled>Terkunci (00:00:00)</button>
-                </div>
-                <div class="fixed-button-container">
-                    <a href="https://whatsapp.com/channel/0029VaorBn4FHWq0dEFX993F" class="fixed-button" target="_blank">CHANEL</a>
-                    <a href="https://chat.whatsapp.com/KFD8wFX1XDgIrge89SO70L" class="fixed-button" target="_blank">JOIN GROUP</a>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 5: Kemana umat Islam melaksanakan ibadah haji?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer5">
-                    <button class="answer-button locked" data-question="5" disabled>Terkunci (00:00:00)</button>
-                </div>
-                <div class="fixed-button-container">
-                    <a href="https://whatsapp.com/channel/0029VaorBn4FHWq0dEFX993F" class="fixed-button" target="_blank">CHANEL</a>
-                    <a href="https://chat.whatsapp.com/KFD8wFX1XDgIrge89SO70L" class="fixed-button" target="_blank">JOIN GROUP</a>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 6: Apa arti dari kata "Allah" dalam agama Islam?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer6">
-                    <button class="answer-button locked" data-question="6" disabled>Terkunci (00:00:00)</button>
-                </div>
-                <div class="fixed-button-container">
-                    <a href="https://whatsapp.com/channel/0029VaorBn4FHWq0dEFX993F" class="fixed-button" target="_blank">CHANEL</a>
-                    <a href="https://chat.whatsapp.com/KFD8wFX1XDgIrge89SO70L" class="fixed-button" target="_blank">JOIN GROUP</a>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 7: Berapa jumlah rakaat dalam shalat subuh? (format angka)</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer7">
-                    <button class="answer-button locked" data-question="7" disabled>Terkunci (00:00:00)</button>
-                </div>
-                <div class="fixed-button-container">
-                    <a href="https://whatsapp.com/channel/0029VaorBn4FHWq0dEFX993F" class="fixed-button" target="_blank">CHANEL</a>
-                    <a href="https://chat.whatsapp.com/KFD8wFX1XDgIrge89SO70L" class="fixed-button" target="_blank">JOIN GROUP</a>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 8: Apa nama malaikat yang bertugas menyampaikan wahyu kepada Nabi Muhammad SAW?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer8">
-                    <button class="answer-button locked" data-question="8" disabled>Terkunci (00:00:00)</button>
-                </div>
-                <div class="fixed-button-container">
-                    <a href="https://whatsapp.com/channel/0029VaorBn4FHWq0dEFX993F" class="fixed-button" target="_blank">CHANEL</a>
-                    <a href="https://chat.whatsapp.com/KFD8wFX1XDgIrge89SO70L" class="fixed-button" target="_blank">JOIN GROUP</a>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 9: Apa nama peristiwa penting dalam sejarah Islam di mana Nabi Muhammad SAW melakukan perjalanan malam dari Masjidil Haram ke Masjidil Aqsa dan kemudian naik ke Sidratul Muntaha? (dua kata)</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer9">
-                    <button class="answer-button locked" data-question="9" disabled>Terkunci (00:00:00)</button>
-                </div>
-                <div class="fixed-button-container">
-                    <a href="https://whatsapp.com/channel/0029VaorBn4FHWq0dEFX993F" class="fixed-button" target="_blank">CHANEL</a>
-                    <a href="https://chat.whatsapp.com/KFD8wFX1XDgIrge89SO70L" class="fixed-button" target="_blank">JOIN GROUP</a>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 10: Apa sebutan bagi orang yang beriman kepada Allah SWT dan mengikuti ajaran Nabi Muhammad SAW?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer10">
-                    <button class="answer-button locked" data-question="10" disabled>Terkunci (00:00:00)</button>
-                </div>
-                <div class="fixed-button-container">
-                    <a href="https://whatsapp.com/channel/0029VaorBn4FHWq0dEFX993F" class="fixed-button" target="_blank">CHANEL</a>
-                    <a href="https://chat.whatsapp.com/KFD8wFX1XDgIrge89SO70L" class="fixed-button" target="_blank">JOIN GROUP</a>
-                </div>
-            </div>
-        </div>
-
-        <p id="message" class="hidden"></p>
-
-        </div>
-
-    <div id="success-overlay">
-        <div id="success-video-container">
-            <video id="success-video" controls autoplay muted>
-                <source src="https://e.top4top.io/m_3381upp550.mp4" type="video/mp4">
-                Browser Anda tidak mendukung pemutar video.
-            </video>
-        </div>
-        <p id="success-text"><strong>SELAMAT! SEMUA  JAWABAN BENAR....</strong><br>Jangan Lupa Gabung Group <strong>DAGET SQUAD</strong> ya, dan join chanel RANDOM</p>
-        <div id="loading-bar-container">
-            <div id="loading-bar"></div>
-
-        </div>
-        <p id="countdown-text">Iklan... (24)</p>
+    <h1 id="game-title">NARA ZAEN GAME</h1>
+    <div id="game-board"></div>
+    <div id="score">Score: 0</div>
+    <button onclick="resetGame()">ULANGI GAME</button>
+    <div id="link-button">
+        <button id="claim-button">KLAIM DANA KAGET</button>
     </div>
+    <div id="warning-text">⚠️ PERHATIAN : Menangkan game dan dapatkan DANA KAGET</div>
+    <script>
+        const emojis = ['🎮', '🎲', '🎯', '🎳', '🏓', '🏸', '🥊', '🎣'];
+        const cards = [...emojis, ...emojis];
+        let flippedCards = [];
+        let matchedCards = 0;
+        let score = 0;
+        const totalPairs = emojis.length;
+        const linkButton = document.getElementById('link-button');
+        const scoreDisplay = document.getElementById('score');
+        const gameBoard = document.getElementById('game-board');
+        const claimButton = document.getElementById('claim-button');
 
-    <div id="wrong-answer-overlay">
-        <img id="wrong-answer-image" src="https://l.top4top.io/p_3382yabr30.png" alt="Jawaban Salah">
-        <div id="wrong-answer-text">JAWABAN SALAH</div>
-    </div>
+        // Deklarasikan variabel untuk link Dana Kaget
+        let danaKagetLink;
 
-    <script src="assets/js/daget.js"></script>
-</body>
-</html>
+        function initGame() {
+            gameBoard.innerHTML = '';
+            flippedCards = [];
+            matchedCards = 0;
+            score = 0;
+            scoreDisplay.textContent = `Score: ${score}`;
+            linkButton.style.display = 'none';
 
+            cards.sort(() => Math.random() - 0.5);
+
+            cards.forEach((emoji, index) => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.dataset.value = emoji;
+                card.dataset.index = index;
+                card.innerHTML = emoji;
+                card.addEventListener('click', flipCard);
+                gameBoard.appendChild(card);
+            });
+        }
+
+        function flipCard() {
+            if (flippedCards.length < 2 && !this.classList.contains('flipped') && !this.classList.contains('matched')) {
+                this.style.backgroundColor = '#e67e22'; // Ubah warna saat diklik
+                this.classList.add('flipped');
+                flippedCards.push(this);
+                if (flippedCards.length === 2) {
+                    checkMatch();
+                }
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+
+            if (card1.dataset.value === card2.dataset.value) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                score += 10;
+                scoreDisplay.textContent = `Score: ${score}`;
+                matchedCards++;
+                if (matchedCards === totalPairs) {
+                    setTimeout(() => {
+                        linkButton.style.display = 'block';
+                    }, 750);
+                }
+            } else {
+                setTimeout(() => {
+                    card
