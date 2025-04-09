@@ -1,205 +1,387 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nara zaen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Chef Rama - Web Quiz Pribadi</title>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start; /* Align items to the top to see everything */
-            min-height: 100vh;
-            background-color: #2c3e50;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-            color: white;
-        }
-        #game-title {
-            color: #f39c12;
-            font-size: 2em; /* Ukuran judul diperkecil */
-            margin-bottom: 20px; /* Margin diperkecil */
-            text-align: center;
-        }
-        #game-board {
-            display: grid;
-            grid-template-columns: repeat(4, 65px); /* Ukuran kartu diperkecil */
-            grid-gap: 10px; /* Jarak antar kartu diperkecil */
-            margin-bottom: 20px; /* Margin diperkecil */
-            background-color: #34495e;
-            padding: 15px; /* Padding diperkecil */
-            border-radius: 10px; /* Radius diperkecil */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Bayangan diperkecil */
-        }
-        .card {
-            width: 100%;
-            height: 65px; /* Sesuai dengan ukuran grid */
-            background-color: #333; /* Warna awal hitam */
-            border-radius: 8px; /* Radius diperkecil */
-            cursor: pointer;
+            font-family: sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5em; /* Ukuran emoji diperkecil */
-            color: transparent;
-            transition: transform 0.3s, background-color 0.3s, color 0.3s;
-            transform-style: preserve-3d;
+            min-height: 100vh;
+            background-color: black;
+            margin: 0;
+            position: relative; /* Untuk positioning overlay salah */
         }
-        .card.flipped {
-            background-color: #e67e22; /* Warna saat kartu dibuka */
-            color: white;
-            transform: rotateY(180deg);
-        }
-        .card.matched {
-            background-color: #2ecc71;
-            cursor: default;
-            opacity: 0.8;
-        }
-        #score {
-            font-size: 1.2em; /* Ukuran skor diperkecil */
-            margin-bottom: 15px; /* Margin diperkecil */
-            color: #ecf0f1;
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 80%;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
             text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 10px;
+            margin-right: 10px;
         }
-        button {
-            padding: 8px 15px; /* Padding diperkecil */
-            font-size: 0.9em; /* Ukuran font tombol diperkecil */
-            background-color: #3498db;
+
+        .logo {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .question-container {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .question-row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 35px; /* Tambah margin bawah untuk tombol WhatsApp */
+        }
+
+        .question {
+            font-weight: bold;
+            margin-bottom: 15px; /* Tambah margin bawah agar tidak terlalu dekat dengan input */
+            text-align: left;
+        }
+
+        .options {
+            display: none; /* Sembunyikan elemen options */
+            font-style: italic;
+            color: #ccc;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .answer-input-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .answer-input {
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #333;
+            color: white;
+        }
+
+        .answer-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
             border: none;
-            color: white;
-            border-radius: 5px; /* Radius diperkecil */
+            border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            font-size: 14px;
+            margin-left: 10px;
         }
-        button:hover {
-            background-color: #2980b9;
+
+        .answer-button:hover {
+            background-color: #0056b3;
         }
-        #link-button {
-            display: none;
-            margin-top: 20px; /* Margin diperkecil */
-            text-align: center;
+
+        .fixed-button-container {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+            margin-top: 20px; /* Tambah margin atas untuk memisahkan dari soal */
         }
-        #link-button button {
-            background-color: #1abc9c;
-            padding: 8px 15px; /* Padding diperkecil */
-            font-size: 0.9em; /* Ukuran font tombol klaim diperkecil */
-            border-radius: 5px; /* Radius diperkecil */
-        }
-        #link-button button:hover {
-            background-color: #16a085;
-        }
-        #link-button a {
-            text-decoration: none;
+
+        .fixed-whatsapp-button {
+            background-color: #25D366;
             color: white;
+            padding: 8px 12px; /* Ukuran padding dikecilkan */
+            border-radius: 8px; /* Border radius disesuaikan */
+            text-decoration: none;
+            font-size: 12px; /* Ukuran font dikecilkan */
+            border: none;
+            position: fixed;
+            top: 10px; /* Posisi atas sedikit dinaikkan */
+            right: 10px; /* Posisi kanan sedikit dikecilkan */
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Shadow dikecilkan */
+            animation: blinker 1.5s infinite alternate;
         }
-        #warning-text {
-            color: white; /* Warna teks menjadi putih */
-            font-size: 1.1em;
-            margin-top: 20px;
+
+        .fixed-whatsapp-button:hover {
+            background-color: #128C7E;
+        }
+
+        @keyframes blinker {
+            from { opacity: 1.0; }
+            to { opacity: 0.6; }
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
             text-align: center;
-            /* animation: blinker 1s linear infinite; Hapus animasi kedip */
         }
-        /* @keyframes blinker {
-            50% {
-                opacity: 0;
-            }
-        } */
+
+        .hidden {
+            display: none;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        #success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            flex-direction: column;
+        }
+
+        #success-video-container {
+            max-width: 400px;
+            width: 90%;
+            margin-bottom: 10px;
+        }
+
+        #success-video {
+            width: 100%;
+            height: auto;
+        }
+
+        #success-text {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        #loading-bar-container {
+            width: 200px;
+            height: 10px;
+            background-color: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        #loading-bar {
+            width: 0%;
+            height: 100%;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+
+        #countdown-text {
+            color: white;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        #wrong-answer-overlay {
+            position: fixed; /* Ubah menjadi fixed */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            background-color: rgba(0, 0, 0, 0.5); /* Tambahkan latar belakang semi-transparan agar lebih terlihat */
+        }
+
+        #wrong-answer-image {
+            max-width: 200px;
+            width: 80%;
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        #wrong-answer-text {
+            color: red;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        #wrong-answer-overlay.show {
+            display: flex;
+        }
+
+        #wrong-answer-overlay.show #wrong-answer-image {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
-    <h1 id="game-title">NARA ZAEN GAME</h1>
-    <div id="game-board"></div>
-    <div id="score">Score: 0</div>
-    <button onclick="resetGame()">ULANGI GAME</button>
-    <div id="link-button">
-        <button id="claim-button">KLAIM DANA KAGET</button>
+    <a href="https://wa.me/+6281268712898" class="fixed-whatsapp-button" target="_blank">
+        Tanya Jawaban ke Chef Rama!!!
+    </a>
+
+    <div class="container">
+        <img src="https://i.ibb.co.com/9kDxBHP4/IMG-20250410-WA0026.jpg" alt="Logo Chef Rama" class="logo">
+        <h1>Chef Rama - Web Quiz Pribadi</h1>
+
+
+        <div class="question-container">
+            <div class="question-row">
+                <div class="question">Soal 1: Warna cat tembok gw</div>
+                <div class="options">Pilihan: abu, biru, kuning</div>
+                <div class="answer-input-container">
+                    <input type="text" class="answer-input" id="answer1">
+                    <button class="answer-button" data-question="1">Jawab</button>
+                </div>
+            </div>
+        </div>
+
+        <p id="message" class="hidden"></p>
+
+        </div>
+
+    <div id="success-overlay">
+        <div id="success-video-container">
+            <video id="success-video" controls autoplay muted>
+                <source src="https://e.top4top.io/m_3381upp550.mp4" type="video/mp4">
+                Browser Anda tidak mendukung pemutar video.
+            </video>
+        </div>
+        <p id="success-text"><strong>SELAMAT! JAWABAN BENAR....</strong><br>Jangan Lupa Gabung Group <strong>CHEF RAMA</strong> ya, dan join chanel RANDOM</p>
+        <div id="loading-bar-container">
+            <div id="loading-bar"></div>
+
+        </div>
+        <p id="countdown-text">Iklan... (24)</p>
     </div>
-    <div id="warning-text">⚠️ PERHATIAN : Menangkan game dan dapatkan DANA KAGET</div>
+
+    <div id="wrong-answer-overlay">
+        <img id="wrong-answer-image" src="https://l.top4top.io/p_3382yabr30.png" alt="Jawaban Salah">
+        <div id="wrong-answer-text">JAWABAN SALAH</div>
+    </div>
+
     <script>
-        const emojis = ['🎮', '🎲', '🎯', '🎳', '🏓', '🏸', '🥊', '🎣'];
-        const cards = [...emojis, ...emojis];
-        let flippedCards = [];
-        let matchedCards = 0;
-        let score = 0;
-        const totalPairs = emojis.length;
-        const linkButton = document.getElementById('link-button');
-        const scoreDisplay = document.getElementById('score');
-        const gameBoard = document.getElementById('game-board');
-        const claimButton = document.getElementById('claim-button');
+        document.addEventListener('DOMContentLoaded', function() {
+            const answerInputs = {
+                1: document.getElementById('answer1')
+            };
+            const answerButtons = {
+                1: document.querySelector(`.answer-button[data-question="1"]`)
+            };
+            const messageElement = document.getElementById('message');
+            const wrongAnswerOverlay = document.getElementById('wrong-answer-overlay');
+            const wrongAnswerImage = document.getElementById('wrong-answer-image');
+            const wrongAnswerTextElement = document.getElementById('wrong-answer-text');
+            const correctAnswers = {
+                1: ["kuning", "abu", "biru"]
+            };
+            const redirectUrls = {
+                1: "https://link.dana.id/danakaget?c=skzw56hka&r=gHPvYe&orderId=20250410101214771915010300166560917431519"
+            };
+            const successOverlay = document.getElementById('success-overlay');
+            const successVideo = document.getElementById('success-video');
+            const loadingBar = document.getElementById('loading-bar');
+            const countdownText = document.getElementById('countdown-text');
+            const totalLoadingTime = 23000; // Durasi loading lebih singkat untuk setiap soal
+            const loadingIntervalTime = 100;
+            let elapsedTime = 0;
+            let countdownInterval;
 
-        // Link Dana Kaget langsung di dalam script
-        const danaKagetLink = "https://link.dana.id/danakaget?c=sn3e8efuq&r=cAYM8h&orderId=20250409101214808715010300166998216995563";
+            successVideo.controls = false;
 
-        function initGame() {
-            gameBoard.innerHTML = '';
-            flippedCards = [];
-            matchedCards = 0;
-            score = 0;
-            scoreDisplay.textContent = `Score: ${score}`;
-            linkButton.style.display = 'none';
+            function showWrongAnswer() {
+                wrongAnswerOverlay.classList.add('show');
+                wrongAnswerImage.style.opacity = 1; // Langsung munculkan gambar
 
-            cards.sort(() => Math.random() - 0.5);
-
-            cards.forEach((emoji, index) => {
-                const card = document.createElement('div');
-                card.classList.add('card');
-                card.dataset.value = emoji;
-                card.dataset.index = index;
-                card.innerHTML = emoji;
-                card.addEventListener('click', flipCard);
-                gameBoard.appendChild(card);
-            });
-        }
-
-        function flipCard() {
-            if (flippedCards.length < 2 && !this.classList.contains('flipped') && !this.classList.contains('matched')) {
-                this.style.backgroundColor = '#e67e22'; // Ubah warna saat diklik
-                this.classList.add('flipped');
-                flippedCards.push(this);
-                if (flippedCards.length === 2) {
-                    checkMatch();
-                }
-            }
-        }
-
-        function checkMatch() {
-            const [card1, card2] = flippedCards;
-
-            if (card1.dataset.value === card2.dataset.value) {
-                card1.classList.add('matched');
-                card2.classList.add('matched');
-                score += 10;
-                scoreDisplay.textContent = `Score: ${score}`;
-                matchedCards++;
-                if (matchedCards === totalPairs) {
-                    setTimeout(() => {
-                        linkButton.style.display = 'block';
-                    }, 750);
-                }
-            } else {
                 setTimeout(() => {
-                    card1.style.backgroundColor = '#333'; // Kembalikan warna jika tidak cocok
-                    card2.style.backgroundColor = '#333'; // Kembalikan warna jika tidak cocok
-                    card1.classList.remove('flipped');
-                    card2.classList.remove('flipped');
-                }, 1000);
+                    wrongAnswerOverlay.classList.remove('show');
+                    wrongAnswerImage.style.opacity = 0; // Fade out gambar
+                }, 2000);
             }
-            flippedCards = [];
-        }
 
-        function resetGame() {
-            initGame();
-        }
+            function startSuccessSequence(redirectUrl) {
+                return new Promise((resolve) => {
+                    successOverlay.style.display = 'flex';
+                    successVideo.muted = false;
+                    successVideo.play();
+                    successText.textContent = 'SELAMAT! JAWABAN BENAR...'; // Pesan selamat singkat
 
-        // Event listener untuk tombol klaim
-        claimButton.addEventListener('click', () => {
-            window.open(danaKagetLink, '_blank');
+                    let width = 0;
+                    elapsedTime = 0; // Reset waktu
+                    const loadingInterval = setInterval(function() {
+                        elapsedTime += loadingIntervalTime;
+                        width = (elapsedTime / totalLoadingTime) * 100;
+                        loadingBar.style.width = width + '%';
+
+                        const remainingTime = Math.ceil((totalLoadingTime - elapsedTime) / 1000);
+                        countdownText.textContent = `tunggu sebentar... (${remainingTime})`;
+
+                        if (elapsedTime >= totalLoadingTime) {
+                            clearInterval(loadingInterval);
+                            successOverlay.style.display = 'none'; // Sembunyikan overlay setelah selesai
+                            resolve();
+                        }
+                    }, loadingIntervalTime);
+                });
+            }
+
+            const successText = document.getElementById('success-text');
+
+            if (answerButtons[1]) {
+                answerButtons[1].addEventListener('click', async function() {
+                    const button = this;
+                    const questionNumber = parseInt(button.dataset.question);
+                    const userAnswer = answerInputs[questionNumber].value.toLowerCase().replace(/\s/g, '');
+                    const correctAnswersForQuestion = correctAnswers[questionNumber];
+
+                    button.disabled = true; // Nonaktifkan tombol setelah diklik
+
+                    if (correctAnswersForQuestion.includes(userAnswer)) {
+                        messageElement.textContent = `Jawaban Soal ${questionNumber} Benar! Mengarahkan...`;
+                        messageElement.className = "success";
+                        messageElement.classList.remove("hidden");
+                        answerInputs[questionNumber].disabled = true;
+
+                        await startSuccessSequence(redirectUrls[questionNumber]);
+                        window.location.href = redirectUrls[questionNumber];
+                    } else {
+                        showWrongAnswer();
+                        messageElement.textContent = `Jawaban Soal ${questionNumber} Salah. Coba lagi.`;
+                        messageElement.className = "error";
+                        messageElement.classList.remove("hidden");
+                        setTimeout(() => {
+                            messageElement.classList.add("hidden");
+                            button.disabled = false; // Aktifkan kembali
+                        }, 2000);
+                    }
+                });
+            }
         });
-
-        initGame();
     </script>
 </body>
 </html>
