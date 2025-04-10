@@ -1,105 +1,164 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Kirim Nama via WhatsApp</title>
-<style>
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #e0f7fa; /* Light Teal */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
-}
-
-.container {
-  background-color: #ffffff;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 90%;
-  max-width: 400px;
-}
-
-h2 {
-  color: #26a69a; /* Teal Accent */
-  margin-bottom: 30px;
-  font-size: 2em;
-  font-weight: 600;
-}
-
-label {
-  display: block;
-  margin-bottom: 10px;
-  color: #37474f; /* Dark Gray */
-  font-weight: bold;
-  font-size: 1.1em;
-  text-align: left;
-}
-
-input[type="text"] {
-  width: calc(100% - 20px);
-  padding: 12px;
-  margin-bottom: 25px;
-  border: 1px solid #b2dfdb; /* Light Teal Border */
-  border-radius: 6px;
-  box-sizing: border-box;
-  font-size: 1em;
-  transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus {
-  outline: none;
-  border-color: #009688; /* Teal Primary */
-  box-shadow: 0 0 6px rgba(0, 150, 136, 0.3);
-}
-
-button {
-  background-color: #009688; /* Teal Primary */
-  color: white;
-  padding: 14px 24px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1.1em;
-  font-weight: 500;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-  background-color: #00796b; /* Darker Teal */
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Singkat</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: calc(100% - 12px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #28a745; /* Warna hijau untuk tombol submit yang mengarah ke hadiah */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #1e7e34;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+        }
+        #results h2 {
+            margin-top: 0;
+        }
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="https://d.top4top.io/p_3387sy0p00.png" alt="Logo" class="logo">
+        </div>
+        <h1>Kuis Singkat</h1>
+        <p>ini request dana kaget dari RAMA Chef</p>
+        <form id="quizForm">
+            <div class="question">
+                <label for="q1">1. Warna cat tembok gw:</label>
+                <input type="text" id="q1" name="q1">
+            </div>
+            <div class="question">
+                <label for="q2">2. Plat nopol gw:</label>
+                <input type="text" id="q2" name="q2">
+            </div>
+            <div class="question">
+                <label for="q3">3. Merk hp gw:</label>
+                <input type="text" id="q3" name="q3">
+            </div>
+            <button type="button" onclick="checkAnswers()">Submit Jawaban</button>
+        </form>
 
-<div class="container">
-  <h2>HAHHAHAHA</h2>
-  <form id="whatsappForm">
-    <label for="nama">Kalau gabisa aksi namanya apa? bacot doang kan ya?</label><br>
-    <input type="text" id="nama" name="nama" required><br><br>
-    <button type="button" onclick="kirimWhatsApp()">Kirim jawaban dapet daget</button>
-  </form>
-</div>
+        <div id="results" style="display: none;">
+            <h2>Hasil Jawaban Anda:</h2>
+            <p><b>Soal 1:</b> Jawaban Anda: <span id="result_q1"></span> <span id="feedback_q1"></span></p>
+            <p><b>Soal 2:</b> Jawaban Anda: <span id="result_q2"></span> <span id="feedback_q2"></span></p>
+            <p><b>Soal 3:</b> Jawaban Anda: <span id="result_q3"></span> <span id="feedback_q3"></span></p>
+            <p id="allCorrectMessage" style="display: none; color: green; font-weight: bold;">Selamat! Semua jawaban benar. Anda akan dialihkan...</p>
+        </div>
+    </div>
 
-<script>
-function kirimWhatsApp() {
-  var nama = document.getElementById("nama").value;
-  var nomorWA = "+6283129753719";
-  var pesan = "https://link.dana.id/danakaget?c=sfujaq6ut&r=cAYM8h&orderId=20250410101214148515010300166998217178065" + nama;
-  var urlWA = "https://wa.me/" + nomorWA + "?text=" + encodeURIComponent(pesan);
-  window.open(urlWA, '_blank');
-}
-</script>
+    <script>
+        function checkAnswers() {
+            const jawaban1 = document.getElementById("q1").value.trim().toLowerCase();
+            const jawaban2 = document.getElementById("q2").value.trim().toUpperCase();
+            const jawaban3 = document.getElementById("q3").value.trim().toLowerCase();
 
+            const jawabanBenar1 = "kuning";
+            const jawabanBenar2 = "BM";
+            const jawabanBenar3 = "siomay";
+
+            document.getElementById("result_q1").textContent = jawaban1;
+            document.getElementById("result_q2").textContent = jawaban2;
+            document.getElementById("result_q3").textContent = jawaban3;
+
+            let semuaBenar = true;
+
+            if (jawaban1 === jawabanBenar1) {
+                document.getElementById("feedback_q1").textContent = " (Benar)";
+                document.getElementById("feedback_q1").className = "correct";
+            } else {
+                document.getElementById("feedback_q1").textContent = " (Salah)";
+                document.getElementById("feedback_q1").className = "incorrect";
+                semuaBenar = false;
+            }
+
+            if (jawaban2 === jawabanBenar2) {
+                document.getElementById("feedback_q2").textContent = " (Benar)";
+                document.getElementById("feedback_q2").className = "correct";
+            } else {
+                document.getElementById("feedback_q2").textContent = " (Salah)";
+                document.getElementById("feedback_q2").className = "incorrect";
+                semuaBenar = false;
+            }
+
+            if (jawaban3 === jawabanBenar3) {
+                document.getElementById("feedback_q3").textContent = " (Benar)";
+                document.getElementById("feedback_q3").className = "correct";
+            } else {
+                document.getElementById("feedback_q3").textContent = " (Salah)";
+                document.getElementById("feedback_q3").className = "incorrect";
+                semuaBenar = false;
+            }
+
+            document.getElementById("results").style.display = "block";
+
+            if (semuaBenar) {
+                document.getElementById("allCorrectMessage").style.display = "block";
+                setTimeout(function() {
+                    window.location.href = "https://link.dana.id/danakaget?c=skzw56hka&r=gHPvYe&orderId=20250410101214771915010300166560917431519";
+                }, 3000); // Redirect setelah 3 detik (opsional)
+            } else {
+                document.getElementById("allCorrectMessage").style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
