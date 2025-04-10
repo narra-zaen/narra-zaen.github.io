@@ -1,493 +1,254 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
+<meta charset="utf-8">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Chef Rama - Web Quiz Pribadi</title>
+    <title>Kuis Singkat</title>
     <style>
         body {
             font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: black;
+            background-color: #000; /* Background hitam */
+            color: #fff; /* Teks putih untuk kontras */
             margin: 0;
-            position: relative; /* Untuk positioning overlay salah */
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Tengah horizontal */
+            justify-content: flex-start; /* Konten mulai dari atas */
+            min-height: 100vh; /* Tinggi minimal layar */
+            box-sizing: border-box;
         }
 
         .container {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: #222; /* Warna container */
+            width: 80%;
+            max-width: 600px; /* Lebar maksimum container */
             padding: 30px;
-            border-radius: 20px;
-            max-width: 80%;
-            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
-            text-align: center;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-left: 10px;
-            margin-right: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Efek bayangan tipis */
+            box-sizing: border-box;
+            margin-top: 50px; /* Beri jarak dari atas */
+            margin-bottom: 20px; /* Beri jarak ke tombol di bawah */
         }
-
-        .logo {
-            max-width: 150px;
-            height: auto;
-            margin-bottom: 10px; /* Sedikit dikurangi agar teks kedip lebih dekat */
-        }
-
-        .blinking-text {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            animation: rainbow 2s infinite alternate;
-        }
-
-        @keyframes rainbow {
-            0% { color: red; }
-            14% { color: orange; }
-            28% { color: yellow; }
-            42% { color: green; }
-            57% { color: blue; }
-            71% { color: indigo; }
-            85% { color: violet; }
-            100% { color: red; }
-        }
-
-        h1 {
+        .form-group {
             margin-bottom: 20px;
         }
-
-        .question-container {
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .question-row {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 25px;
-        }
-
-        .question {
+        label {
+            display: block;
+            margin-bottom: 8px;
             font-weight: bold;
-            margin-bottom: 15px;
-            text-align: left;
+            color: #eee;
         }
-
-        .options {
-            display: none; /* Sembunyikan elemen options */
-            font-style: italic;
-            color: #ccc;
-            margin-bottom: 10px;
-            text-align: left;
-        }
-
-        .answer-input-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .answer-input {
+        input[type="text"],
+        textarea {
+            width: calc(100% - 16px);
             padding: 10px;
             border: 1px solid #555;
-            border-radius: 4px;
-            width: 100%;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
             box-sizing: border-box;
-            background-color: #333;
-            color: white;
         }
-
-        .answer-button {
+        button {
             background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            display: block; /* Agar tombol submit jadi full width jika mau */
+            width: 100%; /* Agar tombol submit jadi full width jika mau */
+            box-sizing: border-box; /* Agar padding tidak menambah lebar */
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .fixed-button {
+            background-color: #28a745; /* Warna tombol titip daget */
             color: white;
             padding: 10px 15px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
-            margin-left: 10px;
-        }
-
-        .answer-button:hover {
-            background-color: #0056b3;
-        }
-
-        .fixed-button-container {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-            justify-content: center;
-            margin-top: 20px; /* Tambah margin atas untuk memisahkan dari soal */
-        }
-
-        .fixed-whatsapp-button {
-            background-color: #25D366;
-            color: white;
-            padding: 8px 12px; /* Ukuran padding dikecilkan */
-            border-radius: 8px; /* Border radius disesuaikan */
+            font-size: 0.9em;
             text-decoration: none;
-            font-size: 12px; /* Ukuran font dikecilkan */
-            border: none;
-            position: fixed;
-            top: 10px; /* Posisi atas sedikit dinaikkan */
-            right: 10px; /* Posisi kanan sedikit dikecilkan */
-            z-index: 1000;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Shadow dikecilkan */
-            animation: blinker 1.5s infinite alternate;
+            transition: background-color 0.3s ease;
+            display: block; /* Agar tombol jadi block element */
+            width: 80%; /* Lebar tombol sama dengan container */
+            max-width: 600px; /* Lebar maksimum tombol sama dengan container */
+            margin: 20px auto; /* Membuat tombol berada di tengah horizontal dan ada jarak */
+            box-sizing: border-box; /* Agar padding tidak menambah lebar */
+            text-align: center; /* Agar teks di tengah tombol */
         }
-
-        .fixed-whatsapp-button:hover {
-            background-color: #128C7E;
+        .fixed-button:hover {
+            background-color: #1e7e34;
         }
-
-        @keyframes blinker {
-            from { opacity: 1.0; }
-            to { opacity: 0.6; }
-        }
-
-        #message {
-            margin-top: 15px;
-            font-weight: bold;
+        h1 {
+            color: #007bff; /* Warna judul */
             text-align: center;
+            margin-bottom: 25px;
         }
-
-        .hidden {
-            display: none;
+        p {
+            color: #ddd;
+            margin-top: 0;
         }
-
-        .error {
-            color: red;
-        }
-
-        .success {
-            color: green;
-        }
-
-        #success-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1001;
-            flex-direction: column;
-        }
-
-        #success-video-container {
-            max-width: 400px;
-            width: 90%;
-            margin-bottom: 10px;
-        }
-
-        #success-video {
-            width: 100%;
-            height: auto;
-        }
-
-        #success-text {
-            color: white;
-            font-size: 18px;
-            margin-bottom: 5px;
-            text-align: center;
-        }
-
-        #loading-bar-container {
-            width: 200px;
-            height: 10px;
+        #titipFormContainer {
+            display: none; /* Sembunyikan form titip daget awal */
             background-color: #333;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 5px;
-        }
-
-        #loading-bar {
-            width: 0%;
-            height: 100%;
-            background-color: #007bff;
-            border-radius: 5px;
-        }
-
-        #countdown-text {
-            color: white;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        #wrong-answer-overlay {
-            position: fixed; /* Ubah menjadi fixed */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            flex-direction: column;
-            background-color: rgba(0, 0, 0, 0.5); /* Tambahkan latar belakang semi-transparan agar lebih terlihat */
-        }
-
-        #wrong-answer-image {
-            max-width: 200px;
             width: 80%;
-            margin-bottom: 10px;
-            opacity: 0;
-            transition: opacity 0.5s ease-out;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            box-sizing: border-box;
+            margin: 20px auto;
+            text-align: left;
         }
-
-        #wrong-answer-text {
+        #titipFormContainer h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        #titipFormContainer button {
+            margin-top: 15px;
+        }
+        .fixed-content {
+            color: #ddd;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .error-message {
             color: red;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        #wrong-answer-overlay.show {
-            display: flex;
-        }
-
-        #wrong-answer-overlay.show #wrong-answer-image {
-            opacity: 1;
-        }
-
-        #correct-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1002; /* Lebih tinggi dari wrong-answer-overlay */
-        }
-
-        #correct-checkmark {
-            font-size: 80px;
-            color: green;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-        }
-
-        #correct-overlay.show {
-            display: flex;
-        }
-
-        #correct-overlay.show #correct-checkmark {
-            opacity: 1;
-            transform: scale(1);
+            font-size: 0.9em;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
-    <a href="https://wa.me/+6281268712898" class="fixed-whatsapp-button" target="_blank">
-        Tanya Jawaban ke Chef Rama!!!
-    </a>
 
     <div class="container">
-        <img src="https://i.ibb.co.com/9kDxBHP4/IMG-20250410-WA0026.jpg" alt="Logo Chef Rama" class="logo">
-        <div class="blinking-text">SIAPA CEPAT DIA DAPAT , Jawab semua pertanyaan dengan benar bila beruntung kamu akan mendapatkan dana kaget</div>
-        <h1>Chef Rama - Web Quiz Pribadi</h1>
-        <p>Jawablah semua pertanyaan di bawah ini dengan benar (huruf kecil tanpa tanda baca).</p>
-
-        <div class="question-container">
-            <div class="question-row">
-                <div class="question">Soal 1: Warna cat tembok gw</div>
-                <div class="options">Pilihan: abu, biru, kuning</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer1">
-                    <button class="answer-button" data-question="1">Jawab</button>
-                </div>
+        <h1>Kuis Singkat</h1>
+        <form id="quizForm">
+            <div class="form-group">
+                <label for="nama_kuis">Nama:</label>
+                <input type="text" id="nama_kuis" name="nama_kuis" required>
+                <div class="error-message" id="nama_kuis_error"></div>
             </div>
-
-            <div class="question-row">
-                <div class="question">Soal 2: Plat nopol gw</div>
-                <div class="options">Pilihan: BM, BK, BA</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer2">
-                    <button class="answer-button" data-question="2">Jawab</button>
-                </div>
+            <div class="form-group">
+                <label for="nomor_kuis">Nomor WhatsApp:</label>
+                <input type="text" id="nomor_kuis" name="nomor_kuis" required>
+                <div class="error-message" id="nomor_kuis_error"></div>
             </div>
-
-            <div class="question-row">
-                <div class="question">Soal 3: Merk hp gw</div>
-                <div class="options">Pilihan: siomay, oddo, aipong</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer3">
-                    <button class="answer-button" data-question="3">Jawab</button>
-                </div>
+            <div class="form-group">
+                <label for="pertanyaan_kuis">Pertanyaan:</label>
+                <p>Kenapa aku sangat tampan?😭</p>
             </div>
-        </div>
-
-        <p id="message" class="hidden"></p>
-
-        </div>
-
-    <div id="success-overlay">
-        <div id="success-video-container">
-            <video id="success-video" controls autoplay muted>
-                <source src="https://e.top4top.io/m_3381upp550.mp4" type="video/mp4">
-                Browser Anda tidak mendukung pemutar video.
-            </video>
-        </div>
-        <p id="success-text"><strong>SELAMAT! SEMUA JAWABAN BENAR....</strong><br>Jangan Lupa Gabung Group <strong>CHEF RAMA</strong> ya, dan join chanel RANDOM</p>
-        <div id="loading-bar-container">
-            <div id="loading-bar"></div>
-
-        </div>
-        <p id="countdown-text">Iklan... (24)</p>
+            <div class="form-group">
+                <label for="jawaban_kuis">Jawaban Anda:</label>
+                <textarea id="jawaban_kuis" name="jawaban_kuis" rows="3" required></textarea>
+                <div class="error-message" id="jawaban_kuis_error"></div>
+            </div>
+            <button type="button" onclick="kirimJawabanKuis()">Kirim Jawaban</button>
+        </form>
     </div>
 
-    <div id="wrong-answer-overlay">
-        <img id="wrong-answer-image" src="https://l.top4top.io/p_3382yabr30.png" alt="Jawaban Salah">
-        <div id="wrong-answer-text">JAWABAN SALAH</div>
-    </div>
+    <a href="#" class="fixed-button" onclick="tampilkanFormTitip()">
+        Titip Daget di web Nara
+    </a>
 
-    <div id="correct-overlay">
-        <div id="correct-checkmark">&#10004;</div>
+    <div id="titipFormContainer">
+        <h2>Titip Daget</h2>
+        <p class="fixed-content">Silakan isi formulir di bawah ini untuk titip daget:</p>
+        <form id="titipForm">
+            <div class="form-group">
+                <label for="nama_titip">Nama Anda:</label>
+                <input type="text" id="nama_titip" name="nama_titip" required>
+                <div class="error-message" id="nama_titip_error"></div>
+            </div>
+            <div class="form-group">
+                <label for="soal_titip">Soal yang Anda Inginkan:</label>
+                <textarea id="soal_titip" name="soal_titip" rows="3" required></textarea>
+                <div class="error-message" id="soal_titip_error"></div>
+            </div>
+            <div class="form-group">
+                <label for="link_titip">Link Daget Anda:</label>
+                <input type="text" id="link_titip" name="link_titip" required>
+                <div class="error-message" id="link_titip_error"></div>
+            </div>
+            <button type="button" onclick="kirimTitipan()">Kirim Titipan</button>
+        </form>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const answerInputs = {
-                1: document.getElementById('answer1'),
-                2: document.getElementById('answer2'),
-                3: document.getElementById('answer3')
-            };
-            const answerButtons = {};
-            for (let i = 1; i <= 3; i++) {
-                answerButtons[i] = document.querySelector(`.answer-button[data-question="${i}"]`);
+        function kirimJawabanKuis() {
+            const nama = document.getElementById('nama_kuis').value.trim();
+            const nomor = document.getElementById('nomor_kuis').value.trim();
+            const jawaban = document.getElementById('jawaban_kuis').value.trim();
+            const pertanyaan = "Kenapa aku sangat tampan?😭";
+            let isValid = true;
+
+            // Reset error messages
+            document.getElementById('nama_kuis_error').textContent = '';
+            document.getElementById('nomor_kuis_error').textContent = '';
+            document.getElementById('jawaban_kuis_error').textContent = '';
+
+            if (!nama) {
+                document.getElementById('nama_kuis_error').textContent = 'Nama harus diisi.';
+                isValid = false;
             }
-            const messageElement = document.getElementById('message');
-            const wrongAnswerOverlay = document.getElementById('wrong-answer-overlay');
-            const wrongAnswerImage = document.getElementById('wrong-answer-image');
-            const wrongAnswerTextElement = document.getElementById('wrong-answer-text');
-            const correctAnswers = {
-                1: ["kuning", "abu", "biru"],
-                2: ["bm", "bk", "ba"],
-                3: ["siomay", "oddo", "aipong"]
-            };
-            const redirectUrls = {
-                final: "https://link.dana.id/danakaget?c=skzw56hka&r=gHPvYe&orderId=20250410101214771915010300166560917431519"
-            };
-            const successOverlay = document.getElementById('success-overlay');
-            const successVideo = document.getElementById('success-video');
-            const loadingBar = document.getElementById('loading-bar');
-            const countdownText = document.getElementById('countdown-text');
-            const totalLoadingTime = 3000; // Durasi loading lebih singkat untuk setiap soal
-            const loadingIntervalTime = 100;
-            let elapsedTime = 0;
-            let countdownInterval;
-            let answers = {};
-            const correctOverlay = document.getElementById('correct-overlay');
-            const correctCheckmark = document.getElementById('correct-checkmark');
-
-            successVideo.controls = false;
-
-            function showWrongAnswer() {
-                wrongAnswerOverlay.classList.add('show');
-                wrongAnswerImage.style.opacity = 1; // Langsung munculkan gambar
-
-                setTimeout(() => {
-                    wrongAnswerOverlay.classList.remove('show');
-                    wrongAnswerImage.style.opacity = 0; // Fade out gambar
-                }, 2000);
+            if (!nomor) {
+                document.getElementById('nomor_kuis_error').textContent = 'Nomor WhatsApp harus diisi.';
+                isValid = false;
+            }
+            if (!jawaban) {
+                document.getElementById('jawaban_kuis_error').textContent = 'Jawaban harus diisi.';
+                isValid = false;
             }
 
-            function showCorrectAnswerEffect() {
-                correctOverlay.classList.add('show');
-                setTimeout(() => {
-                    correctOverlay.classList.remove('show');
-                }, 2000);
+            if (isValid) {
+                const pesan = `Nama: ${nama}\nNomor WhatsApp: ${nomor}\nPertanyaan: ${pertanyaan}\nJawaban: ${jawaban}\nhttps://link.dana.id/danakaget?c=st55xf7aj&r=cAYM8h&orderId=20250410101214284315010300166998217061154`;
+                const nomorWA = "6285711374861";
+                const linkWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+                window.open(linkWA, '_blank');
+            }
+        }
+
+        function tampilkanFormTitip() {
+            document.getElementById('titipFormContainer').style.display = 'block';
+        }
+
+        function kirimTitipan() {
+            const nama = document.getElementById('nama_titip').value.trim();
+            const soal = document.getElementById('soal_titip').value.trim();
+            const link = document.getElementById('link_titip').value.trim();
+            let isValid = true;
+
+            // Reset error messages
+            document.getElementById('nama_titip_error').textContent = '';
+            document.getElementById('soal_titip_error').textContent = '';
+            document.getElementById('link_titip_error').textContent = '';
+
+            if (!nama) {
+                document.getElementById('nama_titip_error').textContent = 'Nama Anda harus diisi.';
+                isValid = false;
+            }
+            if (!soal) {
+                document.getElementById('soal_titip_error').textContent = 'Soal yang Anda Inginkan harus diisi.';
+                isValid = false;
+            }
+            if (!link) {
+                document.getElementById('link_titip_error').textContent = 'Link Daget Anda harus diisi.';
+                isValid = false;
             }
 
-            function startSuccessSequence(redirectUrl) {
-                return new Promise((resolve) => {
-                    successOverlay.style.display = 'flex';
-                    successVideo.muted = false;
-                    successVideo.play();
-                    successText.textContent = 'SELAMAT! SEMUA JAWABAN BENAR...'; // Pesan selamat singkat
-
-                    let width = 0;
-                    elapsedTime = 0; // Reset waktu
-                    const loadingInterval = setInterval(function() {
-                        elapsedTime += loadingIntervalTime;
-                        width = (elapsedTime / totalLoadingTime) * 100;
-                        loadingBar.style.width = width + '%';
-
-                        const remainingTime = Math.ceil((totalLoadingTime - elapsedTime) / 1000);
-                        countdownText.textContent = `Memuat... (${remainingTime})`;
-
-                        if (elapsedTime >= totalLoadingTime) {
-                            clearInterval(loadingInterval);
-                            successOverlay.style.display = 'none'; // Sembunyikan overlay setelah selesai
-                            resolve();
-                        }
-                    }, loadingIntervalTime);
-                });
+            if (isValid) {
+                const pesanTitipan = `Titip Daget:\nNama: ${nama}\nSoal yang diinginkan: ${soal}\nLink Daget: ${link}`;
+                const nomorWA = "6285711374861";
+                const linkWATitipan = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesanTitipan)}`;
+                window.open(linkWATitipan, '_blank');
             }
-
-            const successText = document.getElementById('success-text');
-
-            for (let i = 1; i <= 3; i++) {
-                const answerButton = answerButtons[i];
-                if (answerButton) {
-                    answerButton.addEventListener('click', async function() {
-                        const button = this;
-                        const questionNumber = parseInt(button.dataset.question);
-                        const userAnswer = answerInputs[questionNumber].value.toLowerCase().replace(/\s/g, '');
-                        const correctAnswersForQuestion = correctAnswers[questionNumber];
-
-                        button.disabled = true; // Nonaktifkan tombol setelah diklik
-
-                        if (correctAnswersForQuestion.includes(userAnswer)) {
-                            answers[questionNumber] = true;
-                            showCorrectAnswerEffect(); // Tampilkan efek centang hijau
-                            messageElement.textContent = `Jawaban Soal ${questionNumber} Benar!`;
-                            messageElement.className = "success";
-                            messageElement.classList.remove("hidden");
-                            answerInputs[questionNumber].disabled = true;
-                            setTimeout(() => {
-                                messageElement.classList.add("hidden");
-                            }, 1500);
-                        } else {
-                            answers[questionNumber] = false;
-                            showWrongAnswer();
-                            messageElement.textContent = `Jawaban Soal ${questionNumber} Salah. Coba lagi.`;
-                            messageElement.className = "error";
-                            messageElement.classList.remove("hidden");
-                            setTimeout(() => {
-                                messageElement.classList.add("hidden");
-                                button.disabled = false; // Aktifkan kembali
-                            }, 2000);
-                        }
-
-                        // Cek apakah semua jawaban benar setelah setiap jawaban
-                        if (Object.keys(answers).length === 3 && Object.values(answers).every(val => val === true)) {
-                            await startSuccessSequence(redirectUrls.final);
-                            window.location.href = redirectUrls.final;
-                        } else if (Object.keys(answers).length === 3 && Object.values(answers).some(val => val === false)) {
-                            // Reset jawaban jika ada yang salah setelah semua dijawab
-                            answers = {};
-                            for (let j = 1; j <= 3; j++) {
-                                answerInputs[j].disabled = false;
-                                answerButtons[j].disabled = false;
-                            }
-                        }
-                    });
-                }
-            }
-        });
+        }
     </script>
 </body>
 </html>
-
