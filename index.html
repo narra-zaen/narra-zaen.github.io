@@ -3,162 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis Singkat</title>
+    <title>Tombol Muncul Setelah 3 Detik</title>
     <style>
-        body {
-            font-family: sans-serif;
-            margin: 20px;
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             background-color: #f4f4f4;
         }
-        .container {
+        .button-wrapper {
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        .logo-container {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-bottom: 20px;
+            max-width: 600px;
         }
-        .logo {
-            max-width: 150px;
-            height: auto;
-        }
-        .question {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"] {
-            width: calc(100% - 12px);
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-bottom: 10px;
-        }
-        button {
-            background-color: #28a745; /* Warna hijau untuk tombol submit yang mengarah ke hadiah */
+        .button-link {
+            display: none; /* Sembunyikan tombol secara default */
+            padding: 12px 24px;
+            background-color: #007bff;
             color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
         }
-        button:hover {
-            background-color: #1e7e34;
+        .button-link:hover {
+            background-color: #0056b3;
         }
-        #results {
+        .description {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+        .instructions {
             margin-top: 20px;
             padding: 15px;
-            background-color: #e9ecef;
-            border-radius: 4px;
-            border: 1px solid #ced4da;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            text-align: left;
         }
-        #results h2 {
-            margin-top: 0;
+        .instructions h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
         }
-        .correct {
-            color: green;
-            font-weight: bold;
+        .instructions p {
+            font-size: 14px;
+            line-height: 1.6;
         }
-        .incorrect {
-            color: red;
+        .loading-text {
+            font-size: 16px;
+            color: #777;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo-container">
-            <img src="https://d.top4top.io/p_3387sy0p00.png" alt="Logo" class="logo">
-        </div>
-        <h1>Kuis Singkat</h1>
-        <p>ini request dana kaget dari RAMA Chef</p>
-        <form id="quizForm">
-            <div class="question">
-                <label for="q1">1. Warna cat tembok gw:</label>
-                <input type="text" id="q1" name="q1">
+        <div class="button-wrapper">
+            <p class="loading-text">Menunggu sebentar...</p>
+            <a href="https://sfl.gl/YsAhU" id="visitButton" class="button-link" target="_blank">Kunjungi Situs</a>
+            <p class="description">Tombol akan muncul setelah 3 detik.</p>
+            <div class="instructions">
+                <h3>Cara Melewati teka teki</h3><p>0. klik mulai </p>
+                <p>1. Cari tombol "Open" dan langsung tekan back. dan tonton iklan 30 detik</p>
+                <p>2. tekan "next" Langsung tekan tombol "kembali" (back) </p>
+                <p>3. Cari tombol "Open" dan langsung tekan back.</p>                
+                <p>4. klik "go to link" langsung back</p>
             </div>
-            <div class="question">
-                <label for="q2">2. Plat nopol gw:</label>
-                <input type="text" id="q2" name="q2">
-            </div>
-            <div class="question">
-                <label for="q3">3. Merk hp gw:</label>
-                <input type="text" id="q3" name="q3">
-            </div>
-            <button type="button" onclick="checkAnswers()">Submit Jawaban</button>
-        </form>
-
-        <div id="results" style="display: none;">
-            <h2>Hasil Jawaban Anda:</h2>
-            <p><b>Soal 1:</b> Jawaban Anda: <span id="result_q1"></span> <span id="feedback_q1"></span></p>
-            <p><b>Soal 2:</b> Jawaban Anda: <span id="result_q2"></span> <span id="feedback_q2"></span></p>
-            <p><b>Soal 3:</b> Jawaban Anda: <span id="result_q3"></span> <span id="feedback_q3"></span></p>
-            <p id="allCorrectMessage" style="display: none; color: green; font-weight: bold;">Selamat! Semua jawaban benar. Anda akan dialihkan...</p>
         </div>
     </div>
 
     <script>
-        function checkAnswers() {
-            const jawaban1 = document.getElementById("q1").value.trim().toLowerCase();
-            const jawaban2 = document.getElementById("q2").value.trim().toUpperCase();
-            const jawaban3 = document.getElementById("q3").value.trim().toLowerCase();
-
-            const jawabanBenar1 = "kuning";
-            const jawabanBenar2 = "BM";
-            const jawabanBenar3 = "siomay";
-
-            document.getElementById("result_q1").textContent = jawaban1;
-            document.getElementById("result_q2").textContent = jawaban2;
-            document.getElementById("result_q3").textContent = jawaban3;
-
-            let semuaBenar = true;
-
-            if (jawaban1 === jawabanBenar1) {
-                document.getElementById("feedback_q1").textContent = " (Benar)";
-                document.getElementById("feedback_q1").className = "correct";
-            } else {
-                document.getElementById("feedback_q1").textContent = " (Salah)";
-                document.getElementById("feedback_q1").className = "incorrect";
-                semuaBenar = false;
-            }
-
-            if (jawaban2 === jawabanBenar2) {
-                document.getElementById("feedback_q2").textContent = " (Benar)";
-                document.getElementById("feedback_q2").className = "correct";
-            } else {
-                document.getElementById("feedback_q2").textContent = " (Salah)";
-                document.getElementById("feedback_q2").className = "incorrect";
-                semuaBenar = false;
-            }
-
-            if (jawaban3 === jawabanBenar3) {
-                document.getElementById("feedback_q3").textContent = " (Benar)";
-                document.getElementById("feedback_q3").className = "correct";
-            } else {
-                document.getElementById("feedback_q3").textContent = " (Salah)";
-                document.getElementById("feedback_q3").className = "incorrect";
-                semuaBenar = false;
-            }
-
-            document.getElementById("results").style.display = "block";
-
-            if (semuaBenar) {
-                document.getElementById("allCorrectMessage").style.display = "block";
-                setTimeout(function() {
-                    window.location.href = "https://link.dana.id/danakaget?c=skzw56hka&r=gHPvYe&orderId=20250410101214771915010300166560917431519";
-                }, 3000); // Redirect setelah 3 detik (opsional)
-            } else {
-                document.getElementById("allCorrectMessage").style.display = "none";
-            }
-        }
+        setTimeout(function() {
+            document.getElementById('visitButton').style.display = 'inline-block';
+            document.querySelector('.loading-text').style.display = 'none'; // Hilangkan teks "Menunggu sebentar..."
+        }, 3000); // 3000 milidetik = 3 detik
     </script>
 </body>
 </html>
