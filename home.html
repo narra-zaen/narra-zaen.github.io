@@ -1,143 +1,254 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<meta charset="utf-8">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akses Terproteksi</title>
+    <title>Kuis Singkat</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #6441A5, #2A0845);
+            font-family: sans-serif;
+            background-color: #000; /* Background hitam */
+            color: #fff; /* Teks putih untuk kontras */
             margin: 0;
-            color: #fff;
-            overflow: hidden;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Tengah horizontal */
+            justify-content: flex-start; /* Konten mulai dari atas */
+            min-height: 100vh; /* Tinggi minimal layar */
+            box-sizing: border-box;
         }
 
         .container {
-            position: relative;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            overflow: hidden;
-        }
-
-        .glowing-border {
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #ff008a, #ffeb3b, #00ff8c, #00cfff, #ff008a);
-            z-index: -1;
-            border-radius: 12px;
-            background-size: 200% 200%;
-            animation: glowing 5s linear infinite;
-        }
-
-        @keyframes glowing {
-            0% { background-position: 0 0; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0 0; }
-        }
-
-        .lock-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #eee;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        h1 {
-            margin-bottom: 30px;
-            color: #f0f0f0;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            align-items: center;
-        }
-
-        input[type="password"] {
-            padding: 12px 15px;
-            border: none;
-            border-radius: 6px;
-            width: 200px;
+            background-color: #222; /* Warna container */
+            width: 80%;
+            max-width: 600px; /* Lebar maksimum container */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Efek bayangan tipis */
             box-sizing: border-box;
-            font-size: 16px;
-            color: #333;
+            margin-top: 50px; /* Beri jarak dari atas */
+            margin-bottom: 20px; /* Beri jarak ke tombol di bawah */
         }
-
-        input[type="password"]::placeholder {
-            color: #777;
+        .form-group {
+            margin-bottom: 20px;
         }
-
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #eee;
+        }
+        input[type="text"],
+        textarea {
+            width: calc(100% - 16px);
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            box-sizing: border-box;
+        }
         button {
-            padding: 12px 25px;
             background-color: #007bff;
             color: white;
+            padding: 12px 20px;
             border: none;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 1em;
             transition: background-color 0.3s ease;
+            display: block; /* Agar tombol submit jadi full width jika mau */
+            width: 100%; /* Agar tombol submit jadi full width jika mau */
+            box-sizing: border-box; /* Agar padding tidak menambah lebar */
         }
-
         button:hover {
             background-color: #0056b3;
         }
-
-        .error-message {
-            color: #ff4d4d;
+        .fixed-button {
+            background-color: #28a745; /* Warna tombol titip daget */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            display: block; /* Agar tombol jadi block element */
+            width: 80%; /* Lebar tombol sama dengan container */
+            max-width: 600px; /* Lebar maksimum tombol sama dengan container */
+            margin: 20px auto; /* Membuat tombol berada di tengah horizontal dan ada jarak */
+            box-sizing: border-box; /* Agar padding tidak menambah lebar */
+            text-align: center; /* Agar teks di tengah tombol */
+        }
+        .fixed-button:hover {
+            background-color: #1e7e34;
+        }
+        h1 {
+            color: #007bff; /* Warna judul */
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        p {
+            color: #ddd;
+            margin-top: 0;
+        }
+        #titipFormContainer {
+            display: none; /* Sembunyikan form titip daget awal */
+            background-color: #333;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            box-sizing: border-box;
+            margin: 20px auto;
+            text-align: left;
+        }
+        #titipFormContainer h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        #titipFormContainer button {
             margin-top: 15px;
-            font-size: 14px;
+        }
+        .fixed-content {
+            color: #ddd;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <div class="glowing-border"></div>
-        <div class="lock-icon">🔒</div>
-        <h1>MASUKAN SANDI</h1>
-        <div class="input-group">
-            <input type="password" id="password" placeholder="Masukkan kata sandi">
-            <button onclick="checkPassword()">Masuk</button>
-        </div>
-        <p id="error" class="error-message" style="display: none;">Kata sandi salah!</p>
+        <h1>Kuis Singkat</h1>
+        <form id="quizForm">
+            <div class="form-group">
+                <label for="nama_kuis">Nama:</label>
+                <input type="text" id="nama_kuis" name="nama_kuis" required>
+                <div class="error-message" id="nama_kuis_error"></div>
+            </div>
+            <div class="form-group">
+                <label for="nomor_kuis">Nomor WhatsApp:</label>
+                <input type="text" id="nomor_kuis" name="nomor_kuis" required>
+                <div class="error-message" id="nomor_kuis_error"></div>
+            </div>
+            <div class="form-group">
+                <label for="pertanyaan_kuis">Pertanyaan:</label>
+                <p>Kenapa aku cantik?</p>
+            </div>
+            <div class="form-group">
+                <label for="jawaban_kuis">Jawaban Anda:</label>
+                <textarea id="jawaban_kuis" name="jawaban_kuis" rows="3" required></textarea>
+                <div class="error-message" id="jawaban_kuis_error"></div>
+            </div>
+            <button type="button" onclick="kirimJawabanKuis()">Kirim Jawaban</button>
+        </form>
+    </div>
+
+    <a href="#" class="fixed-button" onclick="tampilkanFormTitip()">
+        Titip Daget di web Nara
+    </a>
+
+    <div id="titipFormContainer">
+        <h2>Titip Daget</h2>
+        <p class="fixed-content">Silakan isi formulir di bawah ini untuk titip daget:</p>
+        <form id="titipForm">
+            <div class="form-group">
+                <label for="nama_titip">Nama Anda:</label>
+                <input type="text" id="nama_titip" name="nama_titip" required>
+                <div class="error-message" id="nama_titip_error"></div>
+            </div>
+            <div class="form-group">
+                <label for="soal_titip">Soal yang Anda Inginkan:</label>
+                <textarea id="soal_titip" name="soal_titip" rows="3" required></textarea>
+                <div class="error-message" id="soal_titip_error"></div>
+            </div>
+            <div class="form-group">
+                <label for="link_titip">Link Daget Anda:</label>
+                <input type="text" id="link_titip" name="link_titip" required>
+                <div class="error-message" id="link_titip_error"></div>
+            </div>
+            <button type="button" onclick="kirimTitipan()">Kirim Titipan</button>
+        </form>
     </div>
 
     <script>
-        const correctPassword = "narazaen123";
+        function kirimJawabanKuis() {
+            const nama = document.getElementById('nama_kuis').value.trim();
+            const nomor = document.getElementById('nomor_kuis').value.trim();
+            const jawaban = document.getElementById('jawaban_kuis').value.trim();
+            const pertanyaan = "Kenapa aku cantik?";
+            let isValid = true;
 
-        function checkPassword() {
-            const passwordInput = document.getElementById("password");
-            const errorMessage = document.getElementById("error");
-            const enteredPassword = passwordInput.value;
+            // Reset error messages
+            document.getElementById('nama_kuis_error').textContent = '';
+            document.getElementById('nomor_kuis_error').textContent = '';
+            document.getElementById('jawaban_kuis_error').textContent = '';
 
-            if (enteredPassword === correctPassword) {
-                window.location.href = "https://narra-zaen.github.io/";
-            } else {
-                errorMessage.style.display = "block";
-                passwordInput.value = "";
+            if (!nama) {
+                document.getElementById('nama_kuis_error').textContent = 'Nama harus diisi.';
+                isValid = false;
+            }
+            if (!nomor) {
+                document.getElementById('nomor_kuis_error').textContent = 'Nomor WhatsApp harus diisi.';
+                isValid = false;
+            }
+            if (!jawaban) {
+                document.getElementById('jawaban_kuis_error').textContent = 'Jawaban harus diisi.';
+                isValid = false;
+            }
+
+            if (isValid) {
+                const pesan = `Nama: ${nama}\nNomor WhatsApp: ${nomor}\nPertanyaan: ${pertanyaan}\nJawaban: ${jawaban}\nhttps://link.dana.id/danakaget?c=s5ueztv5d&r=cAYM8h&orderId=20250410101214848915010300166998217087042`;
+                const nomorWA = "6282114753206";
+                const linkWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+                window.open(linkWA, '_blank');
             }
         }
 
-        document.getElementById("password").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                checkPassword();
+        function tampilkanFormTitip() {
+            document.getElementById('titipFormContainer').style.display = 'block';
+        }
+
+        function kirimTitipan() {
+            const nama = document.getElementById('nama_titip').value.trim();
+            const soal = document.getElementById('soal_titip').value.trim();
+            const link = document.getElementById('link_titip').value.trim();
+            let isValid = true;
+
+            // Reset error messages
+            document.getElementById('nama_titip_error').textContent = '';
+            document.getElementById('soal_titip_error').textContent = '';
+            document.getElementById('link_titip_error').textContent = '';
+
+            if (!nama) {
+                document.getElementById('nama_titip_error').textContent = 'Nama Anda harus diisi.';
+                isValid = false;
             }
-        });
+            if (!soal) {
+                document.getElementById('soal_titip_error').textContent = 'Soal yang Anda Inginkan harus diisi.';
+                isValid = false;
+            }
+            if (!link) {
+                document.getElementById('link_titip_error').textContent = 'Link Daget Anda harus diisi.';
+                isValid = false;
+            }
+
+            if (isValid) {
+                const pesanTitipan = `Titip Daget:\nNama: ${nama}\nSoal yang diinginkan: ${soal}\nLink Daget: ${link}`;
+                const nomorWA = "6285711374861";
+                const linkWATitipan = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesanTitipan)}`;
+                window.open(linkWATitipan, '_blank');
+            }
+        }
     </script>
 </body>
 </html>
