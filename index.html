@@ -166,6 +166,9 @@
         .whatsapp-channel-button:hover {
             background-color: #128c7e;
         }
+        .nama-peserta {
+            color: #25d366; /* Warna hijau WhatsApp */
+        }
     </style>
 </head>
 <body>
@@ -200,8 +203,8 @@
                 <textarea id="pesan" name="pesan" rows="4" placeholder="Masukkan quetes Anda"></textarea>
             </div>
             <div class="form-group">
-                <label for="tambahan">Masukan link minta</label>
-                <input type="text" id="tambahan" name="tambahan" placeholder="Link minta">
+                <label for="tambahan">Masukan no rek dana</label>
+                <input type="text" id="tambahan" name="tambahan" placeholder="no dana">
             </div>
             <p><i>batas waktu ikut serta jam 19:00 WIB</i>
             <button type="submit" id="kirimWhatsapp">Kirim</button>
@@ -215,18 +218,18 @@
             <span class="close-button">&times;</span>
             <h3>Informasi Peserta</h3>
             <ul class="peserta-list">
-                <li>Peserta 1</li>
-                <li>Peserta 2</li>
-                <li>Peserta 3</li>
-                <li>Peserta 4</li>
-                <li>Peserta 5</li>
-                <li>Peserta 6</li>
-                <li>Peserta 7</li>
-                <li>Peserta 8</li>
-                <li>Peserta 9</li>
-                <li>Peserta 10</li>
+                <li>1. <span class="nama-peserta">iputyy</span> - Peserta Lomba Jum'at, 11 Apr</li>
+                <li>2. <span class="nama-peserta">rahma</span> - Peserta Lomba Jum'at, 11 Apr</li>
+                <li>3. <span class="nama-peserta">syifa</span> - Peserta Lomba Jum'at, 11 Apr</li>
+                <li>4. <span class="nama-peserta">ainun</span> - Peserta Lomba Jum'at, 11 Apr</li>
+                <li>5. <span class="nama-peserta">vanilla</span> - Peserta Lomba Jum'at, 11 Apr</li>
+                <li>6. <span class="nama-peserta">araaaimup</span> - Peserta Lomba Jum'at, 11 Apr</li>
+                <li>7. <span class="nama-peserta">farel</span> - Peserta Lomba Jum'at, 11 Apr</li>
+                <li>8. <span class="nama-peserta">aufa</span> - Peserta Lomba Jum'at, 11 Apr</li>
+                <li>9. <span class="nama-peserta">rizky</span> - Peserta Lomba Jum'at, 11 Apr</li>
+                <li>10. <span class="nama-peserta">nurizaazhr</span> - Peserta Lomba Jum'at, 11 Apr</li>
             </ul>
-            <p class="payment-pending">Caption: Payment Pending <i>LOMBA BERAKHIR Besok jam 4 pagi</i> </p>
+            <p class="payment-pending">Caption: Payment Pending <i>LOMBA BERAKHIR Besok jam 4 pagi</i><br>maaf untuk yg belum terpilih jangan khawatir, besok aku akan adakan lomba lagi</p>
         </div>
     </div>
 
@@ -236,7 +239,7 @@
         function kunciTombolJikaLewatWaktu() {
             const sekarang = new Date();
             const batasWaktu = new Date();
-            batasWaktu.setHours(19, 0, 0, 0); // Set batas waktu ke jam 19:00:00
+            batasWaktu.setHours(17, 0, 0, 0); // Set batas waktu ke jam 18:40:00
 
             // Periksa apakah hari ini adalah tanggal 11 April 2025 dan waktu sudah lewat 19:00 WIB
             if (sekarang.getFullYear() === 2025 &&
@@ -269,7 +272,7 @@
                     teks += `Jum'at 11 Apr`;
                 }
                 teks += `\n──────────────────────────────\n${pesan}\n──────────────────────────────`;
-                
+
                 const encodedTeks = encodeURIComponent(teks);
 
                 const urlWhatsApp = `https://wa.me/${nomorTelepon}?text=${encodedTeks}%0a%0a> ${nama} ${emoji} ${tambahan}`;
