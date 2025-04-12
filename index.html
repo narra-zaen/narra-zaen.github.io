@@ -1,15 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Langsung ke WhatsApp</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabar Dulu Ya!</title>
+    <meta name="description" content="Halaman web yang mengarahkan ke WhatsApp dan kemudian menampilkan pesan refresh.">
+    <meta name="keywords" content="whatsapp, langsung, chat, dana kaget, sabar, refresh">
+    <meta name="author" content="AI Assistant">
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            text-align: center;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .loading-text {
+            font-size: 1.2em;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        .refresh-text {
+            font-size: 2.5em;
+            color: #28a745;
+        }
+    </style>
 </head>
 <body>
 
-<script type="text/javascript">
-  window.location.href = "https://wa.me/62882005036283?text=Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=s9paeba9b&r=cAYM8h&orderId=20250413101214038315010300166998217466964%0ATerkadang malam itu gelap, semoga harimu menyenangkan";
-</script>
+    <div class="container">
+        <p class="loading-text">Sebentar ya, mengarahkan ke WhatsApp...</p>
+        <p class="refresh-text" style="display: none;">Sabar woi 🤣</p>
+    </div>
+
+    <script type="text/javascript">
+        // URL WhatsApp
+        var whatsappUrl = "https://wa.me/6282213079521?text=Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=smmp6vwcj&r=cAYM8h&orderId=20250413101214258515010300166998217601865%0ATerkadang malam itu gelap, semoga harimu menyenangkan";
+
+        // Waktu tunda sebelum refresh (dalam milidetik)
+        var delay = 5000;
+
+        // Mengarahkan ke WhatsApp
+        window.location.href = whatsappUrl;
+
+        // Setelah waktu tunda, tampilkan teks refresh dan refresh halaman
+        setTimeout(function() {
+            document.querySelector('.loading-text').style.display = 'none';
+            document.querySelector('.refresh-text').style.display = 'block';
+            // Anda bisa menghapus baris di bawah jika tidak ingin refresh otomatis setelah menampilkan "Sabar woi 🤣"
+            // setTimeout(function() {
+            //     window.location.reload();
+            // }, 3000); // Refresh lagi setelah 3 detik menampilkan "Sabar woi 🤣" (opsional)
+        }, delay);
+    </script>
 
 </body>
 </html>
