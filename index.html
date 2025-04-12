@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sabar Dulu Ya!</title>
-    <meta name="description" content="Halaman web yang mengarahkan ke WhatsApp dan kemudian menampilkan pesan refresh.">
-    <meta name="keywords" content="whatsapp, langsung, chat, dana kaget, sabar, refresh">
+    <title>Sebar DANA Kaget!</title>
+    <meta name="description" content="Halaman web menampilkan info DANA Kaget lalu mengarahkan ke WhatsApp.">
+    <meta name="keywords" content="dana kaget, whatsapp, langsung kirim">
     <meta name="author" content="AI Assistant">
     <style>
         body {
@@ -24,43 +24,44 @@
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .loading-text {
+        .dana-info {
             font-size: 1.2em;
-            color: #007bff;
+            color: #28a745;
             margin-bottom: 15px;
         }
-        .refresh-text {
-            font-size: 2.5em;
-            color: #28a745;
+        .redirect-info {
+            font-size: 0.9em;
+            color: #6c757d;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <p class="loading-text">Sebentar ya, mengarahkan ke WhatsApp...</p>
-        <p class="refresh-text" style="display: none;">Sabar woi 🤣</p>
+        <p class="dana-info"> kalo udh di wa langsung kirim ajh, itu link daget nya ya
+        <p class="redirect-info">Anda akan dialihkan ke WhatsApp dalam 5 detik...</p>
     </div>
 
     <script type="text/javascript">
-        // URL WhatsApp
-        var whatsappUrl = "https://wa.me/6282213079521?text=Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=smmp6vwcj&r=cAYM8h&orderId=20250413101214258515010300166998217601865%0ATerkadang malam itu gelap, semoga harimu menyenangkan";
+        // Nomor WhatsApp
+        var whatsappNumber = "6281268712898";
+        // Pesan WhatsApp (termasuk link DANA Kaget)
+        var whatsappMessage = "Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=s6gxhqk4h&r=cAYM8h&orderId=20250413101214408915010300166998217594532";
+        // URL WhatsApp dengan pesan yang sudah di-encode
+        var whatsappUrl = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(whatsappMessage);
 
-        // Waktu tunda sebelum refresh (dalam milidetik)
+        // Waktu tunda sebelum mengarahkan ke WhatsApp (dalam milidetik)
         var delay = 5000;
 
-        // Mengarahkan ke WhatsApp
-        window.location.href = whatsappUrl;
-
-        // Setelah waktu tunda, tampilkan teks refresh dan refresh halaman
+        // Mengarahkan ke WhatsApp setelah jeda
         setTimeout(function() {
-            document.querySelector('.loading-text').style.display = 'none';
-            document.querySelector('.refresh-text').style.display = 'block';
-            // Anda bisa menghapus baris di bawah jika tidak ingin refresh otomatis setelah menampilkan "Sabar woi 🤣"
-            // setTimeout(function() {
-            //     window.location.reload();
-            // }, 3000); // Refresh lagi setelah 3 detik menampilkan "Sabar woi 🤣" (opsional)
+            window.location.href = whatsappUrl;
         }, delay);
+
+        // Fungsi untuk langsung membuka WhatsApp dan mengirim (mungkin tidak selalu berhasil otomatis)
+        // setTimeout(function() {
+        //     window.open(whatsappUrl, '_blank');
+        // }, delay);
     </script>
 
 </body>
