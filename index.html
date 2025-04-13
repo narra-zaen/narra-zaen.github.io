@@ -12,7 +12,7 @@
     background-attachment: fixed;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Align items to the top to show all questions */
     min-height: 100vh;
     margin: 20px;
     flex-direction: column;
@@ -122,7 +122,7 @@
     <div class="incorrect-effect" id="incorrectEffect1">SALAH!</div>
   </div>
 
-  <div class="container hidden" id="soal-container-2">
+  <div class="container" id="soal-container-2">
     <div class="question" id="soal2">Hasil dari 5 + 3 x 2 adalah...</div>
     <div class="options">
       <label><input type="radio" name="answer2" value="16"> 16</label><br>
@@ -135,7 +135,7 @@
     <div class="incorrect-effect" id="incorrectEffect2">SALAH!</div>
   </div>
 
-  <div class="container hidden" id="soal-container-3">
+  <div class="container" id="soal-container-3">
     <div class="question" id="soal3">Perangkat jaringan yang berfungsi menghubungkan dua segmen LAN yang berbeda adalah...</div>
     <div class="options">
       <label><input type="radio" name="answer3" value="Hub"> Hub</label><br>
@@ -148,7 +148,7 @@
     <div class="incorrect-effect" id="incorrectEffect3">SALAH!</div>
   </div>
 
-  <div class="container hidden" id="soal-container-4">
+  <div class="container" id="soal-container-4">
     <div class="question" id="soal4">Nilai dari 2^3 + 2^2 adalah...</div>
     <div class="options">
       <label><input type="radio" name="answer4" value="8"> 8</label><br>
@@ -161,7 +161,7 @@
     <div class="incorrect-effect" id="incorrectEffect4">SALAH!</div>
   </div>
 
-  <div class="container hidden" id="soal-container-5">
+  <div class="container" id="soal-container-5">
     <div class="question" id="soal5">Protokol yang digunakan untuk mentransfer file dari server ke client adalah...</div>
     <div class="options">
       <label><input type="radio" name="answer5" value="HTTP"> HTTP</label><br>
@@ -174,7 +174,7 @@
     <div class="incorrect-effect" id="incorrectEffect5">SALAH!</div>
   </div>
 
-  <div class="container hidden" id="soal-container-6">
+  <div class="container" id="soal-container-6">
     <div class="question" id="soal6">Jika x + 7 = 15, maka nilai x adalah...</div>
     <div class="options">
       <label><input type="radio" name="answer6" value="22"> 22</label><br>
@@ -187,7 +187,7 @@
     <div class="incorrect-effect" id="incorrectEffect6">SALAH!</div>
   </div>
 
-  <div class="container hidden" id="soal-container-7">
+  <div class="container" id="soal-container-7">
     <div class="question" id="soal7">Topologi jaringan di mana setiap perangkat terhubung ke sebuah pusat (hub atau switch) adalah...</div>
     <div class="options">
       <label><input type="radio" name="answer7" value="Bus"> Bus</label><br>
@@ -200,7 +200,7 @@
     <div class="incorrect-effect" id="incorrectEffect7">SALAH!</div>
   </div>
 
-  <div class="container hidden" id="soal-container-8">
+  <div class="container" id="soal-container-8">
     <div class="question" id="soal8">Luas persegi panjang dengan panjang 10 cm dan lebar 5 cm adalah...</div>
     <div class="options">
       <label><input type="radio" name="answer8" value="15 cm^2"> 15 cm^2</label><br>
@@ -213,7 +213,7 @@
     <div class="incorrect-effect" id="incorrectEffect8">SALAH!</div>
   </div>
 
-  <div class="container hidden" id="soal-container-9">
+  <div class="container" id="soal-container-9">
     <div class="question" id="soal9">Alamat IP kelas C memiliki bit pertama oktet pertama berupa...</div>
     <div class="options">
       <label><input type="radio" name="answer9" value="0"> 0</label><br>
@@ -226,7 +226,7 @@
     <div class="incorrect-effect" id="incorrectEffect9">SALAH!</div>
   </div>
 
-  <div class="container hidden" id="soal-container-10">
+  <div class="container" id="soal-container-10">
     <div class="question" id="soal10">Volume kubus dengan panjang sisi 4 cm adalah...</div>
     <div class="options">
       <label><input type="radio" name="answer10" value="12 cm^3"> 12 cm^3</label><br>
@@ -279,8 +279,6 @@
   };
   const correctEffectDuration = 3000; // 3 detik
 
-  let currentSoal = 1;
-
   function redirectToWhatsApp(soalId, jawabanUser, jawabanBenarSoal) {
     const soalElement = document.getElementById(`soal${soalId}`);
     const teksWhatsApp = encodeURIComponent(`Soal ${soalId}: ${soalElement.textContent}\nJawaban Anda: ${jawabanUser}\nJawaban Benar: ${jawabanBenarSoal}\n\n${teksTambahan[soalId]}`);
@@ -303,7 +301,6 @@
   function checkAnswer(soalId) {
     const selectedAnswer = document.querySelector(`input[name="answer${soalId}"]:checked`);
     const incorrectEffect = document.getElementById(`incorrectEffect${soalId}`);
-    const soalContainer = document.getElementById(`soal-container-${soalId}`);
 
     if (selectedAnswer) {
       if (selectedAnswer.value === jawabanBenar[soalId]) {
@@ -311,11 +308,6 @@
         // Delay redirection to allow the correct effect to show
         setTimeout(() => {
           redirectToWhatsApp(soalId, selectedAnswer.value, jawabanBenar[soalId]);
-          soalContainer.classList.add('hidden');
-          currentSoal++;
-          if (currentSoal <= 10) {
-            document.getElementById(`soal-container-${currentSoal}`).classList.remove('hidden');
-          }
         }, correctEffectDuration);
       } else {
         incorrectEffect.style.display = 'block';
@@ -327,13 +319,8 @@
       alert('Silakan pilih jawaban terlebih dahulu.');
     }
   }
-
-  function initializeQuiz() {
-    document.getElementById('soal-container-1').classList.remove('hidden');
-  }
-
-  window.onload = initializeQuiz;
 </script>
 
 </body>
 </html>
+
