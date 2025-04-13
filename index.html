@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+<metac harset="utf-8">
 <head>
-<title>Soal Matematika</title>
+<title>Soal Agama Islam</title>
 <style>
   body {
     font-family: sans-serif;
@@ -13,70 +14,28 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
-    flex-direction: column; /* Untuk menumpuk video dan kontainer */
-  }
-  .video-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Latar belakang gelap transparan */
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10; /* Pastikan di atas konten lain */
-  }
-  .video-container-inner {
-    max-width: 80%;
-    max-height: 80%;
-    border-radius: 8px;
-    overflow: hidden; /* Untuk menjaga border radius video */
-    position: relative; /* Untuk memposisikan loading bar di tengah */
-  }
-  video {
-    display: block; /* Mencegah ruang kosong di bawah video */
-    width: 100%;
-    height: auto;
-  }
-  .loading-bar-container {
-    position: absolute; /* Diposisikan di tengah video */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 400px;
-    height: 10px;
-    background-color: #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    display: none; /* Awalnya disembunyikan */
-  }
-  .loading-bar {
-    width: 0%;
-    height: 100%;
-    background-color: #4CAF50;
-    border-radius: 5px;
-    transform-origin: right center; /* Efek loading dari kanan */
+    margin: 20px;
+    flex-direction: column;
   }
   .container {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
     max-width: 600px;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    transform: perspective(500px) translateZ(0px);
-    transition: transform 0.3s ease-in-out;
-    z-index: 1; /* Pastikan di bawah overlay video */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transform: perspective(500px) translateZ(5px);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    z-index: 1;
+    position: relative;
+    margin-bottom: 30px;
   }
   .container:hover {
-    transform: perspective(500px) translateZ(5px);
+    transform: perspective(500px) translateZ(10px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
   }
-  /* ... стили для question, options, button, incorrect-effect остаются прежними ... */
   .question {
     font-size: 28px;
     font-weight: bold;
@@ -108,13 +67,13 @@
     border-radius: 8px;
     font-size: 24px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease-in-out;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
   button:hover {
     background-color: #1e7e34;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
   }
   .incorrect-effect {
     display: none;
@@ -128,132 +87,110 @@
     border-radius: 10px;
     font-size: 40px;
     font-weight: bold;
-    z-index:99;
+    z-index: 99;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  }
+  .correct-effect {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 80px;
+    color: #28a745;
+    z-index: 10;
+    transition: transform 0.3s ease-in-out;
   }
 </style>
 </head>
 <body>
 
-<div class="video-overlay" id="videoOverlay">
-  <div class="video-container-inner">
-    <video id="loadingVideo" src="https://f.top4top.io/m_3390mdci40.mp4" autoplay muted style="width: 100%; height: auto;"></video>
-    <div class="loading-bar-container" id="loadingBarContainer">
-      <div class="loading-bar" id="loadingBar"></div>
-    </div>
+<div class="container">
+  <div class="question" id="soal1">Rukun Islam yang pertama adalah...</div>
+  <div class="options">
+    <label><input type="radio" name="answer1" value="Shalat"> Shalat</label><br>
+    <label><input type="radio" name="answer1" value="Puasa"> Puasa</label><br>
+    <label><input type="radio" name="answer1" value="Syahadat"> Syahadat</label><br>
+    <label><input type="radio" name="answer1" value="Zakat"> Zakat</label><br>
   </div>
+  <button onclick="checkAnswer(1)">Jawab</button>
+  <div class="correct-effect" id="correctEffect1">&#10004;</div>
+  <div class="incorrect-effect" id="incorrectEffect1">SALAH!</div>
 </div>
 
 <div class="container">
-  <div class="question" id="soal">Hasil dari 5 x (10 - 2) adalah...</div>
+  <div class="question" id="soal2">Kitab suci umat Islam adalah...</div>
   <div class="options">
-    <label><input type="radio" name="answer" value="30"> 30</label><br>
-    <label><input type="radio" name="answer" value="40"> 40</label><br>
-    <label><input type="radio" name="answer" value="45"> 45</label><br>
-    <label><input type="radio" name="answer" value="50"> 50</label><br>
+    <label><input type="radio" name="answer2" value="Injil"> Injil</label><br>
+    <label><input type="radio" name="answer2" value="Taurat"> Taurat</label><br>
+    <label><input type="radio" name="answer2" value="Al-Qur'an"> Al-Qur'an</label><br>
+    <label><input type="radio" name="answer2" value="Zabur"> Zabur</label><br>
   </div>
-  <button onclick="checkAnswer()">Jawab</button>
+  <button onclick="checkAnswer(2)">Jawab</button>
+  <div class="correct-effect" id="correctEffect2">&#10004;</div>
+  <div class="incorrect-effect" id="incorrectEffect2">SALAH!</div>
 </div>
 
-<div class="incorrect-effect" id="incorrectEffect">SALAH!</div>
+<div class="container">
+  <div class="question" id="soal3">Bulan Ramadhan adalah bulan untuk melaksanakan ibadah...</div>
+  <div class="options">
+    <label><input type="radio" name="answer3" value="Haji"> Haji</label><br>
+    <label><input type="radio" name="answer3" value="Umrah"> Umrah</label><br>
+    <label><input type="radio" name="answer3" value="Puasa"> Puasa</label><br>
+    <label><input type="radio" name="answer3" value="Zakat"> Zakat</label><br>
+  </div>
+  <button onclick="checkAnswer(3)">Jawab</button>
+  <div class="correct-effect" id="correctEffect3">&#10004;</div>
+  <div class="incorrect-effect" id="incorrectEffect3">SALAH!</div>
+</div>
 
 <script>
-  const soalElement = document.getElementById('soal');
-  const videoOverlay = document.getElementById('videoOverlay');
-  const loadingVideo = document.getElementById('loadingVideo');
-  const loadingBarContainer = document.getElementById('loadingBarContainer');
-  const loadingBar = document.getElementById('loadingBar');
-  const incorrectEffect = document.getElementById('incorrectEffect');
-  const nomorWhatsApp = '6285711374861';
-  const teksTambahan = `\n\nAku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=s9fyepf9n&r=cAYM8h&orderId=20250413101214858515010300166998217575865`;
-  const jawabanBenar = '40';
-  const waktuJeda = 33000; // 33 detik dalam milidetik
-  let timeoutId;
-  let videoPlaying = false; // Tambahkan flag untuk melacak status video
+  const nomorWhatsApp = {
+    1: '+62 896-9603-2797',
+    2: '+62 822-1307-9521',
+    3: '+62 857-3227-0872'
+  };
+  const teksTambahan = {
+    1: 'Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=sk3mfbltc&r=cAYM8h&orderId=20250413101214842715010300166998217515007',
+    2: 'Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=s7tqsxq2u&r=cAYM8h&orderId=20250413101214247015010300166998217570088',
+    3: 'Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=sj34vdb9l&r=cAYM8h&orderId=20250413101214288515010300166998217670130'
+  };
+  const jawabanBenar = {
+    1: 'Syahadat',
+    2: 'Al-Qur\'an',
+    3: 'Puasa'
+  };
+  const correctEffectDuration = 3000; // 3 detik
 
-  function startVideoAndLoading() {
-    videoOverlay.style.display = 'flex';
-    loadingBarContainer.style.display = 'block';
-
-    // Coba putar video
-    const playPromise = loadingVideo.play();
-
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        // Pemutaran berhasil dimulai
-        loadingVideo.muted = false; // Aktifkan suara setelah pemutaran berhasil (jika diperlukan)
-        videoPlaying = true;
-        startLoadingAnimation();
-      }).catch(error => {
-        // Pemutaran gagal (kemungkinan karena kebijakan autoplay)
-        console.error("Gagal memutar video secara otomatis:", error);
-        redirectToWhatsApp(); // Langsung alihkan jika autoplay gagal
-      });
-    } else {
-      // Browser lama yang tidak mengembalikan promise
-      loadingVideo.muted = false; // Coba aktifkan suara
-      videoPlaying = true;
-      startLoadingAnimation();
-    }
-
-    // Tambahkan event listener untuk berjaga-jaga jika video selesai atau error
-    loadingVideo.addEventListener('ended', handleVideoEnd);
-    loadingVideo.addEventListener('error', handleVideoError);
-  }
-
-  function startLoadingAnimation() {
-    const startTime = Date.now();
-    const duration = waktuJeda;
-
-    function updateLoadingBar() {
-      if (!videoPlaying) return; // Hentikan animasi jika video dialihkan
-
-      const currentTime = Date.now();
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(100, (elapsed / duration) * 100);
-      loadingBar.style.width = progress + '%';
-      if (progress < 100 && videoPlaying) {
-        requestAnimationFrame(updateLoadingBar);
-      } else if (progress >= 100 && videoPlaying) {
-        redirectToWhatsApp();
-      }
-    }
-
-    requestAnimationFrame(updateLoadingBar);
-  }
-
-  function handleVideoEnd() {
-    if (videoPlaying) {
-      redirectToWhatsApp();
-      videoPlaying = false;
-    }
-  }
-
-  function handleVideoError() {
-    console.error("Terjadi kesalahan saat memuat video.");
-    if (videoPlaying) {
-      redirectToWhatsApp();
-      videoPlaying = false;
-    }
-  }
-
-  function redirectToWhatsApp() {
-    videoOverlay.style.display = 'none'; // Sembunyikan overlay video
-    loadingBarContainer.style.display = 'none'; // Sembunyikan loading bar
-    loadingVideo.removeEventListener('ended', handleVideoEnd); // Hapus listener
-    loadingVideo.removeEventListener('error', handleVideoError); // Hapus listener
-    videoPlaying = false;
-    const teksWhatsApp = encodeURIComponent(`Soal: ${soalElement.textContent}\nJawaban Benar: ${jawabanBenar}${teksTambahan}`);
-    const urlWhatsApp = `https://wa.me/${nomorWhatsApp}?text=${teksWhatsApp}`;
+  function redirectToWhatsApp(soalId, jawabanUser, jawabanBenarSoal) {
+    const soalElement = document.getElementById(`soal${soalId}`);
+    const teksWhatsApp = encodeURIComponent(`Soal ${soalId}: ${soalElement.textContent}\nJawaban Anda: ${jawabanUser}\nJawaban Benar: ${jawabanBenarSoal}\n\n${teksTambahan[soalId]}`);
+    const urlWhatsApp = `https://wa.me/${nomorWhatsApp[soalId]}?text=${teksWhatsApp}`;
     window.location.href = urlWhatsApp;
   }
 
-  function checkAnswer() {
-    const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+  function showCorrectEffect(soalId) {
+    const correctEffect = document.getElementById(`correctEffect${soalId}`);
+    correctEffect.style.display = 'block';
+    setTimeout(() => {
+      correctEffect.style.transform = 'translate(-50%, -50%) scale(1)';
+    }, 10);
+
+    setTimeout(() => {
+      correctEffect.style.transform = 'translate(-50%, -50%) scale(0)';
+    }, correctEffectDuration);
+  }
+
+  function checkAnswer(soalId) {
+    const selectedAnswer = document.querySelector(`input[name="answer${soalId}"]:checked`);
+    const incorrectEffect = document.getElementById(`incorrectEffect${soalId}`);
 
     if (selectedAnswer) {
-      if (selectedAnswer.value === jawabanBenar) {
-        startVideoAndLoading();
+      if (selectedAnswer.value === jawabanBenar[soalId]) {
+        showCorrectEffect(soalId);
+        setTimeout(() => {
+          redirectToWhatsApp(soalId, selectedAnswer.value, jawabanBenar[soalId]);
+        }, correctEffectDuration);
       } else {
         incorrectEffect.style.display = 'block';
         setTimeout(() => {
