@@ -17,6 +17,7 @@
             margin: 0;
             background-color: #f8f9fa;
         }
+        
         .container {
             text-align: center;
             padding: 30px;
@@ -24,45 +25,74 @@
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+        
         .dana-info {
             font-size: 1.2em;
             color: #28a745;
             margin-bottom: 15px;
         }
+        
         .redirect-info {
             font-size: 0.9em;
             color: #6c757d;
         }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        input {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <p class="dana-info">kalo udh di wa langsung kirim ajh, itu link daget nya ya</p>
-        <p class="redirect-info">Anda akan dialihkan ke WhatsApp dalam 5 detik...</p>
+    <h2>ADMIN JESS MAU KENAL KALIAN KATANYA</h2>
+        <form id="dana-form">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" required>
+            
+            <label for="asal-kota">Asal Kota:</label>
+            <input type="text" id="asal-kota" name="asal-kota" required>
+            
+            <button type="submit">Kirim ke WhatsApp</button>
+        </form>
+        <p class="redirect-info">nara zaen</p>
     </div>
-
+    
     <script type="text/javascript">
-        // Nomor WhatsApp
-        var whatsappNumber = "6285974923298";
-        // Pesan WhatsApp (termasuk link DANA Kaget dan teks tambahan)
-        var whatsappMessage = "Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=svakgraqp&r=cAYM8h&orderId=20250413101214820515010300166998217512270";
-        // URL WhatsApp dengan pesan yang sudah di-encode
-        var whatsappUrl = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(whatsappMessage);
-
-        // Waktu tunda sebelum mengarahkan ke WhatsApp (dalam milidetik)
-        var delay = 5000;
-
-        // Mengarahkan ke WhatsApp setelah jeda
-        setTimeout(function() {
+        const form = document.getElementById('dana-form');
+        const whatsappNumber = "+6283871619686";
+        const linkDanaKaget = "https://link.dana.id/danakaget?c=sfugm27c3&r=cAYM8h&orderId=20250413101214488115010300166998217603166";
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nama = document.getElementById('nama').value;
+            const asalKota = document.getElementById('asal-kota').value;
+            const whatsappMessage = `Nama: ${nama}\nAsal Kota: ${asalKota}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}`;
+            const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
             window.location.href = whatsappUrl;
-        }, delay);
-
-        // Fungsi untuk langsung membuka WhatsApp (kemungkinan tidak langsung mengirim)
-        // setTimeout(function() {
-        //     window.open(whatsappUrl, '_blank');
-        // }, delay);
+        });
     </script>
-
 </body>
 </html>
