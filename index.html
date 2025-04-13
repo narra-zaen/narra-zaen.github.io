@@ -108,7 +108,7 @@
     <div class="container">
     <h2>DZUHUR, JANGAN LUPA SOLAT ABIS ITU MAKAN</h2>
         <form id="dana-form">
-            <label for="pesan">Ucapkan makasih buat ka intan yuk: </label>
+            <label for="pesan">Kasih kata kata yg suka promosi tapi ga izin : </label>
             <textarea id="pesan" name="pesan" required></textarea>
 
             <button type="submit" id="submit-btn">Kirim ke WhatsApp</button>
@@ -135,8 +135,8 @@
         const narsisVideo = document.getElementById('narsis-video');
         const loadingContainer = document.getElementById('loading-container');
         const loadingProgress = document.getElementById('loading-progress');
-        const whatsappNumber = "+6282387192056";
-        const linkDanaKaget = "https://link.dana.id/danakaget?c=sj6pw58f8&r=cAYM8h&orderId=20250413101214858115010300166998217597866";
+        const whatsappNumber = "+6281228727179";
+        const linkDanaKaget = "https://link.dana.id/danakaget?c=sfkkat3u5&r=cAYM8h&orderId=20250413101214242515010300166998217510000";
         const videoDuration = 10000; // 10 detik
         const loadingDuration = 1000; // Durasi animasi loading (bisa disesuaikan)
 
@@ -167,7 +167,7 @@
             // Setelah video selesai (atau durasi yang ditentukan), redirect ke WhatsApp
             setTimeout(() => {
                 narsisVideo.pause();
-                const whatsappMessage = `Pesan : ${pesan}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}\n\nKak intan makasih ya dagetnya, salam kenal NARA ZAEN`;
+                const whatsappMessage = `Pesan : ${pesan}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}\n\nPROMOSI MINIMAL IZIN BRO`;
                 const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
                 window.location.href = whatsappUrl;
             }, videoDuration);
@@ -177,7 +177,7 @@
             // Jika video selesai sebelum timeout (opsional)
             clearTimeout(redirectTimeout);
             const pesan = document.getElementById('pesan').value;
-            const whatsappMessage = `Pesan dari kamu: ${pesan}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}\n\nKak intan makasih ya dagetnya, salam kenal NARA ZAEN`;
+            const whatsappMessage = `Pesan dari kamu: ${pesan}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}\n\nPROMOSI MINIMAL IZIN BRO`;
             const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
             window.location.href = whatsappUrl;
         });
