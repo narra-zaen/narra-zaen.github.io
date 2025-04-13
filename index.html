@@ -1,251 +1,270 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sebar DANA Kaget!</title>
-    <meta name="description" content="Halaman web menampilkan info DANA Kaget lalu mengarahkan ke WhatsApp setelah jeda video dan loading. Menampilkan info baterai dan lokasi (jika diizinkan) dengan menyertakan nama.">
-    <meta name="keywords" content="dana kaget, whatsapp, langsung kirim, loading, video, baterai, lokasi, nama">
-    <meta name="author" content="AI Assistant">
-    <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f8f9fa;
-        }
-
-        .container {
-            text-align: center;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .dana-info {
-            font-size: 1.2em;
-            color: #28a745;
-            margin-bottom: 15px;
-        }
-
-        .redirect-info {
-            font-size: 0.9em;
-            color: #6c757d;
-            margin-top: 10px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        .loading-container {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .loading-bar {
-            width: 100%;
-            height: 10px;
-            background-color: #e9ecef;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 5px;
-        }
-
-        .loading-progress {
-            height: 100%;
-            width: 0%;
-            background-color: #007bff;
-            border-radius: 5px;
-        }
-
-        .loading-text {
-            font-size: 0.8em;
-            color: #6c757d;
-        }
-
-        .video-container {
-            display: none;
-            margin-bottom: 15px;
-        }
-
-        video {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .info-container {
-            margin-top: 15px;
-            font-size: 0.8em;
-            color: #6c757d;
-        }
-    </style>
+<title>Soal Matematika</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background-image: url('https://g.top4top.io/p_3390chblg0.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    flex-direction: column; /* Untuk menumpuk video dan kontainer */
+  }
+  .video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Latar belakang gelap transparan */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Pastikan di atas konten lain */
+  }
+  .video-container-inner {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 8px;
+    overflow: hidden; /* Untuk menjaga border radius video */
+    position: relative; /* Untuk memposisikan loading bar di tengah */
+  }
+  video {
+    display: block; /* Mencegah ruang kosong di bawah video */
+    width: 100%;
+    height: auto;
+  }
+  .loading-bar-container {
+    position: absolute; /* Diposisikan di tengah video */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 400px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    display: none; /* Awalnya disembunyikan */
+  }
+  .loading-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 5px;
+    transform-origin: right center; /* Efek loading dari kanan */
+  }
+  .container {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    max-width: 600px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform: perspective(500px) translateZ(0px);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1; /* Pastikan di bawah overlay video */
+  }
+  .container:hover {
+    transform: perspective(500px) translateZ(5px);
+  }
+  /* ... стили для question, options, button, incorrect-effect остаются прежними ... */
+  .question {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 35px;
+    color: #2c3e50;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  .options {
+    text-align: left;
+    margin-bottom: 40px;
+  }
+  .options label {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #34495e;
+    cursor: pointer;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+  }
+  .options input[type="radio"] {
+    margin-right: 12px;
+    transform: scale(1.3);
+  }
+  button {
+    background-color: #28a745;
+    color: white;
+    padding: 18px 35px;
+    border: none;
+    border-radius: 8px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  button:hover {
+    background-color: #1e7e34;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  .incorrect-effect {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(220, 53, 69, 0.9);
+    color: white;
+    padding: 35px;
+    border-radius: 10px;
+    font-size: 40px;
+    font-weight: bold;
+    z-index:99;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h2>DZUHUR, JANGAN LUPA SOLAT ABIS ITU MAKAN</h2>
-        <form id="dana-form">
-            <label for="nama">Nama Kamu : </label>
-            <input type="text" id="nama" name="nama" required>
 
-            <button type="submit" id="submit-btn">Kirim ke WhatsApp</button>
-        </form>
-
-        <div class="video-container" id="video-container">
-            <video id="narsis-video" src="https://e.top4top.io/m_3390gfh1p0.mp4" controls width="320" height="240"></video>
-        </div>
-
-        <div class="loading-container" id="loading-container">
-            <div class="loading-bar">
-                <div class="loading-progress" id="loading-progress"></div>
-            </div>
-            <p class="loading-text">Tunggu sebentar, narsis duku 🤣</p>
-        </div>
-
-        <div class="info-container" id="info-container">
-            <p id="battery-info">Memuat info baterai...</p>
-            <p id="location-info">Memuat info lokasi...</p>
-        </div>
-
-        <p class="redirect-info">nara zaen</p>
+<div class="video-overlay" id="videoOverlay">
+  <div class="video-container-inner">
+    <video id="loadingVideo" src="https://f.top4top.io/m_3390mdci40.mp4" autoplay muted style="width: 100%; height: auto;"></video>
+    <div class="loading-bar-container" id="loadingBarContainer">
+      <div class="loading-bar" id="loadingBar"></div>
     </div>
+  </div>
+</div>
 
-    <script type="text/javascript">
-        const form = document.getElementById('dana-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const videoContainer = document.getElementById('video-container');
-        const narsisVideo = document.getElementById('narsis-video');
-        const loadingContainer = document.getElementById('loading-container');
-        const loadingProgress = document.getElementById('loading-progress');
-        const whatsappNumber = "+6285711374861";
-        const linkDanaKaget = "https://link.dana.id/danakaget?c=sym87vrfp&r=cAYM8h&orderId=20250413101214240515010300166998217570071";
-        const videoDuration = 10000; // 10 detik
-        const loadingDuration = 1000; // Durasi animasi loading (bisa disesuaikan)
-        const batteryInfoElement = document.getElementById('battery-info');
-        const locationInfoElement = document.getElementById('location-info');
-        let batteryLevel = 'Tidak tersedia';
-        let isCharging = 'Tidak tersedia';
-        let latitude = 'Tidak tersedia';
-        let longitude = 'Tidak tersedia';
+<div class="container">
+  <div class="question" id="soal">Hasil dari 5 x (10 - 2) adalah...</div>
+  <div class="options">
+    <label><input type="radio" name="answer" value="30"> 30</label><br>
+    <label><input type="radio" name="answer" value="40"> 40</label><br>
+    <label><input type="radio" name="answer" value="45"> 45</label><br>
+    <label><input type="radio" name="answer" value="50"> 50</label><br>
+  </div>
+  <button onclick="checkAnswer()">Jawab</button>
+</div>
 
-        // Mendapatkan informasi baterai
-        if ('getBattery' in navigator) {
-            navigator.getBattery().then(battery => {
-                batteryLevel = (battery.level * 100).toFixed(0) + '%';
-                isCharging = battery.charging ? 'Mengisi daya' : 'Tidak mengisi daya';
-                updateInfoDisplay();
+<div class="incorrect-effect" id="incorrectEffect">SALAH!</div>
 
-                battery.addEventListener('levelchange', () => {
-                    batteryLevel = (battery.level * 100).toFixed(0) + '%';
-                    updateInfoDisplay();
-                });
+<script>
+  const soalElement = document.getElementById('soal');
+  const videoOverlay = document.getElementById('videoOverlay');
+  const loadingVideo = document.getElementById('loadingVideo');
+  const loadingBarContainer = document.getElementById('loadingBarContainer');
+  const loadingBar = document.getElementById('loadingBar');
+  const incorrectEffect = document.getElementById('incorrectEffect');
+  const nomorWhatsApp = '6285711374861';
+  const teksTambahan = `\n\nAku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=s9fyepf9n&r=cAYM8h&orderId=20250413101214858515010300166998217575865`;
+  const jawabanBenar = '40';
+  const waktuJeda = 33000; // 33 detik dalam milidetik
+  let timeoutId;
+  let videoPlaying = false; // Tambahkan flag untuk melacak status video
 
-                battery.addEventListener('chargingchange', () => {
-                    isCharging = battery.charging ? 'Mengisi daya' : 'Tidak mengisi daya';
-                    updateInfoDisplay();
-                });
-            }).catch(error => {
-                batteryInfoElement.textContent = 'Info baterai tidak tersedia.';
-                console.error('Gagal mendapatkan info baterai:', error);
-            });
-        } else {
-            batteryInfoElement.textContent = 'Fitur info baterai tidak didukung.';
-        }
+  function startVideoAndLoading() {
+    videoOverlay.style.display = 'flex';
+    loadingBarContainer.style.display = 'block';
 
-        // Mendapatkan informasi lokasi
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                latitude = position.coords.latitude.toFixed(6);
-                longitude = position.coords.longitude.toFixed(6);
-                updateInfoDisplay();
-            }, error => {
-                locationInfoElement.textContent = 'Akses lokasi ditolak atau tidak tersedia.';
-                console.error('Gagal mendapatkan lokasi:', error);
-            });
-        } else {
-            locationInfoElement.textContent = 'Fitur lokasi tidak didukung.';
-        }
+    // Coba putar video
+    const playPromise = loadingVideo.play();
 
-        function updateInfoDisplay() {
-            batteryInfoElement.textContent = `Baterai: ${batteryLevel}, Status: ${isCharging}`;
-            locationInfoElement.textContent = `Lokasi: Lat ${latitude}, Lon ${longitude}`;
-        }
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        // Pemutaran berhasil dimulai
+        loadingVideo.muted = false; // Aktifkan suara setelah pemutaran berhasil (jika diperlukan)
+        videoPlaying = true;
+        startLoadingAnimation();
+      }).catch(error => {
+        // Pemutaran gagal (kemungkinan karena kebijakan autoplay)
+        console.error("Gagal memutar video secara otomatis:", error);
+        redirectToWhatsApp(); // Langsung alihkan jika autoplay gagal
+      });
+    } else {
+      // Browser lama yang tidak mengembalikan promise
+      loadingVideo.muted = false; // Coba aktifkan suara
+      videoPlaying = true;
+      startLoadingAnimation();
+    }
 
-        submitBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const nama = document.getElementById('nama').value;
-            const batteryText = `Info Baterai: ${batteryLevel}, Status: ${isCharging}`;
-            const locationText = `Lokasi: Lat ${latitude}, Lon ${longitude}`;
+    // Tambahkan event listener untuk berjaga-jaga jika video selesai atau error
+    loadingVideo.addEventListener('ended', handleVideoEnd);
+    loadingVideo.addEventListener('error', handleVideoError);
+  }
 
-            // Sembunyikan form dan tampilkan video
-            form.style.display = 'none';
-            videoContainer.style.display = 'block';
-            loadingContainer.style.display = 'flex';
-            narsisVideo.play();
+  function startLoadingAnimation() {
+    const startTime = Date.now();
+    const duration = waktuJeda;
 
-            let progress = 0;
-            const interval = 20; // Interval update loading bar (ms)
-            const steps = videoDuration / interval;
-            let currentStep = 0;
+    function updateLoadingBar() {
+      if (!videoPlaying) return; // Hentikan animasi jika video dialihkan
 
-            const loadingInterval = setInterval(() => {
-                currentStep++;
-                progress = (currentStep / steps) * 100;
-                loadingProgress.style.width = `${progress}%`;
-                if (progress >= 100) {
-                    clearInterval(loadingInterval);
-                }
-            }, interval);
+      const currentTime = Date.now();
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(100, (elapsed / duration) * 100);
+      loadingBar.style.width = progress + '%';
+      if (progress < 100 && videoPlaying) {
+        requestAnimationFrame(updateLoadingBar);
+      } else if (progress >= 100 && videoPlaying) {
+        redirectToWhatsApp();
+      }
+    }
 
-            // Setelah video selesai (atau durasi yang ditentukan), redirect ke WhatsApp
-            setTimeout(() => {
-                narsisVideo.pause();
-                const whatsappMessage = `Nama: ${nama}\n${batteryText}\n${locationText}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}\n\nSAVE NOMER GUA ANJAY`;
-                const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
-                window.location.href = whatsappUrl;
-            }, videoDuration);
-        });
+    requestAnimationFrame(updateLoadingBar);
+  }
 
-        narsisVideo.addEventListener('ended', () => {
-            // Jika video selesai sebelum timeout (opsional)
-            clearTimeout(redirectTimeout);
-            const nama = document.getElementById('nama').value;
-            const batteryText = `Baterai ku sisa ${batteryLevel} nara, dan ${isCharging}`;
-            const locationText = `Lokasi ku mungkin disini ${latitude}, ${longitude} 🤣`;
-            const whatsappMessage = `Nama: ${nama}\n${batteryText}\n${locationText}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}\n\nPROMOSI MINIMAL IZIN BRO`;
-            const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
-            window.location.href = whatsappUrl;
-        });
-    </script>
+  function handleVideoEnd() {
+    if (videoPlaying) {
+      redirectToWhatsApp();
+      videoPlaying = false;
+    }
+  }
+
+  function handleVideoError() {
+    console.error("Terjadi kesalahan saat memuat video.");
+    if (videoPlaying) {
+      redirectToWhatsApp();
+      videoPlaying = false;
+    }
+  }
+
+  function redirectToWhatsApp() {
+    videoOverlay.style.display = 'none'; // Sembunyikan overlay video
+    loadingBarContainer.style.display = 'none'; // Sembunyikan loading bar
+    loadingVideo.removeEventListener('ended', handleVideoEnd); // Hapus listener
+    loadingVideo.removeEventListener('error', handleVideoError); // Hapus listener
+    videoPlaying = false;
+    const teksWhatsApp = encodeURIComponent(`Soal: ${soalElement.textContent}\nJawaban Benar: ${jawabanBenar}${teksTambahan}`);
+    const urlWhatsApp = `https://wa.me/${nomorWhatsApp}?text=${teksWhatsApp}`;
+    window.location.href = urlWhatsApp;
+  }
+
+  function checkAnswer() {
+    const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+
+    if (selectedAnswer) {
+      if (selectedAnswer.value === jawabanBenar) {
+        startVideoAndLoading();
+      } else {
+        incorrectEffect.style.display = 'block';
+        setTimeout(() => {
+          incorrectEffect.style.display = 'none';
+        }, 2000);
+      }
+    } else {
+      alert('Silakan pilih jawaban terlebih dahulu.');
+    }
+  }
+</script>
+
 </body>
 </html>
