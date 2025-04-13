@@ -2,7 +2,7 @@
 <html>
 <metac harset="utf-8">
 <head>
-<title>Soal Agama Islam</title>
+<title>Soal TKJ & Matematika</title>
 <style>
   body {
     font-family: sans-serif;
@@ -101,66 +101,185 @@
     z-index: 10;
     transition: transform 0.3s ease-in-out;
   }
+  .hidden {
+    display: none;
+  }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="question" id="soal1">Rukun Islam yang pertama adalah...</div>
-  <div class="options">
-    <label><input type="radio" name="answer1" value="Shalat"> Shalat</label><br>
-    <label><input type="radio" name="answer1" value="Puasa"> Puasa</label><br>
-    <label><input type="radio" name="answer1" value="Syahadat"> Syahadat</label><br>
-    <label><input type="radio" name="answer1" value="Zakat"> Zakat</label><br>
+<div id="quiz-container">
+  <div class="container" id="soal-container-1">
+    <div class="question" id="soal1">Apa kepanjangan dari LAN dalam jaringan komputer?</div>
+    <div class="options">
+      <label><input type="radio" name="answer1" value="Large Area Network"> Large Area Network</label><br>
+      <label><input type="radio" name="answer1" value="Local Access Network"> Local Access Network</label><br>
+      <label><input type="radio" name="answer1" value="Local Area Network"> Local Area Network</label><br>
+      <label><input type="radio" name="answer1" value="Limited Area Network"> Limited Area Network</label><br>
+    </div>
+    <button onclick="checkAnswer(1)">Jawab</button>
+    <div class="correct-effect" id="correctEffect1">&#10004;</div>
+    <div class="incorrect-effect" id="incorrectEffect1">SALAH!</div>
   </div>
-  <button onclick="checkAnswer(1)">Jawab</button>
-  <div class="correct-effect" id="correctEffect1">&#10004;</div>
-  <div class="incorrect-effect" id="incorrectEffect1">SALAH!</div>
-</div>
 
-<div class="container">
-  <div class="question" id="soal2">Kitab suci umat Islam adalah...</div>
-  <div class="options">
-    <label><input type="radio" name="answer2" value="Injil"> Injil</label><br>
-    <label><input type="radio" name="answer2" value="Taurat"> Taurat</label><br>
-    <label><input type="radio" name="answer2" value="Al-Qur'an"> Al-Qur'an</label><br>
-    <label><input type="radio" name="answer2" value="Zabur"> Zabur</label><br>
+  <div class="container hidden" id="soal-container-2">
+    <div class="question" id="soal2">Hasil dari 5 + 3 x 2 adalah...</div>
+    <div class="options">
+      <label><input type="radio" name="answer2" value="16"> 16</label><br>
+      <label><input type="radio" name="answer2" value="11"> 11</label><br>
+      <label><input type="radio" name="answer2" value="10"> 10</label><br>
+      <label><input type="radio" name="answer2" value="8"> 8</label><br>
+    </div>
+    <button onclick="checkAnswer(2)">Jawab</button>
+    <div class="correct-effect" id="correctEffect2">&#10004;</div>
+    <div class="incorrect-effect" id="incorrectEffect2">SALAH!</div>
   </div>
-  <button onclick="checkAnswer(2)">Jawab</button>
-  <div class="correct-effect" id="correctEffect2">&#10004;</div>
-  <div class="incorrect-effect" id="incorrectEffect2">SALAH!</div>
-</div>
 
-<div class="container">
-  <div class="question" id="soal3">Bulan Ramadhan adalah bulan untuk melaksanakan ibadah...</div>
-  <div class="options">
-    <label><input type="radio" name="answer3" value="Haji"> Haji</label><br>
-    <label><input type="radio" name="answer3" value="Umrah"> Umrah</label><br>
-    <label><input type="radio" name="answer3" value="Puasa"> Puasa</label><br>
-    <label><input type="radio" name="answer3" value="Zakat"> Zakat</label><br>
+  <div class="container hidden" id="soal-container-3">
+    <div class="question" id="soal3">Perangkat jaringan yang berfungsi menghubungkan dua segmen LAN yang berbeda adalah...</div>
+    <div class="options">
+      <label><input type="radio" name="answer3" value="Hub"> Hub</label><br>
+      <label><input type="radio" name="answer3" value="Switch"> Switch</label><br>
+      <label><input type="radio" name="answer3" value="Router"> Router</label><br>
+      <label><input type="radio" name="answer3" value="Kabel UTP"> Kabel UTP</label><br>
+    </div>
+    <button onclick="checkAnswer(3)">Jawab</button>
+    <div class="correct-effect" id="correctEffect3">&#10004;</div>
+    <div class="incorrect-effect" id="incorrectEffect3">SALAH!</div>
   </div>
-  <button onclick="checkAnswer(3)">Jawab</button>
-  <div class="correct-effect" id="correctEffect3">&#10004;</div>
-  <div class="incorrect-effect" id="incorrectEffect3">SALAH!</div>
+
+  <div class="container hidden" id="soal-container-4">
+    <div class="question" id="soal4">Nilai dari 2^3 + 2^2 adalah...</div>
+    <div class="options">
+      <label><input type="radio" name="answer4" value="8"> 8</label><br>
+      <label><input type="radio" name="answer4" value="10"> 10</label><br>
+      <label><input type="radio" name="answer4" value="12"> 12</label><br>
+      <label><input type="radio" name="answer4" value="14"> 14</label><br>
+    </div>
+    <button onclick="checkAnswer(4)">Jawab</button>
+    <div class="correct-effect" id="correctEffect4">&#10004;</div>
+    <div class="incorrect-effect" id="incorrectEffect4">SALAH!</div>
+  </div>
+
+  <div class="container hidden" id="soal-container-5">
+    <div class="question" id="soal5">Protokol yang digunakan untuk mentransfer file dari server ke client adalah...</div>
+    <div class="options">
+      <label><input type="radio" name="answer5" value="HTTP"> HTTP</label><br>
+      <label><input type="radio" name="answer5" value="SMTP"> SMTP</label><br>
+      <label><input type="radio" name="answer5" value="FTP"> FTP</label><br>
+      <label><input type="radio" name="answer5" value="TCP"> TCP</label><br>
+    </div>
+    <button onclick="checkAnswer(5)">Jawab</button>
+    <div class="correct-effect" id="correctEffect5">&#10004;</div>
+    <div class="incorrect-effect" id="incorrectEffect5">SALAH!</div>
+  </div>
+
+  <div class="container hidden" id="soal-container-6">
+    <div class="question" id="soal6">Jika x + 7 = 15, maka nilai x adalah...</div>
+    <div class="options">
+      <label><input type="radio" name="answer6" value="22"> 22</label><br>
+      <label><input type="radio" name="answer6" value="7"> 7</label><br>
+      <label><input type="radio" name="answer6" value="8"> 8</label><br>
+      <label><input type="radio" name="answer6" value="9"> 9</label><br>
+    </div>
+    <button onclick="checkAnswer(6)">Jawab</button>
+    <div class="correct-effect" id="correctEffect6">&#10004;</div>
+    <div class="incorrect-effect" id="incorrectEffect6">SALAH!</div>
+  </div>
+
+  <div class="container hidden" id="soal-container-7">
+    <div class="question" id="soal7">Topologi jaringan di mana setiap perangkat terhubung ke sebuah pusat (hub atau switch) adalah...</div>
+    <div class="options">
+      <label><input type="radio" name="answer7" value="Bus"> Bus</label><br>
+      <label><input type="radio" name="answer7" value="Ring"> Ring</label><br>
+      <label><input type="radio" name="answer7" value="Star"> Star</label><br>
+      <label><input type="radio" name="answer7" value="Mesh"> Mesh</label><br>
+    </div>
+    <button onclick="checkAnswer(7)">Jawab</button>
+    <div class="correct-effect" id="correctEffect7">&#10004;</div>
+    <div class="incorrect-effect" id="incorrectEffect7">SALAH!</div>
+  </div>
+
+  <div class="container hidden" id="soal-container-8">
+    <div class="question" id="soal8">Luas persegi panjang dengan panjang 10 cm dan lebar 5 cm adalah...</div>
+    <div class="options">
+      <label><input type="radio" name="answer8" value="15 cm^2"> 15 cm^2</label><br>
+      <label><input type="radio" name="answer8" value="25 cm^2"> 25 cm^2</label><br>
+      <label><input type="radio" name="answer8" value="50 cm^2"> 50 cm^2</label><br>
+      <label><input type="radio" name="answer8" value="100 cm^2"> 100 cm^2</label><br>
+    </div>
+    <button onclick="checkAnswer(8)">Jawab</button>
+    <div class="correct-effect" id="correctEffect8">&#10004;</div>
+    <div class="incorrect-effect" id="incorrectEffect8">SALAH!</div>
+  </div>
+
+  <div class="container hidden" id="soal-container-9">
+    <div class="question" id="soal9">Alamat IP kelas C memiliki bit pertama oktet pertama berupa...</div>
+    <div class="options">
+      <label><input type="radio" name="answer9" value="0"> 0</label><br>
+      <label><input type="radio" name="answer9" value="10"> 10</label><br>
+      <label><input type="radio" name="answer9" value="110"> 110</label><br>
+      <label><input type="radio" name="answer9" value="1110"> 1110</label><br>
+    </div>
+    <button onclick="checkAnswer(9)">Jawab</button>
+    <div class="correct-effect" id="correctEffect9">&#10004;</div>
+    <div class="incorrect-effect" id="incorrectEffect9">SALAH!</div>
+  </div>
+
+  <div class="container hidden" id="soal-container-10">
+    <div class="question" id="soal10">Volume kubus dengan panjang sisi 4 cm adalah...</div>
+    <div class="options">
+      <label><input type="radio" name="answer10" value="12 cm^3"> 12 cm^3</label><br>
+      <label><input type="radio" name="answer10" value="16 cm^3"> 16 cm^3</label><br>
+      <label><input type="radio" name="answer10" value="64 cm^3"> 64 cm^3</label><br>
+      <label><input type="radio" name="answer10" value="256 cm^3"> 256 cm^3</label><br>
+    </div>
+    <button onclick="checkAnswer(10)">Jawab</button>
+    <div class="correct-effect" id="correctEffect10">&#10004;</div>
+    <div class="incorrect-effect" id="incorrectEffect10">SALAH!</div>
+  </div>
 </div>
 
 <script>
   const nomorWhatsApp = {
-    1: '+62 896-9603-2797',
-    2: '+62 822-1307-9521',
-    3: '+62 857-3227-0872'
+    1: '+6289689544635',
+    2: '+6288263753049',
+    3: '+62895700556540',
+    4: '+6282117759736',
+    5: '+6285125267679',
+    6: '+62882022401235',
+    7: '+6283898519122',
+    8: '+6281243414793',
+    9: '+6283872001606',
+    10: '+6289523803621'
   };
   const teksTambahan = {
     1: 'Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=sk3mfbltc&r=cAYM8h&orderId=20250413101214842715010300166998217515007',
     2: 'Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=s7tqsxq2u&r=cAYM8h&orderId=20250413101214247015010300166998217570088',
-    3: 'Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=sj34vdb9l&r=cAYM8h&orderId=20250413101214288515010300166998217670130'
+    3: 'Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=sj34vdb9l&r=cAYM8h&orderId=20250413101214288515010300166998217670130',
+    4: 'Ada kejutan DANA Kaget buat kamu! Buruan klaim sebelum habis! 🎁🎁🎁 https://link.dana.id/danakaget?c=abcd123efg&r=xyz789',
+    5: 'Jangan sampai ketinggalan DANA Kaget spesial! Klik sekarang! ✨✨✨ https://link.dana.id/danakaget?c=hijklm456&r=uvw012',
+    6: 'Rezeki nomplok DANA Kaget menantimu! Ambil sekarang! 🎉🎉🎉 https://link.dana.id/danakaget?c=nopqrs789&r=tuv345',
+    7: 'DANA Kaget hadir lagi! Jangan lewatkan kesempatan ini! 💰💰💰 https://link.dana.id/danakaget?c=tuvwxyz012&r=rst678',
+    8: 'Spesial buat kamu, DANA Kaget gratis! Sikat habis! 🔥🔥🔥 https://link.dana.id/danakaget?c=1234abcd56&r=pqr901',
+    9: 'Klaim DANA Kagetmu sekarang juga! Jangan sampai menyesal! 🚀🚀🚀 https://link.dana.id/danakaget?c=efgh789ijk&r=lmn234',
+    10: 'Ada DANA Kaget spesial akhir pekan! Buruan serbu! 💥💥💥 https://link.dana.id/danakaget?c=lmnopqrs90&r=def567'
   };
   const jawabanBenar = {
-    1: 'Syahadat',
-    2: 'Al-Qur\'an',
-    3: 'Puasa'
+    1: 'Local Area Network',
+    2: '11',
+    3: 'Router',
+    4: '12',
+    5: 'FTP',
+    6: '8',
+    7: 'Star',
+    8: '50 cm^2',
+    9: '110',
+    10: '64 cm^3'
   };
   const correctEffectDuration = 3000; // 3 detik
+
+  let currentSoal = 1;
 
   function redirectToWhatsApp(soalId, jawabanUser, jawabanBenarSoal) {
     const soalElement = document.getElementById(`soal${soalId}`);
@@ -184,12 +303,19 @@
   function checkAnswer(soalId) {
     const selectedAnswer = document.querySelector(`input[name="answer${soalId}"]:checked`);
     const incorrectEffect = document.getElementById(`incorrectEffect${soalId}`);
+    const soalContainer = document.getElementById(`soal-container-${soalId}`);
 
     if (selectedAnswer) {
       if (selectedAnswer.value === jawabanBenar[soalId]) {
         showCorrectEffect(soalId);
+        // Delay redirection to allow the correct effect to show
         setTimeout(() => {
           redirectToWhatsApp(soalId, selectedAnswer.value, jawabanBenar[soalId]);
+          soalContainer.classList.add('hidden');
+          currentSoal++;
+          if (currentSoal <= 10) {
+            document.getElementById(`soal-container-${currentSoal}`).classList.remove('hidden');
+          }
         }, correctEffectDuration);
       } else {
         incorrectEffect.style.display = 'block';
@@ -201,6 +327,12 @@
       alert('Silakan pilih jawaban terlebih dahulu.');
     }
   }
+
+  function initializeQuiz() {
+    document.getElementById('soal-container-1').classList.remove('hidden');
+  }
+
+  window.onload = initializeQuiz;
 </script>
 
 </body>
