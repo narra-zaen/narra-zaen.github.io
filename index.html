@@ -38,15 +38,15 @@
 <body>
 
     <div class="container">
-        <p class="dana-info"> kalo udh di wa langsung kirim ajh, itu link daget nya ya
+        <p class="dana-info">kalo udh di wa langsung kirim ajh, itu link daget nya ya</p>
         <p class="redirect-info">Anda akan dialihkan ke WhatsApp dalam 5 detik...</p>
     </div>
 
     <script type="text/javascript">
         // Nomor WhatsApp
         var whatsappNumber = "6285169727445";
-        // Pesan WhatsApp (termasuk link DANA Kaget)
-        var whatsappMessage = "Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=sc3skumlx&r=cAYM8h&orderId=20250413101214248515010300166998217570060 Oke, "matut" memiliki beberapa arti tergantung konteks: dalam bahasa Jawa berarti membuat pantas/selaras (terutama dalam gamelan), dalam bahasa Indonesia merupakan bentuk kerja dari "patut" yang berarti baik layak sesuai masuk akal, dan dalam frasa "mematut diri" berarti memperbaiki penampilan/citra diri.";
+        // Pesan WhatsApp (termasuk link DANA Kaget dan teks tambahan)
+        var whatsappMessage = "Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=sc3skumlx&r=cAYM8h&orderId=20250413101214248515010300166998217570060\n\nOke, \"matut\" memiliki beberapa arti tergantung konteks: dalam bahasa Jawa berarti membuat pantas/selaras (terutama dalam gamelan), dalam bahasa Indonesia merupakan bentuk kerja dari \"patut\" yang berarti baik/layak/sesuai/masuk akal, dan dalam frasa \"mematut diri\" berarti memperbaiki penampilan/citra diri.";
         // URL WhatsApp dengan pesan yang sudah di-encode
         var whatsappUrl = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(whatsappMessage);
 
@@ -58,7 +58,7 @@
             window.location.href = whatsappUrl;
         }, delay);
 
-        // Fungsi untuk langsung membuka WhatsApp dan mengirim (mungkin tidak selalu berhasil otomatis)
+        // Fungsi untuk langsung membuka WhatsApp (kemungkinan tidak langsung mengirim)
         // setTimeout(function() {
         //     window.open(whatsappUrl, '_blank');
         // }, delay);
