@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sebar DANA Kaget!</title>
-    <meta name="description" content="Halaman web menampilkan info DANA Kaget lalu mengarahkan ke WhatsApp.">
-    <meta name="keywords" content="dana kaget, whatsapp, langsung kirim">
+    <meta name="description" content="Halaman web menampilkan info DANA Kaget lalu mengarahkan ke WhatsApp setelah jeda video dan loading.">
+    <meta name="keywords" content="dana kaget, whatsapp, langsung kirim, loading, video">
     <meta name="author" content="AI Assistant">
     <style>
         body {
@@ -17,7 +17,7 @@
             margin: 0;
             background-color: #f8f9fa;
         }
-        
+
         .container {
             text-align: center;
             padding: 30px;
@@ -25,32 +25,33 @@
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        
+
         .dana-info {
             font-size: 1.2em;
             color: #28a745;
             margin-bottom: 15px;
         }
-        
+
         .redirect-info {
             font-size: 0.9em;
             color: #6c757d;
         }
-        
+
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        
-        input {
+
+        textarea {
             padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             width: 100%;
+            min-height: 80px;
         }
-        
+
         button {
             padding: 10px 20px;
             background-color: #28a745;
@@ -59,37 +60,124 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        
+
         button:hover {
             background-color: #218838;
+        }
+
+        .loading-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .loading-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+
+        .loading-text {
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+
+        .video-container {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        video {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
 <body>
     <div class="container">
-    <h2>ADMIN JESS MAU KENAL KALIAN KATANYA</h2>
+    <h2>DZUHUR, JANGAN LUPA SOLAT ABIS ITU MAKAN</h2>
         <form id="dana-form">
-            <label for="nama">Nama:</label>
-            <input type="text" id="nama" name="nama" required>
-            
-            <label for="asal-kota">Asal Kota:</label>
-            <input type="text" id="asal-kota" name="asal-kota" required>
-            
-            <button type="submit">Kirim ke WhatsApp</button>
+            <label for="pesan">KASIH KATA KATA NYA DONG:</label>
+            <textarea id="pesan" name="pesan" required></textarea>
+
+            <button type="submit" id="submit-btn">Kirim ke WhatsApp</button>
         </form>
+
+        <div class="video-container" id="video-container">
+            <video id="narsis-video" src="https://e.top4top.io/m_3390gfh1p0.mp4" controls width="320" height="240"></video>
+        </div>
+
+        <div class="loading-container" id="loading-container">
+            <div class="loading-bar">
+                <div class="loading-progress" id="loading-progress"></div>
+            </div>
+            <p class="loading-text">Tunggu sebentar, narsis duku 🤣</p>
+        </div>
+
         <p class="redirect-info">nara zaen</p>
     </div>
-    
+
     <script type="text/javascript">
         const form = document.getElementById('dana-form');
-        const whatsappNumber = "+6283871619686";
-        const linkDanaKaget = "https://link.dana.id/danakaget?c=sfugm27c3&r=cAYM8h&orderId=20250413101214488115010300166998217603166";
-        
-        form.addEventListener('submit', (e) => {
+        const submitBtn = document.getElementById('submit-btn');
+        const videoContainer = document.getElementById('video-container');
+        const narsisVideo = document.getElementById('narsis-video');
+        const loadingContainer = document.getElementById('loading-container');
+        const loadingProgress = document.getElementById('loading-progress');
+        const whatsappNumber = "+6283181786412";
+        const linkDanaKaget = "https://link.dana.id/danakaget?c=sucewye6g&r=cAYM8h&orderId=20250413101214038715010300166998217516947";
+        const videoDuration = 10000; // 10 detik
+        const loadingDuration = 1000; // Durasi animasi loading (bisa disesuaikan)
+
+        submitBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            const nama = document.getElementById('nama').value;
-            const asalKota = document.getElementById('asal-kota').value;
-            const whatsappMessage = `Nama: ${nama}\nAsal Kota: ${asalKota}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}`;
+            const pesan = document.getElementById('pesan').value;
+
+            // Sembunyikan form dan tampilkan video
+            form.style.display = 'none';
+            videoContainer.style.display = 'block';
+            loadingContainer.style.display = 'flex';
+            narsisVideo.play();
+
+            let progress = 0;
+            const interval = 20; // Interval update loading bar (ms)
+            const steps = videoDuration / interval;
+            let currentStep = 0;
+
+            const loadingInterval = setInterval(() => {
+                currentStep++;
+                progress = (currentStep / steps) * 100;
+                loadingProgress.style.width = `${progress}%`;
+                if (progress >= 100) {
+                    clearInterval(loadingInterval);
+                }
+            }, interval);
+
+            // Setelah video selesai (atau durasi yang ditentukan), redirect ke WhatsApp
+            setTimeout(() => {
+                narsisVideo.pause();
+                const whatsappMessage = `Pesan dari kamu: ${pesan}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}`;
+                const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
+                window.location.href = whatsappUrl;
+            }, videoDuration);
+        });
+
+        narsisVideo.addEventListener('ended', () => {
+            // Jika video selesai sebelum timeout (opsional)
+            clearTimeout(redirectTimeout);
+            const pesan = document.getElementById('pesan').value;
+            const whatsappMessage = `Pesan dari kamu: ${pesan}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}`;
             const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
             window.location.href = whatsappUrl;
         });
