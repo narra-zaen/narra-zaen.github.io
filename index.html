@@ -3,17 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabung Grup WhatsApp</title>
+    <title>Hubungi via WhatsApp</title>
     <style>
-        /* ... CSS yang sudah ada ... */
+        body {
+            font-family: sans-serif;
+        }
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #25D366; /* Warna hijau WhatsApp */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .additional-text {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #777;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Waktunya DANA KAGET!</h1>
-        <p>Jangan sampai ketinggalan kesempatan dapat saldo DANA gratis! Saya suka bagi-bagi kejutan di grup ini.</p>
-        <a href="https://chat.whatsapp.com/Gp7lu8UEkGp6oaYuwG4Sn0" class="button" target="_blank">🎁 JOIN & DAPATKAN DANA KAGET! 🎁</a>
-        <p style="font-size: 0.8em; color: #777; margin-top: 20px;">Pastikan Anda memiliki aplikasi WhatsApp terinstal di perangkat Anda.</p>
+        <h2>Nurizazhr</h2>
+        <form id="whatsappForm" action="https://wa.me/+6283893127118" method="get" target="_blank">
+            <label for="nama">Nama Anda:</label>
+            <input type="text" id="nama" name="text" placeholder="Masukkan nama Anda">
+            <button type="submit">Kirim Pesan via WhatsApp</button>
+        </form>
+        <div class="additional-text" style="display: none;">
+            <p>Dapatkan kejutan dari DANA Kaget:</p>
+            <a href="https://link.dana.id/danakaget?c=swzwp9vs2&r=kgmjPX&orderId=20250416101214425815010300166595719238229" target="_blank">Klik di sini untuk DANA Kaget!</a>
+        </div>
     </div>
+
+    <script>
+        document.getElementById('whatsappForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah pengiriman form secara default
+            const namaInput = document.getElementById('nama');
+            const danaKagetLink = "https://link.dana.id/danakaget?c=swzwp9vs2&r=kgmjPX&orderId=20250416101214425815010300166595719238229";
+            let pesan = "";
+
+            if (namaInput.value) {
+                pesan = `${encodeURIComponent(namaInput.value)}.\n\nLink DANA Kaget: ${encodeURIComponent(danaKagetLink)}`;
+            } else {
+                pesan = `Link DANA Kaget: ${encodeURIComponent(danaKagetLink)}`;
+            }
+
+            const whatsappUrl = `https://wa.me/+6283893127118?text=${pesan}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
 </body>
 </html>
