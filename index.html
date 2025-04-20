@@ -1,87 +1,646 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Kuis Lucu DANA Kaget!</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-        }
-        .container {
-            width: 80%;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .question {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-        .options {
-            list-style: none;
-            padding: 0;
-        }
-        .options li {
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .correct-message {
-            margin-top: 20px;
-            font-weight: bold;
-            color: green;
-        }
-        .whatsapp-link {
-            margin-top: 10px;
-        }
-        .whatsapp-link a {
-            text-decoration: none;
-            color: #25D366; /* Warna hijau WhatsApp */
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="question">
-            Kenapa kucing selalu menang dalam permainan kartu?
-        </div>
-        <ul class="options">
-            <li><button onclick="checkAnswer('a')">a) Karena dia punya banyak "kartu as" di kakinya.</button></li>
-            <li><button onclick="checkAnswer('b')">b) Karena dia curang dan menyembunyikan kartu di bulunya.</button></li>
-            <li><button onclick="checkAnswer('c')">c) Karena dia punya sembilan nyawa, jadi tidak takut kalah.</button></li>
-            <li><button onclick="checkAnswer('d')">d) Karena dia selalu punya "meow-tivasi" yang kuat untuk menang.</button></li>
-        </ul>
-        <div id="result" class="correct-message" style="display:none;">
-            Selamat! Jawabanmu benar! Silakan klik tautan di bawah ini untuk mengirimkan jawabanmu dan mendapatkan kejutan DANA Kaget:
-            <div class="whatsapp-link">
-                <a href="https://wa.me/+628814028977?text=Jawaban%20kuis:%20a)%20Karena%20dia%20punya%20banyak%20%22kartu%20as%22%20di%20kakinya.%0AAku%20lagi%20sebar%20DANA%20Kaget%20nih!%20Yuk,%20sikat%20segera%20sebelum%20melayang%20💸💸💸%20https://link.dana.id/danakaget?c=svxjyvt4k&r=cAYM8h&orderId=20250419101214882915010300166998218595402%20@nurizazhr" target="_blank">Kirim Jawaban via WhatsApp</a>
-            </div>
-        </div>
-        <div id="wrong-result" style="color: red; font-weight: bold; margin-top: 20px; display: none;">
-            Maaf, jawabanmu kurang tepat. Coba lagi ya!
-        </div>
-    </div>
+ <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Nara Zaen - Beranda</title>
+                    <style>
+Body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text outside product cards */
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column; /* Arrange header and main vertically */
+    align-items: center; /* Center horizontally */
+    min-height: 100vh; /* Ensure full viewport height */
+}
+.kotak-atas {
+  position: fixed;
+  top: 0; /* Remove top margin */
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Slightly transparent black for header */
+  z-index: 99;
+  padding: 10px;
+  box-sizing: border-box;
+}
 
-    <script>
-        function checkAnswer(selectedOption) {
-            const resultDiv = document.getElementById('result');
-            const wrongResultDiv = document.getElementById('wrong-result');
-            if (selectedOption === 'a') {
-                resultDiv.style.display = 'block';
-                wrongResultDiv.style.display = 'none';
-            } else {
-                resultDiv.style.display = 'none';
-                wrongResultDiv.style.display = 'block';
-            }
-        }
-    </script>
-</body>
-</html>
+.container {
+    max-width: 1200px; /* Adjust as needed */
+    width: 90%; /* Adjust as needed */
+    margin-top: 0; /* Remove top margin */
+    padding: 20px;
+    background-color: #111; /* Darker background for container */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Subtle white shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content within container */
+}
+
+header {
+    background-color: transparent;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #333;
+    width: 100%; /* Make header full width within kotak-atas */
+    display: flex;
+    flex-direction: column; /* Arrange logo and search vertically */
+    align-items: flex-start; /* Align items to the left */
+}
+
+header .container {
+    display: flex;
+    flex-direction: column; /* Arrange logo, search, and actions vertically */
+    justify-content: flex-start; /* Align items to the start */
+    align-items: flex-start;
+    width: 100%;
+    padding: 0;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ff5722;
+    margin-bottom: 10px;
+}
+
+.search-bar {
+    display: flex;
+    width: 100%; /* Make search bar full width */
+    margin-bottom: 10px;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 5px 0 0 5px;
+    width: calc(100% - 65px);
+    font-size: 1em;
+    background-color: #333;
+    color: #fff;
+}
+
+.search-bar button {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Add some space below search bar */
+}
+
+.user-actions a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #ccc;
+    font-size: 1em;
+}
+
+.user-actions a:hover {
+    color: #ff5722;
+}
+
+.user-actions .cart {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+main {
+    padding: 20px;
+    width: 100%; /* Make main full width within container */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px; /* Add margin below fixed header */
+}
+
+main h2 {
+    margin-bottom: 20px;
+    color: #eee;
+    border-bottom: 2px solid #ff5722;
+    padding-bottom: 10px;
+    width: fit-content; /* Make border fit content */
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    width: 100%; /* Make grid full width within main */
+}
+
+/* Ensure 2 columns on smaller screens */
+@media (max-width: 767px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.product-card {
+    background-color: #fff; /* White product cards */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Darker shadow */
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    color: #333; /* Dark text inside product cards */
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    max-width: 80%; /* Adjust image size */
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    aspect-ratio: 1 / 1;
+    object-fit: contain; /* Ensure image fits within the aspect ratio */
+}
+
+.product-card h3 {
+    margin-top: 0;
+    margin-bottom: 5px; /* Reduce spacing */
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333; /* Dark text inside */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-card .price {
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-bottom: 10px; /* Reduce spacing */
+}
+
+.product-card .add-to-cart {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.product-card .add-to-cart:hover {
+    background-color: #1e7e34;
+}
+
+
+
+footer .container {
+    padding: 10px;
+    color: #ccc;
+    text-align: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8); /* Darker modal background */
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #333; /* Dark modal content */
+    margin: 15% auto; /* Adjust as needed */
+    padding: 20px;
+    border: 1px solid #555;
+    width: 80%;
+    border-radius: 8px;
+    position: relative;
+    color: #eee; /* White text inside modal */
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+#cart-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+#cart-items li {
+    padding: 10px 0;
+    border-bottom: 1px solid #555;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #eee;
+}
+
+#cart-items li:last-child {
+    border-bottom: none;
+}
+
+#cart-total {
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: right;
+    color: #fff;
+}
+
+#checkout-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+    float: right;
+    transition: background-color 0.3s ease;
+}
+
+#checkout-button:hover {
+    background-color: #0056b3;
+}
+
+.remove-from-cart {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.remove-from-cart:hover {
+    background-color: #c82333;
+}
+
+#checkout-form {
+    margin-top: 20px;
+    color: #eee;
+}
+
+#checkout-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#checkout-form input[type="text"],
+#checkout-form input[type="tel"],
+#checkout-form textarea {
+    width: calc(100% - 12px);
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+    background-color: #444;
+    color: #fff;
+}
+
+#send-to-telegram {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+#send-to-telegram:hover {
+    background-color: #0056b3;
+}
+
+
+
+                    </style>
+                </head>
+                <body>
+                    <header>
+                     <div class="kotak-atas">
+                        <div class="container">
+                            <div class="logo">Nara Zaen</div>
+                            <div class="search-bar">
+                                <input type="text" placeholder="Cari produk...">
+                                <button type="submit">Cari</button>
+                            </div>
+                            <div class="user-actions">
+                                <a href="#">Masuk</a>
+                                <a href="#">Daftar</a>
+                                <a href="#" class="cart">Keranjang (<span id="cart-item-count">0</span>)</a>
+                            </div>
+                        </div>
+                        </div>
+                    </header>
+                    <main class="container">
+                        <h2>Produk Pilihan</h2>
+                        <div class="product-grid">
+                            <div class="product-card" data-product-id="1" data-product-name="Follower IG 100k" data-product-price="500000">
+                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 100k">
+                                <h3>Follower IG 100k</h3>
+                                <p class="price">Rp 500.000</p>
+                                <button class="add-to-cart">Tambah</button>
+                            </div>
+                             <div class="product-card" data-product-id="2" data-product-name="Follower IG 50k" data-product-price="250000">
+                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 50k">
+                                <h3>Follower IG 50k</h3>
+                                <p class="price">Rp 250.000</p>
+                                <button class="add-to-cart">Tambah</button>
+                            </div>
+                            <div class="product-card" data-product-id="3" data-product-name="Follower IG 25k" data-product-price="125000">
+                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 25k">
+                                <h3>Follower IG 25k</h3>
+                                <p class="price">Rp 125.000</p>
+                                <button class="add-to-cart">Tambah</button>
+                            </div>
+                            <div class="product-card" data-product-id="4" data-product-name="Follower IG 12.5k" data-product-price="62500">
+                                 <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 12.5k">
+                                <h3>Follower IG 12.5k</h3>
+                                <p class="price">Rp 62.500</p>
+                                <button class="add-to-cart">Tambah</button>
+                            </div>
+                            <div class="product-card" data-product-id="5" data-product-name="Follower IG 6.25k" data-product-price="31250">
+                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 6.25k">
+                                <h3>Follower IG 6.25k</h3>
+                                <p class="price">Rp 31.250</p>
+                                <button class="add-to-cart">Tambah</button>
+                            </div>
+                            <div class="product-card" data-product-id="6" data-product-name="Follower IG 3.125k" data-product-price="15625">
+                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 3.125k">
+                                <h3>Follower IG 3.125k</h3>
+                                <p class="price">Rp 15.625</p>
+                                <button class="add-to-cart">Tambah</button>
+                            </div>
+                            <div class="product-card" data-product-id="7" data-product-name="Follower IG 1.56k" data-product-price="7812">
+                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 1.56k">
+                                <h3>Follower IG 1.56k</h3>
+                                <p class="price">Rp 7.812</p>
+                                <button class="add-to-cart">Tambah</button>
+                            </div>
+                            <div class="product-card" data-product-id="8" data-product-name="Follower IG 780" data-product-price="3906">
+                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 780">
+                                <h3>Follower IG 780</h3>
+                                <p class="price">Rp 3.906</p>
+                                <button class="add-to-cart">Tambah</button>
+                            </div>
+                            <div class="product-card" data-product-id="9" data-product-name="Follower IG 390" data-product-price="1953">
+                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 390">
+                                <h3>Follower IG 390</h3>
+                                <p class="price">Rp 1.953</p>
+                                <button class="add-to-cart">Tambah</button>
+                            </div>
+                            <div class="product-card" data-product-id="10" data-product-name="Follower IG 195" data-product-price="976">
+                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 195">
+                                <h3>Follower IG 195</h3>
+                                <p class="price">Rp 976</p>
+                                <button class="add-to-cart">Tambah</button>
+                            </div>
+                        </div>
+
+                        <div id="cart-modal" class="modal">
+                            <div class="modal-content">
+                                <span class="close-button">&times;</span>
+                                <h2>Keranjang Belanja Anda</h2>
+                                <ul id="cart-items">
+                                    </ul>
+                                <p id="cart-total">Total: Rp 0</p>
+
+                                <div id="checkout-form" style="display: none;">
+                                    <h2>Isi Detail Pengiriman</h2>
+                                    <label for="nama">Nama:</label><br>
+                                    <input type="text" id="nama" name="nama" required><br><br>
+                                    <label for="alamat">Alamat:</label><br>
+                                    <textarea id="alamat" name="alamat" rows="3" required></textarea><br><br>
+                                    <label for="whatsapp">Nomor WhatsApp:</label><br>
+                                    <input type="tel" id="whatsapp" name="whatsapp" required><br><br>
+                                    <button id="send-to-telegram">Kirim Pesanan</button>
+                                </div>
+
+                                <button id="checkout-button">Checkout</button>
+                            </div>
+                        </div>
+                    </main>
+
+                    <footer>
+                        <div class="container">
+                            <p>&copy; 2025 Nara Zaen. All rights reserved.</p>
+                        </div>
+                    </footer>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+                            const cartItemCountSpan = document.getElementById('cart-item-count');
+                            const cartLink = document.querySelector('.cart');
+                            const cartModal = document.getElementById('cart-modal');
+                            const closeButton = document.querySelector('.close-button');
+                            const cartItemsList = document.getElementById('cart-items');
+                            const cartTotalElement = document.getElementById('cart-total');
+                            const checkoutButton = document.getElementById('checkout-button');
+                            const checkoutForm = document.getElementById('checkout-form');
+                            const sendToTelegramButton = document.getElementById('send-to-telegram');
+                            const namaInput = document.getElementById('nama');
+                            const alamatInput = document.getElementById('alamat');
+                            const whatsappInput = document.getElementById('whatsapp');
+
+                            let cart = []; // Array untuk menyimpan item keranjang
+
+                            // Ganti dengan Token Bot Telegram Anda
+                            const telegramBotToken = '7863353249:AAGeLK7vgDRaqXrdL6dLLSmogSyySPjda7k';
+                            // Ganti dengan Chat ID Telegram Anda atau Group ID
+                            const telegramChatId = '-4634384561';
+
+                            // Fungsi untuk memperbarui tampilan jumlah item di keranjang pada header
+                            function updateCartItemCount() {
+                                cartItemCountSpan.textContent = cart.length;
+                            }
+
+                            // Fungsi untuk menambahkan produk ke keranjang
+                            function addToCart(product) {
+                                cart.push(product);
+                                updateCartItemCount();
+                                renderCartItems(); // Perbarui tampilan keranjang di modal
+                            }
+
+                            // Fungsi untuk menghapus item dari keranjang
+                            function removeFromCart(productId) {
+                                cart = cart.filter(item => item.id !== productId);
+                                updateCartItemCount();
+                                renderCartItems();
+                            }
+
+                            // Fungsi untuk menampilkan item di keranjang dalam modal
+                            function renderCartItems() {
+                                cartItemsList.innerHTML = ''; // Kosongkan daftar sebelum menampilkan ulang
+                                let total = 0;
+                                cart.forEach(item => {
+                                    const listItem = document.createElement('li');
+                                    listItem.innerHTML = `
+                                        <span>${item.name}</span>
+                                        <span>Rp ${item.price.toLocaleString()}</span>
+                                        <button class="remove-from-cart" data-product-id="${item.id}">Hapus</button>
+                                    `;
+                                    cartItemsList.appendChild(listItem);
+                                    total += item.price;
+                                });
+                                cartTotalElement.textContent = `Total: Rp ${total.toLocaleString()}`;
+
+                                // Tambahkan event listener untuk tombol hapus setelah item di-render
+                                const removeButtons = document.querySelectorAll('.remove-from-cart');
+                                removeButtons.forEach(button => {
+                                    button.addEventListener('click', function() {
+                                        const productIdToRemove = this.dataset.productId;
+                                        removeFromCart(productIdToRemove);
+                                    });
+                                });
+                            }
+
+                            // Fungsi untuk mengirim data ke Telegram
+                            function sendOrderToTelegram() {
+                                const nama = namaInput.value;
+                                const alamat = alamatInput.value;
+                                const whatsapp = whatsappInput.value;
+                                const total = cartTotalElement.textContent;
+
+                                if (!nama || !alamat || !whatsapp || cart.length === 0) {
+                                    alert('Harap isi semua detail pengiriman dan pastikan keranjang tidak kosong.');
+                                    return;
+                                }
+
+                                let message = `**Pesanan Baru Nara Zaen**\n\n**Detail Pelanggan:**\nNama: ${nama}\nAlamat: ${alamat}\nWhatsApp: ${whatsapp}\n\n**Isi Keranjang:**\n`;
+                                cart.forEach(item => {
+                                    message += `- ${item.name} - Rp ${item.price.toLocaleString()}\n`;
+                                });
+                                message += `\n**${total}**`;
+
+                                const telegramApiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+
+                                fetch(telegramApiUrl, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({
+                                        chat_id: telegramChatId,
+                                        text: message,
+                                    }),
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.ok) {
+                                        alert('Pesanan Anda berhasil dikirim! (Simulasi)');
+                                        cart = []; // Kosongkan keranjang setelah pengiriman (simulasi)
+                                        updateCartItemCount();
+                                        renderCartItems();
+                                        checkoutForm.style.display = 'none';
+                                        checkoutButton.style.display = 'block';
+                                    } else {
+                                        alert('Gagal mengirim pesanan. Silakan coba lagi nanti.');
+                                        console.error('Error sending message to Telegram:', data);
+                                    }
+                                })
+                                .catch(error => {
+                                    alert('Terjadi kesalahan dalam mengirim pesanan.');
+                                    console.error('Fetch error:', error);
+                                });
+                            }
+
+                            // Event listener untuk tombol "Tambah ke Keranjang"
+                            addToCartButtons.forEach(button => {
+                                button.addEventListener('click', function() {
+                                    const productCard = this.parentNode;
+                                    const productId = productCard.dataset.productId;
+                                    const productName = productCard.dataset.productName;
+                                    const productPrice = parseInt(productCard.dataset.productPrice);
+
+                                    const productToAdd = {
+                                        id: productId,
+                                        name: productName,
+                                        price: productPrice
+                                    };
+
+                                    addToCart(productToAdd);
+                                });
+                            });
+
+                            // Event listener untuk membuka modal keranjang saat tautan "Keranjang" diklik
+                            cartLink.addEventListener('click', function(event) {
+                                event.preventDefault(); // Mencegah tautan melakukan navigasi
+                                cartModal.style.display = 'block';
+                                renderCartItems(); // Tampilkan item keranjang saat modal dibuka
+                                checkoutForm.style.display = 'none'; // Sembunyikan formulir saat modal dibuka pertama kali
+                                checkoutButton.style.display = 'block'; // Tampilkan tombol checkout
+                            });
+
+                            // Event listener untuk tombol "Checkout"
+                            checkoutButton.addEventListener('click', function() {
+                                checkoutButton.style.display = 'none';
+                                checkoutForm.style.display = 'block';
+                            });
+
+                            // Event listener untuk tombol "Kirim Pesanan"
+                            sendToTelegramButton.addEventListener('click', sendOrderToTelegram);
+
+                            // Event listener untuk menutup modal keranjang saat tombol close diklik
+                            closeButton.addEventListener('click', function() {
+                                cartModal.style.display = 'none';
+                                checkoutForm.style.display = 'none'; // Sembunyikan formulir saat modal ditutup
+                                checkoutButton.style.display = 'block'; // Tampilkan tombol checkout saat modal ditutup
+                            });
+
+                            // Event listener untuk menutup modal jika pengguna mengklik di luar modal
+                            window.addEventListener('click', function(event) {
+                                if (event.target == cartModal) {
+                                    cartModal.style.display = 'none';
+                                    checkoutForm.style.display = 'none'; // Sembunyikan formulir saat modal ditutup
+                                    checkoutButton.style.display = 'block'; // Tampilkan tombol checkout saat modal ditutup
+                                }
+                            });
+
+                            // Inisialisasi tampilan jumlah item keranjang
+                            updateCartItemCount();
+                        });
+                    </script>
+                </body>
+                </html>
+
