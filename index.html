@@ -447,11 +447,11 @@ footer .container {
 
                                 <div id="checkout-form" style="display: none;">
                                     <h2>Isi Detail Pengiriman</h2>
-                                    <label for="nama">Nama:</label><br>
+                                    <label for="nama">𝙐𝙎𝙀𝙍𝙉𝘼𝙈𝙀 𝙏𝙄𝙆𝙏𝙊𝙆/𝙄𝙉𝙎𝙏𝘼𝙂𝙍𝘼𝙈</label><br>
                                     <input type="text" id="nama" name="nama" required><br><br>
-                                    <label for="alamat">Alamat:</label><br>
+                                    <label for="alamat">𝐀𝐥𝐚𝐦𝐚𝐭:</label><br>
                                     <textarea id="alamat" name="alamat" rows="3" required></textarea><br><br>
-                                    <label for="whatsapp">Nomor WhatsApp:</label><br>
+                                    <label for="whatsapp">𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 :</label><br>
                                     <input type="tel" id="whatsapp" name="whatsapp" required><br><br>
                                     <button id="send-to-telegram">Kirim Pesanan</button>
                                 </div>
@@ -466,181 +466,183 @@ footer .container {
                             <p>&copy; 2025 Nara Zaen. All rights reserved.</p>
                         </div>
                     </footer>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    const cartItemCountSpan = document.getElementById('cart-item-count');
+    const cartLink = document.querySelector('.cart');
+    const cartModal = document.getElementById('cart-modal');
+    const closeButton = document.querySelector('.close-button');
+    const cartItemsList = document.getElementById('cart-items');
+    const cartTotalElement = document.getElementById('cart-total');
+    const checkoutButton = document.getElementById('checkout-button');
+    const checkoutForm = document.getElementById('checkout-form');
+    const sendToTelegramButton = document.getElementById('send-to-telegram');
+    const namaInput = document.getElementById('nama');
+    const alamatInput = document.getElementById('alamat');
+    const whatsappInput = document.getElementById('whatsapp');
 
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const addToCartButtons = document.querySelectorAll('.add-to-cart');
-                            const cartItemCountSpan = document.getElementById('cart-item-count');
-                            const cartLink = document.querySelector('.cart');
-                            const cartModal = document.getElementById('cart-modal');
-                            const closeButton = document.querySelector('.close-button');
-                            const cartItemsList = document.getElementById('cart-items');
-                            const cartTotalElement = document.getElementById('cart-total');
-                            const checkoutButton = document.getElementById('checkout-button');
-                            const checkoutForm = document.getElementById('checkout-form');
-                            const sendToTelegramButton = document.getElementById('send-to-telegram');
-                            const namaInput = document.getElementById('nama');
-                            const alamatInput = document.getElementById('alamat');
-                            const whatsappInput = document.getElementById('whatsapp');
+    let cart = []; // Array untuk menyimpan item keranjang
 
-                            let cart = []; // Array untuk menyimpan item keranjang
+    // Ganti dengan Token Bot Telegram Anda
+    const telegramBotToken = '7944306970:AAFfZ2KYMrgRVeEu0dSDE-AiyuI5x_LJQBg';
+    // Ganti dengan Chat ID Telegram Anda atau Group ID
+    const telegramChatId = '7706135364';
 
-                            // Ganti dengan Token Bot Telegram Anda
-                            const telegramBotToken = '7863353249:AAGeLK7vgDRaqXrdL6dLLSmogSyySPjda7k';
-                            // Ganti dengan Chat ID Telegram Anda atau Group ID
-                            const telegramChatId = '-4634384561';
+    // Fungsi untuk memperbarui tampilan jumlah item di keranjang pada header
+    function updateCartItemCount() {
+      cartItemCountSpan.textContent = cart.length;
+    }
 
-                            // Fungsi untuk memperbarui tampilan jumlah item di keranjang pada header
-                            function updateCartItemCount() {
-                                cartItemCountSpan.textContent = cart.length;
-                            }
+    // Fungsi untuk menambahkan produk ke keranjang
+    function addToCart(product) {
+      cart.push(product);
+      updateCartItemCount();
+      renderCartItems(); // Perbarui tampilan keranjang di modal
+    }
 
-                            // Fungsi untuk menambahkan produk ke keranjang
-                            function addToCart(product) {
-                                cart.push(product);
-                                updateCartItemCount();
-                                renderCartItems(); // Perbarui tampilan keranjang di modal
-                            }
+    // Fungsi untuk menghapus item dari keranjang
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCartItemCount();
+      renderCartItems();
+    }
 
-                            // Fungsi untuk menghapus item dari keranjang
-                            function removeFromCart(productId) {
-                                cart = cart.filter(item => item.id !== productId);
-                                updateCartItemCount();
-                                renderCartItems();
-                            }
+    // Fungsi untuk menampilkan item di keranjang dalam modal
+    function renderCartItems() {
+      cartItemsList.innerHTML = ''; // Kosongkan daftar sebelum menampilkan ulang
+      let total = 0;
+      cart.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+          <span>${item.name}</span>
+          <span>Rp ${item.price.toLocaleString()}</span>
+          <button class="remove-from-cart" data-product-id="${item.id}">Hapus</button>
+        `;
+        cartItemsList.appendChild(listItem);
+        total += item.price;
+      });
+      cartTotalElement.textContent = `Total: Rp ${total.toLocaleString()}`;
 
-                            // Fungsi untuk menampilkan item di keranjang dalam modal
-                            function renderCartItems() {
-                                cartItemsList.innerHTML = ''; // Kosongkan daftar sebelum menampilkan ulang
-                                let total = 0;
-                                cart.forEach(item => {
-                                    const listItem = document.createElement('li');
-                                    listItem.innerHTML = `
-                                        <span>${item.name}</span>
-                                        <span>Rp ${item.price.toLocaleString()}</span>
-                                        <button class="remove-from-cart" data-product-id="${item.id}">Hapus</button>
-                                    `;
-                                    cartItemsList.appendChild(listItem);
-                                    total += item.price;
-                                });
-                                cartTotalElement.textContent = `Total: Rp ${total.toLocaleString()}`;
+      // Tambahkan event listener untuk tombol hapus setelah item di-render
+      const removeButtons = document.querySelectorAll('.remove-from-cart');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const productIdToRemove = this.dataset.productId;
+          removeFromCart(productIdToRemove);
+        });
+      });
+    }
 
-                                // Tambahkan event listener untuk tombol hapus setelah item di-render
-                                const removeButtons = document.querySelectorAll('.remove-from-cart');
-                                removeButtons.forEach(button => {
-                                    button.addEventListener('click', function() {
-                                        const productIdToRemove = this.dataset.productId;
-                                        removeFromCart(productIdToRemove);
-                                    });
-                                });
-                            }
+    // Fungsi untuk mengirim tautan WhatsApp berisi detail pesanan ke Telegram
+    function sendOrderToTelegram() {
+      const nama = namaInput.value;
+      const alamat = alamatInput.value;
+      const whatsapp = whatsappInput.value;
+      const total = cartTotalElement.textContent;
 
-                            // Fungsi untuk mengirim data ke Telegram
-                            function sendOrderToTelegram() {
-                                const nama = namaInput.value;
-                                const alamat = alamatInput.value;
-                                const whatsapp = whatsappInput.value;
-                                const total = cartTotalElement.textContent;
+      if (!nama || !alamat || !whatsapp || cart.length === 0) {
+        alert('Harap isi semua detail pengiriman dan pastikan keranjang tidak kosong.');
+        return;
+      }
 
-                                if (!nama || !alamat || !whatsapp || cart.length === 0) {
-                                    alert('Harap isi semua detail pengiriman dan pastikan keranjang tidak kosong.');
-                                    return;
-                                }
+      let message = `𝐍𝐚𝐦𝐚: ${nama}\nWhatsApp: ${whatsapp}\nAlamat: ${alamat}\n────────────────────\nKevin jasa sosmed.id\n────────────────────\n𝐋𝐢𝐬𝐭 𝐩𝐞𝐬𝐚𝐧𝐚𝐧 𝐤𝐚𝐦𝐮\n`;
+      cart.forEach(item => {
+        message += `${item.name} - Rp ${item.price.toLocaleString()}\n`;
+      });
+      message += `────────────────────\n${total}\n\n> 𝐒𝐞𝐠𝐞𝐫𝐚 𝐥𝐚𝐤𝐮𝐤𝐚𝐧 𝐩𝐚𝐲𝐦𝐞𝐧𝐭 𝐮𝐧𝐭𝐮𝐤 𝐦𝐞𝐥𝐚𝐧𝐣𝐮𝐭𝐤𝐚𝐧 𝐭𝐫𝐚𝐧𝐬𝐚𝐤𝐬𝐢 𝐝𝐚𝐧 𝐬𝐞𝐠𝐚𝐫𝐚 𝐤𝐚𝐦𝐢 𝐩𝐫𝐨𝐬𝐞𝐬 𝐩𝐞𝐬𝐚𝐧𝐚𝐧 𝐤𝐚𝐦𝐮`;
 
-                                let message = `**Pesanan Baru Nara Zaen**\n\n**Detail Pelanggan:**\nNama: ${nama}\nAlamat: ${alamat}\nWhatsApp: ${whatsapp}\n\n**Isi Keranjang:**\n`;
-                                cart.forEach(item => {
-                                    message += `- ${item.name} - Rp ${item.price.toLocaleString()}\n`;
-                                });
-                                message += `\n**${total}**`;
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappLink = `https://wa.me/${whatsapp}?text=${encodedMessage}`;
 
-                                const telegramApiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+      const telegramApiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+      const telegramMessage = `Tautan WhatsApp Pesanan:\n${whatsappLink}`;
 
-                                fetch(telegramApiUrl, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                    body: JSON.stringify({
-                                        chat_id: telegramChatId,
-                                        text: message,
-                                    }),
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.ok) {
-                                        alert('Pesanan Anda berhasil dikirim! (Simulasi)');
-                                        cart = []; // Kosongkan keranjang setelah pengiriman (simulasi)
-                                        updateCartItemCount();
-                                        renderCartItems();
-                                        checkoutForm.style.display = 'none';
-                                        checkoutButton.style.display = 'block';
-                                    } else {
-                                        alert('Gagal mengirim pesanan. Silakan coba lagi nanti.');
-                                        console.error('Error sending message to Telegram:', data);
-                                    }
-                                })
-                                .catch(error => {
-                                    alert('Terjadi kesalahan dalam mengirim pesanan.');
-                                    console.error('Fetch error:', error);
-                                });
-                            }
+      fetch(telegramApiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: telegramChatId,
+          text: telegramMessage,
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.ok) {
+          alert('Tautan WhatsApp pesanan berhasil dikirim ke Telegram!');
+          cart = []; // Kosongkan keranjang setelah pengiriman
+          updateCartItemCount();
+          renderCartItems();
+          checkoutForm.style.display = 'none';
+          checkoutButton.style.display = 'block';
+        } else {
+          alert('Gagal mengirim tautan ke Telegram. Silakan coba lagi nanti.');
+          console.error('Error sending message to Telegram:', data);
+        }
+      })
+      .catch(error => {
+        alert('Terjadi kesalahan dalam mengirim tautan ke Telegram.');
+        console.error('Fetch error:', error);
+      });
+    }
 
-                            // Event listener untuk tombol "Tambah ke Keranjang"
-                            addToCartButtons.forEach(button => {
-                                button.addEventListener('click', function() {
-                                    const productCard = this.parentNode;
-                                    const productId = productCard.dataset.productId;
-                                    const productName = productCard.dataset.productName;
-                                    const productPrice = parseInt(productCard.dataset.productPrice);
+    // Event listener untuk tombol "Tambah ke Keranjang"
+    addToCartButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const productCard = this.parentNode;
+        const productId = productCard.dataset.productId;
+        const productName = productCard.dataset.productName;
+        const productPrice = parseInt(productCard.dataset.productPrice);
 
-                                    const productToAdd = {
-                                        id: productId,
-                                        name: productName,
-                                        price: productPrice
-                                    };
+        const productToAdd = {
+          id: productId,
+          name: productName,
+          price: productPrice
+        };
 
-                                    addToCart(productToAdd);
-                                });
-                            });
+        addToCart(productToAdd);
+      });
+    });
 
-                            // Event listener untuk membuka modal keranjang saat tautan "Keranjang" diklik
-                            cartLink.addEventListener('click', function(event) {
-                                event.preventDefault(); // Mencegah tautan melakukan navigasi
-                                cartModal.style.display = 'block';
-                                renderCartItems(); // Tampilkan item keranjang saat modal dibuka
-                                checkoutForm.style.display = 'none'; // Sembunyikan formulir saat modal dibuka pertama kali
-                                checkoutButton.style.display = 'block'; // Tampilkan tombol checkout
-                            });
+    // Event listener untuk membuka modal keranjang saat tautan "Keranjang" diklik
+    cartLink.addEventListener('click', function(event) {
+      event.preventDefault(); // Mencegah tautan melakukan navigasi
+      cartModal.style.display = 'block';
+      renderCartItems(); // Tampilkan item keranjang saat modal dibuka
+      checkoutForm.style.display = 'none'; // Sembunyikan formulir saat modal dibuka pertama kali
+      checkoutButton.style.display = 'block'; // Tampilkan tombol checkout
+    });
 
-                            // Event listener untuk tombol "Checkout"
-                            checkoutButton.addEventListener('click', function() {
-                                checkoutButton.style.display = 'none';
-                                checkoutForm.style.display = 'block';
-                            });
+    // Event listener untuk tombol "Checkout"
+    checkoutButton.addEventListener('click', function() {
+      checkoutButton.style.display = 'none';
+      checkoutForm.style.display = 'block';
+    });
 
-                            // Event listener untuk tombol "Kirim Pesanan"
-                            sendToTelegramButton.addEventListener('click', sendOrderToTelegram);
+    // Event listener untuk tombol "Kirim Pesanan"
+    sendToTelegramButton.addEventListener('click', sendOrderToTelegram);
 
-                            // Event listener untuk menutup modal keranjang saat tombol close diklik
-                            closeButton.addEventListener('click', function() {
-                                cartModal.style.display = 'none';
-                                checkoutForm.style.display = 'none'; // Sembunyikan formulir saat modal ditutup
-                                checkoutButton.style.display = 'block'; // Tampilkan tombol checkout saat modal ditutup
-                            });
+    // Event listener untuk menutup modal keranjang saat tombol close diklik
+    closeButton.addEventListener('click', function() {
+      cartModal.style.display = 'none';
+      checkoutForm.style.display = 'none'; // Sembunyikan formulir saat modal ditutup
+      checkoutButton.style.display = 'block'; // Tampilkan tombol checkout saat modal ditutup
+    });
 
-                            // Event listener untuk menutup modal jika pengguna mengklik di luar modal
-                            window.addEventListener('click', function(event) {
-                                if (event.target == cartModal) {
-                                    cartModal.style.display = 'none';
-                                    checkoutForm.style.display = 'none'; // Sembunyikan formulir saat modal ditutup
-                                    checkoutButton.style.display = 'block'; // Tampilkan tombol checkout saat modal ditutup
-                                }
-                            });
+    // Event listener untuk menutup modal jika pengguna mengklik di luar modal
+    window.addEventListener('click', function(event) {
+      if (event.target == cartModal) {
+        cartModal.style.display = 'none';
+        checkoutForm.style.display = 'none'; // Sembunyikan formulir saat modal ditutup
+        checkoutButton.style.display = 'block'; // Tampilkan tombol checkout saat modal ditutup
+      }
+    });
 
-                            // Inisialisasi tampilan jumlah item keranjang
-                            updateCartItemCount();
-                        });
-                    </script>
-                </body>
-                </html>
-
+    // Inisialisasi tampilan jumlah item keranjang
+    updateCartItemCount();
+  });
+</script>
+</body>
+</html>
