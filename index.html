@@ -1,648 +1,316 @@
- <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Nara Zaen - Beranda</title>
-                    <style>
-Body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    background-color: #000; /* Black background */
-    color: #fff; /* White text outside product cards */
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column; /* Arrange header and main vertically */
-    align-items: center; /* Center horizontally */
-    min-height: 100vh; /* Ensure full viewport height */
-}
-.kotak-atas {
-  position: fixed;
-  top: 0; /* Remove top margin */
-  left: 0;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Slightly transparent black for header */
-  z-index: 99;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.container {
-    max-width: 1200px; /* Adjust as needed */
-    width: 90%; /* Adjust as needed */
-    margin-top: 0; /* Remove top margin */
-    padding: 20px;
-    background-color: #111; /* Darker background for container */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Subtle white shadow */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center content within container */
-}
-
-header {
-    background-color: transparent;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #333;
-    width: 100%; /* Make header full width within kotak-atas */
-    display: flex;
-    flex-direction: column; /* Arrange logo and search vertically */
-    align-items: flex-start; /* Align items to the left */
-}
-
-header .container {
-    display: flex;
-    flex-direction: column; /* Arrange logo, search, and actions vertically */
-    justify-content: flex-start; /* Align items to the start */
-    align-items: flex-start;
-    width: 100%;
-    padding: 0;
-}
-
-.logo {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #ff5722;
-    margin-bottom: 10px;
-}
-
-.search-bar {
-    display: flex;
-    width: 100%; /* Make search bar full width */
-    margin-bottom: 10px;
-}
-
-.search-bar input[type="text"] {
-    padding: 10px;
-    border: 1px solid #555;
-    border-radius: 5px 0 0 5px;
-    width: calc(100% - 65px);
-    font-size: 1em;
-    background-color: #333;
-    color: #fff;
-}
-
-.search-bar button {
-    background-color: #ff5722;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-}
-
-.user-actions {
-    display: flex;
-    align-items: center;
-    margin-top: 10px; /* Add some space below search bar */
-}
-
-.user-actions a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #ccc;
-    font-size: 1em;
-}
-
-.user-actions a:hover {
-    color: #ff5722;
-}
-
-.user-actions .cart {
-    font-weight: bold;
-    cursor: pointer;
-}
-
-main {
-    padding: 20px;
-    width: 100%; /* Make main full width within container */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 60px; /* Add margin below fixed header */
-}
-
-main h2 {
-    margin-bottom: 20px;
-    color: #eee;
-    border-bottom: 2px solid #ff5722;
-    padding-bottom: 10px;
-    width: fit-content; /* Make border fit content */
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
-    gap: 20px;
-    width: 100%; /* Make grid full width within main */
-}
-
-/* Ensure 2 columns on smaller screens */
-@media (max-width: 767px) {
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-.product-card {
-    background-color: #fff; /* White product cards */
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Darker shadow */
-    padding: 15px;
-    text-align: center;
-    transition: transform 0.2s ease-in-out;
-    color: #333; /* Dark text inside product cards */
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-}
-
-.product-card img {
-    max-width: 80%; /* Adjust image size */
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 15px;
-    aspect-ratio: 1 / 1;
-    object-fit: contain; /* Ensure image fits within the aspect ratio */
-}
-
-.product-card h3 {
-    margin-top: 0;
-    margin-bottom: 5px; /* Reduce spacing */
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #333; /* Dark text inside */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.product-card .price {
-    color: #dc3545;
-    font-weight: bold;
-    font-size: 1.3em;
-    margin-bottom: 10px; /* Reduce spacing */
-}
-
-.product-card .add-to-cart {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-}
-
-.product-card .add-to-cart:hover {
-    background-color: #1e7e34;
-}
-
-
-
-footer .container {
-    padding: 10px;
-    color: #ccc;
-    text-align: center;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.8); /* Darker modal background */
-    z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: #333; /* Dark modal content */
-    margin: 15% auto; /* Adjust as needed */
-    padding: 20px;
-    border: 1px solid #555;
-    width: 80%;
-    border-radius: 8px;
-    position: relative;
-    color: #eee; /* White text inside modal */
-}
-
-.close-button {
-    color: #aaa;
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: #fff;
-    text-decoration: none;
-}
-
-#cart-items {
-    list-style-type: none;
-    padding: 0;
-}
-
-#cart-items li {
-    padding: 10px 0;
-    border-bottom: 1px solid #555;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #eee;
-}
-
-#cart-items li:last-child {
-    border-bottom: none;
-}
-
-#cart-total {
-    font-weight: bold;
-    margin-top: 20px;
-    text-align: right;
-    color: #fff;
-}
-
-#checkout-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    margin-top: 20px;
-    float: right;
-    transition: background-color 0.3s ease;
-}
-
-#checkout-button:hover {
-    background-color: #0056b3;
-}
-
-.remove-from-cart {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.3s ease;
-}
-
-.remove-from-cart:hover {
-    background-color: #c82333;
-}
-
-#checkout-form {
-    margin-top: 20px;
-    color: #eee;
-}
-
-#checkout-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-#checkout-form input[type="text"],
-#checkout-form input[type="tel"],
-#checkout-form textarea {
-    width: calc(100% - 12px);
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #555;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 1em;
-    background-color: #444;
-    color: #fff;
-}
-
-#send-to-telegram {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-}
-
-#send-to-telegram:hover {
-    background-color: #0056b3;
-}
-
-
-
-                    </style>
-                </head>
-                <body>
-                    <header>
-                     <div class="kotak-atas">
-                        <div class="container">
-                            <div class="logo">Nara Zaen</div>
-                            <div class="search-bar">
-                                <input type="text" placeholder="Cari produk...">
-                                <button type="submit">Cari</button>
-                            </div>
-                            <div class="user-actions">
-                                <a href="#">Masuk</a>
-                                <a href="#">Daftar</a>
-                                <a href="#" class="cart">Keranjang (<span id="cart-item-count">0</span>)</a>
-                            </div>
-                        </div>
-                        </div>
-                    </header>
-                    <main class="container">
-                        <h2>Produk Pilihan</h2>
-                        <div class="product-grid">
-                            <div class="product-card" data-product-id="1" data-product-name="Follower IG 100k" data-product-price="500000">
-                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 100k">
-                                <h3>Follower IG 100k</h3>
-                                <p class="price">Rp 500.000</p>
-                                <button class="add-to-cart">Tambah</button>
-                            </div>
-                             <div class="product-card" data-product-id="2" data-product-name="Follower IG 50k" data-product-price="250000">
-                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 50k">
-                                <h3>Follower IG 50k</h3>
-                                <p class="price">Rp 250.000</p>
-                                <button class="add-to-cart">Tambah</button>
-                            </div>
-                            <div class="product-card" data-product-id="3" data-product-name="Follower IG 25k" data-product-price="125000">
-                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 25k">
-                                <h3>Follower IG 25k</h3>
-                                <p class="price">Rp 125.000</p>
-                                <button class="add-to-cart">Tambah</button>
-                            </div>
-                            <div class="product-card" data-product-id="4" data-product-name="Follower IG 12.5k" data-product-price="62500">
-                                 <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 12.5k">
-                                <h3>Follower IG 12.5k</h3>
-                                <p class="price">Rp 62.500</p>
-                                <button class="add-to-cart">Tambah</button>
-                            </div>
-                            <div class="product-card" data-product-id="5" data-product-name="Follower IG 6.25k" data-product-price="31250">
-                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 6.25k">
-                                <h3>Follower IG 6.25k</h3>
-                                <p class="price">Rp 31.250</p>
-                                <button class="add-to-cart">Tambah</button>
-                            </div>
-                            <div class="product-card" data-product-id="6" data-product-name="Follower IG 3.125k" data-product-price="15625">
-                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 3.125k">
-                                <h3>Follower IG 3.125k</h3>
-                                <p class="price">Rp 15.625</p>
-                                <button class="add-to-cart">Tambah</button>
-                            </div>
-                            <div class="product-card" data-product-id="7" data-product-name="Follower IG 1.56k" data-product-price="7812">
-                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 1.56k">
-                                <h3>Follower IG 1.56k</h3>
-                                <p class="price">Rp 7.812</p>
-                                <button class="add-to-cart">Tambah</button>
-                            </div>
-                            <div class="product-card" data-product-id="8" data-product-name="Follower IG 780" data-product-price="3906">
-                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 780">
-                                <h3>Follower IG 780</h3>
-                                <p class="price">Rp 3.906</p>
-                                <button class="add-to-cart">Tambah</button>
-                            </div>
-                            <div class="product-card" data-product-id="9" data-product-name="Follower IG 390" data-product-price="1953">
-                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 390">
-                                <h3>Follower IG 390</h3>
-                                <p class="price">Rp 1.953</p>
-                                <button class="add-to-cart">Tambah</button>
-                            </div>
-                            <div class="product-card" data-product-id="10" data-product-name="Follower IG 195" data-product-price="976">
-                                <img src="https://i.ibb.co/jPdMbqkd/Screenshot-20250420-173815-Google.png" alt="Follower IG 195">
-                                <h3>Follower IG 195</h3>
-                                <p class="price">Rp 976</p>
-                                <button class="add-to-cart">Tambah</button>
-                            </div>
-                        </div>
-
-                        <div id="cart-modal" class="modal">
-                            <div class="modal-content">
-                                <span class="close-button">&times;</span>
-                                <h2>Keranjang Belanja Anda</h2>
-                                <ul id="cart-items">
-                                    </ul>
-                                <p id="cart-total">Total: Rp 0</p>
-
-                                <div id="checkout-form" style="display: none;">
-                                    <h2>Isi Detail Pengiriman</h2>
-                                    <label for="nama">𝙐𝙎𝙀𝙍𝙉𝘼𝙈𝙀 𝙏𝙄𝙆𝙏𝙊𝙆/𝙄𝙉𝙎𝙏𝘼𝙂𝙍𝘼𝙈</label><br>
-                                    <input type="text" id="nama" name="nama" required><br><br>
-                                    <label for="alamat">𝐀𝐥𝐚𝐦𝐚𝐭:</label><br>
-                                    <textarea id="alamat" name="alamat" rows="3" required></textarea><br><br>
-                                    <label for="whatsapp">𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 :</label><br>
-                                    <input type="tel" id="whatsapp" name="whatsapp" required><br><br>
-                                    <button id="send-to-telegram">Kirim Pesanan</button>
-                                </div>
-
-                                <button id="checkout-button">Checkout</button>
-                            </div>
-                        </div>
-                    </main>
-
-                    <footer>
-                        <div class="container">
-                            <p>&copy; 2025 Nara Zaen. All rights reserved.</p>
-                        </div>
-                    </footer>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    const cartItemCountSpan = document.getElementById('cart-item-count');
-    const cartLink = document.querySelector('.cart');
-    const cartModal = document.getElementById('cart-modal');
-    const closeButton = document.querySelector('.close-button');
-    const cartItemsList = document.getElementById('cart-items');
-    const cartTotalElement = document.getElementById('cart-total');
-    const checkoutButton = document.getElementById('checkout-button');
-    const checkoutForm = document.getElementById('checkout-form');
-    const sendToTelegramButton = document.getElementById('send-to-telegram');
-    const namaInput = document.getElementById('nama');
-    const alamatInput = document.getElementById('alamat');
-    const whatsappInput = document.getElementById('whatsapp');
-
-    let cart = []; // Array untuk menyimpan item keranjang
-
-    // Ganti dengan Token Bot Telegram Anda
-    const telegramBotToken = '7944306970:AAFfZ2KYMrgRVeEu0dSDE-AiyuI5x_LJQBg';
-    // Ganti dengan Chat ID Telegram Anda atau Group ID
-    const telegramChatId = '7706135364';
-
-    // Fungsi untuk memperbarui tampilan jumlah item di keranjang pada header
-    function updateCartItemCount() {
-      cartItemCountSpan.textContent = cart.length;
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DAGET CIHUY PRIVATE</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #192A56;
+      margin: 0;
+      padding-top: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+      font-size: 1.1em;
     }
 
-    // Fungsi untuk menambahkan produk ke keranjang
-    function addToCart(product) {
-      cart.push(product);
-      updateCartItemCount();
-      renderCartItems(); // Perbarui tampilan keranjang di modal
+    /* Navbar Styling */
+    .navbar {
+      background-color: #1E3A8A;
+      color: #fff;
+      padding: 18px 25px;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center; /* Vertically center items */
     }
 
-    // Fungsi untuk menghapus item dari keranjang
-    function removeFromCart(productId) {
-      cart = cart.filter(item => item.id !== productId);
-      updateCartItemCount();
-      renderCartItems();
+    .navbar-logo {
+      max-height: 200px; /* Set a maximum height for the logo */
+      margin-right: 15px; /* Add spacing between the logo and text */
     }
 
-    // Fungsi untuk menampilkan item di keranjang dalam modal
-    function renderCartItems() {
-      cartItemsList.innerHTML = ''; // Kosongkan daftar sebelum menampilkan ulang
-      let total = 0;
-      cart.forEach(item => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-          <span>${item.name}</span>
-          <span>Rp ${item.price.toLocaleString()}</span>
-          <button class="remove-from-cart" data-product-id="${item.id}">Hapus</button>
-        `;
-        cartItemsList.appendChild(listItem);
-        total += item.price;
-      });
-      cartTotalElement.textContent = `Total: Rp ${total.toLocaleString()}`;
-
-      // Tambahkan event listener untuk tombol hapus setelah item di-render
-      const removeButtons = document.querySelectorAll('.remove-from-cart');
-      removeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const productIdToRemove = this.dataset.productId;
-          removeFromCart(productIdToRemove);
-        });
-      });
+    .navbar-title {
+      font-size: 4em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #64b5f6;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
 
-    // Fungsi untuk mengirim tautan WhatsApp berisi detail pesanan ke Telegram
-    function sendOrderToTelegram() {
-      const nama = namaInput.value;
-      const alamat = alamatInput.value;
-      const whatsapp = whatsappInput.value;
-      const total = cartTotalElement.textContent;
+    /* Tombol Admin Fixed Bottom Left (Gambar Bergerak) */
+    .admin-button-container {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 101;
+      padding: 0; /* Hapus padding karena sekarang gambar */
+    }
 
-      if (!nama || !alamat || !whatsapp || cart.length === 0) {
-        alert('Harap isi semua detail pengiriman dan pastikan keranjang tidak kosong.');
-        return;
+    .admin-button-image {
+      width: 320px; /* Sesuaikan ukuran gambar sesuai keinginan */
+      height: auto;
+      cursor: pointer;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      border-radius: 50%; /* Agar terlihat seperti tombol bulat */
+      transition: box-shadow 0.3s ease;
+      animation: moveButton 3s infinite alternate; /* Animasi bergerak */
+    }
+
+    .admin-button-image:hover {
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Keyframes untuk animasi bergerak */
+    @keyframes moveButton {
+      0% {
+        transform: translateX(0);
       }
-
-      let message = `𝐍𝐚𝐦𝐚: ${nama}\nWhatsApp: ${whatsapp}\nAlamat: ${alamat}\n────────────────────\nKevin jasa sosmed.id\n────────────────────\n𝐋𝐢𝐬𝐭 𝐩𝐞𝐬𝐚𝐧𝐚𝐧 𝐤𝐚𝐦𝐮\n`;
-      cart.forEach(item => {
-        message += `${item.name} - Rp ${item.price.toLocaleString()}\n`;
-      });
-      message += `────────────────────\n${total}\n\n> 𝐒𝐞𝐠𝐞𝐫𝐚 𝐥𝐚𝐤𝐮𝐤𝐚𝐧 𝐩𝐚𝐲𝐦𝐞𝐧𝐭 𝐮𝐧𝐭𝐮𝐤 𝐦𝐞𝐥𝐚𝐧𝐣𝐮𝐭𝐤𝐚𝐧 𝐭𝐫𝐚𝐧𝐬𝐚𝐤𝐬𝐢 𝐝𝐚𝐧 𝐬𝐞𝐠𝐚𝐫𝐚 𝐤𝐚𝐦𝐢 𝐩𝐫𝐨𝐬𝐞𝐬 𝐩𝐞𝐬𝐚𝐧𝐚𝐧 𝐤𝐚𝐦𝐮`;
-
-      const encodedMessage = encodeURIComponent(message);
-      const whatsappLink = `https://wa.me/${whatsapp}?text=${encodedMessage}`;
-
-      const telegramApiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
-      const telegramMessage = `Tautan WhatsApp Pesanan:\n${whatsappLink}`;
-
-      fetch(telegramApiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: telegramChatId,
-          text: telegramMessage,
-        }),
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.ok) {
-          alert('Tautan WhatsApp pesanan berhasil dikirim ke Telegram!');
-          cart = []; // Kosongkan keranjang setelah pengiriman
-          updateCartItemCount();
-          renderCartItems();
-          checkoutForm.style.display = 'none';
-          checkoutButton.style.display = 'block';
-        } else {
-          alert('Gagal mengirim tautan ke Telegram. Silakan coba lagi nanti.');
-          console.error('Error sending message to Telegram:', data);
-        }
-      })
-      .catch(error => {
-        alert('Terjadi kesalahan dalam mengirim tautan ke Telegram.');
-        console.error('Fetch error:', error);
-      });
+      100% {
+        transform: translateX(20px); /* Sesuaikan jarak gerakan */
+      }
     }
 
-    // Event listener untuk tombol "Tambah ke Keranjang"
-    addToCartButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const productCard = this.parentNode;
-        const productId = productCard.dataset.productId;
-        const productName = productCard.dataset.productName;
-        const productPrice = parseInt(productCard.dataset.productPrice);
+    /* Daftar Admin Fixed Center */
+    .admin-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 102;
+      justify-content: center;
+      align-items: center;
+    }
 
-        const productToAdd = {
-          id: productId,
-          name: productName,
-          price: productPrice
-        };
+    .admin-list {
+      background-color: #1E3A8A;
+      color: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      position: relative;
+      font-size: 1.1em;
+    }
 
-        addToCart(productToAdd);
-      });
-    });
+    .admin-list h2 {
+      color: #64b5f6;
+      margin-bottom: 15px;
+      font-size: 1.5em;
+    }
 
-    // Event listener untuk membuka modal keranjang saat tautan "Keranjang" diklik
-    cartLink.addEventListener('click', function(event) {
-      event.preventDefault(); // Mencegah tautan melakukan navigasi
-      cartModal.style.display = 'block';
-      renderCartItems(); // Tampilkan item keranjang saat modal dibuka
-      checkoutForm.style.display = 'none'; // Sembunyikan formulir saat modal dibuka pertama kali
-      checkoutButton.style.display = 'block'; // Tampilkan tombol checkout
-    });
+    .admin-list ul {
+      list-style: none;
+      padding: 0;
+    }
 
-    // Event listener untuk tombol "Checkout"
-    checkoutButton.addEventListener('click', function() {
-      checkoutButton.style.display = 'none';
-      checkoutForm.style.display = 'block';
-    });
+    .admin-list li {
+      margin-bottom: 8px;
+    }
 
-    // Event listener untuk tombol "Kirim Pesanan"
-    sendToTelegramButton.addEventListener('click', sendOrderToTelegram);
+    .close-button {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.4em;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
 
-    // Event listener untuk menutup modal keranjang saat tombol close diklik
-    closeButton.addEventListener('click', function() {
-      cartModal.style.display = 'none';
-      checkoutForm.style.display = 'none'; // Sembunyikan formulir saat modal ditutup
-      checkoutButton.style.display = 'block'; // Tampilkan tombol checkout saat modal ditutup
-    });
+    .close-button:hover {
+      opacity: 1;
+    }
 
-    // Event listener untuk menutup modal jika pengguna mengklik di luar modal
-    window.addEventListener('click', function(event) {
-      if (event.target == cartModal) {
-        cartModal.style.display = 'none';
-        checkoutForm.style.display = 'none'; // Sembunyikan formulir saat modal ditutup
-        checkoutButton.style.display = 'block'; // Tampilkan tombol checkout saat modal ditutup
-      }
-    });
+    h1 {
+      color: #64b5f6;
+      margin-bottom: 25px;
+      text-align: center;
+      font-size: 2.8em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+      letter-spacing: 1px;
+      margin-top: 30px;
+    }
 
-    // Inisialisasi tampilan jumlah item keranjang
-    updateCartItemCount();
-  });
-</script>
+    .contact-list {
+      background-color: transparent;
+      padding: 25px;
+      border-radius: 15px;
+      width: 95%;
+      max-width: 800px;
+    }
+
+    ol {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 12px;
+      background-color: #1E3A8A;
+      padding: 18px;
+      border-radius: 10px;
+      box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+      transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.2em;
+    }
+
+    li:hover {
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .list-number {
+      color: #ddd;
+      font-weight: bold;
+      font-size: 1.3em;
+      margin-right: 10px;
+    }
+
+    .contact-name {
+      font-size: 1.3em;
+    }
+
+    .click-text {
+      color: #aaa;
+      font-size: 0.9em;
+      margin-left: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+    }
+
+    a:hover {
+      color: #64b5f6;
+    }
+
+    .whatsapp-icon {
+      margin-right: 12px;
+      color: #25d366;
+      font-size: 1.8em;
+    }
+
+    /* Styling tambahan untuk ikon (jika menggunakan Font Awesome) */
+    .fab.fa-whatsapp {
+      font-size: 1.8em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <img src="https://d.top4top.io/p_3405habtq0.png" alt="DAGET CIHUY Logo" class="navbar-logo">
+    <span class="navbar-title">LIST AKUN DANA</span>
+  </div>
+
+  <div class="admin-button-container">
+    <img src="https://a.top4top.io/p_3405s07n00.png" alt="Admin" class="admin-button-image" onclick="openAdminList()">
+  </div>
+
+  <div class="admin-overlay" id="adminOverlay">
+    <div class="admin-list">
+      <h2>Admin DAGET CIHUY</h2>
+      <button class="close-button" onclick="closeAdminList()">×</button>
+      <ul>
+        <li><a href="https://wa.me/6285945546715">Unta Top 1</a></li>
+        <li><a href="https://wa.me/6285732270872">Nurizahr</a></li>
+        <li><a href="https://wa.me/6285711374861">Zaen</a></li>
+        <li><a href="https://wa.me/6282213079521">silvie</a></li>
+        <li><a href="https://wa.me/6285974923299">Tia</a></li>
+        <li><a href="https://wa.me/6281268712898">Rama</a></li>
+        <li><a href="https://wa.me/6289696032797">alfandy</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <h1>WhatsApp Contact List</h1>
+
+  <div class="contact-list">
+    <ol>
+      <li><span class="list-number">1.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282180708285"><span class="whatsapp-icon"></span> Mardiyana</a></span></li>
+      <li><span class="list-number">2.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282246473590"><span class="whatsapp-icon"></span> Lylia</a></span></li>
+      <li><span class="list-number">3.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285172414470"><span class="whatsapp-icon"></span> Novendra</a></span></li>
+      <li><span class="list-number">4.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/62895365782266"><span class="whatsapp-icon"></span> Muhammad Facrizal</a></span></li>
+      <li><span class="list-number">5.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282286941996"><span class="whatsapp-icon"></span> Erika</a></span></li>
+      <li><span class="list-number">6.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6288247175598"><span class="whatsapp-icon"></span> Hael Putri</a></span></li>
+      <li><span class="list-number">7.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283185748899"><span class="whatsapp-icon"></span> Pia</a></span></li>
+      <li><span class="list-number">8.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281539353435"><span class="whatsapp-icon"></span> Eweuh Ngaran</a></span></li>
+      <li><span class="list-number">9.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285842049521"><span class="whatsapp-icon"></span> Indah Ela Febriyanti</a></span></li>
+      <li><span class="list-number">10.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285654431944"><span class="whatsapp-icon"></span> Putri Nadia</a></span></li>
+      <li><span class="list-number">11.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628975075355"><span class="whatsapp-icon"></span> Sugiarti</a></span></li>
+      <li><span class="list-number">12.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285846812825"><span class="whatsapp-icon"></span> Wiwi Yulia Safitri</a></span></li>
+      <li><span class="list-number">13.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6288802839652"><span class="whatsapp-icon"></span> Iga Manik Kara</a></span></li>
+      <li><span class="list-number">14.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285245402970"><span class="whatsapp-icon"></span> Zakiyah Nasywa Zainuddin</a></span></li>
+      <li><span class="list-number">15.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281315378642"><span class="whatsapp-icon"></span> Nyoman Ayu Indah</a></span></li>
+      <li><span class="list-number">16.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281212585790"><span class="whatsapp-icon"></span> Yudi Astuti</a></span></li>
+      <li><span class="list-number">17.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628814028977"><span class="whatsapp-icon"></span> Lia Natalia</a></span></li>
+      <li><span class="list-number">18.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283134509976"><span class="whatsapp-icon"></span> Majiedah Soiemah</a></span></li>
+      <li><span class="list-number">19.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285380636093"><span class="whatsapp-icon"></span> Siti Mutoharoh</a></span></li>
+      <li><span class="list-number">20.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6289520884950"><span class="whatsapp-icon"></span> Sekar Hardiana</a></span></li>
+      <li><span class="list-number">21.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282184184275"><span class="whatsapp-icon"></span> Citra Putri</a></span></li>
+      <li><span class="list-number">22.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281237732540"><span class="whatsapp-icon"></span> Dana Sakti</a></span></li>
+      <li><span class="list-number">23.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285371022838"><span class="whatsapp-icon"></span> Elvi Rahmi</a></span></li>
+      <li><span class="list-number">24.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282289006533"><span class="whatsapp-icon"></span> Andini Fransisca</a></span></li>
+      <li><span class="list-number">25.</span> <span class="click</span> <span class="contact-name"><a href="https://wa.me/628561770913"><span class="whatsapp-icon"></span> Nathania Khairunnisa</a></span></li>
+      <li><span class="list-number">26.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6287841423588"><span class="whatsapp-icon"></span> 0878...3588</a></span></li>
+      <li><span class="list-number">27.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6289530091366"><span class="whatsapp-icon"></span> Ento</a></span></li>
+      <li><span class="list-number">28.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282181102890"><span class="whatsapp-icon"></span> Natasya Marintan</a></span></li>
+      <li><span class="list-number">29.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282121234894"><span class="whatsapp-icon"></span> Yani Ermayani</a></span></li>
+      <li><span class="list-number">30.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283848597109"><span class="whatsapp-icon"></span> Dian Anggraeni</a></span></li>
+      <li><span class="list-number">31.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282396445595"><span class="whatsapp-icon"></span> Husman Ardiansyah</a></span></li>
+      <li><span class="list-number">32.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285645585186"><span class="whatsapp-icon"></span> Yuda Hermawanto</a></span></li>
+      <li><span class="list-number">33.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282389971424"><span class="whatsapp-icon"></span> Ronauli Friskila</a></span></li>
+      <li><span class="list-number">34.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/62895320364775"><span class="whatsapp-icon"></span> Nur Sri Rahayu</a></span></li>
+      <li><span class="list-number">35.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628385885705"><span class="whatsapp-icon"></span> Noorhayati</a></span></li>
+      <li><span class="list-number">36.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628990002098"><span class="whatsapp-icon"></span> Siti Holilah</a></span></li>
+      <li><span class="list-number">37.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628567026028"><span class="whatsapp-icon"></span> Nurjanah Tuasikal</a></span></li>
+      <li><span class="list-number">38.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281216157765"><span class="whatsapp-icon"></span> Siti Nur Aini</a></span></li>
+      <li><span class="list-number">39.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283897428337"><span class="whatsapp-icon"></span> Nurminingsih</a></span></li>
+      <li><span class="list-number">40.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283848597109"><span class="whatsapp-icon"></span> Dian Agustini</a></span></li>
+      <li><span class="list-number">41.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283847836520"><span class="whatsapp-icon"></span> Wahyu Widodo</a></span></li>
+      <li><span class="list-number">42.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628886516165"><span class="whatsapp-icon"></span> Nandiyani Plavia</a></span></li>
+      <li><span class="list-number">43.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281385484799"><span class="whatsapp-icon"></span> Azam Tufirial</a></span></li>
+      <li><span class="list-number">44.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6288212321632"><span class="whatsapp-icon"></span> Sutini</a></span></li>
+      <li><span class="list-number">45.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285212665587"><span class="whatsapp-icon"></span> 0852-1266-5587</a></span></li>
+      <li><span class="list-number">46.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6287754576713"><span class="whatsapp-icon"></span> Rohimatul Riskiyah</a></span></li>
+      <li><span class="list-number">47.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6287792945330"><span class="whatsapp-icon"></span> Wahyu Ardian</a></span></li>
+      <li><span class="list-number">48.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/62882022401235"><span class="whatsapp-icon"></span> Muh feri Setiawan</a></span></li>
+      <li><span class="list-number">49.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285249100474"><span class="whatsapp-icon"></span> Manda Echa</a></span></li>
+      <li><span class="list-number">50.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281243414793"><span class="whatsapp-icon"></span> Nikmatul Fidriya Hanapi</a></span></li>
+      <li><span class="list-number">51.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6289663617565"><span class="whatsapp-icon"></span> siem natalia</a></span></li>
+      <li><span class="list-number">52.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285777622081"><span class="whatsapp-icon"></span> Nurul A</a></span></li>
+    </ol>
+  </div>
+
+  <script>
+    function openAdminList() {
+      document.getElementById("adminOverlay").style.display = "flex";
+    }
+
+    function closeAdminList() {
+      document.getElementById("adminOverlay").style.display = "none";
+    }
+  </script>
+
 </body>
 </html>
+
