@@ -145,74 +145,111 @@
       margin-top: 30px;
     }
 
-    .contact-list {
-      background-color: transparent;
+    .search-container {
+      background-color: #1E3A8A;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      margin-bottom: 20px;
+      width: 95%;
+      max-width: 600px;
+    }
+
+    .search-container label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.2em;
+      color: #ddd;
+    }
+
+    .search-container input[type="text"] {
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      width: 80%;
+      font-size: 1em;
+      background-color: #294A86;
+      color: #fff;
+    }
+
+    .search-container button {
+      padding: 12px 20px;
+      background-color: #64b5f6;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+      margin-top: 15px;
+    }
+
+    .search-container button:hover {
+      background-color: #4288ca;
+    }
+
+    .contact-details {
+      background-color: #1E3A8A;
       padding: 25px;
       border-radius: 15px;
       width: 95%;
       max-width: 800px;
-    }
-
-    ol {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    li {
-      margin-bottom: 12px;
-      background-color: #1E3A8A;
-      padding: 18px;
-      border-radius: 10px;
-      box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
-      transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: none; /* Initially hidden */
+      text-align: center;
       font-size: 1.2em;
     }
 
-    li:hover {
-      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
-      transform: translateY(-3px);
-    }
-
-    .list-number {
-      color: #ddd;
-      font-weight: bold;
-      font-size: 1.3em;
-      margin-right: 10px;
-    }
-
-    .contact-name {
-      font-size: 1.3em;
-    }
-
-    .click-text {
-      color: #aaa;
-      font-size: 0.9em;
-      margin-left: 10px;
-    }
-
-    a {
-      text-decoration: none;
-      color: #fff;
-      display: flex;
-      align-items: center;
-    }
-
-    a:hover {
+    .contact-details h2 {
       color: #64b5f6;
-    }
-
-    .whatsapp-icon {
-      margin-right: 12px;
-      color: #25d366;
+      margin-bottom: 15px;
       font-size: 1.8em;
     }
 
-    /* Styling tambahan untuk ikon (jika menggunakan Font Awesome) */
-    .fab.fa-whatsapp {
-      font-size: 1.8em;
+    .contact-details p {
+      margin-bottom: 10px;
+    }
+
+    .whatsapp-link {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #25d366;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .whatsapp-link:hover {
+      background-color: #128c7e;
+    }
+
+    .not-found {
+      color: #ff6b6b;
+      font-size: 1.2em;
+      margin-top: 20px;
+      display: none;
+    }
+
+    /* Tombol Dana Kaget */
+    .dana-kaget-button {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #ff9800; /* Warna oranye khas Dana Kaget */
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    .dana-kaget-button:hover {
+      background-color: #f57c00;
     }
   </style>
 </head>
@@ -229,7 +266,7 @@
 
   <div class="admin-overlay" id="adminOverlay">
     <div class="admin-list">
-      <h2>Admin DAGET CIHUY</h2>      
+      <h2>Admin DAGET CIHUY</h2>
       <ul>
         <li><a href="https://wa.me/6285945546715">Unta Top 1</a></li>
         <li><a href="https://wa.me/6285732270872">Nurizahr</a></li>
@@ -238,94 +275,147 @@
         <li><a href="https://wa.me/6285974923299">Tia</a></li>
         <li><a href="https://wa.me/6281268712898">Rama</a></li>
         <li><a href="https://wa.me/6289696032797">alfandy</a></li>
-        <li><a href="https://link.dana.id/danakaget?c=sg5eh2vp3&r=cAYM8h&orderId=20250429101214880915010300166998220212472">KLAIM DANA KAGET</a></li>
+        <li><a href="https://link.dana.id/danakaget?c=sg5eh2vp3&r=cAYM8h&orderId=20250506190905880915010300166998220212472">KLAIM DANA KAGET</a></li>
         <button class="close-button" onclick="closeAdminList()">🐫 tutup unta</button>
       </ul>
     </div>
   </div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <h1>Cari Kontak</h1>
 
-  <h1>WhatsApp Contact List</h1>
-
-  <div class="contact-list">
-    <ol>
-      <li><span class="list-number">1.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282180708285"><span class="whatsapp-icon"></span> Mardiyana</a></span></li>
-      <li><span class="list-number">2.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282246473590"><span class="whatsapp-icon"></span> Lylia</a></span></li>
-      <li><span class="list-number">3.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285172414470"><span class="whatsapp-icon"></span> Novendra</a></span></li>
-      <li><span class="list-number">4.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/62895365782266"><span class="whatsapp-icon"></span> Muhammad Facrizal</a></span></li>
-      <li><span class="list-number">5.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282286941996"><span class="whatsapp-icon"></span> Erika</a></span></li>
-      <li><span class="list-number">6.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6288247175598"><span class="whatsapp-icon"></span> Hael Putri</a></span></li>
-      <li><span class="list-number">7.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283185748899"><span class="whatsapp-icon"></span> Pia</a></span></li>
-      <li><span class="list-number">8.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281539353435"><span class="whatsapp-icon"></span> Eweuh Ngaran</a></span></li>
-      <li><span class="list-number">9.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285842049521"><span class="whatsapp-icon"></span> Indah Ela Febriyanti</a></span></li>
-      <li><span class="list-number">10.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285654431944"><span class="whatsapp-icon"></span> Putri Nadia</a></span></li>
-      <li><span class="list-number">11.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628975075355"><span class="whatsapp-icon"></span> Sugiarti</a></span></li>
-      <li><span class="list-number">12.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285846812825"><span class="whatsapp-icon"></span> Wiwi Yulia Safitri</a></span></li>
-      <li><span class="list-number">13.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6288802839652"><span class="whatsapp-icon"></span> Iga Manik Kara</a></span></li>
-      <li><span class="list-number">14.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285245402970"><span class="whatsapp-icon"></span> Zakiyah Nasywa Zainuddin</a></span></li>
-      <li><span class="list-number">15.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281315378642"><span class="whatsapp-icon"></span> Nyoman Ayu Indah</a></span></li>
-      <li><span class="list-number">16.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281212585790"><span class="whatsapp-icon"></span> Yudi Astuti</a></span></li>
-      <li><span class="list-number">17.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628814028977"><span class="whatsapp-icon"></span> Lia Natalia</a></span></li>
-      <li><span class="list-number">18.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283134509976"><span class="whatsapp-icon"></span> Majiedah Soiemah</a></span></li>
-      <li><span class="list-number">19.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285380636093"><span class="whatsapp-icon"></span> Siti Mutoharoh</a></span></li>
-      <li><span class="list-number">20.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6289520884950"><span class="whatsapp-icon"></span> Sekar Hardiana</a></span></li>
-      <li><span class="list-number">21.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282184184275"><span class="whatsapp-icon"></span> Citra Putri</a></span></li>
-      <li><span class="list-number">22.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281237732540"><span class="whatsapp-icon"></span> Dana Sakti</a></span></li>
-      <li><span class="list-number">23.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285371022838"><span class="whatsapp-icon"></span> Elvi Rahmi</a></span></li>
-      <li><span class="list-number">24.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282289006533"><span class="whatsapp-icon"></span> Andini Fransisca</a></span></li>
-      <li><span class="list-number">25.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628561770913"><span class="whatsapp-icon"></span> Nathania Khairunnisa</a></span></li>
-      <li><span class="list-number">26.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6287841423588"><span class="whatsapp-icon"></span> 0878...3588</a></span></li>
-      <li><span class="list-number">27.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6289530091366"><span class="whatsapp-icon"></span> Ento</a></span></li>
-      <li><span class="list-number">28.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282181102890"><span class="whatsapp-icon"></span> Natasya Marintan</a></span></li>
-      <li><span class="list-number">29.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282121234894"><span class="whatsapp-icon"></span> Yani Ermayani</a></span></li>
-      <li><span class="list-number">30.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283848597109"><span class="whatsapp-icon"></span> Dian Anggraeni</a></span></li>
-      <li><span class="list-number">31.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282396445595"><span class="whatsapp-icon"></span> Husman Ardiansyah</a></span></li>
-      <li><span class="list-number">32.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285645585186"><span class="whatsapp-icon"></span> Yuda Hermawanto</a></span></li>
-      <li><span class="list-number">33.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6282389971424"><span class="whatsapp-icon"></span> Ronauli Friskila</a></span></li>
-      <li><span class="list-number">34.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/62895320364775"><span class="whatsapp-icon"></span> Nur Sri Rahayu</a></span></li>
-      <li><span class="list-number">35.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628385885705"><span class="whatsapp-icon"></span> Noorhayati</a></span></li>
-      <li><span class="list-number">36.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628990002098"><span class="whatsapp-icon"></span> Siti Holilah</a></span></li>
-      <li><span class="list-number">37.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628567026028"><span class="whatsapp-icon"></span> Nurjanah Tuasikal</a></span></li>
-      <li><span class="list-number">38.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281216157765"><span class="whatsapp-icon"></span> Siti Nur Aini</a></span></li>
-      <li><span class="list-number">39.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283897428337"><span class="whatsapp-icon"></span> Nurminingsih</a></span></li>
-      <li><span class="list-number">40.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283848597109"><span class="whatsapp-icon"></span> Dian Agustini</a></span></li>
-      <li><span class="list-number">41.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283847836520"><span class="whatsapp-icon"></span> Wahyu Widodo</a></span></li>
-      <li><span class="list-number">42.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/628886516165"><span class="whatsapp-icon"></span> Nandiyani Plavia</a></span></li>
-      <li><span class="list-number">43.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281385484799"><span class="whatsapp-icon"></span> Azam Tufirial</a></span></li>
-      <li><span class="list-number">44.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6288212321632"><span class="whatsapp-icon"></span> Sutini</a></span></li>
-      <li><span class="list-number">45.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285212665587"><span class="whatsapp-icon"></span> 0852-1266-5587</a></span></li>
-      <li><span class="list-number">46.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6287754576713"><span class="whatsapp-icon"></span> Rohimatul Riskiyah</a></span></li>
-      <li><span class="list-number">47.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6287792945330"><span class="whatsapp-icon"></span> Wahyu Ardian</a></span></li>
-      <li><span class="list-number">48.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/62882022401235"><span class="whatsapp-icon"></span> Muh feri Setiawan</a></span></li>
-      <li><span class="list-number">49.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285249100474"><span class="whatsapp-icon"></span> Manda Echa</a></span></li>
-      <li><span class="list-number">50.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281243414793"><span class="whatsapp-icon"></span> Nikmatul Fidriya Hanapi</a></span></li>
-      <li><span class="list-number">51.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6289663617565"><span class="whatsapp-icon"></span> siem natalia</a></span></li>
-      <li><span class="list-number">52.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285777622081"><span class="whatsapp-icon"></span> Nurul A</a></span></li>
-      <li><span class="list-number">53.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283899660624"><span class="whatsapp-icon"></span> Syamsuddin</a></span></li>
-      <li><span class="list-number">54.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285158663051"><span class="whatsapp-icon"></span> Anissa TS</a></span></li>
-      <li><span class="list-number">55.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283898519122"><span class="whatsapp-icon"></span> Rizki Andriyan</a></span></li>
-      <li><span class="list-number">56.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285143275163"><span class="whatsapp-icon"></span> Lilis</a></span></li>
-      <li><span class="list-number">57.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283835747634"><span class="whatsapp-icon"></span> Muhammad F. M</a></span></li>
-      <li><span class="list-number">58.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6289649831572"><span class="whatsapp-icon"></span> Lisa</a></span></li>
-      <li><span class="list-number">59.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281373670048"><span class="whatsapp-icon"></span> Christian</a></span></li>
-      <li><span class="list-number">60.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6283194111193"><span class="whatsapp-icon"></span> Metty A.T</a></span></li>
-<li><span class="list-number">61.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6289524999384"><span class="whatsapp-icon"></span> 89524999384</a></span></li>
-<li><span class="list-number">62.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6288226521684"><span class="whatsapp-icon"></span> Semi</a></span></li>
-<li><span class="list-number">63.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281554480163"><span class="whatsapp-icon"></span> Aning Sujiati</a></span></li>
-<li><span class="list-number">64.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285813007407"><span class="whatsapp-icon"></span> Tumini</a></span></li>
-<li><span class="list-number">65.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6281917728753"><span class="whatsapp-icon"></span> 81917728753</a></span></li>
-<li><span class="list-number">66.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285847703498"><span class="whatsapp-icon"></span> M. Rizki A. S</a></span></li>
-<li><span class="list-number">67.</span> <span class="click-text">Click name to go to WhatsApp</span> <span class="contact-name"><a href="https://wa.me/6285883444895"><span class="whatsapp-icon"></span> Anatasya E. P</a></span></li>
-
-    </ol>
+  <div class="search-container">
+    <label for="contactId">Masukkan Nama Depan (huruf kecil):</label>
+    <input type="text" id="contactId" placeholder="Contoh: mardiyana">
+    <button onclick="searchContact()">Cari</button>
   </div>
 
+  <div class="contact-details" id="contactDetails">
+    <h2>Detail Kontak</h2>
+    <p><span id="contactName"></span></p>
+    <p><a id="whatsappLink" href="#" class="whatsapp-link">Buka WhatsApp</a></p>
+    <a id="danaKagetLink" href="#" class="dana-kaget-button" style="display:none;">Dana Kaget</a>
+  </div>
+
+  <p class="not-found" id="notFound">Kontak tidak ditemukan.</p>
+
   <script>
+    const danaKagetLink = "https://link.dana.id/danakaget?c=skz7euj2j&r=cAYM8h&orderId=20250506101214858515010300166998221522831"; 
+    const contactList = [
+      { name: "Mardiyana", id: "mardiyana", whatsapp: "6282180708285" },
+            { name: "ADMIN CIHUY", id: "admin1947", whatsapp: "(YEH NGAPAIN BUKA WA, LU KAN ADMIN, KADANG KADANG EMANG KALIAN WKWKWKWKKWKWK , CIHUYYYYYYY)" },
+      { name: "Lylia", id: "lylia", whatsapp: "6282246473590" },
+      { name: "Novendra", id: "novendra", whatsapp: "6285172414470" },
+      { name: "Muhammad Facrizal", id: "Facrizal<", whatsapp: "62895365782266" },
+      { name: "Erika", id: "erika", whatsapp: "6282286941996" },
+      { name: "Hael Putri", id: "hael", whatsapp: "6288247175598" },
+      { name: "Pia", id: "pia", whatsapp: "6283185748899" },
+      { name: "Eweuh Ngaran", id: "eweuh", whatsapp: "6281539353435" },
+      { name: "Indah Ela Febriyanti", id: "indah", whatsapp: "6285842049521" },
+      { name: "Putri Nadia", id: "putri", whatsapp: "6285654431944" },
+      { name: "Sugiarti", id: "sugiarti", whatsapp: "628975075355" },
+      { name: "Wiwi Yulia Safitri", id: "wiwi", whatsapp: "6285846812825" },
+      { name: "Iga Manik Kara", id: "iga", whatsapp: "6288802839652" },
+      { name: "Zakiyah Nasywa Zainuddin", id: "zakiyah", whatsapp: "6285245402970" },
+      { name: "Nyoman Ayu Indah", id: "nyoman", whatsapp: "6281315378642" },
+      { name: "Yudi Astuti", id: "yudi", whatsapp: "6281212585790" },
+      { name: "Lia Natalia", id: "lia", whatsapp: "628814028977" },
+      { name: "Majiedah Soiemah", id: "majiedah", whatsapp: "6283134509976" },
+      { name: "Siti Mutoharoh", id: "siti", whatsapp: "6285380636093" },
+      { name: "Sekar Hardiana", id: "sekar", whatsapp: "6289520884950" },
+      { name: "Citra Putri", id: "citra", whatsapp: "6282184184275" },
+      { name: "Dana Sakti", id: "dana", whatsapp: "6281237732540" },
+      { name: "Elvi Rahmi", id: "elvi", whatsapp: "6285371022838" },
+      { name: "Andini Fransisca", id: "andini", whatsapp: "6282289006533" },
+      { name: "Nathania Khairunnisa", id: "nathania", whatsapp: "628561770913" },
+      { name: "0878...3588", id: "0878", whatsapp: "6287841423588" },
+      { name: "Ento", id: "ento", whatsapp: "6289530091366" },
+      { name: "Natasya Marintan", id: "natasya", whatsapp: "6282181102890" },
+      { name: "Yani Ermayani", id: "yani", whatsapp: "6282121234894" },
+      { name: "Dian Anggraeni", id: "dian", whatsapp: "6283848597109" },
+      { name: "Husman Ardiansyah", id: "husman", whatsapp: "6282396445595" },
+      { name: "Yuda Hermawanto", id: "yuda", whatsapp: "6285645585186" },
+      { name: "Ronauli Friskila", id: "ronauli", whatsapp: "6282389971424" },
+      { name: "Nur Sri Rahayu", id: "nur", whatsapp: "62895320364775" },
+      { name: "Noorhayati", id: "noorhayati", whatsapp: "628385885705" },
+      { name: "Siti Holilah", id: "siti", whatsapp: "628990002098" },
+      { name: "Nurjanah Tuasikal", id: "nurjanah", whatsapp: "628567026028" },
+      { name: "Siti Nur Aini", id: "siti", whatsapp: "6281216157765" },
+      { name: "Nurminingsih", id: "nurminingsih", whatsapp: "6283897428337" },
+      { name: "Dian Agustini", id: "dian", whatsapp: "6283848597109" },
+      { name: "Wahyu Widodo", id: "wahyu", whatsapp: "6283847836520" },
+      { name: "Nandiyani Plavia", id: "nandiyani", whatsapp: "628886516165" },
+      { name: "Azam Tufirial", id: "azam", whatsapp: "6281385484799" },
+      { name: "Sutini", id: "sutini", whatsapp: "6288212321632" },
+      { name: "0852-1266-5587", id: "0852", whatsapp: "6285212665587" },
+      { name: "Rohimatul Riskiyah", id: "rohimatul", whatsapp: "6287754576713" },
+      { name: "Wahyu Ardian", id: "wahyu", whatsapp: "6287792945330" },
+      { name: "Muh feri Setiawan", id: "muh", whatsapp: "62882022401235" },
+      { name: "Manda Echa", id: "manda", whatsapp: "6285249100474" },
+      { name: "Nikmatul Fidriya Hanapi", id: "nikmatul", whatsapp: "6281243414793" },
+      { name: "siem natalia", id: "siem", whatsapp: "6289663617565" },
+      { name: "Nurul A", id: "nurul", whatsapp: "6285777622081" },
+      { name: "Syamsuddin", id: "syamsuddin", whatsapp: "6283899660624" },
+      { name: "Anissa TS", id: "anissa", whatsapp: "6285158663051" },
+      { name: "Rizki Andriyan", id: "rizki", whatsapp: "6283898519122" },
+      { name: "Lilis", id: "lilis", whatsapp: "6285143275163" },
+      { name: "Muhammad F. M", id: "muhammad", whatsapp: "6283835747634" },
+      { name: "Lisa", id: "lisa", whatsapp: "6289649831572" },
+      { name: "Christian", id: "christian", whatsapp: "6281373670048" },
+      { name: "Metty A.T", id: "metty", whatsapp: "6283194111193" },
+      { name: "89524999384", id: "9524", whatsapp: "6289524999384" },
+      { name: "Semi", id: "semi", whatsapp: "6288226521684" },
+      { name: "Aning Sujiati", id: "aning", whatsapp: "6281554480163" },
+      { name: "Tumini", id: "tumini", whatsapp: "6285813007407" },
+      { name: "Nana", id: "1917", whatsapp: "6281917728753" },
+      { name: "M. Rizki A. S", id: "Rizki", whatsapp: "6285847703498" },
+  { name: "Fitriani", id: "Fitriani", whatsapp: "6285259212646" },
+  { name: "Sarniti", id: "Sarniti", whatsapp: "6285559428544" },
+  { name: "Trisna A", id: "Trisna", whatsapp: "6289630832044" },
+  { name: "Jea A", id: "Jea", whatsapp: "6285711752428" },
+  { name: "Diana", id: "Diana", whatsapp: "6285150862057" },
+  { name: "Aryan H. P. U", id: "Aryan", whatsapp: "6282127840501" },
+  { name: "Robekka H. S", id: "Robekka", whatsapp: "6283178974455" },
+  { name: "Lia Muji H", id: "Lia", whatsapp: "6285659861856" },
+  { name: "Rusmi H", id: "Rusmi", whatsapp: "6285936196889" },
+  { name: "Kiki T. U", id: "Kiki", whatsapp: "6281277875311" },
+  { name: "Reva Ratnauli L. R", id: "Reva", whatsapp: "6281396481374" },
+  { name: "RISMA", id: "7080", whatsapp: "628895347080" },
+  { name: "Suryadi", id: "Suryadi", whatsapp: "6281373819159" },
+  { name: "Anatasya E. P", id: "Anatasya", whatsapp: "6285883444895" }
+
+
+    ];
+
     function openAdminList() {
       document.getElementById("adminOverlay").style.display = "flex";
     }
 
     function closeAdminList() {
       document.getElementById("adminOverlay").style.display = "none";
+    }
+
+    function searchContact() {
+      const contactIdInput = document.getElementById("contactId").value.toLowerCase();
+      const contactDetailsDiv = document.getElementById("contactDetails");
+      const contactNameSpan = document.getElementById("contactName");
+      const whatsappLinkA = document.getElementById("whatsappLink");
+      const danaKagetButtonA = document.getElementById("danaKagetLink");
+      const notFoundParagraph = document.getElementById("notFound");
+
+      const foundContact = contactList.find(contact => contact.id === contactIdInput);
+
+      if (foundContact) {
+        contactNameSpan.textContent = foundContact.name;
+        whatsappLinkA.href = `https://wa.me/${foundContact.whatsapp}`;
+        danaKagetButtonA.href = danaKagetLink;
+        contactDetailsDiv.style.display = "block";
+        danaKagetButtonA.style.display = "inline-block"; // Tampilkan tombol Dana Kaget
+        notFoundParagraph.style.display = "none";
+      } else {
+        contactDetailsDiv.style.display = "none";
+        danaKagetButtonA.style.display = "none"; // Sembunyikan tombol Dana Kaget
+        notFoundParagraph.style.display = "block";
+      }
     }
   </script>
 
