@@ -1,208 +1,156 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klaim Voucher</title>
+    <title>Hitung Volumetrik Paket</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://i.ibb.co/MDNW924P/1a0650310f716ee82009972a7a4d13bb.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #64b5f6, #4fc3f7);
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-            position: relative; /* Untuk memposisikan elemen loading */
         }
 
-        .voucher-card {
-            background-color: #fff;
+        .container {
+            background: rgba(0, 0, 0, 0.5); /* Hitam bening */
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 0, 0, 0.2);
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
-        }
-
-        .logo-placeholder {
-            background-color: #e0f7fa;
-            color: #00bcd4;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            margin: 0 auto 20px;
-            font-weight: bold;
+            width: 400px;
+            color: white; /* Warna teks agar terlihat di latar belakang hitam */
         }
 
         h1 {
-            color: #333;
+            color: white;
             margin-bottom: 20px;
-            font-size: 24px;
+            text-align: center;
         }
 
-        .input-group {
-            margin-bottom: 20px;
-            display: flex;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            overflow: hidden;
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+            text-align: left;
+        }
+
+        .form-group input[type="number"] {
             width: 100%;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
             box-sizing: border-box;
-        }
-
-        input[type="text"] {
-            padding: 10px 12px;
-            border: none;
-            flex-grow: 1;
-            font-size: 16px;
-            outline: none;
-            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
         }
 
         button {
-            background-color: #007bff;
+            background-color: #5cb85c;
             color: white;
-            padding: 10px 15px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 7px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s ease;
+            width: 100%;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #4cae4c;
         }
 
-        #message {
-            margin-top: 15px;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .note {
-            color: #777;
-            font-size: 12px;
-            margin-top: 15px;
-        }
-
-        /* Styling untuk video loading */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Latar belakang semi-transparan */
-            display: none; /* Awalnya disembunyikan */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000; /* Pastikan di atas elemen lain */
-            flex-direction: column;
-        }
-
-        .loading-video-container {
-            background-color: #fff;
-            border-radius: 8px;
+        #hasil {
+            margin-top: 30px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            border: 1px solid #555;
+            background-color: rgba(0, 0, 0, 0.7); /* Hitam bening untuk hasil */
+            border-radius: 4px;
         }
 
-        #loadingVideo {
-            width: 80%;
-            max-width: 300px;
-            height: auto;
-            border-radius: 4px;
-            margin-bottom: 10px;
+        #hasil h2 {
+            color: white;
+            margin-top: 0;
         }
 
-        .progress-bar-container {
-            width: 100%;
-            background-color: #f3f3f3;
-            border-radius: 4px;
-            overflow: hidden;
+        #hasil p {
+            color: white;
+            margin-bottom: 8px;
         }
 
-        .progress-bar {
-            background-color: #4CAF50;
-            height: 10px;
-            width: 0%;
-            border-radius: 4px;
-            transition: width 0.1s linear; /* Perubahan transisi agar terlihat berjalan */
+        #hasil strong {
+            font-weight: bold;
+            color: #ddd;
+        }
+
+        #hasil-semangat {
+            color: #ffeb3b;
+            font-style: italic;
+            margin-top: 15px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="voucher-card">
-        <div class="logo-placeholder">Cihuy</div>
-        <h1>The Eid al-Fitr holiday is celebrated by followers of the .... religion.</h1>
-        <div class="input-group">
-            <input type="text" id="voucherCode" placeholder="CRISTIAN"></div>
-            <button onclick="lihatHadiah()">Lihat Hadiah</button>
+    <div class="container">
+        <h1>Hitung Volumetrik Paket</h1>
+        <div class="form-group">
+            <label for="panjang">Panjang (Cm):</label>
+            <input type="number" id="panjang" name="panjang">
+        </div>
+        <div class="form-group">
+            <label for="lebar">Lebar (Cm):</label>
+            <input type="number" id="lebar" name="lebar">
+        </div>
+        <div class="form-group">
+            <label for="tinggi">Tinggi (Cm):</label>
+            <input type="number" id="tinggi" name="tinggi">
+        </div>
+        <button onclick="hitungVolumetrik()">Hitung</button>
 
-        <div id="message"></div>
-        <p class="note">Pastikan kode voucher yang Anda masukkan benar.</p>
-    </div>
-
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-video-container">
-            <video id="loadingVideo" src="https://h.top4top.io/m_3414xvhzj0.mp4"></video>
-            <div class="progress-bar-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
+        <div id="hasil" style="display:none;">
+            <h2>Hasil Perhitungan</h2>
+            <p><strong>Panjang:</strong> <span id="hasil-panjang"></span> Cm</p>
+            <p><strong>Lebar:</strong> <span id="hasil-lebar"></span> Cm</p>
+            <p><strong>Tinggi:</strong> <span id="hasil-tinggi"></span> Cm</p>
+            <p><strong>Volumetrik:</strong> <span id="hasil-volumetrik"></span> Kg</p>
+            <p><strong>Harga:</strong> Rp.<span id="hasil-harga"></span></p>
+            <p id="hasil-semangat">Semangat ya UTS-nya!</p>
         </div>
     </div>
 
     <script>
-        const voucherLinks = {
-            "ISLAM": "https://link.dana.id/danakaget?c=sc4ym5jtl&r=cAYM8h&orderId=20250508101214431915010300166998221854992",
-            "CIHUYCIHUY": "https://link.dana.id/danakaget?c=s59y6mskn&r=cAYM8h&orderId=20250507101214828715010300166998221685347",
-            "M3N4O5P6Q7R8S9ZEN": "https://link.dana.id/danakaget?c=svsv5kn7d&r=cAYM8h&orderId=20250501101214227715010300166998220560287",
-            // ... (daftar voucher lainnya)
-        };
+        function hitungVolumetrik() {
+            const panjang = parseFloat(document.getElementById("panjang").value);
+            const lebar = parseFloat(document.getElementById("lebar").value);
+            const tinggi = parseFloat(document.getElementById("tinggi").value);
 
-        const loadingOverlay = document.getElementById("loadingOverlay");
-        const loadingVideo = document.getElementById("loadingVideo");
-        const progressBar = document.getElementById("progressBar");
-        const messageDiv = document.getElementById("message");
-
-        function lihatHadiah() {
-            const voucherCodeInput = document.getElementById("voucherCode");
-            const voucherCode = voucherCodeInput.value.trim().toUpperCase();
-
-            if (voucherLinks.hasOwnProperty(voucherCode)) {
-                loadingOverlay.style.display = "flex";
-                loadingVideo.play(); // Memulai pemutaran video
-                progressBar.style.width = "0%"; // Reset progress bar
-
-                let progress = 0;
-                const interval = setInterval(() => {
-                    if (loadingVideo.duration) {
-                        progress = (loadingVideo.currentTime / loadingVideo.duration) * 100;
-                        progressBar.style.width = progress + "%";
-                    }
-                }, 100);
-
-                loadingVideo.onended = () => {
-                    clearInterval(interval);
-                    window.location.href = voucherLinks[voucherCode];
-                };
-            } else {
-                messageDiv.textContent = "Kode voucher tidak valid.";
-                messageDiv.style.color = "red";
+            if (isNaN(panjang) || isNaN(lebar) || isNaN(tinggi)) {
+                alert("Masukkan angka yang valid untuk panjang, lebar, dan tinggi.");
+                return;
             }
+
+            const volumetrik = (panjang * lebar * tinggi) / 1000;
+            const harga = Math.round(volumetrik * 3000);
+
+            document.getElementById("hasil-panjang").textContent = panjang;
+            document.getElementById("hasil-lebar").textContent = lebar;
+            document.getElementById("hasil-tinggi").textContent = tinggi;
+            document.getElementById("hasil-volumetrik").textContent = volumetrik.toFixed(1);
+            document.getElementById("hasil-harga").textContent = harga;
+
+            document.getElementById("hasil").style.display = "block";
         }
     </script>
 </body>
