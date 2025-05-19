@@ -1,482 +1,492 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>DAGET CIHUYYY 🤤 - Web Quiz Matematika</title>
+    <meta charset='UTF-8'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5'/>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+    <link rel="icon" type="image/svg+xml" href="https://feeldreams.github.io/main-icon.png">
+    <link rel="apple-touch-icon" href="https://feeldreams.github.io/main-icon.png">
+    <script src="https://htmlku.com/sekarangkamu/script2.js"></script>
+    <script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
+    <link rel="stylesheet" href="https://naraanimation.github.io/NaraAnimations/Nara.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <title>Aku Kangen Kalian - Script HTML feeldream.id</title>
+    <meta name="description" content="Script by Feeldream.id">
     <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: black;
-            margin: 0;
-            position: relative; /* Untuk positioning overlay salah */
-        }
-
-        .container {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            border-radius: 20px;
-            max-width: 80%;
-            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
-            text-align: center;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-
-        .logo {
-            max-width: 150px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        .question-container {
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .question-row {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 25px;
-        }
-
-        .question {
-            font-weight: bold;
-            margin-bottom: 5px;
-            text-align: left;
-        }
-
-        .answer-input-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .answer-input {
-            padding: 10px;
-            border: 1px solid #555;
-            border-radius: 4px;
-            width: 100%;
-            box-sizing: border-box;
-            background-color: #333;
-            color: white;
-        }
-
-        .answer-button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-left: 10px;
-        }
-
-        .answer-button:hover {
-            background-color: #0056b3;
-        }
-
-        .answer-button[disabled] {
-            background-color: #ccc;
-            cursor: not-allowed;
-            border: 1px solid #999;
-            color: #666;
-        }
-
-        #message {
-            margin-top: 15px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .hidden {
+        .sembunyi {
             display: none;
         }
-
-        .error {
+        .scaleUp {
+            transform: scale(1);
+            opacity: 1;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+        .scaleIn {
+            transform: scale(1);
+            opacity: 1;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+        .transition {
+            transition: all 0.5s ease-in-out;
+        }
+        .scale0 {
+            transform: scale(0);
+            opacity: 0;
+        }
+        .itim {
+            font-style: italic;
+        }
+        .med {
+            font-size: 1.5em;
+        }
+        .text-xl {
+            font-size: 1.25em;
+        }
+        .putihmerah {
             color: red;
         }
-
-        .success {
-            color: green;
+        .blocktext {
+            overflow-y: auto;
+            max-height: 300px; /* Atur tinggi maksimal sesuai kebutuhan */
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5); /* Contoh background semi-transparan */
+            border-radius: 5px;
         }
-
-        #success-overlay {
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .tombol {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        #svgheart {
+            width: 50px;
+            height: 50px;
+            fill: red;
+            transition: transform 0.3s ease-in-out;
+        }
+        #svgheart:hover {
+            transform: scale(1.2);
+        }
+        .lovein svg {
+            animation: none;
+            stroke: #ff0000;
+            stroke-width: 1.3;
+            fill: none;
+            width: 35px;
+            height: 35px;
+        }
+        .wp {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .wp img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .stiker {
+            position: absolute;
+            /* Atur posisi stiker sesuai kebutuhan */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        .heart-icon {
+            position: fixed;
+            color: red;
+            font-size: 1em;
+            animation: heartFall linear infinite;
+            top: -10vh;
+            z-index: -1;
+        }
+        @keyframes heartFall {
+            to {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+        }
+        #Tombol {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        #Tombol a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Warna Hijau untuk "Mau" */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+            transition: background-color 0.3s ease-in-out;
+        }
+        #Tombol a:hover {
+            background-color: #45a049;
+        }
+        #tolakteks {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transform: scale(1);
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1em;
+        }
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1001;
-            flex-direction: column;
-        }
-
-        #success-video-container {
-            max-width: 400px;
-            width: 90%;
-            margin-bottom: 10px;
-        }
-
-        #success-video {
-            width: 100%;
-            height: auto;
-        }
-
-        #success-text {
             color: white;
-            font-size: 18px;
-            margin-bottom: 5px;
-            text-align: center;
-        }
-
-        #loading-bar-container {
-            width: 200px;
-            height: 10px;
-            background-color: #333;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 5px;
-        }
-
-        #loading-bar {
-            width: 0%;
-            height: 100%;
-            background-color: #007bff;
-            border-radius: 5px;
-        }
-
-        #countdown-text {
-            color: white;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .locked {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        #wrong-answer-overlay {
-            position: fixed; /* Ubah menjadi fixed */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            flex-direction: column;
-            background-color: rgba(0, 0, 0, 0.5); /* Tambahkan latar belakang semi-transparan agar lebih terlihat */
-        }
-
-        #wrong-answer-image {
-            max-width: 200px;
-            width: 80%;
-            margin-bottom: 10px;
-            opacity: 0;
-            transition: opacity 0.5s ease-out;
-        }
-
-        #wrong-answer-text {
-            color: red;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        #wrong-answer-overlay.show {
             display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            font-size: 1.2em;
+            text-align: center;
         }
-
-        #wrong-answer-overlay.show #wrong-answer-image {
-            opacity: 1;
+        .loading-message {
+            margin-bottom: 20px;
+        }
+        .blocklove {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        #ket {
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        #lihatsc {
+            margin-top: 20px;
+            text-decoration: none;
+            color: yellow;
+            font-size: 1em;
+        }
+        #danaKagetButton {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            margin-top: 20px;
+        }
+        #linkDanaKaget {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #00bfff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+            transition: background-color 0.3s ease-in-out;
+        }
+        #linkDanaKaget:hover {
+            background-color: #0080ff;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://j.top4top.io/p_3425w9fmc0.jpg" alt="Logo" class="logo">
-        <h1>DAGET CIHUYYY 🤤 - Web Quiz Matematika</h1>
-        <p>Jawablah semua pertanyaan di bawah ini dengan benar (format angka untuk jawaban numerik).</p>
 
-        <div class="question-container">
-            <div class="question-row">
-                <div class="question">Soal 1: Berapa hasil dari 5 + 3?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer1">
-                    <button class="answer-button" data-question="1">Jawab</button>
-                </div>
-            </div>
+   <div class="overlay">
+    <div class="loading-message">Hai kamu!<br>Tunggu dulu ya..</div>
+     <div id="loveIn" class="blocklove">
+        <a href="https://www.feeldream.id/2023/01/script-feeldream.html?m=1#punyasesuatu" target="_blank" class="lovein">
+            <svg class='line' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+                <g transform='translate(2.550170, 3.550158)'>
+                    <path d='M0.371729633,8.89614246 C-0.701270367,5.54614246 0.553729633,1.38114246 4.07072963,0.249142462 C5.92072963,-0.347857538 8.20372963,0.150142462 9.50072963,1.93914246 C10.7237296,0.0841424625 13.0727296,-0.343857538 14.9207296,0.249142462 C18.4367296,1.38114246 19.6987296,5.54614246 18.6267296,8.89614246 C16.9567296,14.2061425 11.1297296,16.9721425 9.50072963,16.9721425 C7.87272963,16.9721425 2.09772963,14.2681425 0.371729633,8.89614246 Z'></path>
+                    <path d='M13.23843,4.013842 C14.44543,4.137842 15.20043,5.094842 15.15543,6.435842'></path>
+                </g>
+            </svg>
+        </a>
+        <p id="ket">Sentuh LOVEnya! 🤤</p>
+     </div>
+     <a id="lihatsc" style="font-size:1em;color:yellow" href="#"></a>
+   </div>
+   <audio src="https://feeldreams.github.io/audio/melody.mp3" id="linkmp3" class="sembunyi"></audio>
 
-            <div class="question-row">
-                <div class="question">Soal 2: Berapa hasil dari 10 - 4?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer2">
-                    <button class="answer-button" data-question="2">Jawab</button>
-                </div>
-            </div>
+  <section class="first" id="inisection">
+       <div class="wp"><img src="https://feeldreams.github.io/wp11.jpg" alt="Background 1"/></div>
+       <div id="first_stiker" class="stiker">
+        <img id="inistiker1" src="https://htmlku.com/0/panda/pusn.gif" alt="Stiker 1"/>
+        <img id="inistiker2" class="sembunyi" src="https://htmlku.com/0/panda/cilukba.gif" alt="Stiker 2"/>
+       </div>
 
-            <div class="question-row">
-                <div class="question">Soal 3: Berapa hasil dari 6 x 2?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer3">
-                    <button class="answer-button" data-question="3">Jawab</button>
-                </div>
-            </div>
+       <h1 id="teks1" class="scaleUp itim">Assalamualaikum!</h1>
+       <p id="teks3" class="scaleIn itim transition" style="font-size:1em">Udah bangun belum?<br>Aku kangen kalian yaaa<br><br><span class="text-xl">😊</span></p>
+       <h1 id="teks2" class="sembunyi">JEG MENYALA WI 🤤</h1>
 
-            <div class="question-row">
-                <div class="question">Soal 4: Berapa hasil dari 15 / 3?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer4">
-                    <button class="answer-button" data-question="4">Jawab</button>
-                </div>
-            </div>
+       <div id="sentuh" class="menu">
+        <a class='tombol' onclick="tes()">
+          <svg id="svgheart" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+              <g transform='translate(2.550170, 3.550158)'>
+                  <path d='M0.371729633,8.89614246 C-0.701270367,5.54614246 0.553729633,1.38114246 4.07072963,0.249142462 C5.92072963,-0.347857538 8.20372963,0.150142462 9.50072963,1.93914246 C10.7237296,0.0841424625 13.0727296,-0.343857538 14.9207296,0.249142462 C18.4367296,1.38114246 19.6987296,5.54614246 18.6267296,8.89614246 C16.9567296,14.2061425 11.1297296,16.9721425 9.50072963,16.9721425 C7.87272963,16.9721425 2.09772963,14.2681425 0.371729633,8.89614246 Z'></path>
+                  <path d='M13.23843,4.013842 C14.44543,4.137842 15.20043,5.094842 15.15543,6.435842'></path>
+              </g>
+          </svg>
+        </a>
+        <svg class='line sembunyi' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(5.000000, 8.500000)'><path d='M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0' ></path></g></svg>
+       </div>
+  </section>
 
-            <div class="question-row">
-                <div class="question">Soal 5: Berapa hasil dari 2 pangkat 3?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer5">
-                    <button class="answer-button" data-question="5">Jawab</button>
-                </div>
-            </div>
+  <section>
+      <div class="wp"><img src="https://htmlku.com/hitungan/pict.jpg" alt="Background 2"/></div>
+      <div class="stiker" style="margin-top:0;transform:scale(0)" id="second_stiker">
+        <img id="inistiker3" src="https://htmlku.com/0/panda/ketawa2.gif" alt="Stiker 3"/>
+        <img id="inistiker4" class="sembunyi" src="https://htmlku.com/0/panda/ledekin.gif" alt="Stiker 4"/>
+      </div>
 
-            <div class="question-row">
-                <div class="question">Soal 6: Berapa hasil dari akar kuadrat 9?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer6">
-                    <button class="answer-button" data-question="6">Jawab</button>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 7: Berapa hasil dari (4 + 2) x 3?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer7">
-                    <button class="answer-button" data-question="7">Jawab</button>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 8: Berapa nilai Pi (dibulatkan menjadi dua desimal)?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer8">
-                    <button class="answer-button" data-question="8">Jawab</button>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 9: Berapa hasil dari 10% dari 50?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer9">
-                    <button class="answer-button" data-question="9">Jawab</button>
-                </div>
-            </div>
-
-            <div class="question-row">
-                <div class="question">Soal 10: Berapa hasil dari 1 + 1 + 1 + 1 + 1?</div>
-                <div class="answer-input-container">
-                    <input type="text" class="answer-input" id="answer10">
-                    <button class="answer-button" data-question="10">Jawab</button>
-                </div>
-            </div>
-        </div>
-
-        <p id="message" class="hidden"></p>
-
-        </div>
-
-    <div id="success-overlay">
-        <div id="success-video-container">
-            <video id="success-video" controls autoplay muted>
-                <source src="https://e.top4top.io/m_3381upp550.mp4" type="video/mp4">
-                Browser Anda tidak mendukung pemutar video.
-            </video>
-        </div>
-        <p id="success-text"><strong>SELAMAT! SEMUA JAWABAN BENAR....</strong><br>Jangan Lupa Gabung Group <strong>DAGET CIHUYYY 🤤</strong> ya, dan join chanel RANDOM</p>
-        <div id="loading-bar-container">
-            <div id="loading-bar"></div>
-
-        </div>
-        <p id="countdown-text">Iklan... (24)</p>
+      <h1 id="textsec2first" class="scaleUp itim med">udah mandi belum?<br>Mau aku temenin? 🫣</h1>
+      <p id="tolakteks" class="itim">MANDI CEPET , KAMU BAU! 😝</p>
+      <div id="Tombol">
+        <a id="By" onClick="fungsimau()">💌 Mau</a>
+        <a id="Bn" onClick="btn='Bn';fungsibaru(btn)">Nanti Dulu</a>
+      </div>
+  </section>
+  <section>
+    <div class="wp"><img src="https://i.ibb.co.com/Lkk2d3q/94907a80790d230452e92245b2041f1a.jpg" alt="Background 3"/></div>
+    <div class="stiker" style="margin-top:0;transform:scale(0)" id="third_stiker">
+      <img id="inistiker5" src="https://htmlku.com/0/panda/panah.gif" alt="Stiker 5"/>
+      <img id="inistiker6" class="sembunyi" src="https://htmlku.com/0/panda/muah.gif" alt="Stiker 6"/>
     </div>
 
-    <div id="wrong-answer-overlay">
-        <img id="wrong-answer-image" src="https://l.top4top.io/p_3382yabr30.png" alt="Jawaban Salah">
-        <div id="wrong-answer-text">JAWABAN SALAH</div>
+    <div id="scroll-container" class="blocktext txt transition scale0">
+      <p id="textsec3" class="anm itim text-md"><b id="tekstolak">Jangan ditunda-tunda ya! 😉</b><b id="teksterima">Alhamdulillah! 🥰 Semoga harimu menyenangkan ya! 🤗</b><br><br>Semangat terus ya<br>aktivitasnya hari ini! ✨<br><br>Sebagai penyemangat,<br>ada sedikit rezeki nih buat kamu 🫢<br><br>Semoga bermanfaat yaaa! 😊</p>
     </div>
+    <div id="danaKagetButton" style="opacity: 0; transform: scale(0.8); transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; margin-top: 20px;">
+        <a id="linkDanaKaget" href="https://link.dana.id/danakaget?c=sn5ep3qfu&r=cAYM8h&orderId=20250519101214284515010300166998223280620" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #00bfff; color: white; text-decoration: none; border-radius: 5px; cursor: pointer; border: none; font-size: 1em; transition: background-color 0.3s ease-in-out;">🎁 DANA KAGET</a>
+    </div>
+  </section>
+<script>
+pesanwhatsapp = "";
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const answerInputs = {
-                1: document.getElementById('answer1'),
-                2: document.getElementById('answer2'),
-                3: document.getElementById('answer3'),
-                4: document.getElementById('answer4'),
-                5: document.getElementById('answer5'),
-                6: document.getElementById('answer6'),
-                7: document.getElementById('answer7'),
-                8: document.getElementById('answer8'),
-                9: document.getElementById('answer9'),
-                10: document.getElementById('answer10')
-            };
-            const answerButtons = {};
-            for (let i = 1; i <= 10; i++) {
-                answerButtons[i] = document.querySelector(`.answer-button[data-question="${i}"]`);
-            }
-            const messageElement = document.getElementById('message');
-            const wrongAnswerOverlay = document.getElementById('wrong-answer-overlay');
-            const wrongAnswerImage = document.getElementById('wrong-answer-image');
-            const wrongAnswerTextElement = document.getElementById('wrong-answer-text');
-            const correctAnswers = {
-                1: "8",
-                2: "6",
-                3: "12",
-                4: "5",
-                5: "8",
-                6: "3",
-                7: "18",
-                8: "3.14",
-                9: "5",
-                10: "5"
-            };
-            const redirectUrls = {
-                1: "https://link.dana.id/danakaget?c=s2c38kv3x&r=cAYM8h&orderId=20250518101214784515010300166998223329421",
-                2: "https://link.dana.id/danakaget?c=s7t3whqg5&r=cAYM8h&orderId=20250518101214782515010300166998223359105",
-                3: "https://link.dana.id/danakaget?c=sd7dpaq8w&r=cAYM8h&orderId=20250518101214747715010300166998223349783",
-                4: "https://link.dana.id/danakaget?c=svhbf2s6y&r=cAYM8h&orderId=20250518101214120515010300166998223338270",
-                5: "https://link.dana.id/danakaget?c=suwcyjegt&r=cAYM8h&orderId=20250518101214280015010300166998223261678",
-                6: "https://link.dana.id/danakaget?c=sdr6e6shd&r=cAYM8h&orderId=20250518101214422715010300166998223353203",
-                7: "https://link.dana.id/danakaget?c=scxe2h94p&r=cAYM8h&orderId=20250518101214842015010300166998223242008",
-                8: "https://link.dana.id/danakaget?c=sc4q5qrpa&r=cAYM8h&orderId=20250518101214100515010300166998223308571",
-                9: "https://link.dana.id/danakaget?c=sv6qgled3&r=cAYM8h&orderId=20250518101214438915010300166998223333932",
-                10: "https://link.dana.id/danakaget?c=s8h6crd4r&r=cAYM8h&orderId=20250518101214484715010300166998223283153"
-            };
-            const successOverlay = document.getElementById('success-overlay');
-            const successVideo = document.getElementById('success-video');
-            const loadingBar = document.getElementById('loading-bar');
-            const countdownText = document.getElementById('countdown-text');
-            const totalLoadingTime = 20000; // Durasi loading lebih singkat untuk setiap soal
-            const loadingIntervalTime = 100;
-            let elapsedTime = 0;
-            let countdownInterval;
-            const wrongAnswerDelay = 5000; // 5 detik delay setelah salah jawab
+const body = document.querySelector("body"); audio = new Audio('' + linkmp3.src);
+/* START Hati Berjatuhan */
+function berjatuhan() {const heart = document.createElement("div");heart.innerHTML = "<svg class='line spin' style='opacity:.4;' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='translate(2.550170, 3.550158)'><path d='M0.371729633,8.89614246 C-0.701270367,5.54614246 0.553729633,1.38114246 4.07072963,0.249142462 C5.92072963,-0.347857538 8.20372963,0.150142462 9.50072963,1.93914246 C10.7237296,0.0841424625 13.0727296,-0.343857538 14.9207296,0.249142462 C18.4367296,1.38114246 19.6987296,5.54614246 18.6267296,8.89614246 C16.9567296,14.2061425 11.1297296,16.9721425 9.50072963,16.9721425 C7.87272963,16.9721425 2.09772963,14.2681425 0.371729633,8.89614246 Z'></path><path d='M13.23843,4.013842 C14.44543,4.137842 15.20043,5.094842 15.15543,6.435842'></path></g></svg>";heart.className = "heart-icon";heart.style.left = (Math.random() * 95) + "vw";heart.style.animationDuration = (Math.random() * 3) + 2 + "s";document.body.appendChild(heart);}
+setInterval(function() {var heartArr = document.querySelectorAll(".heart-icon");if (heartArr.length > 100) {heartArr[0].remove();}}, 100);
+/* END Hati Berjatuhan */
+  initextsec2first = textsec2first.innerHTML;textsec2first.innerHTML="";
+  function mulaitextseco(){
+    new TypeIt("#textsec2first", {
+      strings: ["" + initextsec2first], startDelay: 50, speed: 30, /* deff 55 */ cursor: true,
+      afterComplete: function(){
+        textsec2first.innerHTML = initextsec2first;
+        setTimeout(function() {Tombol.style="opacity:1;transform: scale(1);";}, 200);
+      },
+    }).go();
+  }
+  function fungsimau(){
+    if(tolakTrue == false){
+        tekstolak.innerHTML = "";
+        initextsec3 = textsec3.innerHTML;
+    }
 
-            successVideo.controls = false;
+    textsec3.innerHTML="";
+    window.scrollBy({top: tinggi,behavior: 'smooth'});
+    skrg++;
+    scrollContainer.style="transform: scale(1)";
+    setTimeout(function() {third_stiker.style="margin-top:0px;margin-bottom:15px;transform:scale(1);transition:all .9s ease"}, 500);
+    new TypeIt("#textsec3", {
+      strings: ["" + initextsec3], startDelay: 700, speed: 27, cursor: true,
+      afterComplete: function(){
+          textsec3.innerHTML = initextsec3;
+          third_stiker.style.transform = "scale(0)";
+          setTimeout(function() {
+              third_stiker.style.transform = "scale(1)";
+              inistiker5.src = inistiker6.src;
+          }, 300);
+          setInterval(berjatuhan,200);
+          clearInterval(scrollInterval);
 
-            function formatTime(totalSeconds) {
-                const hours = Math.floor(totalSeconds / 3600);
-                const minutes = Math.floor((totalSeconds % 3600) / 60);
-                const seconds = Math.floor(totalSeconds % 60);
-                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }
+          // Tampilkan tombol DANA KAGET setelah 2 detik
+          setTimeout(function() {
+              document.getElementById("danaKagetButton").style.opacity = 1;
+              document.getElementById("danaKagetButton").style.transform = "scale(1)";
+          }, 2000);
+      },
+    }).go();
+  }
 
-            function showWrongAnswer() {
-                wrongAnswerOverlay.classList.add('show');
-                wrongAnswerImage.style.opacity = 1; // Langsung munculkan gambar
+  fungsi=0;fungsiklik=0;skrg=1;iniaja=0;
+  function tes(){
+    sentuh.style="margin-top:100px;transform:scale(2.3)";
+    setTimeout(function() {
+          if(fungsi==0){
+            window.scrollBy({top: tinggi,behavior: 'smooth'});
+            fungsi = 1;skrg++;
+            if(skrg==2){fungsi=0;setTimeout(mulaitextseco,500);setTimeout(function() {second_stiker.style="margin-top:0px;transform:scale(.9);transition:all .7s ease";}, 500);}
+          }
+    }, 100);
+  }
+  function smn(){fungsi=0;initom.style="";}
+  function muncultombol(){fungtom=1;Tombol.style="opacity:1;transform:scale(1)";}
+  function muncultombol2(){Tombol2.style="opacity:1;transform:scale(1)";}
 
-                setTimeout(() => {
-                    wrongAnswerOverlay.classList.remove('show');
-                    wrongAnswerImage.style.opacity = 0; // Fade out gambar
-                }, 2000);
-            }
+function aksiakhir() {
+  if(fungsiklik==0){
+    fungsiklik=1;
+    setTimeout(katajudul,100)
+  }
+}
+function katajudul(){
+      new TypeIt("#judulakhir", {
+      strings: ["" + teksjudulakhir], startDelay: 50, speed: 50, cursor: true,
+      afterComplete: function(){
+          judulakhir.innerHTML = teksjudulakhir;
+          setTimeout(katakata,400);
+      },}).go();
+}
+function katakata(){
+      new TypeIt("#kalimatakhir", {
+      strings: ["" + tekskalimatakhir], startDelay: 50, speed: 48, cursor: true,
+      afterComplete: function(){
+          kalimatakhir.innerHTML = tekskalimatakhir;
+          //judulakhir.style="opacity:0;transform:scale(0);";
+          setTimeout(teksmuncul,20);
+          setInterval(berjatuhan,200);
+          setTimeout(kataakhir,700);
+      },}).go();
+}
+function teksmuncul(){
+    stikerakhir.style="opacity:0;transform:scale(0)";
+    setTimeout(gantifotoakhir,400);
+}
+function jjteksnim(){judulakhir.style.animation="rto .8s infinite alternate";}
+function gantifotoakhir(){stikerakhir.src=stikerakhir2.src;stikerakhir.style="";}
+function kataakhir(){
+      new TypeIt("#palingakhir", {
+      strings: ["" + tekspalingakhir], startDelay: 50, speed: 50, cursor: true,
+      afterComplete: function(){
+          palingakhir.innerHTML = tekspalingakhir;
+          setTimeout(muncultombol3,500);
+      },}).go();
+}
+function muncultombol3(){fungtom2=1;TombolWA.style="opacity:1;transform:scale(1)";}
+function menuju(){if(fungtom2==1){window.location = "https://api.whatsapp.com/send?phone=&text=" + pesanwhatsapp;}}
+tinggi = inisection.offsetHeight;
+function tentukantinggi(){tinggi = inisection.offsetHeight;}
+setInterval(tentukantinggi,200);
+console.log(tinggi);
+function keatas(){window.scrollTo(0, 0);}
+setTimeout(function(){
+  window.scrollTo(0, 0);
+  setTimeout(keatas,500);
 
-            function startSuccessSequence(redirectUrl) {
-                return new Promise((resolve) => {
-                    successOverlay.style.display = 'flex';
-                    successVideo.muted = false;
-                    successVideo.play();
-                    successText.textContent = 'SELAMAT! JAWABAN BENAR...'; // Pesan selamat singkat
+  var overlay = document.querySelector(".loading-message");
+  overlay.style.display = "none";
+  var tomlv = document.querySelector(".blocklove");
+  tomlv.style.display = "flex";
+},700);
+first_stiker.style="transform: scale(0)";
+sentuh.style="transform: scale(0)";
+function showSentuh(){sentuh.style="transform: scale(1.2);";}
+vgantiTeks1 = 0;
+function gantiTeks1(){
+    if(vgantiTeks1 == 0){gantiFoto1();teks1.style="transform: scale(.3);transition:all .75s ease";teks3.style="transform: scale(0);";vgantiTeks1++;setTimeout(gantiTeks1,300);}
+    else {vgantiTeks1 = teks2.innerHTML;teks1.innerHTML = "";teks3.style="display:none";teks1.style="transform: scale(.9);transition:all .75s ease";gantiTeks1nimasi();}
+}
+function gantiFoto1(){
+    first_stiker.style="transform: scale(0);";
+    setTimeout(function() {
+        first_stiker.style.transform = "scale(1)";
+        inistiker1.src = inistiker2.src;
+    }, 300);
+}
+function gantiTeks1nimasi(){
+      new TypeIt("#teks1", {
+      strings: ["" + vgantiTeks1], startDelay: 10, speed: 35, cursor: true,
+      afterComplete: function(){
+          teks1.innerHTML = vgantiTeks1;
+          showSentuh();
+      },}).go();
+   }
+var sudahKlik = false;
+sudahKlik = true;
+document.getElementById('loveIn').innerHTML = '<style>.lovein svg{animation:none;stroke:#ff0000;stroke-width:1.3;fill:none;width:35px;height:35px}</style><label class="lovein"><svg class="line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g transform="translate(2.550170, 3.550158)"><path d="M0.371729633,8.89614246 C-0.701270367,5.54614246 0.553729633,1.38114246 4.07072963,0.249142462 C5.92072963,-0.347857538 8.20372963,0.150142462 9.50072963,1.93914246 C10.7237296,0.0841424625 13.0727296,-0.343857538 14.9207296,0.249142462 C18.4367296,1.38114246 19.6987296,5.5414246 18.6267296,8.89614246 C16.9567296,14.2061425 11.1297296,16.9721425 9.50072963,16.9721425 C7.87272963,16.9721425 2.09772963,14.2681425 0.371729633,8.89614246 Z"></path><path d="M13.23843,4.013842 C14.44543,4.137842 15.20043,5.094842 15.15543,6.435842"></path></g></svg></label><p id="ket">Sentuh LOVEnya!</p>';
+document.getElementById("loveIn").onclick = function() {
+    if (sudahKlik) {
+      audio.play();
+      lihatsc.style.display="none";
+      document.querySelector(".overlay").style.display = "none";
 
-                    let width = 0;
-                    elapsedTime = 0; // Reset waktu
-                    const loadingInterval = setInterval(function() {
-                        elapsedTime += loadingIntervalTime;
-                        width = (elapsedTime / totalLoadingTime) * 100;
-                        loadingBar.style.width = width + '%';
+      first_stiker.style="transform: scale(1)";
+      setTimeout(function() {teks3.style.transform = "scale(1)";}, 300);
+      setTimeout(gantiTeks1, 3000);
+      ScrollReveal({ reset: true });
+      ScrollReveal().reveal(".show-once", { reset: false});
+      ScrollReveal().reveal(".title", {delay: 20, duration: 1500,origin: "top",distance: "50px", easing: "cubic-bezier(0.5, 0, 0, 1)", rotate: { x: 20, z: -10 }});
+      ScrollReveal().reveal(".fade-in", {delay: 200, duration: 2400,move: 0});
+      ScrollReveal().reveal(".scaleUp", {delay: 100, duration: 1200, scale: .5, move: 0});
+      ScrollReveal().reveal(".flip", {delay: 200, duration: 2000, rotate: { x: 20, z: 20}});
+      ScrollReveal().reveal(".slide-right", {duration: 1000,origin: "left",distance: "300px",easing: "ease-in-out"});
+      ScrollReveal().reveal(".slide-up", {duration: 1000, origin: "bottom", distance: "100px", easing: "cubic-bezier(.37,.01,.74,1)", opacity: 0, scale: 0.5});
+    } else {
 
-                        const remainingTime = Math.ceil((totalLoadingTime - elapsedTime) / 1000);
-                        countdownText.textContent = `Memuat... (${remainingTime})`;
+    }
+}
+  const scrollContainer = document.getElementById("scroll-container");
+  const textContainer = document.getElementById("textsec2");
+  function autoScroll() {scrollContainer.scrollTop += 10;}
+  const scrollInterval = setInterval(autoScroll, 50);
+  jumlahKlik = 0;sudah=false;let jumlahSkala = 1;tolakTrue=false
+  function fungsibaru(btn) {
+    if(jumlahKlik == 3){
+        teksterima.innerHTML = "";
+        initextsec3 = textsec3.innerHTML;
+        tolakTrue=true;
+        fungsimau();
+        jumlahKlik=0;
+    } else {
 
-                        if (elapsedTime >= totalLoadingTime) {
-                            clearInterval(loadingInterval);
-                            successOverlay.style.display = 'none'; // Sembunyikan overlay setelah selesai
-                            resolve();
-                        }
-                    }, loadingIntervalTime);
-                });
-            }
+    var tombol = document.getElementById("" + btn);
+    var tombolParent = tombol.parentNode;
+    var tombolPosisiX = Math.floor(Math.random() * 50) + 1;
+    var tombolPosisiY = Math.floor(Math.random() * 75) + 1;
+    var rotasiAcak = Math.floor(Math.random() * 360);
+    tombol.style.position = "relative";
+    tombol.style.left = tombolPosisiX + "px";
+    tombol.style.top = tombolPosisiY + "px";
+    tombol.style.transform = "rotate(" + rotasiAcak + "deg)";
+    tombolParent.appendChild(tombol);
+    // Perbesar tombol By
+      var tombolBy = document.getElementById("By");
+      tombolBy.style.transform = `scale(${1 + jumlahSkala * 0.2})`;
 
-            const successText = document.getElementById('success-text');
-            const answerButtonStates = {};
-            for (let i = 1; i <= 10; i++) {
-                answerButtonStates[i] = true; // Tombol aktif di awal
-            }
-            const wrongAnswerTimeouts = {};
-
-            for (let i = 1; i <= 10; i++) {
-                answerButtons[i].addEventListener('click', async function() {
-                    const button = this;
-                    const questionNumber = parseInt(button.dataset.question);
-                    const userAnswer = answerInputs[questionNumber].value.toLowerCase().replace(/\s/g, '');
-                    const correctAnswer = correctAnswers[questionNumber];
-
-                    if (!answerButtonStates[questionNumber]) {
-                        return; // Jika tombol sedang dalam masa tunggu, jangan lakukan apa pun
-                    }
-
-                    button.disabled = true; // Nonaktifkan tombol setelah diklik
-
-                    if (userAnswer === correctAnswer) {
-                        messageElement.textContent = `Jawaban Soal ${questionNumber} Benar! Mengarahkan...`;
-                        messageElement.className = "success";
-                        messageElement.classList.remove("hidden");
-                        answerInputs[questionNumber].disabled = true;
-
-                        await startSuccessSequence(redirectUrls[questionNumber]);
-                        window.location.href = redirectUrls[questionNumber];
-                    } else {
-                        showWrongAnswer();
-                        messageElement.textContent = `Jawaban Soal ${questionNumber} Salah. Coba lagi.`;
-                        messageElement.className = "error";
-                        messageElement.classList.remove("hidden");
-                        answerButtonStates[questionNumber] = false; // Set tombol menjadi tidak aktif
-                        let remainingTime = wrongAnswerDelay / 1000;
-                        button.textContent = `Tunggu (${remainingTime})`;
-                        const countdownInterval = setInterval(() => {
-                            remainingTime--;
-                            button.textContent = `Tunggu (${remainingTime})`;
-                            if (remainingTime <= 0) {
-                                clearInterval(countdownInterval);
-                                button.disabled = false; // Aktifkan kembali tombol setelah delay
-                                answerButtonStates[questionNumber] = true; // Aktifkan kembali status tombol
-                                button.textContent = 'Jawab'; // Kembalikan teks tombol
-                            }
-                        }, 1000);
-                    }
-                });
-            }
-        });
-
-    </script>
-
+      jumlahKlik++;
+      jumlahSkala++;
+    tolakteks.style="transform:scale(1)";
+    if(sudah==false){
+      sudah=true;
+      second_stiker.style.transform = "scale(0)";
+      setTimeout(function() {
+          second_stiker.style.transform = "scale(.9)";
+          inistiker3.src = inistiker4.src;
+      }, 300);
+    }
+    }
+  }
+</script>
 </body>
 </html>
+
 
