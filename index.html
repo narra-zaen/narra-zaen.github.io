@@ -1,424 +1,450 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<meta charset="utf-8">
-  <title>DAGET CIHUY PRIVATE</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #192A56;
-      margin: 0;
-      padding-top: 80px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      color: #fff;
-      font-size: 1.1em;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Datang!</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Sembunyikan scrollbar awal */
+            font-family: sans-serif;
+            background-color: grey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
 
-    /* Navbar Styling */
-    .navbar {
-      background-color: #1E3A8A;
-      color: #fff;
-      padding: 18px 25px;
-      width: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 100;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center; /* Vertically center items */
-    }
+        #welcome-screen {
+            background-image: url(https://b.top4top.io/p_3433kgd800.png);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+            z-index: 2; /* Pastikan di atas main-content saat belum aktif */
+            position: absolute; /* agar bisa disembunyikan sepenuhnya */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .navbar-logo {
-      max-height: 200px; /* Set a maximum height for the logo */
-      margin-right: 15px; /* Add spacing between the logo and text */
-    }
+        #welcome-logo {
+            width: 100px; /* Sesuaikan ukuran logo */
+            height: auto;
+            margin-bottom: 20px;
+        }
 
-    .navbar-title {
-      font-size: 4em;
-      font-weight: bold;
-      letter-spacing: 1px;
-      color: #64b5f6;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    /* Tombol Admin Fixed Bottom Left (Gambar Bergerak) */
-    .admin-button-container {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      z-index: 101;
-      padding: 0; /* Hapus padding karena sekarang gambar */
-    }
+        #enter-button {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
 
-    .admin-button-image {
-      width: 320px; /* Sesuaikan ukuran gambar sesuai keinginan */
-      height: auto;
-      cursor: pointer;
-      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-      border-radius: 50%; /* Agar terlihat seperti tombol bulat */
-      transition: box-shadow 0.3s ease;
-      animation: moveButton 3s infinite alternate; /* Animasi bergerak */
-    }
+        #enter-button:hover {
+            background-color: #0056b3;
+        }
 
-    .admin-button-image:hover {
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    }
+        #main-content {
+            display: none; /* Sembunyikan konten utama sampai tombol ditekan */
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: auto; /* Izinkan scrollbar setelah masuk */
+        }
 
-    /* Keyframes untuk animasi bergerak */
-    @keyframes moveButton {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(20px); /* Sesuaikan jarak gerakan */
-      }
-    }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: black;
+            padding: 10px 10px; /* Tambah padding samping */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
 
-    /* Daftar Admin Fixed Center */
-    .admin-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 102;
-      justify-content: center;
-      align-items: center;
-    }
+        .navbar-logo {
+            width: 40px; /* Sesuaikan ukuran logo navbar */
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 10px;
+            background-color: #eee; /* Placeholder color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            animation: blink 1s infinite alternate;
+        }
 
-    .admin-list {
-      background-color: #1E3A8A;
-      color: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      position: relative;
-      font-size: 1.1em;
-    }
+        .navbar-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
 
-    .admin-list h2 {
-      color: #64b5f6;
-      margin-bottom: 15px;
-      font-size: 1.5em;
-    }
+        @keyframes blink {
+            from { opacity: 1; }
+            to { opacity: 0.7; }
+        }
 
-    .admin-list ul {
-      list-style: none;
-      padding: 0;
-    }
+        .navbar video {
+            width: auto; /* Sesuaikan lebar video agar proporsional */
+            max-height: 60px; /* Batasi tinggi video di navbar */
+            object-fit: cover;
+        }
 
-    .admin-list li {
-      margin-bottom: 8px;
-    }
+        .content {
+            margin-top: 80px; /* Beri ruang agar konten tidak tertutup navbar */
+            padding: 20px;
+            text-align: left;
+            position: relative; /* Untuk positioning tombol WA */
+            padding-bottom: 80px; /* Ruang untuk tombol WA */
+        }
 
-    .close-button {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.4em;
-      cursor: pointer;
-      opacity: 0.8;
-      transition: opacity 0.3s ease;
-    }
+        /* Styling untuk Formulir */
+        .telegram-form-container {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2); /* Bayangan lebih kuat */
+            max-width: 300px;
+            width: 90%; /* Responsif */
+            position: fixed; /* Fixed position */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Precisely center */
+            z-index: 1001; /* Di atas segalanya */
+            display: none; /* Awalnya sembunyi */
+            animation: popIn 0.3s ease-out forwards; /* Animasi muncul */
+        }
 
-    .close-button:hover {
-      opacity: 1;
-    }
+        @keyframes popIn {
+            from { opacity: 0; transform: translate(-50%, -40%) scale(0.9); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
 
-    h1 {
-      color: #64b5f6;
-      margin-bottom: 25px;
-      text-align: center;
-      font-size: 2.8em;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-      letter-spacing: 1px;
-      margin-top: 30px;
-    }
+        .telegram-form-container h3 {
+            margin-top: 0;
+            color: #333;
+        }
 
-    .search-container {
-      background-color: #1E3A8A;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      margin-bottom: 20px;
-      width: 95%;
-      max-width: 600px;
-    }
+        .telegram-form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
 
-    .search-container label {
-      display: block;
-      margin-bottom: 10px;
-      font-size: 1.2em;
-      color: #ddd;
-    }
+        .telegram-form-container input {
+            width: calc(100% - 20px); /* Kurangi padding */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
+        }
 
-    .search-container input[type="text"] {
-      padding: 12px;
-      border: none;
-      border-radius: 5px;
-      width: 80%;
-      font-size: 1em;
-      background-color: #294A86;
-      color: #fff;
-    }
+        .telegram-form-container button[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
 
-    .search-container button {
-      padding: 12px 20px;
-      background-color: #64b5f6;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: background-color 0.3s ease;
-      margin-top: 15px;
-    }
+        .telegram-form-container button[type="submit"]:hover {
+            background-color: #218838;
+        }
 
-    .search-container button:hover {
-      background-color: #4288ca;
-    }
+        #form-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: none; /* Awalnya sembunyi */
+        }
 
-    .contact-details {
-      background-color: #1E3A8A;
-      padding: 25px;
-      border-radius: 15px;
-      width: 95%;
-      max-width: 800px;
-      margin-top: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      display: none; /* Initially hidden */
-      text-align: center;
-      font-size: 1.2em;
-    }
+        #form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
 
-    .contact-details h2 {
-      color: #64b5f6;
-      margin-bottom: 15px;
-      font-size: 1.8em;
-    }
+        #form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
 
-    .contact-details p {
-      margin-bottom: 10px;
-    }
+        /* Tombol Join Group WA */
+        #join-group-wa-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366; /* Warna hijau WhatsApp */
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 50px; /* Bentuk kapsul */
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            z-index: 999; /* Pastikan di atas konten tapi di bawah form */
+        }
 
-    .whatsapp-link {
-      display: inline-block;
-      padding: 12px 25px;
-      background-color: #25d366;
-      color: #fff;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
+        #join-group-wa-button:hover {
+            background-color: #1DA851;
+            transform: translateY(-3px);
+        }
 
-    .whatsapp-link:hover {
-      background-color: #128c7e;
-    }
-
-    .not-found {
-      color: #ff6b6b;
-      font-size: 1.2em;
-      margin-top: 20px;
-      display: none;
-    }
-
-    /* Tombol Dana Kaget */
-    .dana-kaget-button {
-      display: inline-block;
-      padding: 12px 25px;
-      background-color: #ff9800; /* Warna oranye khas Dana Kaget */
-      color: #fff;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-      margin-top: 15px;
-      cursor: pointer;
-    }
-
-    .dana-kaget-button:hover {
-      background-color: #f57c00;
-    }
-  </style>
+        /* Tombol Close untuk Formulir */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            color: #555;
+            cursor: pointer;
+        }
+        .close-button:hover {
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-
-  <div class="navbar">
-    <img src="https://d.top4top.io/p_3405habtq0.png" alt="DAGET CIHUY Logo" class="navbar-logo">
-    <span class="navbar-title">LIST AKUN DANA</span>
-  </div>
-
-  <div class="admin-button-container">
-    <img src="https://a.top4top.io/p_3405s07n00.png" alt="Admin" class="admin-button-image" onclick="openAdminList()">
-  </div>
-
-  <div class="admin-overlay" id="adminOverlay">
-    <div class="admin-list">
-      <h2>Admin DAGET CIHUY</h2>
-      <ul>
-        <li><a href="https://wa.me/6285945546715">Unta Top 1</a></li>
-        <li><a href="https://wa.me/6285732270872">Nurizahr</a></li>
-        <li><a href="https://wa.me/6285711374861">Zaen</a></li>
-        <li><a href="https://wa.me/6282213079521">silvie</a></li>
-        <li><a href="https://wa.me/6285974923299">Tia</a></li>
-        <li><a href="https://wa.me/6281268712898">Rama</a></li>
-        <li><a href="https://wa.me/6289696032797">alfandy</a></li>
-        <li><a href="https://link.dana.id/danakaget?c=sg5eh2vp3&r=cAYM8h&orderId=20250506190905880915010300166998220212472">KLAIM DANA KAGET</a></li>
-        <button class="close-button" onclick="closeAdminList()">🐫 tutup unta</button>
-      </ul>
+    <div id="welcome-screen">
+        <img id="welcome-logo" src="https://cloudkuimages.guru/uploads/images/683403d35c8cc.jpg" alt="Logo Daget Cihuy">
+        <h1>Selamat Datang!</h1>
+        <h1>Di Group Daget Cihuy</h1>
+        <p>₦₳Ɽ₳ Ⱬ₳Ɇ₦</p>
+        <button id="enter-button">DAGET CIHUY</button>
     </div>
-  </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  <h1>Cari Kontak</h1>
 
-  <div class="search-container">
-    <label for="contactId">Masukkan Nama Depan (huruf kecil):</label>
-    <input type="text" id="contactId" placeholder="Contoh: mardiyana">
-    <button onclick="searchContact()">Cari</button>
-  </div>
-
-  <div class="contact-details" id="contactDetails">
-    <h2>Detail Kontak</h2>
-    <p><span id="contactName"></span></p>
-    <p><a id="whatsappLink" href="#" class="whatsapp-link">Buka WhatsApp</a></p>
-    <a id="danaKagetLink" href="#" class="dana-kaget-button" style="display:none;">Dana Kaget</a>
-  </div>
-
-  <p class="not-found" id="notFound">Kontak tidak ditemukan.</p>
-
-  <script>
-    const danaKagetLink = "https://link.dana.id/danakaget?c=skz7euj2j&r=cAYM8h&orderId=20250506101214858515010300166998221522831"; 
-    const contactList = [
-      { name: "Mardiyana", id: "mardiyana", whatsapp: "6282180708285" },
-            { name: "ADMIN CIHUY", id: "admin1947", whatsapp: "(YEH NGAPAIN BUKA WA, LU KAN ADMIN, KADANG KADANG EMANG KALIAN WKWKWKWKKWKWK , CIHUYYYYYYY)" },
-      { name: "Lylia", id: "lylia", whatsapp: "6282246473590" },
-      { name: "Novendra", id: "novendra", whatsapp: "6285172414470" },
-      { name: "Muhammad Facrizal", id: "Facrizal<", whatsapp: "62895365782266" },
-      { name: "Erika", id: "erika", whatsapp: "6282286941996" },
-      { name: "Hael Putri", id: "hael", whatsapp: "6288247175598" },
-      { name: "Pia", id: "pia", whatsapp: "6283185748899" },
-      { name: "Eweuh Ngaran", id: "eweuh", whatsapp: "6281539353435" },
-      { name: "Indah Ela Febriyanti", id: "indah", whatsapp: "6285842049521" },
-      { name: "Putri Nadia", id: "putri", whatsapp: "6285654431944" },
-      { name: "Sugiarti", id: "sugiarti", whatsapp: "628975075355" },
-      { name: "Wiwi Yulia Safitri", id: "wiwi", whatsapp: "6285846812825" },
-      { name: "Iga Manik Kara", id: "iga", whatsapp: "6288802839652" },
-      { name: "Zakiyah Nasywa Zainuddin", id: "zakiyah", whatsapp: "6285245402970" },
-      { name: "Nyoman Ayu Indah", id: "nyoman", whatsapp: "6281315378642" },
-      { name: "Yudi Astuti", id: "yudi", whatsapp: "6281212585790" },
-      { name: "Lia Natalia", id: "lia", whatsapp: "628814028977" },
-      { name: "Majiedah Soiemah", id: "majiedah", whatsapp: "6283134509976" },
-      { name: "Siti Mutoharoh", id: "siti", whatsapp: "6285380636093" },
-      { name: "Sekar Hardiana", id: "sekar", whatsapp: "6289520884950" },
-      { name: "Citra Putri", id: "citra", whatsapp: "6282184184275" },
-      { name: "Dana Sakti", id: "dana", whatsapp: "6281237732540" },
-      { name: "Elvi Rahmi", id: "elvi", whatsapp: "6285371022838" },
-      { name: "Andini Fransisca", id: "andini", whatsapp: "6282289006533" },
-      { name: "Nathania Khairunnisa", id: "nathania", whatsapp: "628561770913" },
-      { name: "0878...3588", id: "0878", whatsapp: "6287841423588" },
-      { name: "Ento", id: "ento", whatsapp: "6289530091366" },
-      { name: "Natasya Marintan", id: "natasya", whatsapp: "6282181102890" },
-      { name: "Yani Ermayani", id: "yani", whatsapp: "6282121234894" },
-      { name: "Dian Anggraeni", id: "dian", whatsapp: "6283848597109" },
-      { name: "Husman Ardiansyah", id: "husman", whatsapp: "6282396445595" },
-      { name: "Yuda Hermawanto", id: "yuda", whatsapp: "6285645585186" },
-      { name: "Ronauli Friskila", id: "ronauli", whatsapp: "6282389971424" },
-      { name: "Nur Sri Rahayu", id: "nur", whatsapp: "62895320364775" },
-      { name: "Noorhayati", id: "noorhayati", whatsapp: "628385885705" },
-      { name: "Siti Holilah", id: "siti", whatsapp: "628990002098" },
-      { name: "Nurjanah Tuasikal", id: "nurjanah", whatsapp: "628567026028" },
-      { name: "Siti Nur Aini", id: "siti", whatsapp: "6281216157765" },
-      { name: "Nurminingsih", id: "nurminingsih", whatsapp: "6283897428337" },
-      { name: "Dian Agustini", id: "dian", whatsapp: "6283848597109" },
-      { name: "Wahyu Widodo", id: "wahyu", whatsapp: "6283847836520" },
-      { name: "Nandiyani Plavia", id: "nandiyani", whatsapp: "628886516165" },
-      { name: "Azam Tufirial", id: "azam", whatsapp: "6281385484799" },
-      { name: "Sutini", id: "sutini", whatsapp: "6288212321632" },
-      { name: "0852-1266-5587", id: "0852", whatsapp: "6285212665587" },
-      { name: "Rohimatul Riskiyah", id: "rohimatul", whatsapp: "6287754576713" },
-      { name: "Wahyu Ardian", id: "wahyu", whatsapp: "6287792945330" },
-      { name: "Muh feri Setiawan", id: "muh", whatsapp: "62882022401235" },
-      { name: "Manda Echa", id: "manda", whatsapp: "6285249100474" },
-      { name: "Nikmatul Fidriya Hanapi", id: "nikmatul", whatsapp: "6281243414793" },
-      { name: "siem natalia", id: "siem", whatsapp: "6289663617565" },
-      { name: "Nurul A", id: "nurul", whatsapp: "6285777622081" },
-      { name: "Syamsuddin", id: "syamsuddin", whatsapp: "6283899660624" },
-      { name: "Anissa TS", id: "anissa", whatsapp: "6285158663051" },
-      { name: "Rizki Andriyan", id: "rizki", whatsapp: "6283898519122" },
-      { name: "Lilis", id: "lilis", whatsapp: "6285143275163" },
-      { name: "Muhammad F. M", id: "muhammad", whatsapp: "6283835747634" },
-      { name: "Lisa", id: "lisa", whatsapp: "6289649831572" },
-      { name: "Christian", id: "christian", whatsapp: "6281373670048" },
-      { name: "Metty A.T", id: "metty", whatsapp: "6283194111193" },
-      { name: "89524999384", id: "9524", whatsapp: "6289524999384" },
-      { name: "Semi", id: "semi", whatsapp: "6288226521684" },
-      { name: "Aning Sujiati", id: "aning", whatsapp: "6281554480163" },
-      { name: "Tumini", id: "tumini", whatsapp: "6285813007407" },
-      { name: "Nana", id: "1917", whatsapp: "6281917728753" },
-      { name: "M. Rizki A. S", id: "Rizki", whatsapp: "6285847703498" },
-  { name: "Fitriani", id: "Fitriani", whatsapp: "6285259212646" },
-  { name: "Sarniti", id: "Sarniti", whatsapp: "6285559428544" },
-  { name: "Trisna A", id: "Trisna", whatsapp: "6289630832044" },
-  { name: "Jea A", id: "Jea", whatsapp: "6285711752428" },
-  { name: "Diana", id: "Diana", whatsapp: "6285150862057" },
-  { name: "Aryan H. P. U", id: "Aryan", whatsapp: "6282127840501" },
-  { name: "Robekka H. S", id: "Robekka", whatsapp: "6283178974455" },
-  { name: "Lia Muji H", id: "Lia", whatsapp: "6285659861856" },
-  { name: "Rusmi H", id: "Rusmi", whatsapp: "6285936196889" },
-  { name: "Kiki T. U", id: "Kiki", whatsapp: "6281277875311" },
-  { name: "Reva Ratnauli L. R", id: "Reva", whatsapp: "6281396481374" },
-  { name: "RISMA", id: "7080", whatsapp: "628895347080" },
-  { name: "Suryadi", id: "Suryadi", whatsapp: "6281373819159" },
-  { name: "Anatasya E. P", id: "Anatasya", whatsapp: "6285883444895" }
+    <div id="main-content">
+        <div class="navbar">
+            <div class="navbar-logo">
+                <img src="https://cloudkuimages.guru/uploads/images/683403d35c8cc.jpg">
+            </div>
+            <button id="mute-toggle" style="background:none; border:none; color:white; font-size:1.5em; cursor:pointer; margin-left: 10px;">🔊</button>
+            <video id="background-video" preload="auto" loop muted playsinline>
+                <source src="https://cloudkuimages.guru/uploads/videos/6832cfac56ca4.mp4" type="video/mp4">
+                Browser Anda tidak mendukung tag video.
+            </video>
+            <h3>🔊</h3>
+            <div class="navbar-logo">
+                <img src="https://cloudkuimages.guru/uploads/images/683403d35c8cc.jpg" alt="Logo Kanan">
+            </div>
+        </div>
+        <div class="content">
+            <h2>SELAMAT DATANG DI GROUP DAGET CIHUYYY 📣</h2>
+            <p>Selamat Datang di Grup Kami! 🎉</p>
 
 
-    ];
+            <h3>Aturan Utama: 🚨</h3>
+            <ul>
+                <li>Dilarang Promosi 🚫</li>
+                <li>Dilarang Tag Story WhatsApp 🚫</li>
+                <li>Hormati Anggota Lain 🤝</li>
+                <li>Jangan Spam 🚫</li>
+                <li>Dilarang pake bahasa vulgar 🚫</li>
+                <li><strong>Foto/Vid/Vn 1x lihat</strong></li>
+            </ul>
 
-    function openAdminList() {
-      document.getElementById("adminOverlay").style.display = "flex";
-    }
+            <h3>Keuntungan: 🎁</h3>
+            <ul>
+                <li>Dana Kaget Setiap Hari 🎉</li>
+                <li>Informasi Penting 📢</li>
+                <li>Komunitas Solid 👫</li>
+            </ul>
 
-    function closeAdminList() {
-      document.getElementById("adminOverlay").style.display = "none";
-    }
+            <h3>Ajaklah Berbagi: 🤝</h3>
+            <ul>
+                <li>Saling berbagi dana kaget dengan anggota lain</li>
+                <li>Ucapkan terima kasih kepada pemberi dana kaget 🙏, minimal react ♥️</li>
+            </ul>
+            <p>Mari kita jaga grup ini nyaman dan aman! 🌈 Jika ada pertanyaan, hubungi admin.</p>
+                <br><br><br>                <br>
+                
+            <button id="join-group-wa-button">JOIN GROUP WA</button>
 
-    function searchContact() {
-      const contactIdInput = document.getElementById("contactId").value.toLowerCase();
-      const contactDetailsDiv = document.getElementById("contactDetails");
-      const contactNameSpan = document.getElementById("contactName");
-      const whatsappLinkA = document.getElementById("whatsappLink");
-      const danaKagetButtonA = document.getElementById("danaKagetLink");
-      const notFoundParagraph = document.getElementById("notFound");
+            <div class="telegram-form-container" id="telegram-form-popup">
+                <button class="close-button" id="close-form-button">&times;</button>
+                <br><br><br>
+                <h3>JOIN GROUP? ISI DATA FORMULIR DI BAWAH</h3>
+                <form id="telegram-form">
+                    <label for="nama">Nama Lengkap:</label>
+                    <input type="text" id="nama" name="nama" required>
 
-      const foundContact = contactList.find(contact => contact.id === contactIdInput);
+                    <label for="nama_dana">Nama Akun DANA:</label>
+                    <input type="text" id="nama_dana" name="nama_dana" required>
 
-      if (foundContact) {
-        contactNameSpan.textContent = foundContact.name;
-        whatsappLinkA.href = `https://wa.me/${foundContact.whatsapp}`;
-        danaKagetButtonA.href = danaKagetLink;
-        contactDetailsDiv.style.display = "block";
-        danaKagetButtonA.style.display = "inline-block"; // Tampilkan tombol Dana Kaget
-        notFoundParagraph.style.display = "none";
-      } else {
-        contactDetailsDiv.style.display = "none";
-        danaKagetButtonA.style.display = "none"; // Sembunyikan tombol Dana Kaget
-        notFoundParagraph.style.display = "block";
-      }
-    }
-  </script>
+                    <label for="whatsapp">Nomor WhatsApp:</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" pattern="62\d{9,14}" placeholder="Contoh: 628xxxxx" required>
+                    <small>Format: diawali kode negara (misal: 62) tanpa spasi atau tanda hubung. Pastikan nomor yang diinput adalah nomor yang akan digabungkan ke grup.</small>
+                    <br><br>
 
+                    <label for="whatsapp_teman">Nomor WhatsApp Teman yang Mengajak:</label>
+                    <input type="tel" id="whatsapp_teman" name="whatsapp_teman" pattern="62\d{9,14}" placeholder="Contoh: 628xxxx">
+                    <small>harus cantumkan no yg ajak kmu, kalo ga cantum kan ga akan kita invite</small><br><br><small>JANGAN LUPA KIRIM SCRENSHOT AKUN DANA SAAT KAMU DI ARAHKAN KE WHATSAPP</small>
+                    <br>
+
+                    <button type="submit">KIRIM KE CIHUY</button>
+                    <div id="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const enterButton = document.getElementById('enter-button');
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const mainContent = document.getElementById('main-content');
+        const backgroundVideo = document.getElementById('background-video');
+        const muteToggleButton = document.getElementById('mute-toggle');
+
+        const telegramForm = document.getElementById('telegram-form');
+        const formMessage = document.getElementById('form-message');
+        const joinGroupWaButton = document.getElementById('join-group-wa-button');
+        const telegramFormPopup = document.getElementById('telegram-form-popup');
+        const closeFormButton = document.getElementById('close-form-button');
+
+        // **PERINGATAN SANGAT PENTING:**
+        // TOKEN BOT INI TERLIHAT JELAS DI KODE HTML ANDA.
+        // INI ADALAH RISIKO KEAMANAN SANGAT TINGGI!
+        // SIAPAPUN BISA MENYALAHGUNAKAN BOT ANDA JIKA MENGETAHUI TOKEN INI.
+        // SOLUSI YANG AMAN ADALAH MENGGUNAKAN SERVERLESS FUNCTION (BACKEND RINGAN).
+        const botToken = "7863353249:AAGeLK7vgDRaqXrdL6dLLSmogSyySPjda7k";
+        const telegramChatId = "-4634384561"; // Chat ID for Telegram bot
+        const whatsappAdminNumber = "6281400741528"; // Admin WhatsApp number
+
+        enterButton.addEventListener('click', () => {
+            welcomeScreen.style.display = 'none';
+            mainContent.style.display = 'block';
+            document.body.style.overflow = 'auto';
+
+            backgroundVideo.play().then(() => {
+                backgroundVideo.muted = false;
+                muteToggleButton.textContent = '🔊';
+            }).catch(error => {
+                console.error("Video autoplay atau unmute dicegah:", error);
+                alert("Video mungkin tidak dapat otomatis terputar dengan suara karena kebijakan browser. Silakan klik ikon speaker di navbar untuk mengaktifkan suara.");
+                backgroundVideo.play().catch(() => {});
+                backgroundVideo.muted = true;
+                muteToggleButton.textContent = '🔇';
+            });
+        });
+
+        muteToggleButton.addEventListener('click', () => {
+            if (backgroundVideo.muted) {
+                backgroundVideo.muted = false;
+                muteToggleButton.textContent = '🔊';
+            } else {
+                backgroundVideo.muted = true;
+                muteToggleButton.textContent = '🔇';
+            }
+        });
+
+        window.addEventListener('load', () => {
+            backgroundVideo.load();
+        });
+
+        joinGroupWaButton.addEventListener('click', () => {
+            telegramFormPopup.style.display = 'block';
+        });
+
+        closeFormButton.addEventListener('click', () => {
+            telegramFormPopup.style.display = 'none';
+        });
+
+        telegramForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            formMessage.style.display = 'none';
+            formMessage.className = ''; // Bersihkan kelas pesan sebelumnya
+
+            const nama = document.getElementById('nama').value;
+            const namaDana = document.getElementById('nama_dana').value; // Get the new DANA account name
+            const whatsapp = document.getElementById('whatsapp').value;
+            const whatsappTeman = document.getElementById('whatsapp_teman').value;
+
+            if (!nama || !namaDana || !whatsapp) { // Added namaDana to validation
+                formMessage.textContent = 'Nama Lengkap, Nama Akun DANA, dan Nomor WhatsApp wajib diisi.';
+                formMessage.className = 'error';
+                formMessage.style.display = 'block';
+                return;
+            }
+
+            const messageText = `
+*Pendaftaran Anggota Baru Daget Cihuy*
+
+╭─⬣「 *✰ 𝐂𝐢𝐡𝐮𝐲 ✯* 」
+│ 𝐍𝐚𝐦𝐚 : ${nama}
+│ 𝐍𝐚𝐦𝐚 𝐚𝐤𝐮𝐧 𝐝𝐚𝐧𝐚 : ${namaDana}
+│ 𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 : ${whatsapp}
+│ 𝐃𝐢 𝐚𝐣𝐚K 𝐨𝐥𝐞𝐡 :  ${whatsappTeman}
+╰────────────⬣
+
+𝐇𝐢 𝐤𝐚𝐤, 𝐚𝐤𝐮 𝐦𝐚𝐮 𝐦𝐚𝐬𝐮𝐤 𝐠𝐫𝐮𝐩 𝐝𝐚𝐠𝐞𝐭 𝐜𝐢𝐡𝐮𝐲
+
+            `;
+
+            // --- Send to Telegram Bot ---
+            try {
+                const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+                const response = await fetch(telegramApiUrl, {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ chat_id: telegramChatId, text: messageText, parse_mode: "Markdown" })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Gagal mengirim ke Telegram: ${response.status} - ${errorText}`);
+                }
+
+                formMessage.textContent = 'Data berhasil dikirim ke Telegram! Membuka WhatsApp...';
+                formMessage.className = 'success';
+                telegramForm.reset();
+
+                // --- Open WhatsApp Chat ---
+                // Encode the message text for the URL
+                const encodedMessage = encodeURIComponent(messageText);
+                const whatsappUrl = `https://wa.me/${whatsappAdminNumber}?text=${encodedMessage}`;
+                window.open(whatsappUrl, '_blank'); // Open in a new tab
+
+            } catch (error) {
+                console.error('Error sending form:', error);
+                formMessage.textContent = `Terjadi kesalahan saat mengirim formulir: ${error.message}.`;
+                formMessage.className = 'error';
+            } finally {
+                formMessage.style.display = 'block';
+            }
+        });
+       
+    </script>
 </body>
 </html>
-
