@@ -3,65 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sabar Dulu Ya!</title>
-    <meta name="description" content="Halaman web yang mengarahkan ke WhatsApp dan kemudian menampilkan pesan refresh.">
-    <meta name="keywords" content="whatsapp, langsung, chat, dana kaget, sabar, refresh">
-    <meta name="author" content="AI Assistant">
+    <title>Lacak Banyak Kode Kuis Dana Kaget</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            background-image: url(https://j.top4top.io/p_3424u4fl50.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             margin: 0;
-            background-color: #f8f9fa;
+            transition: background-color 0.3s ease;
         }
         .container {
-            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7); /* Hitam semi-transparan (RGBA) */
             padding: 30px;
-            background-color: #ffffff;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 400px;
+            margin: 20px;
+            color: white; /* Warna teks di dalam kontainer agar terlihat */
         }
-        .loading-text {
-            font-size: 1.2em;
-            color: #007bff;
+        h1 {
+            color: #ffca28; /* Warna kuning untuk judul */
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        textarea {
+            padding: 10px;
+            border: 1px solid #b2dfdb;
+            border-radius: 6px;
             margin-bottom: 15px;
+            width: 250px;
+            height: 60px;
+            font-size: 15px;
+            color: #212121; /* Warna teks input */
+            background-color: rgba(255, 255, 255, 0.8); /* Latar belakang input sedikit transparan */
         }
-        .refresh-text {
-            font-size: 2.5em;
-            color: #28a745;
+        textarea::placeholder {
+            color: #9e9e9e;
+        }
+        button {
+            background-color: #ffca28;
+            color: #212121;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #fbc02d;
+        }
+        #linkContainer {
+            margin-top: 25px;
+            text-align: center;
+        }
+        h3 {
+            color: #fbc02d; /* Warna kuning untuk judul hasil */
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .link-button {
+            display: inline-block;
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-bottom: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        .link-button:hover {
+            background-color: #43a047;
+        }
+        .error {
+            color: #e57373;
+            font-style: italic;
+            margin-top: 8px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #linkContainer.show {
+            animation: fadeIn 0.5s ease-out forwards;
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <p class="loading-text">Sebentar ya, mengarahkan ke WhatsApp...</p>
-        <p class="refresh-text" style="display: none;">Sabar woi 🤣</p>
+        <h1>MASUKAN KODE</h1>
+        <textarea id="daftarKode" placeholder="MASUKAN KODE"></textarea>
+        <button onclick="buatDaftarTautan()">UBAH JADI LINK DAGET</button>
+        <div id="linkContainer">
+            <h3>Tautan untuk Dicoba:</h3>
+            <div id="result"></div>
+        </div>
     </div>
 
-    <script type="text/javascript">
-        // URL WhatsApp
-        var whatsappUrl = "https://wa.me/62882005036283?text=Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=s9paeba9b&r=cAYM8h&orderId=20250413101214038315010300166998217466964%0ATerkadang malam itu gelap, semoga harimu menyenangkan";
+    <script>
+        const daftarKodeInput = document.getElementById("daftarKode");
+        const buatTautanButton = document.querySelector("button");
+        const linkContainerDiv = document.getElementById("linkContainer");
+        const resultDiv = document.getElementById("result");
 
-        // Waktu tunda sebelum refresh (dalam milidetik)
-        var delay = 5000;
+        function buatDaftarTautan() {
+            const daftarKodeText = daftarKodeInput.value;
+            const kodeArray = daftarKodeText.split(/[\n,]+/);
+            let daftarTautanHTML = '';
 
-        // Mengarahkan ke WhatsApp
-        window.location.href = whatsappUrl;
+            if (kodeArray.length > 0 && daftarKodeText.trim() !== "") {
+                kodeArray.forEach(kode => {
+                    const kodeTrimmed = kode.trim();
+                    if (kodeTrimmed) {
+                        const linkLengkap = "https://link.dana.id/kaget?c=" + kodeTrimmed;
+                        daftarTautanHTML += `<a href="${linkLengkap}" class="link-button" target="_blank" rel="noopener noreferrer">KLAIM DANA KAGET🎁</a>`;
+                    }
+                });
+                resultDiv.innerHTML = daftarTautanHTML;
+                linkContainerDiv.classList.add('show');
+                linkContainerDiv.style.display = 'block';
+                buatTautanButton.style.display = 'none';
+            } else {
+                resultDiv.innerHTML = '<p class="error">Silakan masukkan setidaknya satu kode.</p>';
+                linkContainerDiv.classList.remove('show');
+                linkContainerDiv.style.display = 'none';
+                buatTautanButton.style.display = 'block';
+            }
+        }
 
-        // Setelah waktu tunda, tampilkan teks refresh dan refresh halaman
-        setTimeout(function() {
-            document.querySelector('.loading-text').style.display = 'none';
-            document.querySelector('.refresh-text').style.display = 'block';
-            // Anda bisa menghapus baris di bawah jika tidak ingin refresh otomatis setelah menampilkan "Sabar woi 🤣"
-            // setTimeout(function() {
-            //     window.location.reload();
-            // }, 3000); // Refresh lagi setelah 3 detik menampilkan "Sabar woi 🤣" (opsional)
-        }, delay);
+        document.addEventListener('DOMContentLoaded', () => {
+            linkContainerDiv.style.display = 'none';
+        });
     </script>
-
 </body>
 </html>
