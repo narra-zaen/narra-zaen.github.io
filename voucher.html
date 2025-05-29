@@ -3,105 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kirim Quotes Anda</title>
+    <title>Kirim Ucapan Ultah & Kado (Pilih Penerima)</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffe0f0; /* Pink muda untuk suasana ultah */
             display: flex;
+            flex-direction: column; /* Mengatur item secara vertikal */
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f0f0f0;
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
         }
-        .container {
-            width: 100%;
-            max-width: 400px;
-            background-color: #fff;
-            border: 2px solid #333;
-            padding: 30px;
+        .main-title {
+            color: #ff1493;
+            font-size: 2.5em;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-        .header {
+        .selection-buttons {
+            display: flex;
+            gap: 20px; /* Jarak antar tombol */
+            margin-bottom: 40px;
+        }
+        .selection-buttons button {
+            background-color: #8a2be2; /* Ungu cerah */
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px; /* Sangat bulat */
+            cursor: pointer;
+            font-size: 1.5em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .selection-buttons button:hover {
+            background-color: #6a1aab; /* Ungu lebih gelap */
+            transform: translateY(-3px); /* Efek melayang lebih tinggi */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+            border: 3px solid #ff69b4;
+            display: none; /* Sembunyikan formulir secara default */
+            animation: fadeIn 0.5s ease-in-out; /* Animasi muncul */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            text-align: center;
+            color: #ff1493;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .form-group {
             margin-bottom: 20px;
         }
-        .line {
-            border-top: 1px solid #000;
-            margin: 10px 0;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8a2be2;
+            font-weight: bold;
+            font-size: 1.1em;
         }
-        h1 {
-            font-size: 2em;
-            margin: 0;
-            color: #333;
-        }
+        input[type="text"],
         textarea {
             width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 12px;
+            border: 2px solid #ffa07a;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: #fffafa;
+        }
+        textarea {
             resize: vertical;
-            min-height: 100px;
-            font-size: 1em;
+            min-height: 120px;
         }
-        button {
-            background-color: #25D366; /* Warna hijau WhatsApp */
+        button[type="submit"] {
+            background-color: #25D366;
             color: white;
-            padding: 12px 20px;
+            padding: 15px 25px;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease;
+            width: 100%;
+            font-size: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-        button:hover {
+        button[type="submit"]:hover {
             background-color: #1DA851;
+            transform: translateY(-2px);
+        }
+        .emoji {
+            font-size: 1.5em;
+            vertical-align: middle;
+            margin-right: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="line"></div>
-            <h1>QUOTES</h1>
-            <div class="line"></div>
-        </div>
+    <h1 class="main-title">selamay ulang tahun kaka ku yg cantik!</h1>
 
-        <textarea id="quoteInput" placeholder="Ketik quotes Anda di sini..."></textarea>
-<p><i>bikin quetes dapet daget 5p</i></p>
-        <button onclick="kirimKeWhatsApp()">Kirim ke WhatsApp</button>
+    <div class="selection-buttons">
+        <button id="btnAnggi"><span class="emoji">🎁</span> Untuk Anggi</button>
+        <button id="btnTamara"><span class="emoji">🎁</span> Untuk Tamara</button>
+    </div>
+
+    <div id="formAnggi" class="container">
+        <h2><span class="emoji">🎉</span> Kirim Ucapan Ultah & Kado untuk Anggi <span class="emoji">🎁</span></h2>
+        <form id="whatsappFormAnggi">
+            <div class="form-group">
+                <label for="namaPengirimAnggi"><span class="emoji">👤</span> Nama Anda (Pengirim):</label>
+                <input type="text" id="namaPengirimAnggi" name="namaPengirimAnggi" placeholder="Contoh: Budi" required>
+            </div>
+            <div class="form-group">
+                <label for="ucapanAnggi"><span class="emoji">💌</span> Ucapan Ulang Tahun Anda:</label>
+                <textarea id="ucapanAnggi" name="ucapanAnggi" placeholder="Contoh: Selamat ulang tahun Anggi! Semoga panjang umur dan bahagia selalu."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="kadoLinkAnggi"><span class="emoji">🔗</span> Link Kado Virtual (misal: Dana Kaget):</label>
+                <input type="text" id="kadoLinkAnggi" name="kadoLinkAnggi" placeholder="Tempel link Dana Kaget atau kado virtual di sini">
+            </div>
+            <button type="submit"><span class="emoji">📲</span> Kirim ke Anggi via WhatsApp</button>
+        </form>
+    </div>
+
+    <div id="formTamara" class="container">
+        <h2><span class="emoji">🎉</span> Kirim Ucapan Ultah & Kado untuk Tamara <span class="emoji">🎁</span></h2>
+        <form id="whatsappFormTamara">
+            <div class="form-group">
+                <label for="namaPengirimTamara"><span class="emoji">👤</span> Nama Anda (Pengirim):</label>
+                <input type="text" id="namaPengirimTamara" name="namaPengirimTamara" placeholder="Contoh: Budi" required>
+            </div>
+            <div class="form-group">
+                <label for="ucapanTamara"><span class="emoji">💌</span> Ucapan Ulang Tahun Anda:</label>
+                <textarea id="ucapanTamara" name="ucapanTamara" placeholder="Contoh: Selamat ulang tahun Tamara! Semoga panjang umur dan bahagia selalu."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="kadoLinkTamara"><span class="emoji">🔗</span> Link Kado Virtual (misal: Dana Kaget):</label>
+                <input type="text" id="kadoLinkTamara" name="kadoLinkTamara" placeholder="Tempel link Dana Kaget atau kado virtual di sini">
+            </div>
+            <button type="submit"><span class="emoji">📲</span> Kirim ke Tamara via WhatsApp</button>
+        </form>
     </div>
 
     <script>
-        function kirimKeWhatsApp() {
-            const quote = document.getElementById('quoteInput').value;
-            const nomorWhatsApp = '6285711374861'; // Ganti dengan nomor WhatsApp Anda (tanpa tanda + atau spasi)
+        // Ambil elemen tombol dan formulir
+        const btnAnggi = document.getElementById('btnAnggi');
+        const btnTamara = document.getElementById('btnTamara');
+        const formAnggi = document.getElementById('formAnggi');
+        const formTamara = document.getElementById('formTamara');
 
-            if (quote.trim() === '') {
-                alert('Silakan masukkan quotes Anda terlebih dahulu!');
-                return;
+        // Fungsi untuk menyembunyikan semua formulir
+        function hideAllForms() {
+            formAnggi.style.display = 'none';
+            formTamara.style.display = 'none';
+        }
+
+        // Event listener untuk tombol Anggi
+        btnAnggi.addEventListener('click', function() {
+            hideAllForms(); // Sembunyikan formulir lain
+            formAnggi.style.display = 'block'; // Tampilkan formulir Anggi
+        });
+
+        // Event listener untuk tombol Tamara
+        btnTamara.addEventListener('click', function() {
+            hideAllForms(); // Sembunyikan formulir lain
+            formTamara.style.display = 'block'; // Tampilkan formulir Tamara
+        });
+
+        // Event listener untuk submit formulir Anggi
+        document.getElementById('whatsappFormAnggi').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const namaPengirim = document.getElementById('namaPengirimAnggi').value;
+            const namaPenerima = 'Anggi';
+            const ucapan = document.getElementById('ucapanAnggi').value;
+            const kadoLink = document.getElementById('kadoLinkAnggi').value;
+            const nomorWhatsApp = '6285805286784'; // Nomor WhatsApp Anggi
+
+            let pesanWhatsApp = `🥳🎉 Selamat Ulang Tahun, ${namaPenerima}! 🎉🥳\n\n`;
+
+            if (ucapan) {
+                pesanWhatsApp += `Dari ${namaPengirim}:\n"${ucapan}"\n\n`;
+            } else {
+                pesanWhatsApp += `Dari ${namaPengirim}:\n"Semoga hari ini penuh kebahagiaan dan tawa!"\n\n`;
+            }
+            
+            if (kadoLink) {
+                pesanWhatsApp += `Ini ada kado virtual spesial untukmu:\n🎁 ${kadoLink} 🎁\n\n`;
+            } else {
+                pesanWhatsApp += `Semoga suka dengan ucapan sederhana ini ya!`;
             }
 
-            // Membangun pesan WhatsApp dengan format yang diinginkan
-            const pesanWhatsApp = `
-> https://link.dana.id/danakaget?c=s44xh7zth&r=cAYM8h&orderId=20250523101214448015010300166998223924038
-════════════════════════
-          ────────────────
-                      QUOTES
-          ────────────────
+            pesanWhatsApp += `\nSalam hangat,\n${namaPengirim}`;
 
-> ${quote}
-
-════════════════════════
-            `;
-
-            const urlWhatsApp = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesanWhatsApp)}`;
-
+            const pesanTerencode = encodeURIComponent(pesanWhatsApp);
+            const urlWhatsApp = `https://wa.me/${nomorWhatsApp}?text=${pesanTerencode}`;
             window.open(urlWhatsApp, '_blank');
-        }
+        });
+
+        // Event listener untuk submit formulir Tamara
+        document.getElementById('whatsappFormTamara').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const namaPengirim = document.getElementById('namaPengirimTamara').value;
+            const namaPenerima = 'Tamara';
+            const ucapan = document.getElementById('ucapanTamara').value;
+            const kadoLink = document.getElementById('kadoLinkTamara').value;
+            const nomorWhatsApp = '6285179751924'; // Nomor WhatsApp Tamara
+
+            let pesanWhatsApp = `🥳🎉 Selamat Ulang Tahun, ${namaPenerima}! 🎉🥳\n\n`;
+
+            if (ucapan) {
+                pesanWhatsApp += `Dari ${namaPengirim}:\n"${ucapan}"\n\n`;
+            } else {
+                pesanWhatsApp += `Dari ${namaPengirim}:\n"Semoga hari ini penuh kebahagiaan dan tawa!"\n\n`;
+            }
+            
+            if (kadoLink) {
+                pesanWhatsApp += `Ini ada kado virtual spesial untukmu:\n🎁 ${kadoLink} 🎁\n\n`;
+            } else {
+                pesanWhatsApp += `Semoga suka dengan ucapan sederhana ini ya!`;
+            }
+
+            pesanWhatsApp += `\nSalam hangat,\n${namaPengirim}`;
+
+            const pesanTerencode = encodeURIComponent(pesanWhatsApp);
+            const urlWhatsApp = `https://wa.me/${nomorWhatsApp}?text=${pesanTerencode}`;
+            window.open(urlWhatsApp, '_blank');
+        });
     </script>
 </body>
 </html>
