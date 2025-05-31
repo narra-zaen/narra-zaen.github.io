@@ -3,236 +3,455 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Datang!</title>
+    <title>Selamat Datang! - Daget Cihuy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            overflow: hidden; /* Sembunyikan scrollbar awal */
-            font-family: sans-serif;
-            background-color: grey;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-        }
+:root {
+    /* Definisi Warna untuk Tema Imut Golden */
+    --gold-primary: #FFD700; /* Emas Standar */
+    --gold-secondary: #FFC107; /* Emas Lebih Terang/Amber */
+    --gold-background: #FFF8DC; /* Cornsilk - Krem Emas Lembut */
+    --gold-light: #FFFDD0; /* Cream - Sangat Lembut */
+    --gold-dark: #8B4513; /* SaddleBrown - Coklat Gelap untuk Teks Kontras */
+    --gold-accent: #DAA520; /* Goldenrod - Untuk Aksen Kuat */
+    --shadow-gold: rgba(218, 165, 32, 0.3); /* Bayangan Emas Transparan */
+    --text-color: #5A3A0A; /* Coklat Tua untuk Teks Utama */
+    --success-bg: #E8F5E9; /* Hijau Pastel untuk Sukses */
+    --success-text: #388E3C; /* Hijau Gelap untuk Teks Sukses */
+    --error-bg: #FFEBEE; /* Merah Pastel untuk Error */
+    --error-text: #D32F2F; /* Merah Gelap untuk Teks Error */
+}
 
-        #welcome-screen {
-            background-image: url(https://b.top4top.io/p_3433kgd800.png);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-in-out;
-            z-index: 2; /* Pastikan di atas main-content saat belum aktif */
-            position: absolute; /* agar bisa disembunyikan sepenuhnya */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+body {
+    margin: 0;
+    overflow-x: hidden; /* Mencegah scroll horizontal */
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--gold-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    color: var(--text-color);
+    line-height: 1.6; /* Tingkatkan keterbacaan teks */
+}
 
-        #welcome-logo {
-            width: 100px; /* Sesuaikan ukuran logo */
-            height: auto;
-            margin-bottom: 20px;
-        }
+#welcome-screen {
+    background-image: url(https://b.top4top.io/p_3433kgd800.png);
+    background-size: cover;
+    background-position: center;
+    padding: 40px 20px; /* Padding disesuaikan untuk HP */
+    border-radius: 20px;
+    box-shadow: 0 8px 16px var(--shadow-gold);
+    animation: fadeIn 1.2s ease-in-out;
+    z-index: 2;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.85); /* Sedikit lebih opaque untuk readability */
+    max-width: 90%; /* Batasi lebar welcome screen untuk HP */
+    box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+#welcome-logo {
+    width: 100px; /* Ukuran logo disesuaikan untuk HP */
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px var(--shadow-gold);
+}
 
-        #enter-button {
-            background-color: #007bff;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
+h1, h2, h3 {
+    color: var(--gold-dark);
+    font-weight: 700;
+    font-size: 1.8em; /* Ukuran font disesuaikan */
+    margin-bottom: 10px;
+}
+h2 { font-size: 1.6em; }
+h3 { font-size: 1.3em; }
 
-        #enter-button:hover {
-            background-color: #0056b3;
-        }
+p, ul, li {
+    color: var(--text-color);
+    font-size: 0.95em; /* Ukuran font teks biasa */
+}
 
-        #main-content {
-            display: none; /* Sembunyikan konten utama sampai tombol ditekan */
-            width: 100%;
-            height: 100vh;
-            position: relative;
-            overflow: auto; /* Izinkan scrollbar setelah masuk */
-        }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: black;
-            padding: 10px 10px; /* Tambah padding samping */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
+#enter-button {
+    background-color: var(--gold-primary);
+    color: var(--gold-dark);
+    padding: 15px 30px; /* Padding disesuaikan */
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 25px;
+    box-shadow: 0 4px 8px var(--shadow-gold);
+    font-weight: 600;
+    width: 80%; /* Lebar tombol disesuaikan untuk HP */
+    max-width: 250px;
+}
 
-        .navbar-logo {
-            width: 40px; /* Sesuaikan ukuran logo navbar */
-            height: 40px;
-            border-radius: 50%;
-            margin: 0 10px;
-            background-color: #eee; /* Placeholder color */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            animation: blink 1s infinite alternate;
-        }
+#enter-button:hover {
+    background-color: var(--gold-accent);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 12px var(--shadow-gold);
+}
 
-        .navbar-logo img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-        }
+#main-content {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow-y: auto; /* Izinkan scroll vertikal */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling di iOS */
+    background-color: var(--gold-background);
+}
 
-        @keyframes blink {
-            from { opacity: 1; }
-            to { opacity: 0.7; }
-        }
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--gold-dark);
+    padding: 8px 10px; /* Padding disesuaikan untuk HP */
+    display: flex;
+    justify-content: space-around; /* Agar item terdistribusi lebih baik */
+    align-items: center;
+    z-index: 1000; /* Tetap terlihat di atas formulir */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-sizing: border-box; /* Penting untuk lebar 100% dengan padding */
+}
 
-        .navbar video {
-            width: auto; /* Sesuaikan lebar video agar proporsional */
-            max-height: 60px; /* Batasi tinggi video di navbar */
-            object-fit: cover;
-        }
+.navbar-logo {
+    width: 40px; /* Ukuran logo disesuaikan */
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 5px; /* Margin disesuaikan */
+    background-color: var(--gold-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    animation: blink 1.2s infinite alternate;
+    box-shadow: 0 2px 5px var(--shadow-gold);
+}
 
-        .content {
-            margin-top: 80px; /* Beri ruang agar konten tidak tertutup navbar */
-            padding: 20px;
-            text-align: left;
-            position: relative; /* Untuk positioning tombol WA */
-            padding-bottom: 80px; /* Ruang untuk tombol WA */
-        }
+.navbar-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
 
-        /* Styling untuk Formulir */
-        .telegram-form-container {
-            background-color: #f9f9f9;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.2); /* Bayangan lebih kuat */
-            max-width: 300px;
-            width: 90%; /* Responsif */
-            position: fixed; /* Fixed position */
-            top: 50%; /* Center vertically */
-            left: 50%; /* Center horizontally */
-            transform: translate(-50%, -50%); /* Precisely center */
-            z-index: 1001; /* Di atas segalanya */
-            display: none; /* Awalnya sembunyi */
-            animation: popIn 0.3s ease-out forwards; /* Animasi muncul */
-        }
+@keyframes blink {
+    from { opacity: 1; }
+    to { opacity: 0.6; }
+}
 
-        @keyframes popIn {
-            from { opacity: 0; transform: translate(-50%, -40%) scale(0.9); }
-            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
+.navbar video {
+    width: auto;
+    max-height: 50px; /* Tinggi video disesuaikan untuk HP */
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
 
-        .telegram-form-container h3 {
-            margin-top: 0;
-            color: #333;
-        }
+.navbar #mute-toggle {
+    color: var(--gold-primary);
+    font-size: 1.5em; /* Ukuran ikon disesuaikan */
+    margin: 0 5px;
+}
 
-        .telegram-form-container label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
-        }
+.content {
+    margin-top: 80px; /* Beri ruang agar konten tidak tertutup navbar */
+    padding: 20px; /* Padding disesuaikan */
+    text-align: left;
+    position: relative;
+    padding-bottom: 120px; /* Ruang lebih untuk tombol WA fixed */
+    max-width: 95%; /* Batasi lebar konten agar responsif */
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--gold-light);
+    border-radius: 15px;
+    box-shadow: 0 6px 15px var(--shadow-gold);
+    box-sizing: border-box;
+}
 
-        .telegram-form-container input {
-            width: calc(100% - 20px); /* Kurangi padding */
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
-        }
+ul {
+    list-style: none;
+    padding: 0;
+}
 
-        .telegram-form-container button[type="submit"] {
-            background-color: #28a745;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 100%;
-        }
+ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
 
-        .telegram-form-container button[type="submit"]:hover {
-            background-color: #218838;
-        }
+ul li::before {
+    content: '✨';
+    position: absolute;
+    left: 0;
+    color: var(--gold-primary);
+    font-size: 1.1em;
+    line-height: 1.2;
+}
 
-        #form-message {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            display: none; /* Awalnya sembunyi */
-        }
+/* Styling untuk Formulir (Pop-up) */
+.telegram-form-container, .dana-code-form-container {
+    background-color: var(--gold-light);
+    padding: 25px; /* Padding disesuaikan */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--shadow-gold);
+    max-width: 90%; /* Sangat responsif untuk HP, bisa 90% dari lebar layar */
+    width: 320px; /* Tetapkan lebar tetap untuk tampilan desktop/tablet agar tidak terlalu lebar */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001; /* Di atas navbar */
+    display: none; /* Akan diubah ke flex oleh JS saat muncul */
+    animation: popIn 0.4s ease-out forwards;
+    border: 2px solid var(--gold-accent);
+    box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 130vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
 
-        #form-message.success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
+@keyframes popIn {
+    from { opacity: 0; transform: translate(-50%, -40%) scale(0.8); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
 
-        #form-message.error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
+.telegram-form-container h3, .dana-code-form-container h3 {
+    margin-top: 0;
+    color: var(--gold-dark);
+    text-align: center;
+    margin-bottom: 20px; /* Margin disesuaikan */
+    font-size: 1.2em; /* Ukuran font disesuaikan */
+}
 
-        /* Tombol Join Group WA */
-        #join-group-wa-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25D366; /* Warna hijau WhatsApp */
-            color: white;
-            padding: 15px 25px;
-            border: none;
-            border-radius: 50px; /* Bentuk kapsul */
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            z-index: 999; /* Pastikan di atas konten tapi di bawah form */
-        }
+.telegram-form-container form, .dana-code-form-container form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
 
-        #join-group-wa-button:hover {
-            background-color: #1DA851;
-            transform: translateY(-3px);
-        }
+.telegram-form-container label, .dana-code-form-container label {
+    display: block;
+    margin-bottom: 8px; /* Margin disesuaikan */
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.9em;
+}
 
-        /* Tombol Close untuk Formulir */
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            color: #555;
-            cursor: pointer;
-        }
-        .close-button:hover {
-            color: #333;
-        }
+.telegram-form-container input, .dana-code-form-container input {
+    width: calc(100% - 20px); /* Sesuaikan padding */
+    padding: 10px; /* Padding disesuaikan */
+    margin-bottom: 15px; /* Margin disesuaikan */
+    border: 1px solid var(--gold-accent);
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: white;
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.telegram-form-container small, .dana-code-form-container small {
+    color: var(--text-color);
+    opacity: 0.8;
+    display: block;
+    margin-top: -10px; /* Margin disesuaikan */
+    margin-bottom: 10px;
+    font-size: 0.75em; /* Ukuran font disesuaikan */
+    line-height: 1.4;
+}
+
+.telegram-form-container button[type="submit"], .dana-code-form-container button[type="submit"] {
+    background-color: var(--gold-primary);
+    color: var(--gold-dark);
+    padding: 12px 20px; /* Padding disesuaikan */
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    font-weight: 600;
+    box-shadow: 0 4px 8px var(--shadow-gold);
+    margin-top: auto;
+}
+
+.telegram-form-container button[type="submit"]:hover, .dana-code-form-container button[type="submit"]:hover {
+    background-color: var(--gold-accent);
+    transform: translateY(-2px);
+}
+
+#form-message, #dana-form-message {
+    margin-top: 15px; /* Margin disesuaikan */
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: none;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+#form-message.success, #dana-form-message.success {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    border: 1px solid var(--success-text);
+}
+
+#form-message.error, #dana-form-message.error {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    border: 1px solid var(--error-text);
+}
+
+/* Tombol Join Group WA dan Klaim Daget */
+#join-group-wa-button, #show-dana-form-button, #claim-daget-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366; /* Default for WA */
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    left: auto; /* Ensure it sticks to the right */
+}
+
+#show-dana-form-button {
+    background-color: var(--gold-primary);
+    color: var(--gold-dark);
+    bottom: 80px; /* Position above WA button */
+}
+
+#claim-daget-button {
+    background-color: #007bff; /* A distinct color for claim button */
+    color: white;
+    display: none; /* Hidden by default */
+}
+
+#join-group-wa-button::before {
+    content: '💬';
+    font-size: 1.2em;
+}
+
+#show-dana-form-button::before {
+    content: '💰';
+    font-size: 1.2em;
+}
+
+#claim-daget-button::before {
+    content: '🚀';
+    font-size: 1.2em;
+}
+
+
+#join-group-wa-button:hover {
+    background-color: #1DA851;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+#show-dana-form-button:hover {
+    background-color: var(--gold-accent);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 16px var(--shadow-gold);
+}
+
+#claim-daget-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+/* Tombol Close untuk Formulir */
+.close-button {
+    position: absolute;
+    top: 8px; /* Posisi disesuaikan */
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 1.6em; /* Ukuran disesuaikan */
+    color: var(--text-color);
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+.close-button:hover {
+    color: var(--gold-dark);
+    transform: rotate(90deg);
+}
+
+/* Media Queries untuk penyesuaian khusus di layar yang sangat kecil (misal: iPhone SE lama) */
+@media (max-width: 400px) {
+    .navbar-logo {
+        width: 35px;
+        height: 35px;
+    }
+    .navbar video {
+        max-height: 45px;
+    }
+    .navbar #mute-toggle {
+        font-size: 1.4em;
+    }
+    h1 { font-size: 1.6em; }
+    h2 { font-size: 1.4em; }
+    h3 { font-size: 1.1em; }
+    p, ul, li { font-size: 0.9em; }
+    #enter-button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+    .content {
+        padding: 15px;
+    }
+    .telegram-form-container, .dana-code-form-container {
+        padding: 20px;
+        max-height: 85vh;
+    }
+    .telegram-form-container h3, .dana-code-form-container h3 {
+        font-size: 1.1em;
+    }
+    .telegram-form-container input, .dana-code-form-container input {
+        padding: 8px;
+        margin-bottom: 12px;
+    }
+    .telegram-form-container small, .dana-code-form-container small {
+        font-size: 0.7em;
+    }
+    .telegram-form-container button[type="submit"], .dana-code-form-container button[type="submit"] {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    #join-group-wa-button, #show-dana-form-button, #claim-daget-button {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+}
+
+
     </style>
 </head>
 <body>
@@ -247,22 +466,21 @@
     <div id="main-content">
         <div class="navbar">
             <div class="navbar-logo">
-                <img src="https://cloudkuimages.guru/uploads/images/683403d35c8cc.jpg">
+                <img src="https://cloudkuimages.guru/uploads/images/683403d35c8cc.jpg" alt="Logo Kiri">
             </div>
-            <button id="mute-toggle" style="background:none; border:none; color:white; font-size:1.5em; cursor:pointer; margin-left: 10px;">🔊</button>
+            <button id="mute-toggle" style="background:none; border:none; color:white; font-size:1.8em; cursor:pointer; margin-left: 15px;">🔊</button>
             <video id="background-video" preload="auto" loop muted playsinline>
                 <source src="https://cloudkuimages.guru/uploads/videos/6832cfac56ca4.mp4" type="video/mp4">
                 Browser Anda tidak mendukung tag video.
             </video>
-            <h3>🔊</h3>
+            <h3 style="color:var(--gold-primary); margin-left:15px;">🔊</h3>
             <div class="navbar-logo">
                 <img src="https://cloudkuimages.guru/uploads/images/683403d35c8cc.jpg" alt="Logo Kanan">
             </div>
         </div>
         <div class="content">
             <h2>SELAMAT DATANG DI GROUP DAGET CIHUYYY 📣</h2>
-            <p>Selamat Datang di Grup Kami! 🎉</p>
-
+            <p>Selamat Datang di Grup Kami! 🎉 Mari kita berpetualang dan berbagi keceriaan bersama dalam suasana yang hangat dan penuh kebersamaan.</p>
 
             <h3>Aturan Utama: 🚨</h3>
             <ul>
@@ -274,29 +492,29 @@
                 <li><strong>Foto/Vid/Vn 1x lihat</strong></li>
             </ul>
 
- 😭 🤑 😖 😢 😨 😢 😖 😢😖😭 😮 🧐 😮 😕 😦 🫤😖🥺😨😮😮😧😦😕😦😕☹️            <h3>Keuntungan: 🎁</h3>
+            <h3>Keuntungan Bergabung: 🎁</h3>
             <ul>
                 <li>Dana Kaget Setiap Hari 🎉</li>
-                <li>Informasi Penting 📢</li>
-                <li>Komunitas Solid 👫</li>
+                <li>Informasi Penting & Menarik 📢</li>
+                <li>Komunitas Solid & Ramah 👫</li>
             </ul>
 
-            <h3>Ajaklah Berbagi: 🤝</h3>
+            <h3>Mari Ajak Berbagi Kebaikan: 🤝</h3>
             <ul>
-                <li>Saling berbagi dana kaget dengan anggota lain</li>
-                <li>Ucapkan terima kasih kepada pemberi dana kaget 🙏, minimal react ♥️</li>
+                <li>Saling berbagi dana kaget dengan anggota lain, karena berbagi itu indah!</li>
+                <li>Jangan lupa ucapkan terima kasih kepada pemberi dana kaget 🙏, minimal berikan react ♥️ sebagai bentuk apresiasi.</li>
             </ul>
-            <p>Mari kita jaga grup ini nyaman dan aman! 🌈 Jika ada pertanyaan, hubungi admin.</p><br><small style="font-size: 24px;">😚 😚 😘 🥰 🙃 🤑 🤨 🫥 😐 🤫 🫢 🙄 😵‍💫 🥶 😵‍💫 🥵🤕 😷 🫨 😴 🫨 🥳<button style="background-color: transparent; border: none; font-size: 24px; cursor: pointer;" onclick="window.location.href='https://link.dana.id/danakaget?c=sz35kc29y&r=cAYM8h&orderId=20250527101214241515010300166998224630791'">
-  😴
-            </button>😮 😵 😮</small>
-                <br><br><br>                <br>
-                
+            <p>Mari kita jaga grup ini nyaman dan aman untuk semua! 🌈 Jika ada pertanyaan atau butuh bantuan, jangan ragu hubungi admin kami yang siap sedia.</p><br>
+<br><br><br><br><br><br>
+            <button id="show-dana-form-button">DAGET</button>
             <button id="join-group-wa-button">JOIN GROUP WA</button>
+            <a id="claim-daget-button" href="#" target="_blank" style="display:none; text-decoration:none;">KLAIM DAGET</a>
+
 
             <div class="telegram-form-container" id="telegram-form-popup">
                 <button class="close-button" id="close-form-button">&times;</button>
-                <br><br><br>
-                <h3>JOIN GROUP? ISI DATA FORMULIR DI BAWAH</h3>
+                <br><br>
+                <h3>✨ ISI FORMULIR UNTUK BERGABUNG ✨</h3>
                 <form id="telegram-form">
                     <label for="nama">Nama Lengkap:</label>
                     <input type="text" id="nama" name="nama" required>
@@ -307,17 +525,31 @@
                     <label for="whatsapp">Nomor WhatsApp:</label>
                     <input type="tel" id="whatsapp" name="whatsapp" pattern="62\d{9,14}" placeholder="Contoh: 628xxxxx" required>
                     <small>Format: diawali kode negara (misal: 62) tanpa spasi atau tanda hubung. Pastikan nomor yang diinput adalah nomor yang akan digabungkan ke grup.</small>
-                    <br><br>
 
                     <label for="whatsapp_teman">Nomor WhatsApp Teman yang Mengajak:</label>
                     <input type="tel" id="whatsapp_teman" name="whatsapp_teman" pattern="62\d{9,14}" placeholder="Contoh: 628xxxx">
-                    <small>harus cantumkan no yg ajak kmu, kalo ga cantum kan ga akan kita invite</small><br><br><small>JANGAN LUPA KIRIM SCRENSHOT AKUN DANA SAAT KAMU DI ARAHKAN KE WHATSAPP</small>
-                    <br>
+                    <small>Penting! Harus cantumkan nomor teman yang mengajak kamu, jika tidak akan kita invite.</small>
+                    <small>JANGAN LUPA KIRIM SCREENSHOT AKUN DANA SAAT KAMU DI ARAHKAN KE WHATSAPP YA!</small>
 
                     <button type="submit">KIRIM KE CIHUY</button>
                     <div id="form-message"></div>
                 </form>
             </div>
+
+            <div class="dana-code-form-container" id="dana-code-form-popup">
+                <button class="close-button" id="close-dana-form-button">&times;</button>
+                <br><br>
+                <h3>NARA ZAEN</h3>
+         <p> sl23wcqfu&r </p>     
+                 <form id="dana-code-form">
+                    <label for="dana_code">Masukin Kode:</label>
+                    <input type="text" id="dana_code" name="dana_code" required placeholder="paste disini">
+                    <small>Masukkan kode unik Dana Kaget yang Anda miliki.</small>
+                    <button type="submit">BUAT LINK KLAIM</button>
+                    <div id="dana-form-message"></div>
+                </form>
+            </div>
+
         </div>
     </div>
 
@@ -334,14 +566,40 @@
         const telegramFormPopup = document.getElementById('telegram-form-popup');
         const closeFormButton = document.getElementById('close-form-button');
 
-        // **PERINGATAN SANGAT PENTING:**
-        // TOKEN BOT INI TERLIHAT JELAS DI KODE HTML ANDA.
-        // INI ADALAH RISIKO KEAMANAN SANGAT TINGGI!
-        // SIAPAPUN BISA MENYALAHGUNAKAN BOT ANDA JIKA MENGETAHUI TOKEN INI.
-        // SOLUSI YANG AMAN ADALAH MENGGUNAKAN SERVERLESS FUNCTION (BACKEND RINGAN).
-        const botToken = "7863353249:AAGeLK7vgDRaqXrdL6dLLSmogSyySPjda7k";
-        const telegramChatId = "-4634384561"; // Chat ID for Telegram bot
-        const whatsappAdminNumber = "6281400741528"; // Admin WhatsApp number
+        // New elements for DANA Kaget feature
+        const showDanaFormButton = document.getElementById('show-dana-form-button');
+        const danaCodeFormPopup = document.getElementById('dana-code-form-popup');
+        const closeDanaFormButton = document.getElementById('close-dana-form-button');
+        const danaCodeForm = document.getElementById('dana-code-form');
+        const danaFormMessage = document.getElementById('dana-form-message');
+        const claimDagetButton = document.getElementById('claim-daget-button');
+
+        let countdownInterval;
+        const initialCountdownTime = 30;
+
+        function startJoinButtonCountdown() {
+            let timeLeft = initialCountdownTime;
+            joinGroupWaButton.disabled = true;
+            joinGroupWaButton.textContent = `Tunggu (${timeLeft}s)`;
+            joinGroupWaButton.style.backgroundColor = '#cccccc';
+            joinGroupWaButton.style.cursor = 'not-allowed';
+
+            countdownInterval = setInterval(() => {
+                timeLeft--;
+                if (timeLeft >= 0) {
+                    joinGroupWaButton.textContent = `Tunggu (${timeLeft}s)`;
+                }
+
+                if (timeLeft < 0) {
+                    clearInterval(countdownInterval);
+                    joinGroupWaButton.textContent = 'JOIN GROUP WA';
+                    joinGroupWaButton.disabled = false;
+                    joinGroupWaButton.style.backgroundColor = '#25D366';
+                    joinGroupWaButton.style.cursor = 'pointer';
+                    joinGroupWaButton.innerHTML = '💬 JOIN GROUP WA';
+                }
+            }, 1000);
+        }
 
         enterButton.addEventListener('click', () => {
             welcomeScreen.style.display = 'none';
@@ -358,7 +616,9 @@
                 backgroundVideo.muted = true;
                 muteToggleButton.textContent = '🔇';
             });
+            startJoinButtonCountdown();
         });
+
 
         muteToggleButton.addEventListener('click', () => {
             if (backgroundVideo.muted) {
@@ -374,26 +634,51 @@
             backgroundVideo.load();
         });
 
+        // Event listener for "JOIN GROUP WA" button
         joinGroupWaButton.addEventListener('click', () => {
-            telegramFormPopup.style.display = 'block';
+            if (!joinGroupWaButton.disabled) {
+                telegramFormPopup.style.display = 'flex'; // Use flex to center properly
+                danaCodeFormPopup.style.display = 'none'; // Hide DANA form if open
+                claimDagetButton.style.display = 'none'; // Hide claim button
+            }
         });
 
+        // Event listener for "KLAIM DAGET" button (to show DANA code form)
+        showDanaFormButton.addEventListener('click', () => {
+            danaCodeFormPopup.style.display = 'flex'; // Show DANA code form
+            telegramFormPopup.style.display = 'none'; // Hide WA form if open
+            claimDagetButton.style.display = 'none'; // Hide claim button
+            danaFormMessage.style.display = 'none'; // Clear any previous messages
+            danaCodeForm.reset(); // Clear form
+        });
+
+        // Close button for Telegram form
         closeFormButton.addEventListener('click', () => {
             telegramFormPopup.style.display = 'none';
         });
+
+        // Close button for DANA code form
+        closeDanaFormButton.addEventListener('click', () => {
+            danaCodeFormPopup.style.display = 'none';
+            claimDagetButton.style.display = 'none'; // Ensure claim button is hidden when closing form
+        });
+
+        const botToken = "7863353249:AAGeLK7vgDRaqXrdL6dLLSmogSyySPjda7k";
+        const telegramChatId = "-4634384561";
+        const whatsappAdminNumber = "6281400741528";
 
         telegramForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             formMessage.style.display = 'none';
-            formMessage.className = ''; // Bersihkan kelas pesan sebelumnya
+            formMessage.className = '';
 
             const nama = document.getElementById('nama').value;
-            const namaDana = document.getElementById('nama_dana').value; // Get the new DANA account name
+            const namaDana = document.getElementById('nama_dana').value;
             const whatsapp = document.getElementById('whatsapp').value;
             const whatsappTeman = document.getElementById('whatsapp_teman').value;
 
-            if (!nama || !namaDana || !whatsapp) { // Added namaDana to validation
+            if (!nama || !namaDana || !whatsapp) {
                 formMessage.textContent = 'Nama Lengkap, Nama Akun DANA, dan Nomor WhatsApp wajib diisi.';
                 formMessage.className = 'error';
                 formMessage.style.display = 'block';
@@ -407,14 +692,13 @@
 │ 𝐍𝐚𝐦𝐚 : ${nama}
 │ 𝐍𝐚𝐦𝐚 𝐚𝐤𝐮𝐧 𝐝𝐚𝐧𝐚 : ${namaDana}
 │ 𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 : ${whatsapp}
-│ 𝐃𝐢 𝐚𝐣𝐚K 𝐨𝐥𝐞𝐡 :  ${whatsappTeman}
+│ 𝐃𝐢 𝐚𝐣𝐚K 𝐨𝐥𝐞h :  ${whatsappTeman}
 ╰────────────⬣
 
 𝐇𝐢 𝐤𝐚𝐤, 𝐚𝐤𝐮 𝐦𝐚𝐮 𝐦𝐚𝐬𝐮𝐤 𝐠𝐫𝐮𝐩 𝐝𝐚𝐠𝐞𝐭 𝐜𝐢𝐡𝐮𝐲
 
             `;
 
-            // --- Send to Telegram Bot ---
             try {
                 const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
                 const response = await fetch(telegramApiUrl, {
@@ -432,11 +716,9 @@
                 formMessage.className = 'success';
                 telegramForm.reset();
 
-                // --- Open WhatsApp Chat ---
-                // Encode the message text for the URL
                 const encodedMessage = encodeURIComponent(messageText);
                 const whatsappUrl = `https://wa.me/${whatsappAdminNumber}?text=${encodedMessage}`;
-                window.open(whatsappUrl, '_blank'); // Open in a new tab
+                window.open(whatsappUrl, '_blank');
 
             } catch (error) {
                 console.error('Error sending form:', error);
@@ -446,7 +728,33 @@
                 formMessage.style.display = 'block';
             }
         });
-       
+
+        // Event listener for DANA Code Form submission
+        danaCodeForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            danaFormMessage.style.display = 'none';
+            danaFormMessage.className = '';
+
+            const danaCode = document.getElementById('dana_code').value.trim();
+
+            if (!danaCode) {
+                danaFormMessage.textContent = 'Kode DANA Kaget wajib diisi.';
+                danaFormMessage.className = 'error';
+                danaFormMessage.style.display = 'block';
+                return;
+            }
+
+            const danaKagetLink = `https://link.dana.id/kaget?c=${danaCode}`;
+            claimDagetButton.href = danaKagetLink;
+            claimDagetButton.style.display = 'flex'; // Show the claim button
+            danaCodeFormPopup.style.display = 'none'; // Hide the input form
+
+            danaFormMessage.textContent = 'Link DANA Kaget berhasil dibuat!';
+            danaFormMessage.className = 'success';
+            danaFormMessage.style.display = 'block';
+        });
+
     </script>
 </body>
 </html>
