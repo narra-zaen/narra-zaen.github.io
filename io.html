@@ -3,281 +3,623 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulir Transaksi Titip Dana Kaget</title>
+    <title>Formulir Dana Kaget & Konversi Saldo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: sans-serif;
-            background-color: #1a1a1a;
-            color: #f0f0f0;
+            font-family: 'Cute Font', cursive;
+            background-color: #f7e6ff; /* Soft lavender background */
+            color: #7b1fa2; /* Deep purple text */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding-bottom: 120px; /* Add padding to body to prevent content being hidden by fixed footer */
+            padding-bottom: 50px;
+            overflow-x: hidden;
         }
-        .qris-container {
-            width: 100%;
-            max-width: 300px;
-            margin-bottom: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .line {
-            width: 100%;
-            height: 2px;
-            background-color: #f0f0f0;
-            margin: 15px 0;
-        }
-        .qris-image {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            border-radius: 8px;
-        }
-        .container {
-            background-color: #2a2a2a; /* Darker background for main form container */
-            padding: 40px;
-            border-top-left-radius: 12px; /* Top-left border radius */
-            border-top-right-radius: 12px; /* Top-right border radius */
-            border-bottom-left-radius: 0; /* No border radius on bottom-left */
-            border-bottom-right-radius: 0; /* No border radius on bottom-right */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            max-width: 600px;
+        .intro-container {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease-in-out;
+            padding: 20px;
+            border-radius: 25px; /* More rounded */
+            background-color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            max-width: 350px; /* Smaller max-width for intro text */
             width: 90%;
-            margin-bottom: 20px; /* Space above the fixed footer */
+            box-sizing: border-box;
+            border: 3px solid #ce93d8; /* Soft purple border */
+        }
+        .intro-text-box {
+            white-space: pre-wrap; /* Preserve whitespace and line breaks */
+            text-align: left;
+            color: #8e24aa; /* Slightly darker purple for text */
+            font-size: 8px; /* Disesuaikan menjadi 8px */
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+        .intro-container h2 {
+            font-size: 30px; /* Slightly smaller for cuter feel */
+            color: #8e24aa;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        .intro-buttons {
+            display: flex;
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+            justify-content: center;
+            gap: 15px; /* Space between buttons */
+            margin-top: 20px;
+        }
+        .intro-button {
+            background-color: #ba68c8; /* Medium purple */
+            color: white;
+            border: none;
+            padding: 12px 25px; /* Slightly smaller padding */
+            border-radius: 30px; /* More rounded button */
+            font-size: 20px; /* Adjusted font size */
+            font-family: 'Cute Font', cursive;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px; /* Add some letter spacing */
+            flex-grow: 1; /* Allow buttons to grow and fill space */
+            max-width: 200px; /* Limit max width for individual buttons */
+        }
+        .intro-button:hover {
+            background-color: #9c27b0; /* Darker purple on hover */
+            transform: translateY(-2px) scale(1.03); /* Slight bounce and scale */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        .intro-button.dana-kaget::before {
+            content: '💖'; /* Cute emoji */
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px; /* Smaller emoji size */
+        }
+         .intro-button.convert-saldo::before {
+            content: '🔄'; /* Convert emoji */
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+        }
+
+
+        .container {
+            background-color: #ffffff; /* Background putih sama seperti intro */
+            padding: 30px;
+            border-radius: 25px; /* Sama seperti intro */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Sama seperti intro */
+            max-width: 400px;
+            width: 90%;
+            margin-bottom: 20px;
+            border: 3px solid #ce93d8; /* Border solid ungu lembut sama seperti intro */
+            animation: fadeInScale 1s ease-out;
         }
         h2 {
             text-align: center;
-            color: #f0f0f0;
-            margin-bottom: 30px;
+            color: #8e24aa; /* Warna ungu gelap */
+            margin-bottom: 25px;
+            font-size: 32px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
         }
         label {
             display: block;
             margin-bottom: 10px;
-            color: #ccc;
+            color: #7b1fa2; /* Ungu gelap */
             font-weight: bold;
+            font-size: 18px;
         }
-        input, textarea {
-            width: calc(100% - 22px);
-            padding: 12px;
-            margin-bottom: 25px;
-            border: 1px solid #555;
-            background-color: #3a3a3a;
-            color: #f0f0f0;
-            border-radius: 6px;
+        input, textarea, select {
+            width: calc(100% - 40px); /* Disesuaikan untuk lebih kecil, agar border kontainer terlihat */
+            padding: 10px; /* Padding lebih kecil */
+            margin-bottom: 20px;
+            border: 2px solid #ce93d8; /* Border ungu lembut */
+            background-color: #f3e5f5; /* Background ungu sangat terang */
+            color: #7b1fa2; /* Warna teks ungu gelap */
+            border-radius: 15px;
             font-size: 16px;
             box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #8e24aa;
+            box-shadow: 0 0 8px rgba(142, 36, 170, 0.3);
+            outline: none;
         }
         textarea {
             resize: vertical;
+            min-height: 80px;
         }
-        .fixed-buttons-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #286090; /* Blue background for button container */
-            padding: 20px;
-            box-shadow: 0 -8px 20px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 1000; /* Ensure it's above other content */
-        }
-        .fixed-buttons-container button {
-            width: 90%; /* Adjust width to match container's max-width */
-            max-width: 600px; /* Match container's max-width */
-            margin-bottom: 15px; /* Spacing between buttons */
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
-        }
-        .add-row-button {
-            background-color: #007bff;
-            color: white;
+        .show-details-button, .submit-button, .back-button {
             border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-family: 'Cute Font', cursive;
             cursor: pointer;
+            width: calc(100% - 20px);
+            max-width: 350px;
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            letter-spacing: 1px;
         }
-        .add-row-button:hover {
-            background-color: #0056b3;
+        .show-details-button {
+            background-color: #aed581; /* Soft green */
+            color: white;
+        }
+        .show-details-button:hover {
+            background-color: #8bc34a; /* Darker green */
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
         .submit-button {
-            background-color: #25D366;
+            background-color: #ba68c8; /* Medium purple */
             color: white;
-            border: none;
-            cursor: pointer;
         }
         .submit-button:hover {
-            background-color: #1DA851;
+            background-color: #9c27b0; /* Darker purple */
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
-        .input-group {
+        .back-button {
+            background-color: #ffb74d; /* Soft orange */
+            color: white;
+        }
+        .back-button:hover {
+            background-color: #ff9800; /* Darker orange */
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .qris-container {
+            width: 100%;
+            max-width: 250px;
+            margin-top: 20px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s ease-out;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border: 2px solid #ce93d8;
+        }
+        .qris-container h2 {
+            font-size: 28px;
             margin-bottom: 15px;
-            border: 1px solid #444;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #333;
-            position: relative;
         }
-        .remove-group-btn {
-            background-color: #dc3545;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: auto;
-            padding: 5px 10px;
-            font-size: 12px;
+        .line {
+            width: 80%;
+            height: 2px;
+            background-color: #ce93d8;
+            margin: 10px 0;
             border-radius: 5px;
         }
-        .remove-group-btn:hover {
-            background-color: #c82333;
+        .qris-image {
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+            border: 2px solid #ba68c8;
+        }
+        .qris-container p {
+            font-size: 15px;
+            color: #7b1fa2;
+            margin-top: 10px;
+        }
+        .transaction-details {
+            background-color: #f3e5f5;
+            border: 2px solid #ce93d8;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            color: #7b1fa2;
+            display: none;
+            animation: fadeIn 1s ease-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .transaction-details p {
+            margin: 6px 0;
+            font-size: 16px;
+        }
+        .transaction-details strong {
+            color: #8e24aa;
+            font-size: 17px;
+        }
+
+        #form-dana-kaget, #form-convert-saldo {
+            display: none; /* Hide both forms by default */
+        }
+        #summary-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
-    <div class="qris-container">
-        <div class="line"></div>
-        <h2> SCAN QRIS </h2>
-        <img src="https://h.top4top.io/p_3430euebb0.jpg" alt="QRIS Pembayaran" class="qris-image" width="150" height="250">
-        <p><i>jangan lupa screenshot buktinya ya</i></p>
-        <div class="line"></div>
+    <audio id="background-music" loop>
+        <source src="https://files.catbox.moe/et7tj5.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="intro-container" id="intro-section">
+        <div class="intro-text-box">
+            ╭─⬣「 _✰ 𝐓𝐢𝐭𝐢𝐩 𝐃𝐚𝐧𝐚 𝐊𝐚𝐠𝐞𝐭 ✯_ 」
+            │ Informasi Penting!
+            │-----------------------
+            │ 1. Semua e-wallet bisa transaksi di aku
+            │ 2. Tidak ada biaya tambahan kalau pakai DANA
+            │ 3. Jasa pembuatan hanya 100 rupiah
+            │ 4. Bisa request nama
+            │ 5. Bisa request caption
+            │ 6. Amanah 100%
+            ╰────────────⬣
+        </div>
+        <h2>
+            Pilih Layanan:
+        </h2>
+        <div class="intro-buttons">
+            <button id="startButtonDanaKaget" class="intro-button dana-kaget">Dana Kaget</button>
+            <button id="startButtonConvertSaldo" class="intro-button convert-saldo">Konversi Saldo</button>
+        </div>
     </div>
 
-    <div class="container">
-        <h2>Formulir Transaksi Titip Dana Kaget</h2>
-        <form id="waForm">
-            <label for="jumlahTransfer">Jumlah Transfer (Rp):</label>
-            <input type="number" id="jumlahTransfer" placeholder="Contoh: 100000" required>
+    <div id="form-section">
+        <div id="form-dana-kaget" class="container">
+            <h2>Formulir Dana Kaget</h2>
+            <form id="waFormDanaKaget">
+                <label for="namaDanaKaget">Nama Pengirim:</label>
+                <input type="text" id="namaDanaKaget" placeholder="Contoh: NARA ZAEN" required>
 
-            <div id="dynamic-inputs">
-                <div class="input-group">
-                    <button type="button" class="remove-group-btn" data-row-id="0">Hapus data ding 1</button>
-                    <label for="jumlahSaldoDaget_0">Jumlah Saldo Daget (Rp):</label>
-                    <input type="number" class="jumlahSaldoDaget" id="jumlahSaldoDaget_0" placeholder="Contoh: 50000" required>
+                <label for="captionDanaKaget">Pesan Spesial:</label>
+                <textarea id="captionDanaKaget" rows="4" placeholder="Tulis pesan Dana Kagetmu di sini..." required></textarea>
 
-                    <label for="jumlahPemenang_0">Jumlah Pemenang/SLOT:</label>
-                    <input type="number" class="jumlahPemenang" id="jumlahPemenang_0" placeholder="Contoh: 10" required>
+                <label for="isiDanaKaget">Isi Dana Kaget per Pemenang (Rp):</label>
+                <input type="number" id="isiDanaKaget" placeholder="Contoh: 5000" required>
 
-                    <label for="nama_0">Nama:</label>
-                    <input type="text" class="nama" id="nama_0" placeholder="Contoh: Budi Santoso" required>
+                <label for="jumlahPemenang">Jumlah Pemenang:</label>
+                <input type="number" id="jumlahPemenang" placeholder="Contoh: 10" required>
 
-                    <label for="caption_0">Caption:</label>
-                    <textarea class="caption" id="caption_0" rows="4" placeholder="Tulis caption Anda di sini..." required></textarea>
-                </div>
+                <label for="paymentMethodDanaKaget">Metode Pembayaran:</label>
+                <select id="paymentMethodDanaKaget" required>
+                    <option value="">Pilih Metode Pembayaran</option>
+                    <option value="qris">QRIS (Bebas Biaya)</option>
+                    <option value="gopay">Gopay</option>
+                    <option value="ovo">OVO</option>
+                    <option value="shopeepay">ShopeePay</option>
+                    <option value="linkaja">LinkAja</option>
+                    <option value="banklain">Bank Lainnya</option>
+                </select>
+
+                <button type="button" id="showSummaryButtonDanaKaget" class="show-details-button">Lihat Rincian & QRIS</button>
+            </form>
+        </div>
+
+        <div id="form-convert-saldo" class="container">
+            <h2>Formulir Konversi Saldo</h2>
+            <form id="waFormConvertSaldo">
+                <label for="namaConvertSaldo">Nama Pengirim:</label>
+                <input type="text" id="namaConvertSaldo" placeholder="Contoh: NARA ZAEN" required>
+
+                <label for="jumlahSaldoConvert">Jumlah Saldo yang Dikonversi (Rp):</label>
+                <input type="number" id="jumlahSaldoConvert" placeholder="Contoh: 100000" required>
+
+                <label for="bankPengirim">Metode Pengirim:</label>
+                <select id="bankPengirim" required>
+                    <option value="">Pilih Metode Pengirim</option>
+                    <option value="dana">DANA</option>
+                    <option value="gopay">Gopay</option>
+                    <option value="ovo">OVO</option>
+                    <option value="shopeepay">ShopeePay</option>
+                    <option value="linkaja">LinkAja</option>
+                    <option value="bca">BCA</option>
+                    <option value="mandiri">Mandiri</option>
+                    <option value="bri">BRI</option>
+                    <option value="bni">BNI</option>
+                    <option value="btn">BTN</option>
+                    <option value="cimb">CIMB Niaga</option>
+                    <option value="bsi">BSI</option>
+                    <option value="lainnya">Lainnya</option>
+                </select>
+
+                <label for="bankPenerima">Metode Penerima:</label>
+                <select id="bankPenerima" required>
+                    <option value="">Pilih Metode Penerima</option>
+                    <option value="dana">DANA</option>
+                    <option value="gopay">Gopay</option>
+                    <option value="ovo">OVO</option>
+                    <option value="shopeepay">ShopeePay</option>
+                    <option value="linkaja">LinkAja</option>
+                    <option value="bca">BCA</option>
+                    <option value="mandiri">Mandiri</option>
+                    <option value="bri">BRI</option>
+                    <option value="bni">BNI</option>
+                    <option value="btn">BTN</option>
+                    <option value="cimb">CIMB Niaga</option>
+                    <option value="bsi">BSI</option>
+                    <option value="lainnya">Lainnya</option>
+                </select>
+
+                <label for="nomorPenerima">Nomor Rekening/ID Penerima:</label>
+                <input type="text" id="nomorPenerima" placeholder="Contoh: 081234567890 (DANA) / 1234567890 (BCA)" required>
+
+                <button type="button" id="showSummaryButtonConvertSaldo" class="show-details-button">Lihat Rincian & QRIS</button>
+            </form>
+        </div>
+
+        <div id="summary-content">
+            <div class="qris-container" id="qrisContainer">
+                <div class="line"></div>
+                <h2> SCAN QRIS </h2>
+                <img src="https://h.top4top.io/p_3430euebb0.jpg" alt="QRIS Pembayaran" class="qris-image" width="150" height="250">
+                <p><i>jangan lupa screenshot buktinya ya!</i></p>
+                <div class="line"></div>
             </div>
-        </form>
+
+            <div class="transaction-details" id="transactionDetails">
+                </div>
+
+            <button type="button" id="backToFormButton" class="back-button">Kembali ke Formulir</button>
+            <button type="submit" class="submit-button" id="waSubmitButton">Kirim ke WhatsApp</button>
+        </div>
     </div>
 
-    <div class="fixed-buttons-container">
-        <button type="button" id="addRow" class="add-row-button">TAMBAH DATA LINK DAGET</button>
-        <button type="submit" form="waForm" class="submit-button">Kirim ke WhatsApp</button>
-    </div>    <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const dynamicInputs = document.getElementById('dynamic-inputs');
-            const addRowButton = document.getElementById('addRow');
-            let inputGroupCount = 0; // Initialize to 0 for the first row
+            const introSection = document.getElementById('intro-section');
+            const formSection = document.getElementById('form-section');
+            const formDanaKaget = document.getElementById('form-dana-kaget');
+            const formConvertSaldo = document.getElementById('form-convert-saldo');
+            const summaryContent = document.getElementById('summary-content');
 
-            // Tambahkan baris ini untuk mengaitkan tombol dengan fungsinya
-            addRowButton.addEventListener('click', addInputGroup);
+            const startButtonDanaKaget = document.getElementById('startButtonDanaKaget');
+            const startButtonConvertSaldo = document.getElementById('startButtonConvertSaldo');
+            const backgroundMusic = document.getElementById('background-music');
+            const qrisContainer = document.getElementById('qrisContainer');
+            const transactionDetails = document.getElementById('transactionDetails');
+            const backToFormButton = document.getElementById('backToFormButton');
+            const waSubmitButton = document.getElementById('waSubmitButton');
 
-            // Function to update the text of all "Hapus Baris" buttons
-            function updateRemoveButtonTexts() {
-                const inputGroups = dynamicInputs.querySelectorAll('.input-group');
-                inputGroups.forEach((group, index) => {
-                    const removeButton = group.querySelector('.remove-group-btn');
-                    removeButton.textContent = `Hapus data Link ${index + 1}`; // Added "ding" here
-                    removeButton.dataset.rowId = index; // Store the row index
-                });
-                updateRemoveButtonsVisibility(); // Call this to handle display property
-            }
+            // Dana Kaget elements
+            const namaDanaKagetInput = document.getElementById('namaDanaKaget');
+            const captionDanaKagetInput = document.getElementById('captionDanaKaget');
+            const isiDanaKagetInput = document.getElementById('isiDanaKaget');
+            const jumlahPemenangInput = document.getElementById('jumlahPemenang');
+            const paymentMethodDanaKagetSelect = document.getElementById('paymentMethodDanaKaget');
+            const showSummaryButtonDanaKaget = document.getElementById('showSummaryButtonDanaKaget');
 
-            // Function to manage display property based on number of rows
-            function updateRemoveButtonsVisibility() {
-                const removeButtons = dynamicInputs.querySelectorAll('.remove-group-btn');
-                if (removeButtons.length === 1) {
-                    removeButtons[0].style.display = 'none';
-                } else {
-                    removeButtons.forEach(button => {
-                        button.style.display = 'block';
-                    });
+            // Konversi Saldo elements
+            const namaConvertSaldoInput = document.getElementById('namaConvertSaldo');
+            const jumlahSaldoConvertInput = document.getElementById('jumlahSaldoConvert');
+            const bankPengirimSelect = document.getElementById('bankPengirim');
+            const bankPenerimaSelect = document.getElementById('bankPenerima');
+            const nomorPenerimaInput = document.getElementById('nomorPenerima'); // New element
+            const showSummaryButtonConvertSaldo = document.getElementById('showSummaryButtonConvertSaldo');
+
+            const SERVICE_FEE_DK = 100;
+            const PAYMENT_METHOD_ADDITIONAL_FEE_DK = 100; // For Dana Kaget if not QRIS
+
+            const CONVERSION_COST_PER_100K = 5000;
+            const CONVERSION_ADMIN_FEE_UNDER_50K = 2500; // New fee for conversion under 50k
+
+            let currentFormType = ''; // To track which form is active: 'danaKaget' or 'convertSaldo'
+
+            // Function to format number as Rupiah
+            const formatRupiah = (angka) => {
+                return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            };
+
+            // --- Calculation Functions ---
+
+            function calculateDanaKagetDetails() {
+                const isiDanaKaget = parseFloat(isiDanaKagetInput.value) || 0;
+                const jumlahPemenang = parseFloat(jumlahPemenangInput.value) || 0;
+                const selectedPaymentMethod = paymentMethodDanaKagetSelect.value;
+
+                const totalDanaKaget = isiDanaKaget * jumlahPemenang;
+                let currentPaymentMethodFee = 0;
+
+                if (selectedPaymentMethod && selectedPaymentMethod !== 'qris') {
+                    currentPaymentMethodFee = PAYMENT_METHOD_ADDITIONAL_FEE_DK;
                 }
-            }
 
-            function addInputGroup() {
-                inputGroupCount++; // Increment before creating new group for correct ID
-                const newGroup = document.createElement('div');
-                newGroup.classList.add('input-group');
-                newGroup.dataset.id = inputGroupCount; // Use the incremented count as ID
+                const totalPembayaran = totalDanaKaget + SERVICE_FEE_DK + currentPaymentMethodFee;
 
-                newGroup.innerHTML = `
-                    <button type="button" class="remove-group-btn">Hapus data ding ${inputGroupCount + 1}</button> <label for="jumlahSaldoDaget_${inputGroupCount}">Jumlah Saldo Daget (Rp):</label>
-                    <input type="number" class="jumlahSaldoDaget" id="jumlahSaldoDaget_${inputGroupCount}" placeholder="Contoh: 50000" required>
-
-                    <label for="jumlahPemenang_${inputGroupCount}">Jumlah Pemenang/SLOT:</label>
-                    <input type="number" class="jumlahPemenang" id="jumlahPemenang_${inputGroupCount}" placeholder="Contoh: 10" required>
-
-                    <label for="nama_${inputGroupCount}">Nama:</label>
-                    <input type="text" class="nama" id="nama_${inputGroupCount}" placeholder="Contoh: Budi Santoso" required>
-
-                    <label for="caption_${inputGroupCount}">Caption:</label>
-                    <textarea class="caption" id="caption_${inputGroupCount}" rows="4" placeholder="Tulis caption Anda di sini..." required></textarea>
+                transactionDetails.innerHTML = `
+                    <p>Total Dana Kaget: <strong id="displayTotalDanaKaget">Rp ${formatRupiah(totalDanaKaget)}</strong></p>
+                    <p>Biaya Jasa: <strong>Rp ${formatRupiah(SERVICE_FEE_DK)}</strong></p>
+                    <p id="displayPaymentMethodFee">Biaya Metode Pembayaran: <strong>Rp ${formatRupiah(currentPaymentMethodFee)}</strong></p>
+                    <p>Total Pembayaran: <strong id="displayTotalPembayaran">Rp ${formatRupiah(totalPembayaran)}</strong></p>
                 `;
-
-                dynamicInputs.appendChild(newGroup);
-                updateRemoveButtonTexts(); // Update all button texts after adding
             }
 
-            dynamicInputs.addEventListener('click', function(event) {
-                if (event.target.classList.contains('remove-group-btn')) {
-                    const groupToRemove = event.target.closest('.input-group');
-                    groupToRemove.remove();
-                    updateRemoveButtonTexts(); // Update all button texts after removing
+            function calculateConvertSaldoDetails() {
+                const jumlahSaldoConvert = parseFloat(jumlahSaldoConvertInput.value) || 0;
+
+                let conversionFee = 0;
+                if (jumlahSaldoConvert > 0) {
+                    if (jumlahSaldoConvert < 50000) {
+                        conversionFee = CONVERSION_ADMIN_FEE_UNDER_50K;
+                    } else {
+                        const kelipatan100k = Math.ceil(jumlahSaldoConvert / 100000);
+                        conversionFee = kelipatan100k * CONVERSION_COST_PER_100K;
+                    }
+                }
+
+                const totalYangDiterima = jumlahSaldoConvert - conversionFee; // Penerima menerima saldo dikurangi biaya konversi
+                const totalPembayaran = jumlahSaldoConvert; // Yang dibayarkan pengirim adalah jumlah saldo asli
+
+                transactionDetails.innerHTML = `
+                    <p>Saldo yang Dikonversi: <strong>Rp ${formatRupiah(jumlahSaldoConvert)}</strong></p>
+                    <p>Biaya Konversi: <strong>Rp ${formatRupiah(conversionFee)}</strong></p>
+                    <p>Total yang Diterima: <strong style="color: #4CAF50;">Rp ${formatRupiah(totalYangDiterima)}</strong></p>
+                    <p>Total Pembayaran: <strong id="displayTotalPembayaran">Rp ${formatRupiah(totalPembayaran)}</strong></p>
+                `;
+            }
+
+            // --- Event Listeners ---
+
+            startButtonDanaKaget.addEventListener('click', function() {
+                introSection.style.display = 'none';
+                formSection.style.display = 'flex';
+                formDanaKaget.style.display = 'block';
+                formConvertSaldo.style.display = 'none';
+                summaryContent.style.display = 'none';
+                currentFormType = 'danaKaget';
+                backgroundMusic.play().catch(error => {
+                    console.log("Autoplay prevented:", error);
+                });
+            });
+
+            startButtonConvertSaldo.addEventListener('click', function() {
+                introSection.style.display = 'none';
+                formSection.style.display = 'flex';
+                formDanaKaget.style.display = 'none';
+                formConvertSaldo.style.display = 'block';
+                summaryContent.style.display = 'none';
+                currentFormType = 'convertSaldo';
+                backgroundMusic.play().catch(error => {
+                    console.log("Autoplay prevented:", error);
+                });
+            });
+
+            showSummaryButtonDanaKaget.addEventListener('click', function() {
+                if (!namaDanaKagetInput.checkValidity() || !captionDanaKagetInput.checkValidity() ||
+                    !isiDanaKagetInput.checkValidity() || parseFloat(isiDanaKagetInput.value) <= 0 ||
+                    !jumlahPemenangInput.checkValidity() || parseFloat(jumlahPemenangInput.value) <= 0 ||
+                    !paymentMethodDanaKagetSelect.value) {
+                    alert('Mohon lengkapi semua data Dana Kaget dengan benar (nilai harus lebih dari 0 dan metode pembayaran dipilih).');
+                    return;
+                }
+                calculateDanaKagetDetails();
+                formDanaKaget.style.display = 'none';
+                summaryContent.style.display = 'flex';
+                qrisContainer.style.display = 'flex';
+                transactionDetails.style.display = 'block';
+                waSubmitButton.style.display = 'block';
+                backToFormButton.style.display = 'block';
+                summaryContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            showSummaryButtonConvertSaldo.addEventListener('click', function() {
+                if (!namaConvertSaldoInput.checkValidity() || !jumlahSaldoConvertInput.checkValidity() ||
+                    parseFloat(jumlahSaldoConvertInput.value) <= 0 ||
+                    !bankPengirimSelect.value || !bankPenerimaSelect.value || !nomorPenerimaInput.checkValidity()) {
+                    alert('Mohon lengkapi semua data Konversi Saldo dengan benar (jumlah saldo harus lebih dari 0, metode pengirim/penerima harus dipilih, dan nomor rekening/ID penerima tidak boleh kosong).');
+                    return;
+                }
+                calculateConvertSaldoDetails();
+                formConvertSaldo.style.display = 'none';
+                summaryContent.style.display = 'flex';
+                qrisContainer.style.display = 'flex';
+                transactionDetails.style.display = 'block';
+                waSubmitButton.style.display = 'block';
+                backToFormButton.style.display = 'block';
+                summaryContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            backToFormButton.addEventListener('click', function() {
+                summaryContent.style.display = 'none';
+                if (currentFormType === 'danaKaget') {
+                    formDanaKaget.style.display = 'block';
+                    formDanaKaget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else if (currentFormType === 'convertSaldo') {
+                    formConvertSaldo.style.display = 'block';
+                    formConvertSaldo.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
 
-            // Initial call to set text and hide/show for the first row on load
-            updateRemoveButtonTexts();
+            // Real-time calculation updates for Dana Kaget
+            isiDanaKagetInput.addEventListener('input', calculateDanaKagetDetails);
+            jumlahPemenangInput.addEventListener('input', calculateDanaKagetDetails);
+            paymentMethodDanaKagetSelect.addEventListener('change', calculateDanaKagetDetails);
 
+            // Real-time calculation updates for Convert Saldo
+            jumlahSaldoConvertInput.addEventListener('input', calculateConvertSaldoDetails);
 
-            document.getElementById('waForm').addEventListener('submit', function(event) {
-                event.preventDefault();
+            // WhatsApp Submission
+            waSubmitButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default form submission if any
 
-                const jumlahTransfer = document.getElementById('jumlahTransfer').value;
-                const formatRupiah = (angka) => {
-                    return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                let teksWhatsApp = '';
+                const phoneNumber = '6285711374861'; // Nomor WhatsApp Anda
+
+                if (currentFormType === 'danaKaget') {
+                    const nama = namaDanaKagetInput.value;
+                    const caption = captionDanaKagetInput.value;
+                    const isiDanaKaget = parseFloat(isiDanaKagetInput.value) || 0;
+                    const jumlahPemenang = parseFloat(jumlahPemenangInput.value) || 0;
+                    const selectedPaymentMethod = paymentMethodDanaKagetSelect.value;
+                    const paymentMethodText = paymentMethodDanaKagetSelect.options[paymentMethodDanaKagetSelect.selectedIndex].text;
+
+                    const totalDanaKagetCalculated = isiDanaKaget * jumlahPemenang;
+                    let currentPaymentMethodFee = 0;
+                    if (selectedPaymentMethod && selectedPaymentMethod !== 'qris') {
+                        currentPaymentMethodFee = PAYMENT_METHOD_ADDITIONAL_FEE_DK;
+                    }
+                    const totalPembayaranFinal = totalDanaKagetCalculated + SERVICE_FEE_DK + currentPaymentMethodFee;
+
+                    teksWhatsApp = `*💖 Transaksi Dana Kaget 💖*\n────────────────────────\n════════════════════════\n*👤 Pengirim: ${nama}*\n*💬 Pesan: ${caption}*\n*💰 Isi Dana Kaget per Pemenang: Rp${formatRupiah(isiDanaKaget)}*\n*🏆 Jumlah Pemenang: ${jumlahPemenang} orang*\n*💳 Metode Pembayaran: ${paymentMethodText}*\n────────────────────────\n*✨ Total Dana Kaget: Rp${formatRupiah(totalDanaKagetCalculated)}*\n*💸 Biaya Jasa: Rp${formatRupiah(SERVICE_FEE_DK)}*\n*➕ Biaya ${paymentMethodText}: Rp${formatRupiah(currentPaymentMethodFee)}*\n*✅ Total Pembayaran: Rp${formatRupiah(totalPembayaranFinal)}*\n════════════════════════\n               _© Dana Kaget Chichuy_`;
+
+                } else if (currentFormType === 'convertSaldo') {
+                    const nama = namaConvertSaldoInput.value;
+                    const jumlahSaldoConvert = parseFloat(jumlahSaldoConvertInput.value) || 0;
+                    const bankPengirimText = bankPengirimSelect.options[bankPengirimSelect.selectedIndex].text;
+                    const bankPenerimaText = bankPenerimaSelect.options[bankPenerimaSelect.selectedIndex].text;
+                    const nomorPenerima = nomorPenerimaInput.value; // Get the recipient's number
+
+                    let conversionFee = 0;
+                    if (jumlahSaldoConvert > 0) {
+                        if (jumlahSaldoConvert < 50000) {
+                            conversionFee = CONVERSION_ADMIN_FEE_UNDER_50K;
+                        } else {
+                            const kelipatan100k = Math.ceil(jumlahSaldoConvert / 100000);
+                            conversionFee = kelipatan100k * CONVERSION_COST_PER_100K;
+                        }
+                    }
+                    const totalYangDiterima = jumlahSaldoConvert - conversionFee;
+                    const totalPembayaranFinal = jumlahSaldoConvert; // Jumlah yang harus dibayarkan pengirim
+
+                    teksWhatsApp = `*🔄 Transaksi Konversi Saldo 🔄*\n────────────────────────\n════════════════════════\n*👤 Pengirim: ${nama}*\n*💵 Saldo Dikonversi: Rp${formatRupiah(jumlahSaldoConvert)}*\n*🏦 Metode Pengirim: ${bankPengirimText}*\n*💸 Metode Penerima: ${bankPenerimaText}*\n*🆔 Rekening/ID Penerima: ${nomorPenerima}*\n────────────────────────\n*💰 Biaya Konversi: Rp${formatRupiah(conversionFee)}*\n*✅ Saldo yang Diterima: Rp${formatRupiah(totalYangDiterima)}*\n*✅ Total Pembayaran: Rp${formatRupiah(totalPembayaranFinal)}*\n════════════════════════\n               _© Dana Kaget Chichuy_`;
                 }
 
-                let dynamicContent = '';
-                const inputGroups = dynamicInputs.querySelectorAll('.input-group');
-
-                inputGroups.forEach(group => {
-                    const jumlahSaldoDaget = group.querySelector('.jumlahSaldoDaget').value;
-                    const jumlahPemenang = group.querySelector('.jumlahPemenang').value;
-                    const nama = group.querySelector('.nama').value;
-                    const caption = group.querySelector('.caption').value;
-
-                    dynamicContent += `*𝕵𝖚𝖒𝖑𝖆𝖍 𝕾𝖆𝖑𝖉𝖔 𝕯𝖆𝖌𝖊𝖙 : Rp.${formatRupiah(jumlahSaldoDaget)}*\n`;
-                    dynamicContent += `*𝕵𝖚𝖒𝖑𝖆𝕷𝕬𝖍 𝕻𝖊𝖒𝖊𝖓𝖆𝖓𝖌 : ${jumlahPemenang}*\n`;
-                    dynamicContent += `*𝕹𝖆𝖒𝖆 : ${nama}*\n`;
-                    dynamicContent += `*𝕮𝖆𝖕𝖙𝖎𝖔𝖓 : ${caption}*\n> 𝕷𝖎𝖓𝖐𝕲𝖊𝖙 :\n────────────────────────\n`; // Added LinkGet here
-                });
-
-                const teksWhatsApp = `*𝕿𝖗𝖆𝖓𝖘𝖆𝖐𝖘𝖎 𝕿𝖎𝖙𝖎𝖕 𝕯𝖆𝖓𝖆 𝕶𝖆𝖌𝖊𝖙*\n────────────────────────\n════════════════════════\n*𝕵𝖚𝖒𝖑𝖆𝖍 𝕿𝖗𝖆𝖓𝖘𝖋𝖊𝖗 : Rp.${formatRupiah(jumlahTransfer)}*\n────────────────────────\n${dynamicContent}════════════════════════\n               𝐜𝐨𝐩𝐲𝐫𝖎𝖌𝖍𝖙.𝐃𝖆𝖌𝖊𝖙_𝕮𝖎𝖈𝖍𝖚y`;
-
                 const encodedTeks = encodeURIComponent(teksWhatsApp);
-                const phoneNumber = '6285711374861';
                 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedTeks}`;
-
                 window.open(whatsappUrl, '_blank');
             });
         });
-    
     </script>
 </body>
 </html>
