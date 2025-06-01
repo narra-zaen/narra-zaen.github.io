@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Good Night!</title>
+    <title>Salam Kenal, Baskara Syafira!</title>
     <style>
         body {
             margin: 0;
@@ -12,7 +12,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: url('https://files.catbox.moe/tlmai8.jpg');
+            background-image: url('https://files.catbox.moe/bgvxea.jpg'); /* Updated background */
             background-size: cover;
             background-position: center;
             color: #fff;
@@ -64,6 +64,15 @@
             color: #ffe0f0;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
+        .quote-text {
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-style: italic;
+            color: #f0e0ff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+            font-weight: bold;
+        }
+
 
         /* Input Screen Styles */
         #inputScreen h1 {
@@ -111,6 +120,15 @@
             font-style: italic;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
+        
+        .dana-kaget-preview { /* Styling for the preview text in the textarea */
+            color: #8a2be2;
+            font-size: 0.9em;
+            margin-top: 5px;
+            font-style: italic;
+            text-shadow: 0 0 1px rgba(0,0,0,0.1);
+        }
+
 
         .hidden {
             opacity: 0;
@@ -212,6 +230,14 @@
             margin-bottom: 20px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
+        #waitingScreen .quote-text-waiting { /* New style for waiting screen quote */
+            font-size: 1em;
+            font-style: italic;
+            color: #8a2be2; /* Different color to stand out */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            margin-top: 10px;
+            margin-bottom: 10px; /* Added margin for spacing */
+        }
 
         #countdown {
             font-size: 2em;
@@ -222,25 +248,28 @@
 </head>
 <body>
     <div class="container visible" id="initialScreen">
-        <button id="goodNightButton">Good Night!</button>
-        <p class="cute-text">Tekan tombol ini untuk kejutan manis!</p>
+        <button id="goodNightButton">Klik untuk Menyapa Baskara Syafira!</button>
+        <p class="quote-text">"Persahabatan sejati adalah tentang berbagi tawa, menghapus air mata, dan selalu ada di setiap langkah."</p>
+        <p class="cute-text">Tekan tombol ini untuk saling kenal lebih dekat!</p>
     </div>
 
     <div class="container hidden" id="waitingScreen">
-        <p>Sedang menunggumu menyayangiku...</p>
+        <p>Sedang menunggumu menyapa...</p>
+        <p class="quote-text-waiting">"Sahabat sejati adalah mereka yang tetap di sisimu saat dunia berpaling."</p>
         <p id="countdown">20</p>
-        <p class="cute-text">Aku butuh sedikit lebih banyak kasih sayang darimu sebelum malam ini.</p>
+        <p class="cute-text">Ayo, berikan sapaan persahabatanmu!</p>
     </div>
 
     <div class="container hidden" id="inputScreen">
-        <h1>Kirim Ucapan Manis</h1>
+        <h1>Kirim Pesan Salam Kenal untuk Baskara Syafira</h1>
         <div class="cute-animations">
             <img src="https://i.ibb.co/wZbCHw65/8865fdebfdfc5a58cf297a90a1fd5b53.png" alt="Cute Bear" class="animated-element bear">
             <img src="https://i.ibb.co/wZbCHw65/8865fdebfdfc5a58cf297a90a1fd5b53.png" alt="Sparkling Stars" class="animated-element stars">
         </div>
-        <textarea id="messageInput" placeholder="Tulis ucapan selamat malammu di sini..." disabled></textarea>
-        <button id="sendWaButton" disabled>Kirim Lewat WhatsApp</button>
-        <p class="hint-text">Ucapanmu akan langsung terkirim!</p>
+        <textarea id="messageInput" placeholder="Tulis pesan salam kenalmu di sini..."></textarea>
+        <p class="dana-kaget-preview">Pesanmu juga akan disertai kado DANA Kaget! 💸</p>
+        <button id="sendWaButton">Kirim Lewat WhatsApp</button>
+        <p class="hint-text">Pesanmu akan langsung terkirim!</p>
     </div>
 
     <audio id="backgroundMusic" loop>
@@ -259,23 +288,23 @@
             const sendWaButton = document.getElementById('sendWaButton');
             const countdownElement = document.getElementById('countdown');
 
-            // Define the WhatsApp number here
+            // Define the WhatsApp number and DANA Kaget link here
             const whatsappNumber = '6285974923298'; 
+            const danaKagetLink = 'https://link.dana.id/danakaget?c=s7kbmpbk6&r=cAYM8h&orderId=20250601101214422815010300166998225263209';
+            const danaKagetText = `\n\n🎁 Kado ini untukmu! Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 ${danaKagetLink}`;
 
             let audioPlayed = false;
             let countdownSeconds = 20;
 
             goodNightButton.addEventListener('click', () => {
-                // Sembunyikan initial screen
                 initialScreen.classList.remove('visible');
                 initialScreen.classList.add('hidden');
 
-                // Tampilkan waiting screen setelah transisi
                 setTimeout(() => {
-                    initialScreen.style.display = 'none'; // Hapus dari layout
+                    initialScreen.style.display = 'none';
                     waitingScreen.classList.remove('hidden');
                     waitingScreen.classList.add('visible');
-                }, 500); // Sesuaikan dengan durasi transisi CSS
+                }, 500);
 
                 if (!audioPlayed) {
                     backgroundMusic.play().catch(e => {
@@ -291,37 +320,44 @@
 
                     if (countdownSeconds <= 0) {
                         clearInterval(countdownInterval);
-                        // Sembunyikan waiting screen
                         waitingScreen.classList.remove('visible');
                         waitingScreen.classList.add('hidden');
 
-                        // Tampilkan input screen setelah transisi
                         setTimeout(() => {
-                            waitingScreen.style.display = 'none'; // Hapus dari layout
+                            waitingScreen.style.display = 'none';
                             inputScreen.classList.remove('hidden');
                             inputScreen.classList.add('visible');
                             messageInput.disabled = false; // Enable textarea
                             sendWaButton.disabled = false; // Enable button
-                        }, 500); // Sesuaikan dengan durasi transisi CSS
+                        }, 500);
                     }
                 }, 1000);
             });
 
             sendWaButton.addEventListener('click', () => {
-                const message = messageInput.value;
-                if (message.trim() === '') {
-                    alert('Ups! Sepertinya kamu lupa menulis ucapan. Coba tulis sesuatu yang manis!');
+                let userMessage = messageInput.value.trim();
+                if (userMessage === '') {
+                    alert('Ups! Sepertinya kamu lupa menulis pesan. Coba tulis sesuatu yang manis!');
                     return;
                 }
 
-                const encodedMessage = encodeURIComponent(message);
-                // Use the whatsappNumber variable here
+                // Append DANA Kaget text and link to the user's message
+                const fullMessage = userMessage + danaKagetText;
+                
+                const encodedMessage = encodeURIComponent(fullMessage);
                 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
                 window.open(whatsappUrl, '_blank');
+
+                // No need for a separate "messageSentScreen" anymore
+                // We can reset the input screen or simply do nothing if the user closes WhatsApp
+                // For simplicity, I'll just clear the textarea and disable the button.
+                messageInput.value = '';
+                messageInput.disabled = true;
+                sendWaButton.disabled = true;
+                alert('Pesanmu telah dikirim ke WhatsApp! Semoga Baskara Syafira suka kadonya! ✨');
             });
 
-            // Auto-play musik saat ada interaksi pertama di body
             document.body.addEventListener('click', () => {
                 if (!audioPlayed) {
                     backgroundMusic.play().catch(e => {
