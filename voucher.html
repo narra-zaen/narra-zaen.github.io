@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salam Kenal, Baskara Syafira!</title>
+    <title>Salam Kenal, Kak Mawar Hitam! 💜</title>
     <style>
         body {
             margin: 0;
@@ -12,7 +12,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: url('https://files.catbox.moe/bgvxea.jpg'); /* Updated background */
+            background-image: linear-gradient(to top right, #e0b0ff, #c080ff); /* Soft purple gradient */
             background-size: cover;
             background-position: center;
             color: #fff;
@@ -21,26 +21,25 @@
         }
 
         .container {
-            background-image: url('https://i.ibb.co/Rq5wKzy/8865fdebfdfc5a58cf297a90a1fd5b53-1.png');
-            background-size: cover;
-            background-position: center;
+            background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white for content box */
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 20px; /* More rounded for cuteness */
             text-align: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(120, 0, 180, 0.3); /* Purple-ish shadow */
             max-width: 90%;
-            width: 400px; /* Lebar tetap untuk konsistensi */
-            position: absolute; /* Mengatur posisi absolut untuk transisi yang lebih baik */
+            width: 400px;
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: black;
-            transition: opacity 0.5s ease, transform 0.5s ease; /* Transisi untuk fade dan posisi */
+            color: #4a0072; /* Darker purple text for contrast */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            border: 3px solid #b380ff; /* Cute purple border */
         }
 
         /* Initial Screen Styles */
         #initialScreen button {
-            background-color: #ff69b4;
+            background-color: #8a2be2; /* Medium purple */
             color: white;
             border: none;
             padding: 18px 35px;
@@ -53,7 +52,7 @@
         }
 
         #initialScreen button:hover {
-            background-color: #e65a9f;
+            background-color: #6a0dad; /* Darker purple on hover */
             transform: translateY(-3px);
         }
 
@@ -61,25 +60,25 @@
             margin-top: 20px;
             font-size: 1.1em;
             font-style: italic;
-            color: #ffe0f0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            color: #7b00b0; /* Darker purple for text */
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
         }
         .quote-text {
             margin-top: 15px;
             font-size: 1.2em;
             font-style: italic;
-            color: #f0e0ff;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+            color: #8a2be2; /* Medium purple for quotes */
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.4);
             font-weight: bold;
         }
 
 
         /* Input Screen Styles */
         #inputScreen h1 {
-            color: #ffe0f0;
+            color: #7b00b0; /* Darker purple */
             margin-bottom: 25px;
             font-size: 2.2em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.4);
         }
 
         textarea {
@@ -87,17 +86,17 @@
             height: 120px;
             padding: 10px;
             margin-bottom: 20px;
-            border: 2px solid #ffb6c1;
+            border: 2px solid #b380ff; /* Purple border */
             border-radius: 10px;
             font-size: 1em;
-            background-color: rgba(255, 255, 255, 0.9);
-            color: #333;
+            background-color: rgba(255, 255, 255, 0.95); /* Light translucent white */
+            color: #4a0072; /* Dark purple text */
             resize: vertical;
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
         }
 
         #sendWaButton {
-            background-color: #25d366;
+            background-color: #9933ff; /* Bright purple */
             color: white;
             border: none;
             padding: 15px 30px;
@@ -109,31 +108,31 @@
         }
 
         #sendWaButton:hover {
-            background-color: #1da851;
+            background-color: #8000ff; /* Darker bright purple */
             transform: translateY(-2px);
         }
 
         .hint-text {
             margin-top: 15px;
             font-size: 0.9em;
-            color: #d0e0f0;
+            color: #7b00b0; /* Darker purple */
             font-style: italic;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
         }
         
-        .dana-kaget-preview { /* Styling for the preview text in the textarea */
-            color: #8a2be2;
+        .dana-kaget-preview {
+            color: #8a2be2; /* Medium purple */
             font-size: 0.9em;
             margin-top: 5px;
             font-style: italic;
-            text-shadow: 0 0 1px rgba(0,0,0,0.1);
+            text-shadow: 0 0 1px rgba(255,255,255,0.1);
         }
 
 
         .hidden {
             opacity: 0;
-            pointer-events: none; /* Mencegah interaksi saat hidden */
-            z-index: -1; /* Memastikan tidak menimpa elemen lain */
+            pointer-events: none;
+            z-index: -1;
         }
 
         .visible {
@@ -153,11 +152,14 @@
             z-index: 5;
         }
 
+        /* Mengubah gambar animasi menjadi nuansa ungu jika ada pengganti yang cocok */
         .animated-element {
             position: absolute;
             opacity: 0;
             animation-iteration-count: infinite;
             animation-fill-mode: forwards;
+            /* Jika ada gambar beruang/bintang nuansa ungu, ganti src-nya */
+            /* Misalnya: filter: hue-rotate(180deg) saturate(200%); untuk memberi efek ungu */
         }
 
         .bear {
@@ -201,72 +203,73 @@
 
         /* Waiting Screen Styles */
         #waitingScreen {
-            background-image: url('https://i.ibb.co/Rq5wKzy/8865fdebfdfc5a58cf297a90a1fd5b53-1.png');
+            background-image: url('https://files.catbox.moe/x363ne.jpg'); /* New background image for waiting screen */
             background-size: cover;
             background-position: center;
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(120, 0, 180, 0.3);
             max-width: 90%;
-            width: 400px; /* Lebar tetap untuk konsistensi */
+            width: 400px;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: black;
+            color: #4a0072;
             font-size: 1.5em;
             font-weight: bold;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 200px; /* Adjust as needed */
+            min-height: 200px;
             transition: opacity 0.5s ease, transform 0.5s ease;
+            border: 3px solid #b380ff;
         }
 
         #waitingScreen p {
-            color: #ff69b4;
+            color: #7b00b0; /* Darker purple */
             margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
         }
-        #waitingScreen .quote-text-waiting { /* New style for waiting screen quote */
+        #waitingScreen .quote-text-waiting {
             font-size: 1em;
             font-style: italic;
-            color: #8a2be2; /* Different color to stand out */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            color: #8a2be2; /* Medium purple */
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
             margin-top: 10px;
-            margin-bottom: 10px; /* Added margin for spacing */
+            margin-bottom: 10px;
         }
 
         #countdown {
             font-size: 2em;
-            color: #8a2be2;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #9933ff; /* Bright purple */
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.3);
         }
     </style>
 </head>
 <body>
     <div class="container visible" id="initialScreen">
-        <button id="goodNightButton">Klik untuk Menyapa Baskara Syafira!</button>
-        <p class="quote-text">"Persahabatan sejati adalah tentang berbagi tawa, menghapus air mata, dan selalu ada di setiap langkah."</p>
+        <button id="goodNightButton">Klik untuk Menyapa Kak Mawar Hitam! 💜</button>
+        <p class="quote-text">"Rindu itu seperti hujan, datang tiba-tiba tanpa permisi, membasahi hati yang sepi."</p>
         <p class="cute-text">Tekan tombol ini untuk saling kenal lebih dekat!</p>
     </div>
 
     <div class="container hidden" id="waitingScreen">
         <p>Sedang menunggumu menyapa...</p>
-        <p class="quote-text-waiting">"Sahabat sejati adalah mereka yang tetap di sisimu saat dunia berpaling."</p>
+        <p class="quote-text-waiting">"Hati tak pernah berbohong tentang rindu, ia selalu menemukan jalan untuk pulang."</p>
         <p id="countdown">20</p>
         <p class="cute-text">Ayo, berikan sapaan persahabatanmu!</p>
     </div>
 
     <div class="container hidden" id="inputScreen">
-        <h1>Kirim Pesan Salam Kenal untuk Baskara Syafira</h1>
+        <h1>Kirim Pesan Rindu untuk Kak Mawar Hitam</h1>
         <div class="cute-animations">
             <img src="https://i.ibb.co/wZbCHw65/8865fdebfdfc5a58cf297a90a1fd5b53.png" alt="Cute Bear" class="animated-element bear">
             <img src="https://i.ibb.co/wZbCHw65/8865fdebfdfc5a58cf297a90a1fd5b53.png" alt="Sparkling Stars" class="animated-element stars">
         </div>
-        <textarea id="messageInput" placeholder="Tulis pesan salam kenalmu di sini..."></textarea>
+        <textarea id="messageInput" placeholder="Tulis pesan rindumu di sini..."></textarea>
         <p class="dana-kaget-preview">Pesanmu juga akan disertai kado DANA Kaget! 💸</p>
         <button id="sendWaButton">Kirim Lewat WhatsApp</button>
         <p class="hint-text">Pesanmu akan langsung terkirim!</p>
@@ -288,9 +291,8 @@
             const sendWaButton = document.getElementById('sendWaButton');
             const countdownElement = document.getElementById('countdown');
 
-            // Define the WhatsApp number and DANA Kaget link here
-            const whatsappNumber = '6285974923298'; 
-            const danaKagetLink = 'https://link.dana.id/danakaget?c=s7kbmpbk6&r=cAYM8h&orderId=20250601101214422815010300166998225263209';
+            const whatsappNumber = '6285187426233'; 
+            const danaKagetLink = 'https://link.dana.id/danakaget?c=ssc9tal9c&r=cAYM8h&orderId=20250601101214188815010300166998225328639';
             const danaKagetText = `\n\n🎁 Kado ini untukmu! Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 ${danaKagetLink}`;
 
             let audioPlayed = false;
@@ -327,8 +329,8 @@
                             waitingScreen.style.display = 'none';
                             inputScreen.classList.remove('hidden');
                             inputScreen.classList.add('visible');
-                            messageInput.disabled = false; // Enable textarea
-                            sendWaButton.disabled = false; // Enable button
+                            messageInput.disabled = false;
+                            sendWaButton.disabled = false;
                         }, 500);
                     }
                 }, 1000);
@@ -341,21 +343,16 @@
                     return;
                 }
 
-                // Append DANA Kaget text and link to the user's message
                 const fullMessage = userMessage + danaKagetText;
-                
                 const encodedMessage = encodeURIComponent(fullMessage);
                 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
                 window.open(whatsappUrl, '_blank');
 
-                // No need for a separate "messageSentScreen" anymore
-                // We can reset the input screen or simply do nothing if the user closes WhatsApp
-                // For simplicity, I'll just clear the textarea and disable the button.
                 messageInput.value = '';
                 messageInput.disabled = true;
                 sendWaButton.disabled = true;
-                alert('Pesanmu telah dikirim ke WhatsApp! Semoga Baskara Syafira suka kadonya! ✨');
+                alert('Pesan rindumu telah dikirim ke WhatsApp! Semoga Kak Mawar Hitam suka kadonya! ✨');
             });
 
             document.body.addEventListener('click', () => {
