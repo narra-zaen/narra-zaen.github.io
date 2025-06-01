@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salam Kenal, Kak Mawar Hitam! 💜</title>
+    <title>Untuk Syafira... 💕</title>
     <style>
         body {
             margin: 0;
@@ -12,7 +12,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: linear-gradient(to top right, #e0b0ff, #c080ff); /* Soft purple gradient */
+            background-image: linear-gradient(to top right, #ffb0e0, #ff80c0); /* Soft pink gradient */
             background-size: cover;
             background-position: center;
             color: #fff;
@@ -25,21 +25,21 @@
             padding: 30px;
             border-radius: 20px; /* More rounded for cuteness */
             text-align: center;
-            box-shadow: 0 10px 30px rgba(120, 0, 180, 0.3); /* Purple-ish shadow */
+            box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3); /* Pink-ish shadow */
             max-width: 90%;
             width: 400px;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #4a0072; /* Darker purple text for contrast */
+            color: #99004d; /* Darker pink text for contrast */
             transition: opacity 0.5s ease, transform 0.5s ease;
-            border: 3px solid #b380ff; /* Cute purple border */
+            border: 3px solid #ff80b3; /* Cute pink border */
         }
 
         /* Initial Screen Styles */
         #initialScreen button {
-            background-color: #8a2be2; /* Medium purple */
+            background-color: #ff69b4; /* Medium pink */
             color: white;
             border: none;
             padding: 18px 35px;
@@ -51,8 +51,14 @@
             animation: pulse 2s infinite;
         }
 
+        #initialScreen button:disabled {
+            background-color: #a0a0a0; /* Grey out when disabled */
+            cursor: not-allowed;
+            animation: none; /* Stop pulse animation when disabled */
+        }
+
         #initialScreen button:hover {
-            background-color: #6a0dad; /* Darker purple on hover */
+            background-color: #ff1493; /* Darker pink on hover */
             transform: translateY(-3px);
         }
 
@@ -60,22 +66,22 @@
             margin-top: 20px;
             font-size: 1.1em;
             font-style: italic;
-            color: #7b00b0; /* Darker purple for text */
+            color: #cc0066; /* Darker pink for text */
             text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
         }
+
         .quote-text {
             margin-top: 15px;
             font-size: 1.2em;
             font-style: italic;
-            color: #8a2be2; /* Medium purple for quotes */
+            color: #ff69b4; /* Medium pink for quotes */
             text-shadow: 1px 1px 3px rgba(255,255,255,0.4);
             font-weight: bold;
         }
 
-
         /* Input Screen Styles */
         #inputScreen h1 {
-            color: #7b00b0; /* Darker purple */
+            color: #cc0066; /* Darker pink */
             margin-bottom: 25px;
             font-size: 2.2em;
             text-shadow: 2px 2px 4px rgba(255,255,255,0.4);
@@ -86,17 +92,17 @@
             height: 120px;
             padding: 10px;
             margin-bottom: 20px;
-            border: 2px solid #b380ff; /* Purple border */
+            border: 2px solid #ff80b3; /* Pink border */
             border-radius: 10px;
             font-size: 1em;
             background-color: rgba(255, 255, 255, 0.95); /* Light translucent white */
-            color: #4a0072; /* Dark purple text */
+            color: #99004d; /* Dark pink text */
             resize: vertical;
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
         }
 
         #sendWaButton {
-            background-color: #9933ff; /* Bright purple */
+            background-color: #ff3385; /* Bright pink */
             color: white;
             border: none;
             padding: 15px 30px;
@@ -108,26 +114,25 @@
         }
 
         #sendWaButton:hover {
-            background-color: #8000ff; /* Darker bright purple */
+            background-color: #ff0066; /* Darker bright pink */
             transform: translateY(-2px);
         }
 
         .hint-text {
             margin-top: 15px;
             font-size: 0.9em;
-            color: #7b00b0; /* Darker purple */
+            color: #cc0066; /* Darker pink */
             font-style: italic;
             text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
         }
-        
+
         .dana-kaget-preview {
-            color: #8a2be2; /* Medium purple */
+            color: #ff69b4; /* Medium pink */
             font-size: 0.9em;
             margin-top: 5px;
             font-style: italic;
             text-shadow: 0 0 1px rgba(255,255,255,0.1);
         }
-
 
         .hidden {
             opacity: 0;
@@ -152,14 +157,14 @@
             z-index: 5;
         }
 
-        /* Mengubah gambar animasi menjadi nuansa ungu jika ada pengganti yang cocok */
+        /* Mengubah gambar animasi menjadi nuansa merah muda jika ada pengganti yang cocok */
         .animated-element {
             position: absolute;
             opacity: 0;
             animation-iteration-count: infinite;
             animation-fill-mode: forwards;
-            /* Jika ada gambar beruang/bintang nuansa ungu, ganti src-nya */
-            /* Misalnya: filter: hue-rotate(180deg) saturate(200%); untuk memberi efek ungu */
+            /* Jika ada gambar beruang/bintang nuansa merah muda, ganti src-nya */
+            /* Misalnya: filter: hue-rotate(330deg) saturate(200%); untuk memberi efek merah muda */
         }
 
         .bear {
@@ -203,20 +208,20 @@
 
         /* Waiting Screen Styles */
         #waitingScreen {
-            background-image: url('https://files.catbox.moe/x363ne.jpg'); /* New background image for waiting screen */
+            background-image: url('https://files.catbox.moe/2ctut8.jpg'); /* New background image for waiting screen */
             background-size: cover;
             background-position: center;
             padding: 30px;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(120, 0, 180, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3); /* Pink-ish shadow */
             max-width: 90%;
             width: 400px;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #4a0072;
+            color: #fff; /* Changed to white for better contrast on the new background */
             font-size: 1.5em;
             font-weight: bold;
             display: flex;
@@ -225,64 +230,66 @@
             align-items: center;
             min-height: 200px;
             transition: opacity 0.5s ease, transform 0.5s ease;
-            border: 3px solid #b380ff;
+            border: 3px solid #ff80b3;
         }
 
         #waitingScreen p {
-            color: #7b00b0; /* Darker purple */
+            color: #fff; /* Changed to white for better contrast on the new background */
             margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Added shadow for readability */
         }
+
         #waitingScreen .quote-text-waiting {
             font-size: 1em;
             font-style: italic;
-            color: #8a2be2; /* Medium purple */
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
+            color: #fff; /* Changed to white for better contrast on the new background */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Added shadow for readability */
             margin-top: 10px;
             margin-bottom: 10px;
         }
 
         #countdown {
             font-size: 2em;
-            color: #9933ff; /* Bright purple */
+            color: #ff3385; /* Bright pink */
             text-shadow: 2px 2px 4px rgba(255,255,255,0.3);
         }
     </style>
 </head>
 <body>
     <div class="container visible" id="initialScreen">
-        <button id="goodNightButton">Klik untuk Menyapa Kak Mawar Hitam! 💜</button>
-        <p class="quote-text">"Rindu itu seperti hujan, datang tiba-tiba tanpa permisi, membasahi hati yang sepi."</p>
-        <p class="cute-text">Tekan tombol ini untuk saling kenal lebih dekat!</p>
+        <p class="quote-text">"Aku sayang kamu, tapi maaf..."</p>
+        <button id="loveSorryButton" disabled>I Love You, I'm Sorry (<span id="buttonCountdown">5</span>)</button>
+        <p class="cute-text">statement "i love you, i'm sorry" itu beneran ada.
+kaya lo sayang ke dia, tapi keadaan emang ga bisa buat lo bareng bareng</p>
     </div>
 
     <div class="container hidden" id="waitingScreen">
-        <p>Sedang menunggumu menyapa...</p>
-        <p class="quote-text-waiting">"Hati tak pernah berbohong tentang rindu, ia selalu menemukan jalan untuk pulang."</p>
+        <p>Tolong beri aku waktu...</p>
+        <p class="quote-text-waiting">"I love you, I'm sorry. Maaf jika aku tak bisa selalu ada, tapi hatiku selalu milikmu."</p>
         <p id="countdown">20</p>
-        <p class="cute-text">Ayo, berikan sapaan persahabatanmu!</p>
+        <p class="cute-text">Sebentar lagi...</p>
     </div>
 
     <div class="container hidden" id="inputScreen">
-        <h1>Kirim Pesan Rindu untuk Kak Mawar Hitam</h1>
+        <h1>i love you, i'm sorry</h1>
         <div class="cute-animations">
             <img src="https://i.ibb.co/wZbCHw65/8865fdebfdfc5a58cf297a90a1fd5b53.png" alt="Cute Bear" class="animated-element bear">
             <img src="https://i.ibb.co/wZbCHw65/8865fdebfdfc5a58cf297a90a1fd5b53.png" alt="Sparkling Stars" class="animated-element stars">
         </div>
-        <textarea id="messageInput" placeholder="Tulis pesan rindumu di sini..."></textarea>
-        <p class="dana-kaget-preview">Pesanmu juga akan disertai kado DANA Kaget! 💸</p>
-        <button id="sendWaButton">Kirim Lewat WhatsApp</button>
+        <textarea id="messageInput" placeholder="Tulis curahan hatimu di sini..."></textarea>
+        <p class="dana-kaget-preview">kasih semangat buat kak syafira ya 🥲</p>
+        <button id="sendWaButton">i love you, i'm sorry</button>
         <p class="hint-text">Pesanmu akan langsung terkirim!</p>
     </div>
 
     <audio id="backgroundMusic" loop>
-        <source src="https://files.catbox.moe/et7tj5.mp3" type="audio/mpeg">
+        <source src="https://files.catbox.moe/7k058r.mp3" type="audio/mpeg">
         Maaf, browser Anda tidak mendukung elemen audio.
     </audio>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const goodNightButton = document.getElementById('goodNightButton');
+            const loveSorryButton = document.getElementById('loveSorryButton');
             const initialScreen = document.getElementById('initialScreen');
             const waitingScreen = document.getElementById('waitingScreen');
             const inputScreen = document.getElementById('inputScreen');
@@ -290,15 +297,28 @@
             const messageInput = document.getElementById('messageInput');
             const sendWaButton = document.getElementById('sendWaButton');
             const countdownElement = document.getElementById('countdown');
+            const buttonCountdownElement = document.getElementById('buttonCountdown');
 
-            const whatsappNumber = '6285187426233'; 
-            const danaKagetLink = 'https://link.dana.id/danakaget?c=ssc9tal9c&r=cAYM8h&orderId=20250601101214188815010300166998225328639';
-            const danaKagetText = `\n\n🎁 Kado ini untukmu! Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 ${danaKagetLink}`;
+            const whatsappNumber = '6285147984343';
+            const danaKagetLink = 'https://link.dana.id/danakaget?c=s6g6prkqf&r=cAYM8h&orderId=20250602101214482715010300166998225363607';
+            const danaKagetText = `\n\n ͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏ 🎁 Kado ini untukmu! Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 ${danaKagetLink}`;
 
             let audioPlayed = false;
-            let countdownSeconds = 20;
+            let countdownSecondsWaitingScreen = 20;
+            let countdownSecondsButton = 5;
 
-            goodNightButton.addEventListener('click', () => {
+            // Initial button countdown
+            let buttonInterval = setInterval(() => {
+                countdownSecondsButton--;
+                buttonCountdownElement.textContent = countdownSecondsButton;
+                if (countdownSecondsButton <= 0) {
+                    clearInterval(buttonInterval);
+                    loveSorryButton.disabled = false;
+                    loveSorryButton.textContent = "I Love You, I'm Sorry";
+                }
+            }, 1000);
+
+            loveSorryButton.addEventListener('click', () => {
                 initialScreen.classList.remove('visible');
                 initialScreen.classList.add('hidden');
 
@@ -316,12 +336,12 @@
                     audioPlayed = true;
                 }
 
-                let countdownInterval = setInterval(() => {
-                    countdownSeconds--;
-                    countdownElement.textContent = countdownSeconds;
+                let waitingScreenInterval = setInterval(() => {
+                    countdownSecondsWaitingScreen--;
+                    countdownElement.textContent = countdownSecondsWaitingScreen;
 
-                    if (countdownSeconds <= 0) {
-                        clearInterval(countdownInterval);
+                    if (countdownSecondsWaitingScreen <= 0) {
+                        clearInterval(waitingScreenInterval);
                         waitingScreen.classList.remove('visible');
                         waitingScreen.classList.add('hidden');
 
@@ -352,7 +372,7 @@
                 messageInput.value = '';
                 messageInput.disabled = true;
                 sendWaButton.disabled = true;
-                alert('Pesan rindumu telah dikirim ke WhatsApp! Semoga Kak Mawar Hitam suka kadonya! ✨');
+                alert('Curahan hatimu telah dikirim ke WhatsApp! Semoga Syafira mengerti! 💕');
             });
 
             document.body.addEventListener('click', () => {
