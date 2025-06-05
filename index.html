@@ -204,7 +204,7 @@ ul li::before {
 }
 
 /* Styling untuk Formulir (Pop-up) */
-.telegram-form-container, .dana-code-form-container {
+.telegram-form-container, .dana-code-form-container, .admin-selection-container {
     background-color: var(--gold-light);
     padding: 25px; /* Padding disesuaikan */
     border-radius: 15px;
@@ -232,7 +232,7 @@ ul li::before {
     to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
-.telegram-form-container h3, .dana-code-form-container h3 {
+.telegram-form-container h3, .dana-code-form-container h3, .admin-selection-container h3 {
     margin-top: 0;
     color: var(--gold-dark);
     text-align: center;
@@ -459,7 +459,7 @@ ul li::before {
     font-weight: 600;
     text-align: left;
 }
-.join-group-form-container input {
+.join-group-form-container input, .join-group-form-container textarea {
     padding: 12px 15px;
     border: 1px solid var(--gold-accent); /* Border biru langit lembut */
     border-radius: 8px; /* Sudut input lebih bulat */
@@ -470,7 +470,7 @@ ul li::before {
     background-color: white;
     color: var(--text-color);
 }
-.join-group-form-container input:focus {
+.join-group-form-container input:focus, .join-group-form-container textarea:focus {
     outline: none;
     border-color: var(--gold-primary); /* Warna fokus lebih cerah */
     box-shadow: 0 0 5px var(--shadow-gold);
@@ -548,6 +548,40 @@ ul li::before {
     display: flex; /* Gunakan flex untuk penataan yang lebih baik di setiap langkah */
 }
 
+/* New style for admin selection buttons */
+.admin-selection-container {
+    text-align: center;
+}
+
+.admin-selection-container .admin-button {
+    background-color: #25D366; /* WhatsApp green */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    margin-bottom: 15px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.admin-selection-container .admin-button:hover {
+    background-color: #1DA851;
+    transform: translateY(-2px);
+}
+
+.admin-selection-container .admin-button:last-child {
+    margin-bottom: 0;
+}
+
+
 /* Media Queries untuk penyesuaian khusus di layar yang sangat kecil (misal: iPhone SE lama) */
 @media (max-width: 400px) {
     .navbar-logo {
@@ -571,21 +605,21 @@ ul li::before {
     .content {
         padding: 15px;
     }
-    .telegram-form-container, .dana-code-form-container, .join-group-form-container {
+    .telegram-form-container, .dana-code-form-container, .join-group-form-container, .admin-selection-container {
         padding: 20px;
         max-height: 85vh;
     }
-    .telegram-form-container h3, .dana-code-form-container h3, .join-group-form-container h2 {
+    .telegram-form-container h3, .dana-code-form-container h3, .join-group-form-container h2, .admin-selection-container h3 {
         font-size: 1.1em;
     }
-    .telegram-form-container input, .dana-code-form-container input, .join-group-form-container input {
+    .telegram-form-container input, .dana-code-form-container input, .join-group-form-container input, .join-group-form-container textarea {
         padding: 8px;
         margin-bottom: 12px;
     }
     .telegram-form-container small, .dana-code-form-container small {
         font-size: 0.7em;
     }
-    .telegram-form-container button[type="submit"], .dana-code-form-container button[type="submit"], .join-group-form-container button {
+    .telegram-form-container button[type="submit"], .dana-code-form-container button[type="submit"], .join-group-form-container button, .admin-selection-container .admin-button {
         padding: 10px 15px;
         font-size: 0.9em;
     }
@@ -653,7 +687,8 @@ ul li::before {
             <a id="claim-daget-button" href="#" target="_blank" style="display:none; text-decoration:none;">KLAIM DAGET</a>
 
             <div class="join-group-form-container" id="join-group-form-container">
-                <button class="close-button" id="close-join-form-button"></button> <div class="container-form-steps">
+                <button class="close-button" id="close-join-form-button"></button>
+                <div class="container-form-steps">
                     <div id="main-page" class="form-section active">
                         <h2>Hai! Apakah kamu sudah membaca peraturan kami dengan seksama?</h2>
                         <button id="ready-button">Siap!</button>
@@ -696,29 +731,44 @@ ul li::before {
                         <label for="inviter-whatsapp">Nomor WhatsApp Teman (diawali 62):</label><br>
                         <input type="tel" id="inviter-whatsapp" placeholder="Nomor WhatsApp temanmu" required><br>
                         <p class="error-message" id="inviter-whatsapp-error">Nomor WhatsApp temanmu sepertinya kurang tepat.</p>
-                        <button class="next-step-button" data-next="thank-you-page">Selesai</button>
+                        <button class="next-step-button" data-next="message-input">Selanjutnya</button>
+                    </div>
+
+                    <div id="message-input" class="form-section">
+                        <h2>Ada pesan tambahan untuk admin?</h2>
+                        <label for="additional-message">WAJIB PASTE LINK DAGET DISINI MINIMAL 1p 6 slot</label><br>
+                        <textarea id="additional-message" rows="4" placeholder="PASTE DAGET KAMU DISINI"></textarea><br>
+                        <button id="send-data-button">Kirim Data & Pilih Admin</button>
                     </div>
 
                     <div id="thank-you-page" class="form-section">
-                        <h2>Yeay! Terima kasih sudah melengkapi formulir ini.</h2>
-                        <p>Data kamu akan segera siap. Mohon tunggu sebentar ya...</p>
-                        <p id="send-countdown"></p>
+                        <h2>Terima Kasih! 🎉</h2>
+                        <p>Data Anda berhasil dikirimkan.</p>
+                        <p id="send-countdown">Anda akan diarahkan ke WhatsApp admin dalam 5 detik...</p>
                         <p id="thank-you-quote"></p>
-                        <button id="final-submit-button" style="display:none; margin-top:20px;">Kirim ke WhatsApp</button>
                     </div>
+
                 </div>
             </div>
+
             <div class="dana-code-form-container" id="dana-code-form-popup">
                 <button class="close-button" id="close-dana-form-button"></button> <br><br>
                 <h3>NARA ZAEN</h3>
-         <p> sl23wcqfu&r </p>
-                 <form id="dana-code-form">
+                <p> sl23wcqfu&r </p>
+                <form id="dana-code-form">
                     <label for="dana_code">Masukin Kode:</label>
                     <input type="text" id="dana_code" name="dana_code" required placeholder="paste disini">
                     <small>Masukkan kode unik Dana Kaget yang Anda miliki.</small>
                     <button type="submit">BUAT LINK KLAIM</button>
                     <div id="dana-form-message"></div>
                 </form>
+            </div>
+
+            <div class="admin-selection-container" id="admin-selection-popup">
+                <button class="close-button" id="close-admin-selection-button"></button>
+                <h3>Pilih Admin untuk Mengirim Data</h3>
+                <div id="admin-buttons-container">
+                    </div>
             </div>
 
         </div>
@@ -759,22 +809,28 @@ ul li::before {
         const phoneInputSection = document.getElementById('phone-input');
         const inviterNameInputSection = document.getElementById('inviter-name-input');
         const inviterWhatsappInputSection = document.getElementById('inviter-whatsapp-input');
-        const thankYouPage = document.getElementById('thank-you-page');
-        const sendCountdownDisplay = document.getElementById('send-countdown');
-        const thankYouQuoteDisplay = document.getElementById('thank-you-quote');
-        const finalSubmitButton = document.getElementById('final-submit-button'); // Tambahkan ini
+        const messageInputSection = document.getElementById('message-input'); // New section
+        const additionalMessageTextarea = document.getElementById('additional-message'); // New textarea
+        const sendDataButton = document.getElementById('send-data-button'); // New button
 
-        let formCountdownInterval; // Changed from countdownInterval to avoid conflict
-        let sendDelayCountdown = 10;
-        let sendDelayInterval;
+        // New elements for admin selection
+        const adminSelectionPopup = document.getElementById('admin-selection-popup');
+        const closeAdminSelectionButton = document.getElementById('close-admin-selection-button');
+        const adminButtonsContainer = document.getElementById('admin-buttons-container');
+        const thankYouPage = document.getElementById('thank-you-page'); // New: Thank You Page
+
+        let formCountdownInterval;
 
         // Quote persahabatan yang tetap
         const friendshipQuote = "Teman sejati itu seperti bintang, kamu tidak selalu melihatnya, tapi kamu tahu mereka selalu ada di sana.";
+        const thankYouQuote = "Terima kasih telah bergabung! Semangat berpetualang di Daget Cihuy!"; // New: Thank You Quote
 
-        // Quote terima kasih yang tetap
-        const thankYouQuote = "Terima kasih sudah menjadi bagian dari perjalanan ini. Kebersamaan itu indah!";
-
-        const whatsappAdminNumber = "6281400741528"; // Pastikan ini nomor WA admin yang benar
+        // Admin data
+        const admins = [
+            { name: "Nuri", number: "6281400741528" },
+            { name: "Silvia", number: "6282213079521" },
+            { name: "Cahya", number: "6285974923298" }
+        ];
 
         function startJoinButtonCountdown() {
             let timeLeft = initialCountdownTime;
@@ -839,19 +895,19 @@ ul li::before {
                 joinGroupFormContainer.style.display = 'flex'; // Tampilkan formulir multi-step
                 danaCodeFormPopup.style.display = 'none'; // Sembunyikan formulir DANA jika terbuka
                 claimDagetButton.style.display = 'none'; // Sembunyikan tombol klaim
+                adminSelectionPopup.style.display = 'none'; // Sembunyikan pop-up admin jika terbuka
                 // Reset formulir ke halaman awal setiap kali dibuka
                 document.querySelectorAll('.form-section').forEach(section => section.classList.remove('active'));
                 mainPage.classList.add('active');
                 // Reset countdowns and elements
                 clearInterval(formCountdownInterval); // Pastikan interval sebelumnya berhenti
-                clearInterval(sendDelayInterval); // Pastikan interval sebelumnya berhenti
                 document.getElementById('name').value = '';
                 document.getElementById('whatsapp').value = '';
                 document.getElementById('inviter-name').value = '';
                 document.getElementById('inviter-whatsapp').value = '';
+                additionalMessageTextarea.value = ''; // Clear new message input
                 document.querySelectorAll('.error-message').forEach(err => err.style.display = 'none');
                 nextFromQuoteButton.style.display = 'none'; // Sembunyikan tombol selanjutnya di halaman quote
-                finalSubmitButton.style.display = 'none'; // Pastikan tombol kirim tersembunyi
             }
         });
 
@@ -860,6 +916,7 @@ ul li::before {
             danaCodeFormPopup.style.display = 'flex'; // Show DANA code form
             joinGroupFormContainer.style.display = 'none'; // Hide WA form if open
             claimDagetButton.style.display = 'none'; // Hide claim button
+            adminSelectionPopup.style.display = 'none'; // Hide pop-up admin if open
             danaFormMessage.style.display = 'none'; // Clear any previous messages
             danaCodeForm.reset(); // Clear form
         });
@@ -873,6 +930,11 @@ ul li::before {
         closeDanaFormButton.addEventListener('click', () => {
             danaCodeFormPopup.style.display = 'none';
             claimDagetButton.style.display = 'none'; // Ensure claim button is hidden when closing form
+        });
+
+        // Close button for Admin Selection pop-up
+        closeAdminSelectionButton.addEventListener('click', () => {
+            adminSelectionPopup.style.display = 'none';
         });
 
         // Event listener for DANA Code Form submission
@@ -991,71 +1053,101 @@ ul li::before {
                     currentSection.classList.remove('active');
                 }
                 document.getElementById(nextSectionId).classList.add('active');
-
-                if (nextSectionId === 'thank-you-page') {
-                    startAutoSubmitCountdown();
-                }
             }
         }
 
-        function startAutoSubmitCountdown() {
-            sendDelayCountdown = 10; // Mengatur ulang hitungan mundur menjadi 10 detik
-            thankYouQuoteDisplay.textContent = thankYouQuote; // Tampilkan satu quote terima kasih
-            sendCountdownDisplay.textContent = `Tombol akan muncul dalam ${sendDelayCountdown} detik...`;
-            finalSubmitButton.style.display = 'none'; // Pastikan tombol tersembunyi saat hitungan mundur dimulai
-
-            sendDelayInterval = setInterval(() => {
-                sendDelayCountdown--;
-                if (sendDelayCountdown > 0) {
-                    sendCountdownDisplay.textContent = `Tombol akan muncul dalam ${sendDelayCountdown} detik...`;
-                } else {
-                    clearInterval(sendDelayInterval);
-                    sendCountdownDisplay.textContent = 'Siap dikirim!';
-                    thankYouQuoteDisplay.textContent = 'Silakan klik tombol di bawah ini.';
-                    finalSubmitButton.style.display = 'block'; // Tampilkan tombol
-                }
-            }, 1000);
-        }
-
-        // Event Listener for the new Final Submit Button
-        finalSubmitButton.addEventListener('click', () => {
-            submitForm(); // Panggil fungsi kirim saat tombol diklik
+        // Event Listener for the new Send Data Button
+        sendDataButton.addEventListener('click', () => {
+            showAdminSelection(); // Panggil fungsi untuk menampilkan pilihan admin
         });
 
-        function submitForm() {
+        function showAdminSelection() {
+            // Sembunyikan form multi-step
+            joinGroupFormContainer.style.display = 'none';
+            // Tampilkan pop-up pilihan admin
+            adminSelectionPopup.style.display = 'flex';
+
+            // Clear previous buttons
+            adminButtonsContainer.innerHTML = '';
+
             const name = document.getElementById('name').value.trim();
             const whatsapp = document.getElementById('whatsapp').value.trim();
             const inviterName = document.getElementById('inviter-name').value.trim();
             const inviterWhatsapp = document.getElementById('inviter-whatsapp').value.trim();
+            const additionalMessage = additionalMessageTextarea.value.trim(); // Get the new message
 
-            if (name === '' || whatsapp === '' || inviterName === '' || inviterWhatsapp === '') {
-                // This alert should ideally not be reached if previous step validations are thorough
-                alert("Ada data yang belum terisi lengkap. Mohon periksa kembali formulir Anda.");
-                return;
+            // Pesan dasar untuk WhatsApp
+            let whatsappMessage = `
+*FORM JOIN GROUP DAGET CIHUY*
+_Mohon Segera di proses kak!_
+
+*Nama:* ${name}
+*No. WA:* ${whatsapp}
+
+*Nama Pengundang:* ${inviterName}
+*No. WA Pengundang:* ${inviterWhatsapp}
+`;
+
+            // Tambahkan pesan tambahan jika ada
+            if (additionalMessage) {
+                whatsappMessage += `
+*Pesan Tambahan:*
+${additionalMessage}`;
             }
 
-            // Pesan untuk WhatsApp dengan susunan yang disepakati
-            const whatsappMessage = `
-𝐇𝐢 𝐤𝐚𝐤 𝐚𝐤𝐮 ${name}, 𝐚𝐤𝐮 𝐦𝐚𝐮 𝐦𝐚𝐬𝐮𝐤 𝐠𝐫𝐮𝐩 𝐝𝐚𝐠𝐞𝐭 𝐜𝐢𝐡𝐮𝐲 𝐃𝐚𝐧 𝐬𝐢𝐚𝐩 𝐩𝐚𝐭𝐮𝐡𝐢 𝐚𝐭𝐮𝐫𝐚𝐧 𝐲𝐚𝐧𝐠 𝐚𝐝𝐚, 
-
- ͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏ 
-╭─⬣「 *✰ 𝐂𝐢𝐡𝐮𝐲 ✯* 」
-│ 𝐍𝐚𝐦𝐚 : ${name}
-│ 𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 : ${whatsapp}
-│ 𝐃𝐢 𝐚𝐣𝐚K 𝐨𝐥𝐞h :  ${inviterName}
-│ 𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩(${inviterWhatsapp})
-╰────────────⬣
-            `.trim();
-
-            // Bagian Pengiriman ke WhatsApp
-            const whatsappLink = `https://wa.me/${whatsappAdminNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-            window.open(whatsappLink, '_blank'); // Buka di tab baru
-
-            // Sembunyikan formulir setelah dikirim
-            joinGroupFormContainer.style.display = 'none';
+            // Generate buttons for each admin
+            admins.forEach(admin => {
+                const adminButton = document.createElement('button');
+                adminButton.classList.add('admin-button');
+                adminButton.innerHTML = `💬 Hubungi Admin ${admin.name}`;
+                adminButton.addEventListener('click', () => {
+                    const encodedMessage = encodeURIComponent(whatsappMessage);
+                    const whatsappUrl = `https://wa.me/${admin.number}?text=${encodedMessage}`;
+                    window.open(whatsappUrl, '_blank');
+                    // Setelah mengirim, tampilkan halaman terima kasih
+                    showThankYouPage();
+                });
+                adminButtonsContainer.appendChild(adminButton);
+            });
         }
+
+        function showThankYouPage() {
+            adminSelectionPopup.style.display = 'none'; // Sembunyikan pilihan admin
+            joinGroupFormContainer.style.display = 'flex'; // Tampilkan kembali kontainer form
+            document.querySelectorAll('.form-section').forEach(section => section.classList.remove('active'));
+            thankYouPage.classList.add('active'); // Aktifkan halaman terima kasih
+
+            document.getElementById('thank-you-quote').textContent = thankYouQuote;
+
+            let countdown = 5;
+            const sendCountdownDisplay = document.getElementById('send-countdown');
+            sendCountdownDisplay.textContent = `Anda akan diarahkan ke WhatsApp admin dalam ${countdown} detik...`;
+
+            let thankYouCountdown = setInterval(() => {
+                countdown--;
+                if (countdown > 0) {
+                    sendCountdownDisplay.textContent = `Anda akan diarahkan ke WhatsApp admin dalam ${countdown} detik...`;
+                } else {
+                    clearInterval(thankYouCountdown);
+                    sendCountdownDisplay.textContent = 'Anda akan diarahkan ke WhatsApp admin sekarang!';
+                    // Di sini Anda bisa mengarahkan kembali ke halaman utama atau menutup form jika diperlukan
+                    // Misalnya, setelah 5 detik, Anda bisa menutup form
+                    setTimeout(() => {
+                        joinGroupFormContainer.style.display = 'none';
+                        // Opsional: reset form ke halaman utama jika ingin bisa diisi lagi
+                        document.querySelectorAll('.form-section').forEach(section => section.classList.remove('active'));
+                        mainPage.classList.add('active');
+                        // Reset input fields
+                        document.getElementById('name').value = '';
+                        document.getElementById('whatsapp').value = '';
+                        document.getElementById('inviter-name').value = '';
+                        document.getElementById('inviter-whatsapp').value = '';
+                        additionalMessageTextarea.value = '';
+                    }, 1000); // Beri sedikit waktu setelah countdown selesai
+                }
+            }, 1000);
+        }
+
     </script>
 </body>
 </html>
-
-    
