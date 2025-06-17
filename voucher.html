@@ -1,83 +1,734 @@
 <!DOCTYPE html>
-<html>
-<meta charset='UTF-8'/>
-<meta content='width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5' name='viewport'/><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
-<meta content='IE=edge' http-equiv='X-UA-Compatible'/><link href="https://feeldreams.github.io/akanku/style.css" rel="stylesheet" type="text/css" />
-
+<html lang="id">
 <head>
-<title>Script HTML Tidak Ada Pepaya</title>
-<meta name="description" content="Script HTML Tidak Ada Pepaya">
-<meta name="keywords" content="Script HTML Tidak Ada Pepaya">
-<link rel="icon" type="image/x-icon" href="https://www.palingit.com/favicon.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kim Chenul</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            /* Latar belakang baru */
+            background-image: url("http://googleusercontent.com/image_collection/image_retrieval/11718726004526810034");
+            background-size: cover; /* Untuk memastikan gambar menutupi seluruh latar belakang */
+            background-repeat: no-repeat; /* Untuk mencegah gambar diulang */
+            background-attachment: fixed; /* Agar gambar latar belakang tetap saat di-scroll */
+            background-position: center center; /* Memastikan gambar berada di tengah */
+            text-align: center;
+            overflow-x: hidden; /* Mencegah scrollbar horizontal dari animasi */
+        }
+
+        /* Keyframes untuk animasi fade-in */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Keyframes untuk animasi scale-in (logo) */
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Keyframes untuk animasi slide-in dari kiri */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Keyframes untuk animasi slide-in dari kanan */
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Style untuk halaman pembuka (welcome screen) */
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            animation: fadeIn 0.8s ease-out;
+            background-color: rgba(255, 224, 240, 0.7); /* Menambahkan overlay pink transparan */
+        }
+        .welcome-screen .container {
+            background-color: rgba(255, 255, 255, 0.85); /* Kontainer lebih solid */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Bayangan lebih jelas */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        .welcome-screen .welcome-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: scaleIn 0.8s ease-out;
+        }
+        .welcome-screen h1 {
+            color: #e91e63;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+        .welcome-screen p {
+            color: #6a1b4d;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+        .welcome-screen .btn {
+            background-color: #ff4081;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            animation: fadeIn 1s ease-out 0.6s forwards;
+            opacity: 0;
+        }
+        .welcome-screen .btn:hover {
+            background-color: #f50057;
+            transform: scale(1.05);
+        }
+
+        /* Style untuk halaman utama (main content) */
+        .main-content {
+            display: none;
+            padding-top: 80px;
+            animation: fadeIn 0.8s ease-out;
+            min-height: 100vh;
+            background-color: rgba(255, 224, 240, 0.5); /* Overlay pink transparan untuk konten utama */
+            padding-bottom: 40px; /* Tambahkan padding bawah agar tidak terlalu mepet */
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 64, 129, 0.85); /* Medium Pink, agak transparan */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .navbar .logo {
+            height: 40px;
+            margin-right: 15px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .brand-name {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        .content {
+            text-align: center;
+            padding: 40px 20px;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out, height 0.5s ease-out, padding 0.5s ease-out, margin-bottom 0.5s ease-out;
+        }
+        .content.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+            height: 0;
+            padding: 0;
+            margin-bottom: 0;
+            overflow: hidden; /* Penting untuk menyembunyikan konten yang terpotong saat height 0 */
+        }
+        .content h1 {
+            color: #e91e63;
+            margin-bottom: 20px;
+        }
+        .content p {
+            color: #6a1b4d;
+            margin-bottom: 30px;
+        }
+        .button-container {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .btn-action {
+            background-color: #f06292;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            min-width: 250px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+        .btn-action:first-child {
+            animation: slideInLeft 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+        .btn-action:last-child {
+            animation: slideInRight 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+        .btn-action:hover {
+            background-color: #e91e63;
+            transform: scale(1.03);
+        }
+
+        /* Wrapper untuk formulir dan pesannya */
+        .form-wrapper {
+            display: none; /* Default hidden */
+            margin-top: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px; /* Tambahkan sedikit padding agar tidak terlalu mepet tepi */
+            box-sizing: border-box;
+            animation: fadeIn 0.8s ease-out; /* Animasi fade-in untuk seluruh wrapper */
+        }
+
+        /* Style untuk pesan formulir */
+        .form-message {
+            background-color: rgba(255, 235, 242, 0.8); /* Sangat light pink, lebih solid */
+            border: 1px solid rgba(255, 128, 171, 0.8); /* Pink border, lebih solid */
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            color: #6a1b4d;
+            text-align: left;
+            font-size: 0.95em;
+            line-height: 1.5;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Bayangan lebih jelas */
+        }
+        .form-message ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+        .form-message ul li {
+            margin-bottom: 5px;
+        }
+        .form-message .bunga-info { /* Style khusus untuk info bunga di pesan */
+            font-weight: bold;
+            color: #e91e63; /* Warna pink yang lebih gelap agar menonjol */
+        }
+
+
+        /* Animasi fade-in untuk formulir (ini dihapus dari .form-container dan dipindahkan ke .form-wrapper) */
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.85); /* Background form lebih solid */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Bayangan lebih jelas */
+            text-align: left;
+            border: 1px solid rgba(255, 179, 217, 0.8); /* Soft Pink Border, lebih solid */
+        }
+        .form-container h2 {
+            text-align: center;
+            color: #e91e63;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #6a1b4d;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="tel"],
+        .form-group input[type="email"],
+        .form-group select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid rgba(255, 179, 217, 0.8); /* Soft Pink Border, lebih solid */
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.7); /* Input background, lebih solid */
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #ff4081;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 64, 129, 0.4); /* Bayangan fokus lebih jelas */
+        }
+        .form-group input::placeholder {
+            color: #f48fb1;
+        }
+        .form-group input.submit-btn {
+            background-color: #ff4081;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .form-group input.submit-btn:hover {
+            background-color: #f50057;
+            transform: scale(1.02);
+        }
+        .info-bunga {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: rgba(255, 235, 242, 0.8); /* Very light pink for info box, lebih solid */
+            border: 1px solid rgba(255, 128, 171, 0.8); /* Border for info box, lebih solid */
+            border-radius: 8px;
+            color: #e91e63;
+            font-weight: bold;
+            text-align: center;
+        }
+        .info-bunga p {
+            margin: 5px 0; /* Memberi sedikit jarak antar paragraf di dalam info bunga */
+        }
+
+
+        /* Gaya untuk tombol kontrol musik */
+        #musicControl {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 64, 129, 0.85); /* Sama dengan navbar */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            z-index: 1001; /* Lebih tinggi dari navbar */
+            display: none; /* Sembunyikan secara default */
+        }
+        #musicControl:hover {
+            background-color: #f50057;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-	
-   <audio src="https://feeldreams.github.io/akanku/akanku.mp3" id="linkmp3"></audio><script>audio = new Audio('' + linkmp3.src);</script>
-   
-   <div id="bodyblur">
-     <img src="https://files.catbox.moe/mce6e7.jpg" id="wallpaper"/>
-   </div>
+    <audio id="backgroundMusic" loop>
+        <source src="https://files.catbox.moe/vqjtao.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
 
-   <div id='Content'>
-   	
-     <div id="suratin">
-       <img src="https://rayyscoding.github.io/envelope.png"/>
-     </div>
-     <p id="ket">Klik Pesannya!</p>
-   
-     <div>
-         <img src="https://feeldreams.github.io/peachgaruk.gif" id="fotoakhir"/>
-         <img src="https://feeldreams.github.io/peachhello.gif" id="fotoakhir1"/>
-         <img src="https://feeldreams.github.io/peach22.gif" id="fotoakhir2"/>
-         <img src="https://feeldreams.github.io/peachbunga2.gif" id="fotoakhir3"/>
-         <img src="https://feeldreams.github.io/peach33.gif" id="fotoakhir4"/>
-         <img src="https://feeldreams.github.io/peachlove.gif" id="fotoakhir5"/>
+    <div id="welcomeScreen" class="welcome-screen">
+        <div class="container">
+            <img src="https://files.catbox.moe/m3xj0r.jpg" alt="Logo Selamat Datang" class="welcome-logo">
+            <h1>Hai! Selamat Datang 🥰</h1>
+            <p>Yuk, klik tombol di bawah ini untuk menjelajahi lebih lanjut!</p>
+            <button class="btn" onclick="showMainContent()">Mulai Sekarang!</button>
+        </div>
+    </div>
 
-         <img src="https://feeldreams.github.io/peachhoam.gif" id="fotoAkhir"/>
-     </div>
-     <div><blockquote id='bq'>
-  
-       <p id="kalimat">Tidak Ada Pepaya,</p>
-       <p id="kalimata">Tapi Ada Kelapa..</p>
-       <p id="kalimatb">Tidak Peduli Seberapa Buruk Tentangnya,</p>
-       <p id="kalimatc">Akan Ku Temani,</p>
-       <p id="kalimatd">Jika Memang Dia Setia 🤭❤️</p>
+    <div id="mainContent" class="main-content">
+        <div class="navbar">
+            <img src="https://files.catbox.moe/m3xj0r.jpg" alt="Logo Kim Chenul" class="logo">
+            <span class="brand-name">Kim Chenul</span>
+        </div>
 
-       <p id="kalimat2">Dah Ah wkwk 🤣❤️</p>
+        <button id="musicControl" onclick="toggleMusic()">🎵</button>
 
-       <p id="kalimatb3">Kirim ke WhatsApp aku ya!</p>
-     </blockquote></div>
-   
-     <div id="Tombol">
-       <a id="By" onClick="multifungsi()">
-         <b id="tmbl">Lanjut</b>
-         <b id="tmbl2">💌 Balas</b>
-       </a>
-     </div>
-     
-   </div>
+        <div id="mainContentArea" class="content">
+            <h1>Selamat Datang di Kim Chenul!</h1>
+            <p>Pilih layanan yang kamu butuhkan ya:</p>
 
-<script>
-  const swalst = Swal.mixin({timer: 2777, allowOutsideClick: false, showConfirmButton: false, timerProgressBar: true, imageHeight: 100,}); const swals = Swal.mixin({allowOutsideClick: false, cancelButtonColor: '#FF0040', imageWidth: 100, imageHeight: 100,}); const body = document.querySelector("body");function createHeart() {const heart = document.createElement("div"); heart.className = "fas fa-heart"; heart.style.left = (Math.random() * 90)+"vw"; heart.style.animationDuration = (Math.random()*3)+2+"s"; body.appendChild(heart);} setInterval(function name(params) {var heartArr = document.querySelectorAll(".fa-heart"); if (heartArr.length > 100) {heartArr[0].remove()}},100);ftom=0;jikatom=0;ftganti=0;fungsi=0;
-  
-  function mulaikonten() {
-    setTimeout(fmketik1,4200);setTimeout(mketik1,4200);
-    setTimeout(fmketik2,5200);setTimeout(mketik2,5200);
-    setTimeout(fmketik3,6900);setTimeout(mketik3,6900);
-    setTimeout(fmketik4,8900);setTimeout(mketik4,8900);
-    setTimeout(fmketik5,10000);setTimeout(mketik5,10000);
-  }
+            <div class="button-container">
+                <button class="btn-action" onclick="showForm('pinjamanTunai')">🌸 Pinjaman Tunai 🌸</button>
+                <button class="btn-action" onclick="showForm('kreditHP')">📱 Kredit Elektronik 💖</button>
+            </div>
+        </div>
 
-  async function menuju(){
-    const pesanwhatsapp = "Aku lagi sebar DANA Kaget nih! Yuk, sikat segera sebelum melayang 💸💸💸 https://link.dana.id/danakaget?c=sq7nl45kt&r=cAYM8h&orderId=20250616101214088515010300166998227506440";
-    await swals.fire('OK!', 'Kirim pesan ke WhatsApp aku, ya!', 'success');
-    window.location = "https://api.whatsapp.com/send?phone=6285711374861&text=" + encodeURIComponent(pesanwhatsapp);
-    Tombol.style="margin-top:15px;opacity:1;transform: scale(1);";
-  }
-</script>
-<script src="https://feeldreams.github.io/akanku/script.js"></script>
+        <div id="pinjamanTunaiWrapper" class="form-wrapper">
+            <div class="form-message">
+                <p><strong>Isi formulir di bawah ini, tapi baca dulu ya ketentuan dari kami:</strong></p>
+                <ul>
+                    <li>Usia minimal 21 tahun, maksimal 55 tahun.</li>
+                    <li>Wajib memiliki E-KTP dan KK.</li>
+                    <li>Diutamakan berdomisili di area layanan kami.</li>
+                    <li>Dana cair dalam 1-2 hari kerja setelah persetujuan.</li>
+                    <li>Tenor fleksibel sesuai kemampuan pembayaran Anda.</li>
+                    <li><span class="bunga-info">Bunga: Tenor 1 bulan hanya 15%</span> dari total pinjaman.</li>
+                    <li><span class="bunga-info">Bunga: Tenor 2 bulan dan seterusnya 30%</span> dari total pinjaman.</li>
+                </ul>
+                <p>Kami merekomendasikan untuk mengisi data dengan jujur dan lengkap agar proses pengajuan lancar.</p>
+            </div>
+            <div id="pinjamanTunaiForm" class="form-container">
+                <h2>Formulir Pinjaman Tunai</h2>
+                <form onsubmit="kirimKeWhatsApp('tunai'); return false;">
+                    <div class="form-group">
+                        <label for="namaLengkapTunai">Nama Lengkap:</label>
+                        <input type="text" id="namaLengkapTunai" name="nama_lengkap" placeholder="Nama sesuai KTP" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nikKTPTunai">NIK KTP:</label>
+                        <input type="text" id="nikKTPTunai" name="nik_ktp" pattern="[0-9]{16}" placeholder="16 digit NIK KTP" title="NIK harus 16 digit angka" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nikKKTunai">NIK KK:</label>
+                        <input type="text" id="nikKKTunai" name="nik_kk" pattern="[0-9]{16}" placeholder="16 digit NIK KK" title="NIK KK harus 16 digit angka" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="noPonselPribadiTunai">Nomor Ponsel Pribadi:</label>
+                        <input type="tel" id="noPonselPribadiTunai" name="no_ponsel_pribadi" pattern="[0-9]+" placeholder="Contoh: 081234567890" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="noPonselSuamiTunai">Nomor Ponsel Suami (jika ada):</label>
+                        <input type="tel" id="noPonselSuamiTunai" name="no_ponsel_suami" pattern="[0-9]+" placeholder="Contoh: 081234567890 (Opsional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="tenorTunai">Tenor (Berapa bulan?):</label>
+                        <select id="tenorTunai" name="tenor" onchange="hitungBunga('tunai')" required>
+                            <option value="">Pilih Tenor</option>
+                            <option value="1">1 bulan</option>
+                            <option value="2">2 bulan</option>
+                            <option value="3">3 bulan</option>
+                            <option value="6">6 bulan</option>
+                            <option value="12">12 bulan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="jumlahPinjamTunai">Pinjam Berapa Rupiah?:</label>
+                        <input type="text" id="jumlahPinjamTunai" name="jumlah_pinjam" placeholder="Contoh: 5.000.000" oninput="formatRupiah(this); hitungBunga('tunai')" required>
+                    </div>
+                    <div id="infoBungaTunai" class="info-bunga" style="display:none;">
+                        <p>Bunga yang berlaku: <span id="bungaPersenTunai"></span>.</p>
+                        <p>Total pengembalian: <span id="totalPengembalianTunai"></span></p>
+                        <p>Cicilan per bulan: <span id="cicilanPerBulanTunai"></span></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Ajukan Pinjaman" class="submit-btn">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="kreditHPWrapper" class="form-wrapper">
+            <div class="form-message">
+                <p><strong>Isi formulir di bawah ini, tapi baca dulu ya ketentuan dari kami:</strong></p>
+                <ul>
+                    <li>Usia minimal 21 tahun, maksimal 55 tahun.</li>
+                    <li>Wajib memiliki E-KTP dan KK.</li>
+                    <li>Diutamakan berdomisili di area layanan kami.</li>
+                    <li>Proses persetujuan cepat (1-2 hari kerja).</li>
+                    <li>Pilih barang elektronik sesuai kebutuhan dan kemampuan.</li>
+                    <li><span class="bunga-info">Bunga: Tenor 1 bulan hanya 15%</span> dari harga barang.</li>
+                    <li><span class="bunga-info">Bunga: Tenor 2 bulan dan seterusnya 30%</span> dari harga barang.</li>
+                </ul>
+                <p>Kami merekomendasikan untuk mengisi data dengan jujur dan lengkap agar proses pengajuan lancar.</p>
+            </div>
+            <div id="kreditHPForm" class="form-container">
+                <h2>Formulir Kredit Elektronik</h2>
+                <form onsubmit="kirimKeWhatsApp('kredit'); return false;">
+                    <div class="form-group">
+                        <label for="namaLengkapKredit">Nama Lengkap:</label>
+                        <input type="text" id="namaLengkapKredit" name="nama_lengkap" placeholder="Nama sesuai KTP" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nikKTPKredit">NIK KTP:</label>
+                        <input type="text" id="nikKTPKredit" name="nik_ktp" pattern="[0-9]{16}" placeholder="16 digit NIK KTP" title="NIK harus 16 digit angka" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nikKKKredit">NIK KK:</label>
+                        <input type="text" id="nikKKKredit" name="nik_kk" pattern="[0-9]{16}" placeholder="16 digit NIK KK" title="NIK KK harus 16 digit angka" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="noPonselPribadiKredit">Nomor Ponsel Pribadi:</label>
+                        <input type="tel" id="noPonselPribadiKredit" name="no_ponsel_pribadi" pattern="[0-9]+" placeholder="Contoh: 081234567890" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="noPonselSuamiKredit">Nomor Ponsel Suami (jika ada):</label>
+                        <input type="tel" id="noPonselSuamiKredit" name="no_ponsel_suami" pattern="[0-9]+" placeholder="Contoh: 081234567890 (Opsional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="tenorKredit">Tenor (Berapa bulan?):</label>
+                        <select id="tenorKredit" name="tenor" onchange="hitungBunga('kredit')" required>
+                            <option value="">Pilih Tenor</option>
+                            <option value="1">1 bulan</option>
+                            <option value="2">2 bulan</option>
+                            <option value="3">3 bulan</option>
+                            <option value="6">6 bulan</option>
+                            <option value="12">12 bulan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="kategoriElektronik">Kategori Elektronik:</label>
+                        <select id="kategoriElektronik" name="kategori_elektronik" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="HP">Handphone (HP)</option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="TV">Televisi (TV)</option>
+                            <option value="Kulkas">Kulkas</option>
+                            <option value="Mesin Cuci">Mesin Cuci</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="hargaBarangKredit">Harga Barang Elektronik (Rp):</label>
+                        <input type="text" id="hargaBarangKredit" name="harga_barang" placeholder="Contoh: 7.500.000" oninput="formatRupiah(this); hitungBunga('kredit')" required>
+                    </div>
+                    <div id="infoBungaKredit" class="info-bunga" style="display:none;">
+                        <p>Bunga yang berlaku: <span id="bungaPersenKredit"></span>.</p>
+                        <p>Total pengembalian: <span id="totalPengembalianKredit"></span></p>
+                        <p>Cicilan per bulan: <span id="cicilanPerBulanKredit"></span></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Ajukan Kredit" class="submit-btn">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const musicControlBtn = document.getElementById('musicControl');
+        let isPlaying = false; // Status untuk melacak apakah musik sedang diputar
+
+        // Fungsi untuk menampilkan konten utama dan menyembunyikan halaman pembuka
+        function showMainContent() {
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            musicControlBtn.style.display = 'flex'; // Tampilkan tombol kontrol musik
+            playMusic(); // Langsung mainkan musik
+            animateMainButtons(); // Panggil fungsi untuk mengaktifkan animasi pada tombol utama
+        }
+
+        // Fungsi untuk memutar musik
+        function playMusic() {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play().then(() => {
+                    isPlaying = true;
+                    musicControlBtn.textContent = '⏸️'; // Ganti ikon menjadi pause
+                }).catch(error => {
+                    console.error("Autoplay prevented:", error);
+                    // Mungkin tampilkan pesan ke pengguna untuk klik tombol play manual
+                    musicControlBtn.textContent = '▶️'; // Pastikan ikon play jika gagal
+                    isPlaying = false;
+                });
+            }
+        }
+
+        // Fungsi untuk menghentikan musik
+        function pauseMusic() {
+            if (!backgroundMusic.paused) {
+                backgroundMusic.pause();
+                isPlaying = false;
+                musicControlBtn.textContent = '▶️'; // Ganti ikon menjadi play
+            }
+        }
+
+        // Fungsi untuk toggle (play/pause) musik
+        function toggleMusic() {
+            if (isPlaying) {
+                pauseMusic();
+            } else {
+                playMusic();
+            }
+        }
+
+        // Fungsi untuk mengaktifkan animasi pada tombol utama (Pinjaman Tunai & Kredit Elektronik)
+        function animateMainButtons() {
+            const buttons = document.querySelectorAll('#mainContentArea .btn-action'); // Targetkan hanya tombol di mainContentArea
+            buttons.forEach((button, index) => {
+                button.style.opacity = 0;
+                button.style.animation = ''; // Reset animasi agar bisa dipicu ulang
+                // Berikan delay kecil untuk memastikan browser mereset state animasi
+                setTimeout(() => {
+                    if (index === 0) {
+                        button.style.animation = 'slideInLeft 0.8s ease-out 0.2s forwards';
+                    } else {
+                        button.style.animation = 'slideInRight 0.8s ease-out 0.4s forwards';
+                    }
+                }, 50); // Delay 50ms
+            });
+        }
+
+        // Fungsi untuk menampilkan/menyembunyikan formulir pinjaman/kredit
+        function showForm(formId) {
+            // Sembunyikan bagian konten utama (heading "Selamat Datang" dan kedua tombol)
+            const mainContentArea = document.getElementById('mainContentArea');
+            mainContentArea.classList.add('hidden'); // Tambahkan kelas hidden untuk transisi
+
+            // Sembunyikan semua wrapper formulir (termasuk pesan)
+            document.getElementById('pinjamanTunaiWrapper').style.display = 'none';
+            document.getElementById('kreditHPWrapper').style.display = 'none';
+
+            const targetWrapper = document.getElementById(formId + 'Wrapper');
+            // Gunakan timeout agar transisi hidden selesai sebelum form muncul
+            setTimeout(() => {
+                targetWrapper.style.display = 'block'; // Tampilkan wrapper form
+                // Animasi fadeIn sudah diterapkan di CSS untuk .form-wrapper
+            }, 500); // Sesuaikan timeout dengan durasi transisi '.content.hidden' (0.5s = 500ms)
+
+            // Sembunyikan info bunga saat beralih formulir
+            document.getElementById('infoBungaTunai').style.display = 'none';
+            document.getElementById('infoBungaKredit').style.display = 'none';
+        }
+
+        // Fungsi untuk memformat input angka menjadi rupiah dan memastikan angka besar bisa diisi
+        function formatRupiah(input) {
+            // Ambil hanya angka dari nilai input (hapus semua non-digit dan titik)
+            let value = input.value.replace(/[^0-9]/g, ''); 
+            
+            if (value) {
+                input.value = new Intl.NumberFormat('id-ID').format(Number(value));
+            } else {
+                input.value = '';
+            }
+        }
+
+        // Fungsi untuk menghitung bunga, total pengembalian, dan cicilan bulanan
+        function hitungBunga(formType) {
+            let tenorInput, jumlahInputField, bungaPersenSpan, totalPengembalianSpan, cicilanPerBulanSpan, infoBungaDiv;
+
+            if (formType === 'tunai') {
+                tenorInput = document.getElementById('tenorTunai');
+                jumlahInputField = document.getElementById('jumlahPinjamTunai');
+                bungaPersenSpan = document.getElementById('bungaPersenTunai');
+                totalPengembalianSpan = document.getElementById('totalPengembalianTunai');
+                cicilanPerBulanSpan = document.getElementById('cicilanPerBulanTunai');
+                infoBungaDiv = document.getElementById('infoBungaTunai');
+            } else { // formType === 'kredit'
+                tenorInput = document.getElementById('tenorKredit');
+                jumlahInputField = document.getElementById('hargaBarangKredit');
+                bungaPersenSpan = document.getElementById('bungaPersenKredit');
+                totalPengembalianSpan = document.getElementById('totalPengembalianKredit');
+                cicilanPerBulanSpan = document.getElementById('cicilanPerBulanKredit');
+                infoBungaDiv = document.getElementById('infoBungaKredit');
+            }
+
+            const tenor = parseInt(tenorInput.value);
+            // Penting: Hapus semua pemisah ribuan (titik) dari string sebelum dikonversi ke angka
+            const jumlah = parseInt(jumlahInputField.value.replace(/\./g, ''));
+
+            if (isNaN(tenor) || isNaN(jumlah) || tenor === 0 || jumlah === 0) {
+                infoBungaDiv.style.display = 'none';
+                return;
+            }
+
+            let bungaRate;
+            if (tenor === 1) {
+                bungaRate = 0.15; // 15%
+            } else {
+                bungaRate = 0.30; // 30%
+            }
+
+            const jumlahBunga = jumlah * bungaRate;
+            const totalPengembalian = jumlah + jumlahBunga;
+            const cicilanPerBulan = totalPengembalian / tenor;
+
+            bungaPersenSpan.textContent = (bungaRate * 100) + '%';
+            totalPengembalianSpan.textContent = totalPengembalian.toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            cicilanPerBulanSpan.textContent = cicilanPerBulan.toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            infoBungaDiv.style.display = 'block';
+        }
+
+        // Fungsi untuk mengirim data ke WhatsApp
+        function kirimKeWhatsApp(formType) {
+            let namaLengkap, nikKTP, nikKK, noPonselPribadi, noPonselSuami, tenor, jumlahInputVal, tipeTransaksi, bungaPersen, totalPengembalian, cicilanPerBulan, kategoriElektronik;
+
+            if (formType === 'tunai') {
+                tipeTransaksi = "Pinjaman Tunai";
+                namaLengkap = document.getElementById('namaLengkapTunai').value;
+                nikKTP = document.getElementById('nikKTPTunai').value;
+                nikKK = document.getElementById('nikKKTunai').value;
+                noPonselPribadi = document.getElementById('noPonselPribadiTunai').value;
+                noPonselSuami = document.getElementById('noPonselSuamiTunai').value;
+                tenor = document.getElementById('tenorTunai').value;
+                jumlahInputVal = document.getElementById('jumlahPinjamTunai').value; // Ambil nilai yang diformat
+                
+                bungaPersen = document.getElementById('bungaPersenTunai').textContent;
+                totalPengembalian = document.getElementById('totalPengembalianTunai').textContent;
+                cicilanPerBulan = document.getElementById('cicilanPerBulanTunai').textContent;
+
+            } else { // formType === 'kredit'
+                tipeTransaksi = "Kredit Elektronik";
+                namaLengkap = document.getElementById('namaLengkapKredit').value;
+                nikKTP = document.getElementById('nikKTPKredit').value;
+                nikKK = document.getElementById('nikKKKredit').value;
+                noPonselPribadi = document.getElementById('noPonselPribadiKredit').value;
+                noPonselSuami = document.getElementById('noPonselSuamiKredit').value;
+                tenor = document.getElementById('tenorKredit').value;
+                kategoriElektronik = document.getElementById('kategoriElektronik').value; // Ambil kategori
+                jumlahInputVal = document.getElementById('hargaBarangKredit').value; // Harga barang, ambil nilai yang diformat
+
+                bungaPersen = document.getElementById('bungaPersenKredit').textContent;
+                totalPengembalian = document.getElementById('totalPengembalianKredit').textContent;
+                cicilanPerBulan = document.getElementById('cicilanPerBulanKredit').textContent;
+            }
+
+            if (!namaLengkap || !nikKTP || !nikKK || !noPonselPribadi || !tenor || !jumlahInputVal || (formType === 'kredit' && !kategoriElektronik)) {
+                alert('Mohon lengkapi semua data yang wajib diisi.');
+                return;
+            }
+
+            // Dapatkan tanggal dan waktu saat ini
+            const now = new Date();
+            const options = {
+                day: '2-digit', month: '2-digit', year: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hour12: false // Format 24 jam
+            };
+            const dateTimeString = now.toLocaleString('id-ID', options);
+
+            let pesan = `╭─⬣「 _✰ Pengajuan ${tipeTransaksi} ✯_ 」
+│
+│ _Data Pemohon:_
+│ 💡 Nama Lengkap: ${namaLengkap}
+│ 🔒 NIK KTP: ${nikKTP}
+│ 👪 NIK KK: ${nikKK}
+│ 📱 No. Ponsel Pribadi: ${noPonselPribadi}
+│ 👫 No. Ponsel Suami: ${noPonselSuami || '-'}
+│
+│ _Detail Pengajuan:_
+`;
+            if (formType === 'tunai') {
+                pesan += `│ 💰 Jumlah Pinjaman: ${totalPengembalian.replace('Rp', 'Rp ')}\n`; // Gunakan totalPengembalian karena sudah diformat dengan Rp
+            } else {
+                pesan += `│ 📦 Kategori Barang: ${kategoriElektronik}
+│ 💸 Harga Barang: ${totalPengembalian.replace('Rp', 'Rp ')}\n`; // Gunakan totalPengembalian karena sudah diformat dengan Rp
+            }
+
+            pesan += `│ 📆 Tenor: ${tenor} bulan
+│ 📊 Bunga yang berlaku: ${bungaPersen}
+│ 📈 Total Pengembalian: ${totalPengembalian}
+│ 📅 Cicilan per bulan: ${cicilanPerBulan}
+│
+│ Mohon diproses, terima kasih!
+│ _Waktu Pengajuan: ${dateTimeString}_
+╰────────────⬣
+            `.trim(); // Trim untuk menghilangkan spasi kosong di awal/akhir
+
+            const nomorWhatsApp = '6285711374861'; // Nomor WhatsApp tujuan
+            const tautanWhatsApp = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
+
+            window.open(tautanWhatsApp, '_blank');
+        }
+    </script>
 </body>
 </html>
